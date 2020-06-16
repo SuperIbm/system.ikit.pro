@@ -1,0 +1,63 @@
+.v-effect
+{
+    &--fade
+    {
+        &-enter,
+        &-leave
+        {
+            opacity: 0;
+
+            &-active
+            {
+                transition: opacity .5s;
+            }
+        }
+
+        &-leave
+        {
+            &-active
+            {
+                transition: opacity 0.1s;
+            }
+        }
+
+        &-leave
+        {
+            &-to
+            {
+                opacity: 0;
+            }
+        }
+    }
+
+    &--slide
+    {
+        &-fade
+        {
+            &-enter
+            {
+                transform: translateY(-10px);
+                opacity: 0;
+
+                &-active
+                {
+                    transition: all .3s ease;
+                }
+            }
+
+            &-leave
+            {
+                &-active
+                {
+                    transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+                }
+
+                &-to
+                {
+                    transform: translateY(-10px);
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}

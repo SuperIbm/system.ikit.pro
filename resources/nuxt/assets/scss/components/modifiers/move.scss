@@ -1,0 +1,46 @@
+.v-move
+{
+    &--middle
+    {
+        vertical-align: middle;
+    }
+
+    &--bottom
+    {
+        vertical-align: bottom;
+    }
+
+    &--top
+    {
+        vertical-align: top;
+    }
+
+    &--right
+    {
+        text-align: right;
+    }
+
+    &--left
+    {
+        text-align: left;
+
+        &--as-p
+        {
+            P,
+            LI
+            {
+                text-align: left;
+            }
+        }
+    }
+
+    &--center
+    {
+        text-align: center;
+
+        &-element
+        {
+            margin: 0 auto;
+        }
+    }
+}

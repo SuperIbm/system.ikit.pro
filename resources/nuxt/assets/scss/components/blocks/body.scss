@@ -1,0 +1,12 @@
+.v-body
+{
+    &--no-scroll
+    {
+        overflow: hidden;
+
+        .v-hint
+        {
+            display: none;
+        }
+    }
+}

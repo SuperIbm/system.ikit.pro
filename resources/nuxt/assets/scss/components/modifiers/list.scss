@@ -1,0 +1,43 @@
+.v-list
+{
+    margin: 0;
+    padding: 0;
+
+    LI
+    {
+        margin-bottom: 0.3rem;
+        padding-left: 0.3rem;
+    }
+
+    &--ul
+    {
+        LI
+        {
+
+        }
+    }
+
+    &--ol
+    {
+        LI
+        {
+
+        }
+    }
+
+    &__lists
+    {
+        UL,
+        OL
+        {
+            margin: 0;
+            padding: 0;
+
+            LI
+            {
+                margin-bottom: 0.3rem;
+                padding-left: 0.3rem;
+            }
+        }
+    }
+}
