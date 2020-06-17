@@ -1,0 +1,461 @@
+@import "./../vars/app";
+
+.v-border
+{
+    &--width
+    {
+        &-aside
+        {
+            @for $i from 1 through 10
+            {
+                &--#{$i}
+                {
+                    border-width: #{$i}px;
+                }
+            }
+        }
+
+        &-top
+        {
+            @for $i from 1 through 10
+            {
+                &--#{$i}
+                {
+                    border-top-width: #{$i}px;
+                }
+            }
+        }
+
+        &-right
+        {
+            @for $i from 1 through 10
+            {
+                &--#{$i}
+                {
+                    border-right-width: #{$i}px;
+                }
+            }
+        }
+
+        &-left
+        {
+            @for $i from 1 through 10
+            {
+                &--#{$i}
+                {
+                    border-left-width: #{$i}px;
+                }
+            }
+        }
+
+        &-bottom
+        {
+            @for $i from 1 through 10
+            {
+                &--#{$i}
+                {
+                    border-bottom-width: #{$i}px;
+                }
+            }
+        }
+    }
+
+    &--color
+    {
+        &-aside
+        {
+            &-black
+            {
+                border-color: $app_color_black;
+            }
+
+            &-white
+            {
+                border-color: $app_color_white;
+            }
+
+            &-red
+            {
+                border-color: $app_color_red;
+            }
+
+            &-green
+            {
+                border-color: $app_color_green;
+            }
+        }
+
+        &-top
+        {
+            &-black
+            {
+                border-top-color: $app_color_black;
+            }
+
+            &-white
+            {
+                border-top-color: $app_color_white;
+            }
+
+            &-red
+            {
+                border-top-color: $app_color_red;
+            }
+
+            &-green
+            {
+                border-top-color: $app_color_green;
+            }
+        }
+
+        &-right
+        {
+            &-black
+            {
+                border-right-color: $app_color_black;
+            }
+
+            &-white
+            {
+                border-right-color: $app_color_white;
+            }
+
+            &-red
+            {
+                border-right-color: $app_color_red;
+            }
+
+            &-green
+            {
+                border-right-color: $app_color_green;
+            }
+        }
+
+        &-left
+        {
+            &-black
+            {
+                border-left-color: $app_color_black;
+            }
+
+            &-white
+            {
+                border-left-color: $app_color_white;
+            }
+
+            &-red
+            {
+                border-left-color: $app_color_red;
+            }
+
+            &-green
+            {
+                border-left-color: $app_color_green;
+            }
+        }
+
+        &-bottom
+        {
+            &-black
+            {
+                border-bottom-color: $app_color_black;
+            }
+
+            &-white
+            {
+                border-bottom-color: $app_color_white;
+            }
+
+            &-red
+            {
+                border-bottom-color: $app_color_red;
+            }
+
+            &-green
+            {
+                border-bottom-color: $app_color_green;
+            }
+        }
+    }
+
+    &--style
+    {
+        &-aside
+        {
+            &-none
+            {
+                border-style: none;
+            }
+
+            &-hidden
+            {
+                border-style: hidden;
+            }
+
+            &-dotted
+            {
+                border-style: dotted;
+            }
+
+            &-dashed
+            {
+                border-style: dashed;
+            }
+
+            &-solid
+            {
+                border-style: solid;
+            }
+
+            &-double
+            {
+                border-style: double;
+            }
+
+            &-groove
+            {
+                border-style: groove;
+            }
+
+            &-ridge
+            {
+                border-style: ridge;
+            }
+
+            &-inset
+            {
+                border-style: inset;
+            }
+
+            &-outset
+            {
+                border-style: outset;
+            }
+        }
+
+        &-top
+        {
+            &-none
+            {
+                border-top-style: none;
+            }
+
+            &-hidden
+            {
+                border-top-style: hidden;
+            }
+
+            &-dotted
+            {
+                border-top-style: hidden;
+            }
+
+            &-dashed
+            {
+                border-top-style: hidden;
+            }
+
+            &-solid
+            {
+                border-top-style: hidden;
+            }
+
+            &-double
+            {
+                border-top-style: hidden;
+            }
+
+            &-groove
+            {
+                border-top-style: hidden;
+            }
+
+            &-ridge
+            {
+                border-top-style: hidden;
+            }
+
+            &-inset
+            {
+                border-top-style: hidden;
+            }
+
+            &-outset
+            {
+                border-top-style: hidden;
+            }
+        }
+
+        &-right
+        {
+            &-none
+            {
+                border-right-style: none;
+            }
+
+            &-hidden
+            {
+                border-right-style: hidden;
+            }
+
+            &-dotted
+            {
+                border-right-style: dotted;
+            }
+
+            &-dashed
+            {
+                border-right-style: dashed;
+            }
+
+            &-solid
+            {
+                border-right-style: solid;
+            }
+
+            &-double
+            {
+                border-right-style: double;
+            }
+
+            &-groove
+            {
+                border-right-style: hidden;
+            }
+
+            &-ridge
+            {
+                border-right-style: ridge;
+            }
+
+            &-inset
+            {
+                border-right-style: inset;
+            }
+
+            &-outset
+            {
+                border-right-style: outset;
+            }
+        }
+
+        &-left
+        {
+            &-none
+            {
+                border-left-style: none;
+            }
+
+            &-hidden
+            {
+                border-left-style: hidden;
+            }
+
+            &-dotted
+            {
+                border-left-style: dotted;
+            }
+
+            &-dashed
+            {
+                border-left-style: dashed;
+            }
+
+            &-solid
+            {
+                border-left-style: solid;
+            }
+
+            &-double
+            {
+                border-left-style: double;
+            }
+
+            &-groove
+            {
+                border-left-style: groove;
+            }
+
+            &-ridge
+            {
+                border-left-style: hidden;
+            }
+
+            &-inset
+            {
+                border-left-style: inset;
+            }
+
+            &-outset
+            {
+                border-left-style: outset;
+            }
+        }
+
+        &-bottom
+        {
+            &-none
+            {
+                border-bottom-style: none;
+            }
+
+            &-hidden
+            {
+                border-bottom-style: hidden;
+            }
+
+            &-dotted
+            {
+                border-bottom-style: dotted;
+            }
+
+            &-dashed
+            {
+                border-bottom-style: dashed;
+            }
+
+            &-solid
+            {
+                border-bottom-style: solid;
+            }
+
+            &-double
+            {
+                border-bottom-style: double;
+            }
+
+            &-groove
+            {
+                border-bottom-style: groove;
+            }
+
+            &-ridge
+            {
+                border-bottom-style: ridge;
+            }
+
+            &-inset
+            {
+                border-bottom-style: hidden;
+            }
+
+            &-outset
+            {
+                border-bottom-style: outset;
+            }
+        }
+    }
+
+    &--collapse
+    {
+        &-collapse
+        {
+            border-collapse: collapse;
+        }
+
+        &-separate
+        {
+            border-collapse: separate;
+        }
+    }
+}

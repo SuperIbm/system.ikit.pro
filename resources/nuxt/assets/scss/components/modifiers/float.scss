@@ -1,0 +1,137 @@
+.v-float
+{
+    &--left
+    {
+        float: left;
+
+        @media (min-width: 1904px)
+        {
+            &-xl
+            {
+                float: left;
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            &-lg
+            {
+                float: left;
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            &-md
+            {
+                float: left;
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            &-sm
+            {
+                float: left;
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            &-xs
+            {
+                float: left;
+            }
+        }
+    }
+
+    &--right
+    {
+        float: right;
+
+        @media (min-width: 1904px)
+        {
+            &-xl
+            {
+                float: right;
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            &-lg
+            {
+                float: right;
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            &-md
+            {
+                float: right;
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            &-sm
+            {
+                float: right;
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            &-xs
+            {
+                float: right;
+            }
+        }
+    }
+
+    &--none
+    {
+        float: none;
+
+        @media (min-width: 1904px)
+        {
+            &-xl
+            {
+                float: none;
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            &-lg
+            {
+                float: none;
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            &-md
+            {
+                float: none;
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            &-sm
+            {
+                float: none;
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            &-xs
+            {
+                float: none;
+            }
+        }
+    }
+}
