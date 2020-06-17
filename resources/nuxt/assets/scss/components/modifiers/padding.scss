@@ -60,27 +60,27 @@
     {
         @for $i from 0 through 20
         {
-            &--xl-aside-#{$i}
+            &--aside-#{$i}-xl
             {
                 padding: 1em * $i !important;
             }
 
-            &--xl-top-#{$i}
+            &--top-#{$i}-xl
             {
                 padding-top: 1em * $i !important;
             }
 
-            &--xl-right-#{$i}
+            &--right-#{$i}-xl
             {
                 padding-right: 1em * $i !important;
             }
 
-            &--xl-bottom-#{$i}
+            &--bottom-#{$i}-xl
             {
                 padding-bottom: 1em * $i !important;
             }
 
-            &--xl-left-#{$i}
+            &--left-#{$i}-xl
             {
                 padding-left: 1em * $i !important;
             }
@@ -88,27 +88,27 @@
 
         @for $i from 0 through 20
         {
-            &--xl-aside-#{$i}-5
+            &--aside-#{$i}-5-xl
             {
                 padding: 1em * $i + 0.5 !important;
             }
 
-            &--xl-top-#{$i}-5
+            &--top-#{$i}-5-xl
             {
                 padding-top: 1em * $i + 0.5 !important;
             }
 
-            &--xl-right-#{$i}-5
+            &--right-#{$i}-5-xl
             {
                 padding-right: 1em * $i + 0.5 !important;
             }
 
-            &--xl-bottom-#{$i}-5
+            &--bottom-#{$i}-5-xl
             {
                 padding-bottom: 1em * $i + 0.5 !important;
             }
 
-            &--xl-left-#{$i}-5
+            &--left-#{$i}-5-xl
             {
                 padding-left: 1em * $i + 0.5 !important;
             }
@@ -119,17 +119,17 @@
     {
         @for $i from 0 through 20
         {
-            &--lg-aside-#{$i}
+            &--aside-#{$i}-lg
             {
                 padding: 1em * $i !important;
             }
 
-            &--lg-top-#{$i}
+            &--top-#{$i}-lg
             {
                 padding-top: 1em * $i !important;
             }
 
-            &--lg-right-#{$i}
+            &--right-#{$i}-lg
             {
                 padding-right: 1em * $i !important;
             }
@@ -139,7 +139,7 @@
                 padding-bottom: 1em * $i !important;
             }
 
-            &--lg-left-#{$i}
+            &--left-#{$i}-lg
             {
                 padding-left: 1em * $i !important;
             }
@@ -147,27 +147,27 @@
 
         @for $i from 0 through 20
         {
-            &--lg-aside-#{$i}-5
+            &--aside-#{$i}-5-lg
             {
                 padding: 1em * $i + 0.5 !important;
             }
 
-            &--lg-top-#{$i}-5
+            &--top-#{$i}-5-lg
             {
                 padding-top: 1em * $i + 0.5 !important;
             }
 
-            &--lg-right-#{$i}-5
+            &--right-#{$i}-5-lg
             {
                 padding-right: 1em * $i + 0.5 !important;
             }
 
-            &--lg-bottom-#{$i}-5
+            &--bottom-#{$i}-5-lg
             {
                 padding-bottom: 1em * $i + 0.5 !important;
             }
 
-            &--lg-left-#{$i}-5
+            &--left-#{$i}-5-lg
             {
                 padding-left: 1em * $i + 0.5 !important;
             }
@@ -178,12 +178,12 @@
     {
         @for $i from 0 through 20
         {
-            &--md-aside-#{$i}
+            &--aside-#{$i}-md
             {
                 padding: 1em * $i !important;
             }
 
-            &--md-top-#{$i}
+            &--top-#{$i}-md
             {
                 padding-top: 1em * $i !important;
             }
@@ -193,12 +193,12 @@
                 padding-right: 1em * $i !important;
             }
 
-            &--md-bottom-#{$i}
+            &--bottom-#{$i}-md
             {
                 padding-bottom: 1em * $i !important;
             }
 
-            &--md-left-#{$i}
+            &--left-#{$i}-md
             {
                 padding-left: 1em * $i !important;
             }
@@ -206,27 +206,27 @@
 
         @for $i from 0 through 20
         {
-            &--md-aside-#{$i}-5
+            &--aside-#{$i}-5-md
             {
                 padding: 1em * $i + 0.5 !important;
             }
 
-            &--md-top-#{$i}-5
+            &--top-#{$i}-5-md
             {
                 padding-top: 1em * $i + 0.5 !important;
             }
 
-            &--md-right-#{$i}-5
+            &--right-#{$i}-5-md
             {
                 padding-right: 1em * $i + 0.5 !important;
             }
 
-            &--md-bottom-#{$i}-5
+            &--bottom-#{$i}-5-md
             {
                 padding-bottom: 1em * $i + 0.5 !important;
             }
 
-            &--md-left-#{$i}-5
+            &--left-#{$i}-5-md
             {
                 padding-left: 1em * $i + 0.5 !important;
             }
@@ -237,27 +237,27 @@
     {
         @for $i from 0 through 20
         {
-            &--sm-aside-#{$i}
+            &--aside-#{$i}-sm
             {
                 padding: 1em * $i !important;
             }
 
-            &--sm-top-#{$i}
+            &--top-#{$i}-sm
             {
                 padding-top: 1em * $i !important;
             }
 
-            &--sm-right-#{$i}
+            &--right-#{$i}-sm
             {
                 padding-right: 1em * $i !important;
             }
 
-            &--sm-bottom-#{$i}
+            &--bottom-#{$i}-sm
             {
                 padding-bottom: 1em * $i !important;
             }
 
-            &--sm-left-#{$i}
+            &--left-#{$i}-sm
             {
                 padding-left: 1em * $i !important;
             }
@@ -265,27 +265,27 @@
 
         @for $i from 0 through 20
         {
-            &--sm-aside-#{$i}-5
+            &--aside-#{$i}-5-sm
             {
                 padding: 1em * $i + 0.5 !important;
             }
 
-            &--sm-top-#{$i}-5
+            &--top-#{$i}-5-sm
             {
                 padding-top: 1em * $i + 0.5 !important;
             }
 
-            &--sm-right-#{$i}-5
+            &--right-#{$i}-5-sm
             {
                 padding-right: 1em * $i + 0.5 !important;
             }
 
-            &--sm-bottom-#{$i}-5
+            &--bottom-#{$i}-5-sm
             {
                 padding-bottom: 1em * $i + 0.5 !important;
             }
 
-            &--sm-left-#{$i}-5
+            &--left-#{$i}-5-sm
             {
                 padding-left: 1em * $i + 0.5 !important;
             }
@@ -296,27 +296,27 @@
     {
         @for $i from 0 through 20
         {
-            &--xs-aside-#{$i}
+            &--aside-#{$i}-xs
             {
                 padding: 1em * $i !important;
             }
 
-            &--xs-top-#{$i}
+            &--top-#{$i}-xs
             {
                 padding-top: 1em * $i !important;
             }
 
-            &--xs-right-#{$i}
+            &--right-#{$i}-xs
             {
                 padding-right: 1em * $i !important;
             }
 
-            &--xs-bottom-#{$i}
+            &--bottom-#{$i}-xs
             {
                 padding-bottom: 1em * $i !important;
             }
 
-            &--xs-left-#{$i}
+            &--left-#{$i}-xs
             {
                 padding-left: 1em * $i !important;
             }
@@ -324,27 +324,27 @@
 
         @for $i from 0 through 20
         {
-            &--xs-aside-#{$i}-5
+            &--aside-#{$i}-5-xs
             {
                 padding: 1em * $i + 0.5 !important;
             }
 
-            &--xs-top-#{$i}-5
+            &--top-#{$i}-5-xs
             {
                 padding-top: 1em * $i + 0.5 !important;
             }
 
-            &--xs-right-#{$i}-5
+            &--right-#{$i}-5-xs
             {
                 padding-right: 1em * $i + 0.5 !important;
             }
 
-            &--xs-bottom-#{$i}-5
+            &--bottom-#{$i}-5-xs
             {
                 padding-bottom: 1em * $i + 0.5 !important;
             }
 
-            &--xs-left-#{$i}-5
+            &--left-#{$i}-5-xs
             {
                 padding-left: 1em * $i + 0.5 !important;
             }

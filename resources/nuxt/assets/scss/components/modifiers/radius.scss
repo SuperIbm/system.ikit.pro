@@ -1,0 +1,422 @@
+.v-radius
+{
+    &--aside
+    {
+        @for $i from 0 through 50
+        {
+            &-#{$i}
+            {
+                border-radius: #{$i}px;
+            }
+        }
+
+        @media (min-width: 1904px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xl
+                {
+                    border-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            @for $i from 1 through 12
+            {
+                &-#{$i}-lg
+                {
+                    border-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-md
+                {
+                    border-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-sm
+                {
+                    border-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xs
+                {
+                    border-radius: #{$i}px;
+                }
+            }
+        }
+    }
+
+    &--top-right
+    {
+        @for $i from 0 through 50
+        {
+            &-#{$i}
+            {
+                border-top-right-radius: #{$i}px;
+            }
+        }
+
+        @media (min-width: 1904px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xl
+                {
+                    border-top-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            @for $i from 1 through 12
+            {
+                &-#{$i}-lg
+                {
+                    border-top-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-md
+                {
+                    border-top-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-sm
+                {
+                    border-top-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xs
+                {
+                    border-top-right-radius: #{$i}px;
+                }
+            }
+        }
+    }
+
+    &--bottom-right
+    {
+        @for $i from 0 through 50
+        {
+            &-#{$i}
+            {
+                border-bottom-right-radius: #{$i}px;
+            }
+        }
+
+        @media (min-width: 1904px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xl
+                {
+                    border-bottom-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            @for $i from 1 through 12
+            {
+                &-#{$i}-lg
+                {
+                    border-bottom-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-md
+                {
+                    border-bottom-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-sm
+                {
+                    border-bottom-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xs
+                {
+                    border-bottom-right-radius: #{$i}px;
+                }
+            }
+        }
+    }
+
+    &--bottom-left
+    {
+        @for $i from 0 through 50
+        {
+            &-#{$i}
+            {
+                border-bottom-left-radius: #{$i}px;
+            }
+        }
+
+        @media (min-width: 1904px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xl
+                {
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            @for $i from 1 through 12
+            {
+                &-#{$i}-lg
+                {
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-md
+                {
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-sm
+                {
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xs
+                {
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+    }
+
+    &--top-left
+    {
+        @for $i from 0 through 50
+        {
+            &-#{$i}
+            {
+                border-top-left-radius: #{$i}px;
+            }
+        }
+
+        @media (min-width: 1904px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xl
+                {
+                    border-top-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            @for $i from 1 through 12
+            {
+                &-#{$i}-lg
+                {
+                    border-top-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-md
+                {
+                    border-top-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-sm
+                {
+                    border-top-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xs
+                {
+                    border-top-left-radius: #{$i}px;
+                }
+            }
+        }
+    }
+
+    &--pill
+    {
+        border-radius: 9999px;
+
+        @media (min-width: 1904px)
+        {
+            &-xl
+            {
+                border-radius: 9999px;
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            &-lg
+            {
+                border-radius: 9999px;
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            &-md
+            {
+                border-radius: 9999px;
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            &-sm
+            {
+                border-radius: 9999px;
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            &-xs
+            {
+                border-radius: 9999px;
+            }
+        }
+    }
+
+    &--circle
+    {
+        border-radius: 50%;
+
+        @media (min-width: 1904px)
+        {
+            &-xl
+            {
+                border-radius: 50%;
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            &-lg
+            {
+                border-radius: 50%;
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            &-md
+            {
+                border-radius: 50%;
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            &-sm
+            {
+                border-radius: 50%;
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            &-xs
+            {
+                border-radius: 50%;
+            }
+        }
+    }
+}

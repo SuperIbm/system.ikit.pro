@@ -2,5 +2,23 @@
 
 .v-color
 {
+    &--black
+    {
+        color: $app_color_black;
+    }
 
+    &--white
+    {
+        color: $app_color_white;
+    }
+
+    &--red
+    {
+        color: $app_color_red;
+    }
+
+    &--green
+    {
+        color: $app_color_green;
+    }
 }

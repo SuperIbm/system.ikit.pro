@@ -1,0 +1,17 @@
+.v-elevation
+{
+    &-0
+    {
+        box-shadow: none;
+    }
+
+    @for $i from 1 through 24
+    {
+        &-#{$i}
+        {
+            box-shadow: 0 px #{$i}px -#{$i}px rgba(0, 0, 0, .2),
+                0 #{$i}px #{$i}px 0 rgba(0, 0, 0, .14),
+                0 1px #{$i}px 0 rgba(0, 0, 0, .12) !important;
+        }
+    }
+}

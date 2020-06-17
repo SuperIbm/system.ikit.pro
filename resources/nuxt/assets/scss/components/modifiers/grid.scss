@@ -9,71 +9,71 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+    }
 
-        &_cell
+    &__cell
+    {
+        &--size
         {
-            &--size
+            @for $i from 1 through 12
+            {
+                &-#{$i}
+                {
+                    width: 8.33333% * $i;
+                }
+            }
+
+            @media (min-width: 1904px)
             {
                 @for $i from 1 through 12
                 {
-                    &-#{$i}
+                    &-#{$i}-xl
                     {
                         width: 8.33333% * $i;
                     }
                 }
+            }
 
-                @media (min-width: 1904px)
+            @media (max-width: 1904px)
+            {
+                @for $i from 1 through 12
                 {
-                    @for $i from 1 through 12
+                    &-#{$i}-lg
                     {
-                        &-xl-#{$i}
-                        {
-                            width: 8.33333% * $i;
-                        }
+                        width: 8.33333% * $i;
                     }
                 }
+            }
 
-                @media (max-width: 1904px)
+            @media (max-width: 1264px)
+            {
+                @for $i from 1 through 12
                 {
-                    @for $i from 1 through 12
+                    &-#{$i}-md
                     {
-                        &-lg-#{$i}
-                        {
-                            width: 8.33333% * $i;
-                        }
+                        width: 8.33333% * $i;
                     }
                 }
+            }
 
-                @media (max-width: 1264px)
+            @media (max-width: 960px)
+            {
+                @for $i from 1 through 12
                 {
-                    @for $i from 1 through 12
+                    &-#{$i}-sm
                     {
-                        &-md-#{$i}
-                        {
-                            width: 8.33333% * $i;
-                        }
+                        width: 8.33333% * $i;
                     }
                 }
+            }
 
-                @media (max-width: 960px)
+            @media all and (max-width: 600px)
+            {
+                @for $i from 1 through 12
                 {
-                    @for $i from 1 through 12
+                    &-#{$i}-xs
                     {
-                        &-sm-#{$i}
-                        {
-                            width: 8.33333% * $i;
-                        }
-                    }
-                }
-
-                @media all and (max-width: 600px)
-                {
-                    @for $i from 1 through 12
-                    {
-                        &-xs-#{$i}
-                        {
-                            width: 8.33333% * $i;
-                        }
+                        width: 8.33333% * $i;
                     }
                 }
             }

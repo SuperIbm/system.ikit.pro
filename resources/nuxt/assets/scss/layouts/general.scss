@@ -1,7 +1,8 @@
+@import "~ress";
+
 @import "./../components/modifiers/font";
 @import "./../components/modifiers/clear";
 @import "./../components/modifiers/hide";
-@import "./../components/modifiers/img";
 @import "./../components/modifiers/link";
 @import "./../components/modifiers/list";
 @import "./../components/modifiers/max";
@@ -10,7 +11,8 @@
 @import "./../components/modifiers/site";
 @import "./../components/modifiers/table";
 @import "./../components/modifiers/transition";
-@import "./../components/modifiers/move";
+@import "./../components/modifiers/align";
+@import "./../components/modifiers/vertical";
 @import "./../components/modifiers/margin";
 @import "./../components/modifiers/padding";
 @import "./../components/modifiers/buttons";
@@ -20,8 +22,10 @@
 @import "./../components/modifiers/effect";
 @import "./../components/modifiers/ripple";
 @import "./../components/modifiers/height";
-@import "./../components/modifiers/pointer";
 @import "./../components/modifiers/color";
+@import "./../components/modifiers/radius";
+@import "./../components/modifiers/display";
+@import "./../components/modifiers/elevation";
 
 @import "./../components/blocks/header";
 @import "./../components/blocks/content";

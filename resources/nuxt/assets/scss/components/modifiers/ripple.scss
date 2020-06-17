@@ -1,3 +1,5 @@
+@import "./../vars/app";
+
 .v-ripple
 {
     position: relative;
@@ -14,12 +16,20 @@
         top: 0;
         left: 0;
         pointer-events: none;
-        background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+        background-image: radial-gradient(circle, $app_color_white 10%, transparent 10.01%);
         background-repeat: no-repeat;
         background-position: 50%;
         transform: scale(10, 10);
         opacity: 0;
         transition: transform .5s, opacity 1s;
+    }
+
+    &--dark
+    {
+        &:after
+        {
+            background-image: radial-gradient(circle, $app_color_black 10%, transparent 10.01%);
+        }
     }
 
     &:active

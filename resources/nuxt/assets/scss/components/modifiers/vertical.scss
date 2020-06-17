@@ -1,14 +1,14 @@
-.v-clear
+.v-vertical
 {
-    &--none
+    &--middle
     {
-        clear: none;
+        vertical-align: middle;
 
         @media (min-width: 1904px)
         {
             &-xl
             {
-                clear: none;
+                vertical-align: middle;
             }
         }
 
@@ -16,7 +16,7 @@
         {
             &-lg
             {
-                clear: none;
+                vertical-align: middle;
             }
         }
 
@@ -24,7 +24,7 @@
         {
             &-md
             {
-                clear: none;
+                vertical-align: middle;
             }
         }
 
@@ -32,7 +32,7 @@
         {
             &-sm
             {
-                clear: none;
+                vertical-align: middle;
             }
         }
 
@@ -40,22 +40,20 @@
         {
             &-xs
             {
-                clear: none;
+                vertical-align: middle;
             }
         }
     }
 
-    &--both
+    &--bottom
     {
-        clear: both;
-        float: none;
+        vertical-align: bottom;
 
         @media (min-width: 1904px)
         {
             &-xl
             {
-                clear: both;
-                float: none;
+                vertical-align: bottom;
             }
         }
 
@@ -63,8 +61,7 @@
         {
             &-lg
             {
-                clear: both;
-                float: none;
+                vertical-align: bottom;
             }
         }
 
@@ -72,8 +69,7 @@
         {
             &-md
             {
-                clear: both;
-                float: none;
+                vertical-align: bottom;
             }
         }
 
@@ -81,8 +77,7 @@
         {
             &-sm
             {
-                clear: both;
-                float: none;
+                vertical-align: bottom;
             }
         }
 
@@ -90,21 +85,20 @@
         {
             &-xs
             {
-                clear: both;
-                float: none;
+                vertical-align: bottom;
             }
         }
     }
 
-    &--left
+    &--top
     {
-        clear: left;
+        vertical-align: top;
 
         @media (min-width: 1904px)
         {
             &-xl
             {
-                clear: left;
+                vertical-align: top;
             }
         }
 
@@ -112,7 +106,7 @@
         {
             &-lg
             {
-                clear: left;
+                vertical-align: top;
             }
         }
 
@@ -120,7 +114,7 @@
         {
             &-md
             {
-                clear: left;
+                vertical-align: top;
             }
         }
 
@@ -128,7 +122,7 @@
         {
             &-sm
             {
-                clear: left;
+                vertical-align: top;
             }
         }
 
@@ -136,52 +130,7 @@
         {
             &-xs
             {
-                clear: left;
-            }
-        }
-    }
-
-    &--right
-    {
-        clear: right;
-
-        @media (min-width: 1904px)
-        {
-            &-xl
-            {
-                clear: right;
-            }
-        }
-
-        @media (max-width: 1904px)
-        {
-            &-lg
-            {
-                clear: right;
-            }
-        }
-
-        @media (max-width: 1264px)
-        {
-            &-md
-            {
-                clear: right;
-            }
-        }
-
-        @media (max-width: 960px)
-        {
-            &-sm
-            {
-                clear: right;
-            }
-        }
-
-        @media all and (max-width: 600px)
-        {
-            &-xs
-            {
-                clear: right;
+                vertical-align: top;
             }
         }
     }
