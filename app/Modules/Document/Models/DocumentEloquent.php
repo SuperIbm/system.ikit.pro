@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  *
- * @property int $id_document ID документа.
+ * @property int $id ID документа.
  * @property mixed $byte Байт код документа.
  * @property mixed $format Формат документа.
  * @property string $cache Предиката для кеширования.
@@ -110,7 +110,7 @@ class DocumentEloquent extends Eloquent
      * @version 1.0
      */
     protected $fillable = [
-        'id_document',
+        'id',
         'byte',
         'format',
         'cache'

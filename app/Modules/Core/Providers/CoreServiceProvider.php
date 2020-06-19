@@ -12,7 +12,6 @@ namespace App\Modules\Core\Providers;
 
 use App;
 use Illuminate\Support\ServiceProvider;
-use App\Modules\Core\Models\Installer;
 use Illuminate\Database\Eloquent\Factory;
 
 /**
@@ -54,20 +53,6 @@ class CoreServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-
-        $this->commands
-        (
-            [
-                \App\Modules\Core\Commands\InstallCommand::class,
-            ]
-        );
-
-        App::singleton('installer',
-            function()
-            {
-                return new Installer();
-            }
-        );
     }
 
     /**

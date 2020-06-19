@@ -71,7 +71,6 @@ class ImageEloquent extends Eloquent
      */
     public $pathCache;
 
-
     /**
      * Параметр для хранения физического пути к файлу.
      *

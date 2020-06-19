@@ -3,7 +3,7 @@ Route::group
 (
     [
         'middleware' => ['ajax'],
-        'prefix' => 'api/ajax/typograph/typograph_admin_controller/'
+        'prefix' => 'api/ajax/typograph/typograph/'
     ],
     function()
     {

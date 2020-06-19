@@ -10,6 +10,7 @@
 
 namespace App\Modules\Document\Models;
 
+use Config;
 use Illuminate\Support\Manager;
 
 
@@ -28,6 +29,6 @@ class DocumentManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['document.record'];
+        Config::get('document.record');
     }
 }

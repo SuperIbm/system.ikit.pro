@@ -56,8 +56,7 @@ class LocationController extends Controller
      */
     public function countries(Request $request)
     {
-        if($request->get("allowed", false)) $data = $this->_location->getAllowedCountries();
-        else $data = $this->_location->getCountries();
+        $data = $this->_location->getCountries();
 
         if($data)
         {

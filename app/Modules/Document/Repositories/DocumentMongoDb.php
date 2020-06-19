@@ -38,7 +38,7 @@ class DocumentMongoDb extends Document
     public function create($path)
     {
         $model = $this->newInstance();
-        $model->id_document = round((time() * 1000) + microtime(true));
+        $model->id = round((time() * 1000) + microtime(true));
         $model->path = $path;
         $model->format = pathinfo($path)["extension"];
         $status = $model->save();
@@ -49,7 +49,7 @@ class DocumentMongoDb extends Document
             return false;
         }
 
-        return $model->id_document;
+        return $model->id;
     }
 
     /**
@@ -100,7 +100,7 @@ class DocumentMongoDb extends Document
     {
         $status = DB::connection('mongodb')
             ->collection($this->newInstance()->getTable())
-            ->where('id_document', $id)
+            ->where('id', $id)
             ->update(['byte' => $byte]);
 
         Cache::tags(['Document', 'DocumentItem'])->forget($id);
@@ -173,7 +173,7 @@ class DocumentMongoDb extends Document
         {
             $document = DB::connection('mongodb')
                 ->collection($this->newInstance()->getTable())
-                ->where('id_document', $id)
+                ->where('id', $id)
                 ->first();
 
             if($document) return $document['byte'];

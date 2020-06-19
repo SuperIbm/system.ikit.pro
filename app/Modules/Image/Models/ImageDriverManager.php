@@ -28,6 +28,6 @@ class ImageDriverManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['image.storeDriver'];
+        Config::get('image.storeDriver');
     }
 }

@@ -10,6 +10,7 @@
 
 namespace App\Modules\Image\Models;
 
+use Config;
 use Illuminate\Support\Manager;
 
 
@@ -28,6 +29,6 @@ class ImageManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['image.record'];
+        Config::get('image.record');
     }
 }

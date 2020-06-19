@@ -13,7 +13,7 @@ namespace App\Modules\Typograph\Http\Controllers;
 use Illuminate\Routing\Controller;
 
 use App\Modules\Typograph\Http\Requests\TypographAdminGetRequest;
-use Tttptd\Mdash\Facades\Mdash;
+use EMT\EMTypograph;
 
 
 /**
@@ -45,9 +45,13 @@ class TypographAdminController extends Controller
 
         if($text != "")
         {
-            $result = Mdash::process($text, [
-                'OptAlign.all' => false
-            ]);
+            $typograph = new EMTypograph();
+
+            $typograph->do_setup("OptAlign.all", false);
+            $typograph->do_setup("Text.paragraphs", false);
+            $typograph->do_setup("Text.breakline", false);
+
+            $result = $typograph->process($text);
 
             if($result)
             {

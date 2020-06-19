@@ -225,7 +225,6 @@ class ImageMongoDb extends Image
         return $this->newInstance()->all();
     }
 
-
     /**
      * Удаление.
      *

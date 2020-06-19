@@ -71,7 +71,6 @@ class ImageMongoDb extends MongoDb
      */
     public $pathCache;
 
-
     /**
      * Параметр для хранения физического пути к файлу.
      *

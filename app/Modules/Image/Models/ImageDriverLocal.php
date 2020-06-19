@@ -40,7 +40,6 @@ class ImageDriverLocal extends ImageDriver
         return Config::get('image.store.local.path') . $id . '.' . $format;
     }
 
-
     /**
      * Метод получения физического пути к изображению.
      *
@@ -56,7 +55,6 @@ class ImageDriverLocal extends ImageDriver
         return Config::get('image.store.local.pathSource') . $id . '.' . $format;
     }
 
-
     /**
      * Метод чтения изображения.
      *
@@ -71,7 +69,6 @@ class ImageDriverLocal extends ImageDriver
     {
         return null;
     }
-
 
     /**
      * Метод создания изображения.
@@ -89,7 +86,6 @@ class ImageDriverLocal extends ImageDriver
         return File::copy($path, $this->pathSource($id, $format));
     }
 
-
     /**
      * Метод обновления изображения.
      *
@@ -105,7 +101,6 @@ class ImageDriverLocal extends ImageDriver
     {
         return File::copy($path, $this->pathSource($id, $format));
     }
-
 
     /**
      * Метод удаления изображения.

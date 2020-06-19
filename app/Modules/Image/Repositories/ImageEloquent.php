@@ -221,7 +221,6 @@ class ImageEloquent extends Image
         return $this->newInstance()->all();
     }
 
-
     /**
      * Удаление.
      *

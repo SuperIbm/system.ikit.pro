@@ -54,37 +54,6 @@ class Location extends Contract
     }
 
     /**
-     * Получить все допустимые страны.
-     *
-     * @param bool $showAll Вернуть все страны.
-     *
-     * @return array|bool Вернет все допустимые страны.
-     * @version 1.0
-     * @since 1.0
-     */
-    public function getAllowedCountries($showAll = true)
-    {
-        $orderDeliveryZones = OrderDeliveryZone::orderBy("weight", "ASC")->get()->unique('code');
-
-        if($orderDeliveryZones->count())
-        {
-            $data = [];
-
-            foreach($orderDeliveryZones as $orderDeliveryZone)
-            {
-                $data[$orderDeliveryZone->code] = [
-                    "name" => $orderDeliveryZone->name,
-                    "telephone_format" => $orderDeliveryZone->telephone_format,
-                ];
-            }
-
-            return $data;
-        }
-        else if($showAll) return Location::getCountries();
-        else return false;
-    }
-
-    /**
      * Вернуть название страны по коду.
      *
      * @param string $code Код страны.

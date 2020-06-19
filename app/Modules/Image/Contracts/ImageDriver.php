@@ -33,7 +33,6 @@ abstract class ImageDriver
      */
     abstract public function path($id, $format);
 
-
     /**
      * Абстрактный метод получения физического пути к изображению.
      *
@@ -46,7 +45,6 @@ abstract class ImageDriver
      */
     abstract public function pathSource($id, $format);
 
-
     /**
      * Абстрактный метод чтения изображения.
      *
@@ -58,7 +56,6 @@ abstract class ImageDriver
      * @version 1.0
      */
     abstract public function read($id, $format);
-
 
     /**
      * Абстрактный метод создания изображения.
@@ -73,7 +70,6 @@ abstract class ImageDriver
      */
     abstract public function create($id, $format, $path);
 
-
     /**
      * Абстрактный метод обновления изображения.
      *
@@ -86,7 +82,6 @@ abstract class ImageDriver
      * @version 1.0
      */
     abstract public function update($id, $format, $path);
-
 
     /**
      * Абстрактный метод удаления изображения.

@@ -23,7 +23,7 @@ use Illuminate\Support\Str;
 use Kreait\Firebase\Auth;
 
 /**
- * Регистрация нового пользователя.
+ * Регистрация нового пользователя через соцаильные сети.
  *
  * @version 1.0
  * @since 1.0

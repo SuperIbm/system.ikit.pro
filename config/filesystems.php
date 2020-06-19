@@ -79,7 +79,66 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        'local' => [
+            'driver' => 'local',
+            'root' => storage_path('app'),
+        ],
+
+        'public' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'root' => [
+            'driver' => 'local',
+            'root' => base_path(),
+        ],
+
+        'root_public' => [
+            'driver' => 'local',
+            'root' => base_path('public/'),
+        ],
+
+        'images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/images'),
+            'visibility' => 'public',
+        ],
+
+        'documents' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/documents'),
+            'visibility' => 'public',
+        ],
+
+        'tmp' => [
+            'driver' => 'local',
+            'root' => storage_path('app/tmp'),
+            'visibility' => 'public',
+        ],
+
+        'modules' => [
+            'driver' => 'local',
+            'root' => app_path('Modules/'),
+            'visibility' => 'public',
+        ],
+
+        'nuxt' => [
+            'driver' => 'local',
+            'root' => resource_path('nuxt'),
+            'visibility' => 'public',
+        ],
+
+        's3' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
+        ],
     ],
 
 ];

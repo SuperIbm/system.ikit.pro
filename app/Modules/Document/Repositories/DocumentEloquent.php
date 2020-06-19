@@ -48,7 +48,7 @@ class DocumentEloquent extends Document
             return false;
         }
 
-        return $model->id_document;
+        return $model->id;
     }
 
     /**
@@ -98,7 +98,7 @@ class DocumentEloquent extends Document
     public function updateByte($id, $byte)
     {
         $status = DB::table($this->newInstance()->getTable())
-            ->where('id_document', $id)
+            ->where('id', $id)
             ->update(['byte' => $byte]);
 
         Cache::tags(['Document', 'DocumentItem'])->forget($id);
@@ -170,7 +170,7 @@ class DocumentEloquent extends Document
         else
         {
             $document = DB::table($this->newInstance()->getTable())
-                ->where('id_document', $id)
+                ->where('id', $id)
                 ->first();
 
             if($document) return $document['byte'];

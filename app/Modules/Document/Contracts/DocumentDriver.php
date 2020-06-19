@@ -33,7 +33,6 @@ abstract class DocumentDriver
      */
     abstract public function path($id, $format);
 
-
     /**
      * Абстрактный метод получения физического пути к документу.
      *
@@ -45,7 +44,6 @@ abstract class DocumentDriver
      * @version 1.0
      */
     abstract public function pathSource($id, $format);
-
 
     /**
      * Абстрактный метод чтения документа.
@@ -59,7 +57,6 @@ abstract class DocumentDriver
      */
     abstract public function read($id, $format);
 
-
     /**
      * Абстрактный метод создания документа.
      *
@@ -71,7 +68,6 @@ abstract class DocumentDriver
      * @version 1.0
      */
     abstract public function create($id, $format, $path);
-
 
     /**
      * Абстрактный метод обновления документа.
@@ -85,7 +81,6 @@ abstract class DocumentDriver
      * @version 1.0
      */
     abstract public function update($id, $format, $path);
-
 
     /**
      * Абстрактный метод удаления документа.

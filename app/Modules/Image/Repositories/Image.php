@@ -48,7 +48,6 @@ abstract class Image extends Repository
         else return false;
     }
 
-
     /**
      * Установка данных изображения по ее ID в базу ранее полученных изображений.
      *
@@ -64,7 +63,6 @@ abstract class Image extends Repository
         self::$_images[$id] = $image;
     }
 
-
     /**
      * Получение всех записей.
      *
@@ -73,7 +71,6 @@ abstract class Image extends Repository
      * @version 1.0
      */
     abstract public function all();
-
 
     /**
      * Создание.
@@ -85,7 +82,6 @@ abstract class Image extends Repository
      * @version 1.0
      */
     abstract public function create($path);
-
 
     /**
      * Обновление.
@@ -99,7 +95,6 @@ abstract class Image extends Repository
      */
     abstract public function update($id, $path);
 
-
     /**
      * Обновление байт кода картинки.
      *
@@ -112,7 +107,6 @@ abstract class Image extends Repository
      */
     abstract public function updateByte($id, $byte);
 
-
     /**
      * Удаление.
      *
@@ -123,7 +117,6 @@ abstract class Image extends Repository
      * @version 1.0
      */
     abstract public function destroy($id);
-
 
     /**
      * Создание копии изображения.
@@ -149,7 +142,6 @@ abstract class Image extends Repository
         else return false;
     }
 
-
     /**
      * Производит конвертирования изображения из одного формата в другой.
      *
@@ -170,7 +162,6 @@ abstract class Image extends Repository
         }
         else return false;
     }
-
 
     /**
      * Проверяет растровое ли изображение, с которым может работать библиотека GD2.
@@ -195,7 +186,6 @@ abstract class Image extends Repository
         else return false;
     }
 
-
     /**
      * Проверка векторное ли изображение.
      *
@@ -219,7 +209,6 @@ abstract class Image extends Repository
         else return false;
     }
 
-
     /**
      * Проверка является ли файл изображением.
      *
@@ -234,7 +223,6 @@ abstract class Image extends Repository
         if($this->isRasterGt($path) == true || $this->isVektor($path) == true) return true;
         else return false;
     }
-
 
     /**
      * Проверка является ли расширение изображением.
@@ -251,7 +239,6 @@ abstract class Image extends Repository
         else return false;
     }
 
-
     /**
      * Проверка является ли расширение растровым.
      *
@@ -267,7 +254,6 @@ abstract class Image extends Repository
         else return false;
     }
 
-
     /**
      * Проверка является ли расширение векторным.
      *
@@ -282,7 +268,6 @@ abstract class Image extends Repository
         if(in_array($extension, array("swf", "flw"))) return true;
         else return false;
     }
-
 
     /**
      * Переводит  нумерованный формат в текстовый формат.

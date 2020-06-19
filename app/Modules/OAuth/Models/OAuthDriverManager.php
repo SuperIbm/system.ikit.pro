@@ -10,6 +10,7 @@
 
 namespace App\Modules\OAuth\Models;
 
+use Config;
 use Illuminate\Support\Manager;
 
 /**
@@ -27,6 +28,6 @@ class OAuthDriverManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['oauth.storeDriver'];
+        Config::get('oauth.storeDriver');
     }
 }

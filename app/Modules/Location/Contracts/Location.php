@@ -30,17 +30,6 @@ abstract class Location
     abstract public function getCountries(): array;
 
     /**
-     * Получить все допустимые страны.
-     *
-     * @param bool $showAll Вернуть все страны.
-     *
-     * @return array|bool Вернет все допустимые страны.
-     * @version 1.0
-     * @since 1.0
-     */
-    abstract public function getAllowedCountries($showAll = true);
-
-    /**
      * Вернуть название страны по коду.
      *
      * @param string $code Код страны.
