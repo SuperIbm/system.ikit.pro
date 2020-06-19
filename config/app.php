@@ -175,6 +175,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\ValidatorServiceProvider::class,
+        App\Providers\SessionServiceProvider::class,
+        App\Providers\CacheServiceProvider::class,
+        App\Providers\CurrencyServiceProvider::class,
+        App\Providers\SmsServiceProvider::class,
+        App\Providers\GeoServiceProvider::class,
+        App\Providers\GeocoderServiceProvider::class,
+
     ],
 
     /*

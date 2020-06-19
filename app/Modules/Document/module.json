@@ -1,0 +1,12 @@
+{
+    "name": "Document",
+    "alias": "document",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 8,
+    "providers": [
+        "App\\Modules\\Document\\Providers\\DocumentServiceProvider"
+    ],
+    "aliases":{}
+}

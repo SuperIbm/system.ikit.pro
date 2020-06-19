@@ -1,0 +1,13 @@
+{
+    "name": "Typograph",
+    "alias": "typograph",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 26,
+    "providers": [
+        "App\\Modules\\Typograph\\Providers\\TypographServiceProvider"
+    ],
+    "aliases": {},
+    "requires": []
+}

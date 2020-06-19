@@ -1,0 +1,16 @@
+{
+    "name": "superibm/cache",
+    "type": "weborobot-module",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\Modules\\Cache\\": ""
+        }
+    }
+}

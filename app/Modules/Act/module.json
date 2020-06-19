@@ -1,0 +1,14 @@
+{
+    "name": "Act",
+    "alias": "act",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "App\\Modules\\Act\\Providers\\ActServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
