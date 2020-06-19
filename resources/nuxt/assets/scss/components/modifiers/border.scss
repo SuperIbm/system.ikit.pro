@@ -1,4 +1,4 @@
-@import "./../vars/app";
+@import "./../vars/color";
 
 .v-border
 {
@@ -56,124 +56,6 @@
                 {
                     border-bottom-width: #{$i}px;
                 }
-            }
-        }
-    }
-
-    &--color
-    {
-        &-aside
-        {
-            &-black
-            {
-                border-color: $app_color_black;
-            }
-
-            &-white
-            {
-                border-color: $app_color_white;
-            }
-
-            &-red
-            {
-                border-color: $app_color_red;
-            }
-
-            &-green
-            {
-                border-color: $app_color_green;
-            }
-        }
-
-        &-top
-        {
-            &-black
-            {
-                border-top-color: $app_color_black;
-            }
-
-            &-white
-            {
-                border-top-color: $app_color_white;
-            }
-
-            &-red
-            {
-                border-top-color: $app_color_red;
-            }
-
-            &-green
-            {
-                border-top-color: $app_color_green;
-            }
-        }
-
-        &-right
-        {
-            &-black
-            {
-                border-right-color: $app_color_black;
-            }
-
-            &-white
-            {
-                border-right-color: $app_color_white;
-            }
-
-            &-red
-            {
-                border-right-color: $app_color_red;
-            }
-
-            &-green
-            {
-                border-right-color: $app_color_green;
-            }
-        }
-
-        &-left
-        {
-            &-black
-            {
-                border-left-color: $app_color_black;
-            }
-
-            &-white
-            {
-                border-left-color: $app_color_white;
-            }
-
-            &-red
-            {
-                border-left-color: $app_color_red;
-            }
-
-            &-green
-            {
-                border-left-color: $app_color_green;
-            }
-        }
-
-        &-bottom
-        {
-            &-black
-            {
-                border-bottom-color: $app_color_black;
-            }
-
-            &-white
-            {
-                border-bottom-color: $app_color_white;
-            }
-
-            &-red
-            {
-                border-bottom-color: $app_color_red;
-            }
-
-            &-green
-            {
-                border-bottom-color: $app_color_green;
             }
         }
     }
@@ -456,6 +338,79 @@
         &-separate
         {
             border-collapse: separate;
+        }
+    }
+
+    &--color
+    {
+        &-aside
+        {
+            @each $color, $types in $colors
+            {
+                @each $type, $value in $types
+                {
+                    &-#{$color}-#{$type}
+                    {
+                        border-color: $value;
+                    }
+                }
+            }
+        }
+
+        &-top
+        {
+            @each $color, $types in $colors
+            {
+                @each $type, $value in $types
+                {
+                    &-#{$color}-#{$type}
+                    {
+                        border-top-color: $value;
+                    }
+                }
+            }
+        }
+
+        &-right
+        {
+            @each $color, $types in $colors
+            {
+                @each $type, $value in $types
+                {
+                    &-#{$color}-#{$type}
+                    {
+                        border-right-color: $value;
+                    }
+                }
+            }
+        }
+
+        &-left
+        {
+            @each $color, $types in $colors
+            {
+                @each $type, $value in $types
+                {
+                    &-#{$color}-#{$type}
+                    {
+                        border-left-color: $value;
+                    }
+                }
+            }
+        }
+
+        &-bottom
+        {
+            @each $color, $types in $colors
+            {
+                @each $type, $value in $types
+                {
+                    &-#{$color}-#{$type}
+                    {
+                        border-bottom-color: $value;
+                    }
+                }
+            }
         }
     }
 }

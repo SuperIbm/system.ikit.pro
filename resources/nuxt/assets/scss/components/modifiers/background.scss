@@ -1,6 +1,6 @@
 @import "./../vars/color";
 
-.v-color
+.v-background
 {
     @each $color, $types in $colors
     {

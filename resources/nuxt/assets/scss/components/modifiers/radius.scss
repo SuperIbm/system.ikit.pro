@@ -419,4 +419,292 @@
             }
         }
     }
+
+    &--top
+    {
+        @for $i from 0 through 50
+        {
+            &-#{$i}
+            {
+                border-top-left-radius: #{$i}px;
+                border-top-right-radius: #{$i}px;
+            }
+        }
+
+        @media (min-width: 1904px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xl
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-top-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            @for $i from 1 through 12
+            {
+                &-#{$i}-lg
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-top-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-md
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-top-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-sm
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-top-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xs
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-top-right-radius: #{$i}px;
+                }
+            }
+        }
+    }
+
+    &--right
+    {
+        @for $i from 0 through 50
+        {
+            &-#{$i}
+            {
+                border-top-right-radius: #{$i}px;
+                border-bottom-right-radius: #{$i}px;
+            }
+        }
+
+        @media (min-width: 1904px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xl
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-bottom-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            @for $i from 1 through 12
+            {
+                &-#{$i}-lg
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-bottom-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-md
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-bottom-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-sm
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-bottom-right-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xs
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-bottom-right-radius: #{$i}px;
+                }
+            }
+        }
+    }
+
+    &--bottom
+    {
+        @for $i from 0 through 50
+        {
+            &-#{$i}
+            {
+                border-bottom-right-radius: #{$i}px;
+                border-bottom-left-radius: #{$i}px;
+            }
+        }
+
+        @media (min-width: 1904px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xl
+                {
+                    border-bottom-right-radius: #{$i}px;
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            @for $i from 1 through 12
+            {
+                &-#{$i}-lg
+                {
+                    border-bottom-right-radius: #{$i}px;
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-md
+                {
+                    border-bottom-right-radius: #{$i}px;
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-sm
+                {
+                    border-bottom-right-radius: #{$i}px;
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xs
+                {
+                    border-bottom-right-radius: #{$i}px;
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+    }
+
+    &--left
+    {
+        @for $i from 0 through 50
+        {
+            &-#{$i}
+            {
+                border-top-left-radius: #{$i}px;
+                border-bottom-left-radius: #{$i}px;
+            }
+        }
+
+        @media (min-width: 1904px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xl
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            @for $i from 1 through 12
+            {
+                &-#{$i}-lg
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-md
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-sm
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            @for $i from 0 through 50
+            {
+                &-#{$i}-xs
+                {
+                    border-top-left-radius: #{$i}px;
+                    border-bottom-left-radius: #{$i}px;
+                }
+            }
+        }
+    }
 }
