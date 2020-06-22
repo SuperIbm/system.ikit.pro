@@ -22,5 +22,5 @@ interface Pipe
      *
      * @return mixed Вернет значение полученное после выполнения следующего pipe.
      */
-    public function handle($content, Closure $next);
+    public function handle(array $content, Closure $next);
 }

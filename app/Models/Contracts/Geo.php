@@ -41,9 +41,9 @@ abstract class Geo
      * Если не указать, то вернет массив со всеми данными.
      * @param string $ip IP пользователя. Если не указать, получить IP текущего пользователя.
      *
-     * @return string|array|false Вернет значения по указанным параметрам.
+     * @return string|array|bool Вернет значения по указанным параметрам.
      * @since 1.0
      * @version 1.0
      */
-    abstract public function get($geoObject = null, $ip = null);
+    abstract public function get(array $geoObject = null, string $ip = null);
 }

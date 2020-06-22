@@ -236,6 +236,28 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Geographer' => MenaraSolutions\Geographer\Integrations\LaravelFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+        // Advanced classes
+        'MongoDb' => Jenssegers\Mongodb\Eloquent\Model::class,
+        'Module' => Nwidart\Modules\Facades\Module::class,
+        //'LogReader' => Jackiedo\LogReader\Facades\LogReader::class,
+
+        // Own classes
+        'Util' => App\Models\Facades\Util::class,
+        'Bot' => App\Models\Facades\Bot::class,
+        'Act' => App\Modules\Act\Facades\Act::class,
+        'Currency' => App\Models\Facades\Currency::class,
+        'Sms' => App\Models\Facades\Sms::class,
+        'Geo' => App\Models\Facades\Geo::class,
+        'Geocoder' => App\Models\Facades\Geocoder::class,
+
+        'ImageStore' => App\Modules\Image\Facades\Image::class,
+        'Document' => App\Modules\Document\Facades\Document::class,
+        'Alert' => App\Modules\Alert\Facades\Alert::class,
+        //'Size' => Intervention\Image\Facades\Image::class,
+        'Meta' => App\Models\Facades\Meta::class,
+        'Widget' => App\Models\Facades\Widget::class,
+        'OAuth' => App\Modules\OAuth\Facades\OAuth::class
     ],
 
 ];
