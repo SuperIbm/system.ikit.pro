@@ -1,4 +1,4 @@
-mdash.php<?php
+<?php
 return [
 
     /*

@@ -33,7 +33,7 @@ class LogAction
      */
     public function handle(Request $request, Closure $next)
     {
-        $next($request);
+        return $next($request);
 
         /*
         if(function_exists('getrusage')) $usage = getrusage();
