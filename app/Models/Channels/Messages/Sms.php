@@ -57,7 +57,6 @@ class Sms
      */
     public $translit = false;
 
-
     /**
      * Индикатор того, что сообщение было удачно отправлено.
      *
@@ -93,12 +92,11 @@ class Sms
      * @since 1.0
      * @version 1.0
      */
-    public function sender($sender): Sms
+    public function sender(string $sender): Sms
     {
         $this->sender = $sender;
         return $this;
     }
-
 
     /**
      * Устанавливаем сообщение на отправку.
@@ -109,12 +107,11 @@ class Sms
      * @since 1.0
      * @version 1.0
      */
-    public function message($message): Sms
+    public function message(string $message): Sms
     {
         $this->message = $message;
         return $this;
     }
-
 
     /**
      * Определяем нужно ли транслировать текст.
@@ -125,7 +122,7 @@ class Sms
      * @since 1.0
      * @version 1.0
      */
-    public function translit($translit): Sms
+    public function translit(bool $translit): Sms
     {
         $this->translit = $translit;
         return $this;

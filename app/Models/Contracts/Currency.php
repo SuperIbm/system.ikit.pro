@@ -28,12 +28,12 @@ abstract class Currency
     /**
      * Получение валюты по коду валюты.
      *
-     * @param \Carbon\Carbon $Carbon Дата на которую нужно получить котировки.
+     * @param \Carbon\Carbon $carbon Дата на которую нужно получить котировки.
      * @param string $charCode Код валюты для получения котировки. Если не указать, то вернет все валюты.
      *
      * @return array|int|false Массив данных запрашиваемой валюты.
      * @since 1.0
      * @version 1.0
      */
-    abstract public function get(Carbon $Carbon, $charCode);
+    abstract public function get(Carbon $carbon, string $charCode);
 }

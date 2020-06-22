@@ -53,7 +53,6 @@ class CacheMemcache extends TaggableStore implements Store
         $this->setConnection();
     }
 
-
     /**
      * Создание соединения с сервером кеширования.
      *
@@ -68,7 +67,6 @@ class CacheMemcache extends TaggableStore implements Store
 
         return true;
     }
-
 
     /**
      * Получение кеша по ключу.
@@ -88,23 +86,22 @@ class CacheMemcache extends TaggableStore implements Store
         else return null;
     }
 
-
     /**
      * Запись кеша.
      *
      * @param string $key Ключ.
      * @param mixed $value Значение кеша.
-     * @param int $minutes Количество минут, на которые нужно запомнить кешь.
+     * @param int $seconds Количество секунд, на которые нужно запомнить кешь.
      *
      * @return bool Статус удачности записи.
      * @since 1.0
      * @version 1.0
      */
-    public function put($key, $value, $minutes): bool
+    public function put($key, $value, $seconds): bool
     {
         $index = $this->getPrefix() . $key;
         $compress = config("cache.stores.memcache.compress") ? MEMCACHE_COMPRESSED : 0;
-        $status = $this->getCache()->set($index, serialize($value), $compress, $minutes * 60);
+        $status = $this->getCache()->set($index, serialize($value), $compress, $seconds * 60);
 
         return $status;
     }
@@ -125,7 +122,6 @@ class CacheMemcache extends TaggableStore implements Store
         return $this->getCache()->increment($index, serialize($value));
     }
 
-
     /**
      * Декриминирование значения.
      *
@@ -142,7 +138,6 @@ class CacheMemcache extends TaggableStore implements Store
         return $this->getCache()->decrement($index, serialize($value));
     }
 
-
     /**
      * Запись кеша на неограниченое количество времени.
      *
@@ -157,7 +152,6 @@ class CacheMemcache extends TaggableStore implements Store
     {
         return $this->put($key, serialize($value), 0);
     }
-
 
     /**
      * Удаление кеша по ключу.
@@ -174,7 +168,6 @@ class CacheMemcache extends TaggableStore implements Store
         return $this->getCache()->delete($index);
     }
 
-
     /**
      * Полная очистка закешированных данных.
      *
@@ -187,7 +180,6 @@ class CacheMemcache extends TaggableStore implements Store
         return $this->getCache()->flush();
     }
 
-
     /**
      * Получение префикса кеширования для проекта.
      *
@@ -199,7 +191,6 @@ class CacheMemcache extends TaggableStore implements Store
     {
         return $this->_indexCaches;
     }
-
 
     /**
      * Получение закешированных данных по набору из ключей.
@@ -222,12 +213,11 @@ class CacheMemcache extends TaggableStore implements Store
         return $data;
     }
 
-
     /**
      * Сохранение закешированных данных по набору из значений.
      *
      * @param array $values Массив данных с ключами.
-     * @param int $minutes Количество минут, на которые нужно запомнить кешь.
+     * @param int $seconds Количество секунд, на которые нужно запомнить кешь.
      *
      * @return bool Вернет статус удачности операции.
      *
@@ -235,16 +225,15 @@ class CacheMemcache extends TaggableStore implements Store
      * @since 1.0
      * @version 1.0
      */
-    public function putMany(array $values, $minutes): bool
+    public function putMany(array $values, $seconds): bool
     {
         foreach($values as $key => $value)
         {
-            $this->put($key, $value, $minutes);
+            $this->put($key, $value, $seconds);
         }
 
         return true;
     }
-
 
     /**
      * Получение объекта кеширования на основе Memcache.

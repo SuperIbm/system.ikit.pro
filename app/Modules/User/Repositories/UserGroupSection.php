@@ -14,14 +14,14 @@ use App\Models\RepositoryEloquent;
 use App\Models\Repository;
 
 /**
- * Класс репозитария для выбранных ролей группы на основе Eloquent.
+ * Класс репозитария выбранных разделов группы на основе Eloquent.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class UserGroupRole extends Repository
+class UserGroupSection extends Repository
 {
     use RepositoryEloquent;
 
@@ -36,7 +36,7 @@ class UserGroupRole extends Repository
      */
     public function get($id)
     {
-        return $this->_get(['User', 'UserGroupRole'], $id);
+        return $this->_get(['User', 'UserGroupSection'], $id);
     }
 
 
@@ -55,7 +55,7 @@ class UserGroupRole extends Repository
      */
     public function read($filters = null, $sorts = null, $offset = null, $limit = null, $with = null)
     {
-        return $this->_read(['User', 'UserGroupRole'], false, $filters, null, $sorts, $offset, $limit, $with);
+        return $this->_read(['User', 'UserGroupSection'], false, $filters, null, $sorts, $offset, $limit, $with);
     }
 
     /**
@@ -70,7 +70,7 @@ class UserGroupRole extends Repository
      */
     public function count($filters = null, $with = null)
     {
-        return $this->_read(['User', 'UserGroupRole'], true, $filters, null, null, null, null, $with);
+        return $this->_read(['User', 'UserGroupSection'], true, $filters, null, null, null, null, $with);
     }
 
     /**
@@ -84,7 +84,7 @@ class UserGroupRole extends Repository
      */
     public function create(array $data)
     {
-        return $this->_create(['UserGroupRole'], $data);
+        return $this->_create(['UserGroupSection'], $data);
     }
 
     /**
@@ -99,7 +99,7 @@ class UserGroupRole extends Repository
      */
     public function update($id, array $data)
     {
-        return $this->_update(['UserGroupRole'], $id, $data);
+        return $this->_update(['UserGroupSection'], $id, $data);
     }
 
     /**
@@ -113,6 +113,6 @@ class UserGroupRole extends Repository
      */
     public function destroy($id)
     {
-        return $this->_destroy(['UserGroupRole'], $id);
+        return $this->_destroy(['UserGroupSection'], $id);
     }
 }

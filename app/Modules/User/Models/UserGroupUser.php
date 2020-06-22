@@ -116,17 +116,4 @@ class UserGroupUser extends Eloquent
     {
         return $this->hasMany(UserGroup::class, 'id', 'user_group_id');
     }
-
-
-    /**
-     * Получить выбранные роли для группы.
-     *
-     * @return \App\Modules\User\Models\UserGroupRole[]|\Illuminate\Database\Eloquent\Relations\HasMany Модель выбранные роли для группы.
-     * @version 1.0
-     * @since 1.0
-     */
-    public function userGroupRoles()
-    {
-        return $this->hasMany(UserGroupRole::class);
-    }
 }

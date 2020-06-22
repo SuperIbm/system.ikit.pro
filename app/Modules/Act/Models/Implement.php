@@ -60,7 +60,7 @@ class Implement
      * @since 1.0
      * @version 1.0
      */
-    public function status($index, $maxCount, $minutes = 60): bool
+    public function status(string $index, int $maxCount, int $minutes = 60): bool
     {
         $index = $this->_getKey($index);
         $value = $this->_get($index);
@@ -96,7 +96,7 @@ class Implement
      * @since 1.0
      * @version 1.0
      */
-    public function add($index, $to = 1, $minutes = 60 * 24 * 31): Implement
+    public function add(string $index, int $to = 1, int $minutes = 60 * 24 * 31): Implement
     {
         $index = $this->_getKey($index);
 
@@ -122,7 +122,7 @@ class Implement
      * @since 1.0
      * @version 1.0
      */
-    public function delete($index): Implement
+    public function delete(string $index): Implement
     {
         $index = $this->_getKey($index);
         $this->_clean($index);
@@ -140,7 +140,7 @@ class Implement
      * @since 1.0
      * @version 1.0
      */
-    protected function _get($index, $default = null)
+    protected function _get(string $index, array $default = null)
     {
         $filters = [
             [
@@ -181,7 +181,7 @@ class Implement
      * @since 1.0
      * @version 1.0
      */
-    protected function _set($index, $count, $minutes, $time = null): Implement
+    protected function _set(string $index, int $count, int $minutes, int $time = null): Implement
     {
         $time = isset($time) ? $time : time();
 
@@ -231,7 +231,7 @@ class Implement
      * @since 1.0
      * @version 1.0
      */
-    protected function _clean($index): Implement
+    protected function _clean(string $index): Implement
     {
         $filters = [
             [
@@ -266,7 +266,7 @@ class Implement
      * @since 1.0
      * @version 1.0
      */
-    protected function _getKey($index): string
+    protected function _getKey(string $index): string
     {
         return md5("action." . Request::ip() . "." . $index);
     }

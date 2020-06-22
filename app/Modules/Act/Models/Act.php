@@ -85,9 +85,9 @@ class Act extends Eloquent
     protected function getNames()
     {
         return [
-            'index' => 'Index',
-            'count' => 'Count',
-            'Minutes' => 'Minutes'
+            'index' => trans('act::models.act.index'),
+            'count' => trans('act::models.act.count'),
+            'minutes' => trans('act::models.act.Minutes')
         ];
     }
 }

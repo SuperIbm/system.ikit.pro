@@ -29,8 +29,6 @@ use App\Models\Delete;
  * @property string $status Значение статуса.
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modules\User\Models\UserGroupUser[] $userGroupUsers
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modules\User\Models\UserGroupRole[] $userGroupRoles
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modules\User\Models\UserGroupPage[] $userGroupPages
  *
  * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserGroup whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserGroup whereNameGroup($value)
@@ -106,29 +104,5 @@ class UserGroup extends Eloquent
     public function userGroupUsers()
     {
         return $this->hasMany(UserGroupUser::class);
-    }
-
-    /**
-     * Получить запись выбранных ролей.
-     *
-     * @return \App\Modules\User\Models\UserGroupRole[]|\Illuminate\Database\Eloquent\Relations\HasMany Модель выбранных ролей.
-     * @version 1.0
-     * @since 1.0
-     */
-    public function userGroupRoles()
-    {
-        return $this->hasMany(UserGroupRole::class);
-    }
-
-    /**
-     * Получить запись выбранных страниц группы.
-     *
-     * @return \App\Modules\User\Models\UserGroupPage[]|\Illuminate\Database\Eloquent\Relations\HasMany Модель выбранных страницы для групп.
-     * @version 1.0
-     * @since 1.0
-     */
-    public function userGroupPage()
-    {
-        return $this->hasMany(UserGroupPage::class, 'user_group_id');
     }
 }

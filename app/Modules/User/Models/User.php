@@ -304,30 +304,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Получение всех заказов.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany Модель заказов.
-     * @version 1.0
-     * @since 1.0
-     */
-    public function orderUsers()
-    {
-        return $this->hasMany(OrderUser::class);
-    }
-
-    /**
-     * Получение компании пользоватеяля.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne Модель компании пользователя.
-     * @version 1.0
-     * @since 1.0
-     */
-    public function userCompany()
-    {
-        return $this->hasOne(UserCompany::class);
-    }
-
-    /**
      * Получение адреса пользоватеяля.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne Модель адреса пользователя.

@@ -41,7 +41,7 @@ class Observable
      * @since 1.0
      * @version 1.0
      */
-    public function add($observer, string $action, $function = null): Observable
+    public function add($observer, string $action, callable $function = null): Observable
     {
         if(!isset($this->_observers[$action])) $this->_observers[$action] = Array();
 
@@ -53,7 +53,6 @@ class Observable
 
         return $this;
     }
-
 
     /**
      * Удаление действия наблюдателя.
@@ -71,7 +70,6 @@ class Observable
         return $this;
     }
 
-
     /**
      * Проверить если такое действие у наблюдателя.
      *
@@ -87,7 +85,6 @@ class Observable
         else return false;
     }
 
-
     /**
      * Запуск действия.
      *
@@ -99,7 +96,7 @@ class Observable
      * @since 1.0
      * @version 1.0
      */
-    protected function _start(string $action, $params = [], $stopIfFalse = false)
+    protected function _start(string $action, array $params = [], bool $stopIfFalse = false)
     {
         if(isset($this->_observers[$action]))
         {
@@ -130,7 +127,6 @@ class Observable
         return true;
     }
 
-
     /**
      * Запуск действия и возращения всех значений.
      *
@@ -141,12 +137,11 @@ class Observable
      * @since 1.0
      * @version 1.0
      */
-    public function fire(string $action, $params = [])
+    public function fire(string $action, array $params = [])
     {
         $values = $this->_start($action, $params);
         return $values;
     }
-
 
     /**
      * Запуск действия и возращения только первого значения.
@@ -158,14 +153,13 @@ class Observable
      * @since 1.0
      * @version 1.0
      */
-    public function first(string $action, $params = [])
+    public function first(string $action, array $params = [])
     {
         $values = $this->_start($action, $params);
 
         if(is_array($values)) return $values[0];
         else return true;
     }
-
 
     /**
      * Запуск действия и их исполнение до первого возращенного false.
@@ -177,7 +171,7 @@ class Observable
      * @since 1.0
      * @version 1.0
      */
-    public function until(string $action, $params = [])
+    public function until(string $action, array $params = [])
     {
         $values = $this->_start($action, $params, true);
 

@@ -42,6 +42,7 @@ trait Error
     public function cleanError()
     {
         $this->_errors = [];
+
         return $this;
     }
 
@@ -92,7 +93,7 @@ trait Error
      * @since 1.0
      * @version 1.0
      */
-    public function addError($type, $message = null, $tag = null)
+    public function addError($type, string $message = null, string $tag = null)
     {
         if(is_array($type))
         {
@@ -125,7 +126,7 @@ trait Error
      * @since 1.0
      * @version 1.0
      */
-    public function getError($index = 0)
+    public function getError(int $index = 0)
     {
         if($this->hasError())
         {
@@ -181,7 +182,7 @@ trait Error
      * @since 1.0
      * @version 1.0
      */
-    public function getErrorString($index = 0)
+    public function getErrorString(int $index = 0)
     {
         if($this->hasError())
         {
@@ -208,7 +209,7 @@ trait Error
      * @since 1.0
      * @version 1.0
      */
-    public function getErrorType($index = 0)
+    public function getErrorType(int $index = 0)
     {
         if($this->hasError())
         {
@@ -227,7 +228,7 @@ trait Error
      * @since 1.0
      * @version 1.0
      */
-    public function getErrorMessage($index = 0)
+    public function getErrorMessage(int $index = 0)
     {
         if($this->hasError())
         {
@@ -246,7 +247,7 @@ trait Error
      * @since 1.0
      * @version 1.0
      */
-    public function getErrorNumber($index = 0)
+    public function getErrorNumber(int $index = 0)
     {
         if($this->hasError())
         {

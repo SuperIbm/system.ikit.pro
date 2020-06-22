@@ -39,7 +39,7 @@ trait RepositoryMongoDb
      * @since 1.0
      * @version 1.0
      */
-    protected function _get($tags, $id, $active = null, $with = null)
+    protected function _get(array $tags, int $id, bool $active = null, array $with = null)
     {
         $pages = $this->_read($tags, false, [
             [

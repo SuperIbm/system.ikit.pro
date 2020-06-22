@@ -32,7 +32,7 @@ trait Delete
      * @since 1.0
      * @version 1.0
      */
-    public function deleteRelation(Relation $relation, $force = false)
+    public function deleteRelation(Relation $relation, bool $force = false)
     {
         $models = $relation->get();
 

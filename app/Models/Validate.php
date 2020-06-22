@@ -34,7 +34,6 @@ trait Validate
      */
     abstract protected function getRules(): array;
 
-
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
@@ -43,7 +42,6 @@ trait Validate
      * @since 1.0
      */
     abstract protected function getNames(): array;
-
 
     /**
      * Метод, который должен вернуть все сообщения об ошибках.
@@ -56,7 +54,6 @@ trait Validate
     {
         return [];
     }
-
 
     /**
      * Обработчик загрузки.
@@ -77,7 +74,6 @@ trait Validate
             if(!$status) return false;
         });
     }
-
 
     /**
      * Валидирование текущих атрибутов.

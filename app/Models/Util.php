@@ -197,7 +197,7 @@ class Util
      * @since 1.0
      * @version 1.0
      */
-    public function latin(string $string, $separator = "-", $symbols = true): string
+    public function latin(string $string, string $separator = "-", bool $symbols = true): string
     {
         $order = array(
             "а" => "a",
@@ -357,11 +357,11 @@ class Util
      *
      * @param array $arr Ассоциативный массив для проверки.
      *
-     * @return string Возвращает true, если массив ассоциативный.
+     * @return bool Возвращает true, если массив ассоциативный.
      * @since 1.0
      * @version 1.0
      */
-    public function isAssoc($arr)
+    public function isAssoc(array $arr): bool
     {
         if(array() === $arr) return false;
         return array_keys($arr) !== range(0, count($arr) - 1);
@@ -379,24 +379,6 @@ class Util
     public function getKey(...$params): string
     {
         return serialize($params);
-    }
-
-    /**
-     * Проверка соотвествия версий.
-     *
-     * @param string $versionFirst Первая версия.
-     * @param string $versionSecond Вторая версия.
-     *
-     * @return bool Вернет true, если версии соотвествуют.
-     * @since 1.0
-     * @version 1.0
-     */
-    function isCorrectVersion($versionFirst, $versionSecond)
-    {
-        $versionCurrent = explode(".", $versionFirst);
-        $versionModule = explode(".", $versionSecond);
-
-        return $versionCurrent[0] == $versionModule[0];
     }
 
     /**
@@ -468,7 +450,7 @@ class Util
      * @since 1.0
      * @version 1.0
      */
-    public function getNumber($number, $digits = 0): string
+    public function getNumber(float $number, int $digits = 0): string
     {
         return $this->_number($number, $digits);
     }
@@ -484,7 +466,7 @@ class Util
      * @since 1.0
      * @version 1.0
      */
-    public function getMoney($number, $digits = true, $label = '$'): string
+    public function getMoney(float $number, bool $digits = true, string $label = '$'): string
     {
         $digits = $digits == false ? 0 : 2;
         $money = $this->_number($number, $digits);
@@ -503,7 +485,7 @@ class Util
      * @since 1.0
      * @version 1.0
      */
-    public function isJson($string): bool
+    public function isJson(string $string): bool
     {
         if(is_string($string) && !is_numeric($string))
         {

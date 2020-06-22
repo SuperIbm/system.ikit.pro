@@ -64,7 +64,7 @@ abstract class Repository
      * @since 1.0
      * @version 1.0
      */
-    public function getModel()
+    public function getModel(): Eloquent
     {
         return $this->_model;
     }
@@ -78,9 +78,10 @@ abstract class Repository
      * @since 1.0
      * @version 1.0
      */
-    protected function _setModel($model): Repository
+    protected function _setModel(Eloquent $model): Repository
     {
         $this->_model = $model;
+
         return $this;
     }
 
@@ -91,7 +92,7 @@ abstract class Repository
      * @since 1.0
      * @version 1.0
      */
-    public function getCacheMinutes()
+    public function getCacheMinutes(): int
     {
         return $this->_cacheMinutes;
     }
@@ -108,6 +109,7 @@ abstract class Repository
     public function setCacheMinutes(int $minutes): Repository
     {
         $this->_cacheMinutes = $minutes;
+
         return $this;
     }
 
@@ -179,7 +181,6 @@ abstract class Repository
         return $filter;
     }
 
-
     /**
      * Перевод ключ значение к формату репозитария для филтрации данных.
      *
@@ -221,7 +222,7 @@ abstract class Repository
      * @param int $id Первичный ключ.
      * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
      *
-     * @return array Массив данных.
+     * @return array|bool Массив данных.
      * @since 1.0
      * @version 1.0
      */
@@ -242,12 +243,11 @@ abstract class Repository
      * @param array|string $selects Выражения для выборки.
      * @param bool $toTree Переведет все в дерево.
      *
-     * @return array|int Массив данных.
+     * @return array|bool Массив данных.
      * @since 1.0
      * @version 1.0
      */
     abstract protected function _read(array $tags, $count = false, array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null, array $group = null, array $selects = null, bool $toTree = false);
-
 
     /**
      * Создание.
@@ -255,7 +255,7 @@ abstract class Repository
      * @param array $tags Массив тэгов для кеширования.
      * @param array $data Данные для добавления.
      *
-     * @return int Вернет ID последней вставленной строки. Если ошибка, то вернет false.
+     * @return int|bool Вернет ID последней вставленной строки. Если ошибка, то вернет false.
      * @since 1.0
      * @version 1.0
      */
@@ -268,7 +268,7 @@ abstract class Repository
      * @param int $id Id записи для обновления.
      * @param array $data Данные для обновления.
      *
-     * @return int Вернет ID вставленной строки. Если ошибка, то вернет false.
+     * @return int|bool Вернет ID вставленной строки. Если ошибка, то вернет false.
      * @since 1.0
      * @version 1.0
      */
@@ -286,16 +286,15 @@ abstract class Repository
      */
     abstract protected function _destroy(array $tags, $id): bool;
 
-
     /**
      * Получение нового экземпляра модели.
      *
      * @param array $data Данные этой модели.
      * @param bool $exists Определяет существует ли эта запись или нет.
      *
-     * @return Object Объект модели данного репозитария.
+     * @return \Eloquent Объект модели данного репозитария.
      * @since 1.0
      * @version 1.0
      */
-    abstract public function newInstance(array $data = [], $exists = false);
+    abstract public function newInstance(array $data = [], $exists = false): Eloquent;
 }

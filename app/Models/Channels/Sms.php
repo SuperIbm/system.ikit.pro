@@ -26,20 +26,20 @@ class Sms
     /**
      * Отправка сообщения.
      *
-     * @param mixed $Notifiable
-     * @param \Illuminate\Notifications\Notification $Notification
+     * @param mixed $notifiable
+     * @param \Illuminate\Notifications\Notification $notification
      *
      * @return \App\Models\Facades\Sms;
      * @since 1.0
      * @version 1.0
      */
-    public function send($Notifiable, Notification $Notification)
+    public function send($notifiable, Notification $notification)
     {
-        $Message = $Notification->toSms($Notifiable);
+        $Message = $notification->toSms($notifiable);
 
         return SmsFacade::send
         (
-            $Notifiable->routeNotificationForPhone(),
+            $notifiable->routeNotificationForPhone(),
             $Message->message,
             $Message->sender,
             $Message->translit

@@ -14,7 +14,7 @@ use Eloquent;
 use App\Models\Delete;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Modules\AdminSection\Models\AdminSection;
+use App\Modules\Section\Models\Section;
 
 /**
  * Класс модель для таблицы выбранных разделов роли на основе Eloquent.
@@ -26,26 +26,24 @@ use App\Modules\AdminSection\Models\AdminSection;
  *
  * @property int $id
  * @property int $user_role_id
- * @property int $admin_section_id
+ * @property int $section_id
  * @property bool $read Значение статуса на чтение.
  * @property bool $update Значение статуса на обновление.
  * @property bool $create Значение статуса на создание.
  * @property bool $destroy Значение статуса на удаление.
  *
- * @property-read \App\Modules\User\Models\UserRole $userRole
- * @property-read \App\Modules\AdminSection\Models\AdminSection $adminSection
+ * @property-read \App\Modules\Section\Models\Section $adminSection
  *
- * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserRoleAdminSection whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserRoleAdminSection whereUserRoleId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserRoleAdminSection whereAdminSectionId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserRoleAdminSection whereRead($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserRoleAdminSection whereUpdate($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserRoleAdminSection whereCreate($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserRoleAdminSection whereDestroy($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserGroupSection whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserGroupSection whereSectionId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserGroupSection whereRead($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserGroupSection whereUpdate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserGroupSection whereCreate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Modules\User\Models\UserGroupSection whereDestroy($value)
  *
  * @mixin \Eloquent
  */
-class UserRoleAdminSection extends Eloquent
+class UserGroupSection extends Eloquent
 {
     use Validate, SoftDeletes, Delete;
 
@@ -67,8 +65,8 @@ class UserRoleAdminSection extends Eloquent
      */
     protected $fillable = [
         'id',
-        'user_role_id',
-        'admin_section_id',
+        'user_group_id',
+        'section_id',
         'read',
         'update',
         'create',
@@ -85,14 +83,13 @@ class UserRoleAdminSection extends Eloquent
     {
         return [
             'user_role_id' => 'required|integer|digits_between:1,20',
-            'admin_section_id' => 'required|integer|digits_between:1,20',
+            'section_id' => 'required|integer|digits_between:1,20',
             'read' => 'boolean',
             'update' => 'boolean',
             'create' => 'boolean',
             'destroy' => 'boolean'
         ];
     }
-
 
     /**
      * Метод, который должен вернуть все названия атрибутов.
@@ -104,7 +101,7 @@ class UserRoleAdminSection extends Eloquent
     {
         return [
             'user_role_id' => 'ID role',
-            'admin_section_id' => 'ID admin section',
+            'section_id' => 'ID section',
             'read' => 'Read',
             'update' => 'Update',
             'create' => 'Create',
@@ -113,27 +110,14 @@ class UserRoleAdminSection extends Eloquent
     }
 
     /**
-     * Получить запись роли.
+     * Получить раздел системы.
      *
-     * @return \App\Modules\User\Models\UserRole|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель роли пользователей.
+     * @return \App\Modules\Section\Models\Section|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель разделов административной системы.
      * @version 1.0
      * @since 1.0
      */
-    public function userRole()
+    public function section()
     {
-        return $this->belongsTo(UserRole::class, 'id_user_role');
-    }
-
-
-    /**
-     * Получить раздел адмнистративной системы.
-     *
-     * @return \App\Modules\AdminSection\Models\AdminSection|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель разделов административной системы.
-     * @version 1.0
-     * @since 1.0
-     */
-    public function adminSection()
-    {
-        return $this->belongsTo(AdminSection::class, 'id_admin_section');
+        return $this->belongsTo(Section::class, 'id_section');
     }
 }

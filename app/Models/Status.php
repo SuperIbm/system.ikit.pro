@@ -32,7 +32,7 @@ trait Status
      * @since 1.0
      * @version 1.0
      */
-    private function statusIs(Builder $query, bool $status = true)
+    private function statusIs(Builder $query, bool $status = true): Builder
     {
         $query->where($this->getTable().".status", $status);
 
@@ -48,7 +48,7 @@ trait Status
      * @since 1.0
      * @version 1.0
      */
-    public function scopeActive(Builder $query)
+    public function scopeActive(Builder $query): Builder
     {
         return $this->statusIs($query, true);
     }
@@ -62,7 +62,7 @@ trait Status
      * @since 1.0
      * @version 1.0
      */
-    public function scopeNotActive(Builder $query)
+    public function scopeNotActive(Builder $query): Builder
     {
         return $this->statusIs($query, false);
     }

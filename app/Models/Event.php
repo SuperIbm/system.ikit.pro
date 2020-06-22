@@ -44,7 +44,6 @@ trait Event
         return $this;
     }
 
-
     /**
      * Добавление событий.
      *
@@ -55,13 +54,12 @@ trait Event
      * @since 1.0
      * @version 1.0
      */
-    public function addEvent(string $action, Callback $function = null)
+    public function addEvent(string $action, callable $function = null)
     {
         $this->_init();
         $this->_observable->add($this, $action, $function);
         return $this;
     }
-
 
     /**
      * Удаление события.
@@ -78,7 +76,6 @@ trait Event
         $this->_observable->delete($action);
         return $this;
     }
-
 
     /**
      * Проверить если такое событие.
@@ -105,12 +102,11 @@ trait Event
      * @since 1.0
      * @version 1.0
      */
-    public function fireEvent(string $action, $params = [])
+    public function fireEvent(string $action, array $params = [])
     {
         $this->_init();
         return $this->_observable->fire($action, $params);
     }
-
 
     /**
      * Запуск события и возращения только первого значения.
@@ -122,12 +118,11 @@ trait Event
      * @since 1.0
      * @version 1.0
      */
-    public function firstEvent(string $action, $params = [])
+    public function firstEvent(string $action, array $params = [])
     {
         $this->_init();
         return $this->_observable->first($action, $params);
     }
-
 
     /**
      * Запуск события и их исполнение до первого возращенного false.
@@ -139,7 +134,7 @@ trait Event
      * @since 1.0
      * @version 1.0
      */
-    public function untilEvent(string $action, $params = [])
+    public function untilEvent(string $action, array $params = [])
     {
         $this->_init();
         return $this->_observable->until($action, $params);

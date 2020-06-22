@@ -58,7 +58,6 @@ class CacheMongoDb extends TaggableStore implements Store
         $this->setConnection();
     }
 
-
     /**
      * Создание соединения с сервером кеширования.
      *
@@ -80,7 +79,6 @@ class CacheMongoDb extends TaggableStore implements Store
         }
         else return false;
     }
-
 
     /**
      * Получение кеша по ключу.
@@ -118,17 +116,18 @@ class CacheMongoDb extends TaggableStore implements Store
      *
      * @param string $key Ключ.
      * @param mixed $value Значение кеша.
-     * @param int $minutes Количество минут, на которые нужно запомнить кешь.
+     * @param int $seconds Количество секунд, на которые нужно запомнить кешь.
      *
      * @return bool Статус удачности записи.
+     * @throws
      * @since 1.0
      * @version 1.0
      */
-    public function put($key, $value, $minutes): bool
+    public function put($key, $value, $seconds)
     {
         $index = $this->getPrefix() . $key;
         $dateTime = new DateTime();
-        $dateInterval = new DateInterval('PT'.$minutes.'M');
+        $dateInterval = new DateInterval('PT'.$seconds.'S');
         $dateTime->add($dateInterval);
         $expiration = new UTCDateTime($dateTime);
 
@@ -270,7 +269,7 @@ class CacheMongoDb extends TaggableStore implements Store
      * Сохранение закешированных данных по набору из значений.
      *
      * @param array $values Массив данных с ключами.
-     * @param int $minutes Количество минут, на которые нужно запомнить кешь.
+     * @param int $seconds Количество секунд, на которые нужно запомнить кешь.
      *
      * @return bool Вернет статус удачности операции.
      *
@@ -278,11 +277,11 @@ class CacheMongoDb extends TaggableStore implements Store
      * @since 1.0
      * @version 1.0
      */
-    public function putMany(array $values, $minutes): bool
+    public function putMany(array $values, $seconds): bool
     {
         foreach($values as $key => $value)
         {
-            $this->put($key, $value, $minutes);
+            $this->put($key, $value, $seconds);
         }
 
         return true;
