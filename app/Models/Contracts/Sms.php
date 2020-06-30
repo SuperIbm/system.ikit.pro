@@ -36,7 +36,7 @@ abstract class Sms
      * @since 1.0
      * @version 1.0
      */
-    abstract public function send(string $phone, string $message, string $sender = null, bool $isTranslit = false);
+    abstract public function send(string $phone, string $message, string $sender, bool $isTranslit = false);
 
     /**
      * Абстрактный метод проверки статуса отправки сообщения.

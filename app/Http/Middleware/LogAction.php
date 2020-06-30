@@ -10,6 +10,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Config;
 use Log;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,6 @@ class LogAction
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
-
-        /*
         if(function_exists('getrusage')) $usage = getrusage();
         else $usage = [];
 
@@ -69,12 +67,12 @@ class LogAction
 
         if
         (
-            config('app.log_slow_time', 0) == 0 ||
-            config('app.log_slow_memory', 0) == 0 ||
-            config('app.log_slow_cpu', 0) == 0 ||
-            $executeTime > config('app.log_slow_time') ||
-            $executeMemory > config('app.log_slow_memory') ||
-            $cpu > config('app.log_slow_cpu')
+            Config::get('app.log_slow_time', 0) == 0 ||
+            Config::get('app.log_slow_memory', 0) == 0 ||
+            Config::get('app.log_slow_cpu', 0) == 0 ||
+            $executeTime > Config::get('app.log_slow_time') ||
+            $executeMemory > Config::get('app.log_slow_memory') ||
+            $cpu > Config::get('app.log_slow_cpu')
         )
         {
             Log::alert($request->fullUrl(),
@@ -87,6 +85,6 @@ class LogAction
             );
         }
 
-        return $response;*/
+        return $response;
     }
 }

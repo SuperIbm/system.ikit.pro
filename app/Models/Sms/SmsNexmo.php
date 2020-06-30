@@ -40,13 +40,12 @@ class SmsNexmo extends Sms
      * @version 1.0
      * @see \App\Models\Contracts\Sms::send
      */
-    public function send(string $phone, string $message, string $sender = null, bool $isTranslit = false)
+    public function send(string $phone, string $message, string $sender, bool $isTranslit = false)
     {
         $basic = new Basic(Config::get("sms.nexmo.key"), Config::get("sms.nexmo.secret"));
         $client = new Client($basic);
 
         $phone = str_replace(["+", "-", ""], "", $phone);
-        $sender = $sender ? $sender : Config::get("phone.sender");
         $sender = str_replace(["+", "-", ""], "", $sender);
 
         try

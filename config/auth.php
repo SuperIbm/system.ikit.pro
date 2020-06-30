@@ -92,6 +92,12 @@ return [
     |
     */
 
+    'redirections' =>
+        [
+            'login' => env('AUTH_REDIRECTION_LOGIN'),
+            'register' => env('AUTH_REDIRECTION_REGISTER'),
+        ],
+
     'passwords' => [
         'users' => [
             'provider' => 'users',

@@ -11,6 +11,6 @@ return [
     |
     */
 
-    'driver' => "cbr",
+    'driver' => env('CURRENCY', 'cbr'),
 
 ];

@@ -9,6 +9,7 @@
 
 namespace App\Providers;
 
+use Config;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use DB;
 use Log;
@@ -41,37 +42,32 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        if(config('database.log', false))
+        if(Config::get('database.log', false))
         {
-            DB::listen
-            (
-                function($Query)
+            DB::listen(function($query) {
+                if(($query->time / 1000) >= Config::get('database.timeSlow', 0))
                 {
-                    if(($Query->time / 1000) >= config('database.timeSlow', 0))
+                    $data = [
+                        "bindings" => $query->bindings,
+                        "time" => $query->time / 1000,
+                        "sql" => $query->sql,
+                    ];
+
+                    foreach($query->bindings as $i => $binding)
                     {
-                        $data =
-                            [
-                                "bindings" => $Query->bindings,
-                                "time" => $Query->time / 1000,
-                                "sql" => $Query->sql,
-                            ];
-
-                        foreach($Query->bindings as $i => $binding)
-                        {
-                            if($binding instanceof \DateTime) $bindings[$i] = $binding->format('\'Y-m-d H:i:s\'');
-                            else if(is_string($binding)) $bindings[$i] = "'$binding'";
-                        }
-
-                        $query = str_replace(array('%', '?'), array('%%', '%s'), $Query->sql);
-                        $query = vsprintf($query, $Query->bindings);
-
-                        $data["type"] = "base";
-
-                        if(config('database.timeSlow', 0) != 0) Log::warning($query, $data);
-                        else Log::info($query, $data);
+                        if($binding instanceof \DateTime) $bindings[$i] = $binding->format('\'Y-m-d H:i:s\'');
+                        else if(is_string($binding)) $bindings[$i] = "'$binding'";
                     }
+
+                    $query = str_replace(array('%', '?'), array('%%', '%s'), $query->sql);
+                    $query = vsprintf($query, $query->bindings);
+
+                    $data["type"] = "base";
+
+                    if(Config::get('database.timeSlow', 0) != 0) Log::warning($query, $data);
+                    else Log::info($query, $data);
                 }
-            );
+            });
         }
     }
 }

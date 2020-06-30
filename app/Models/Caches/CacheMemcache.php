@@ -10,6 +10,7 @@
 
 namespace App\Models\Caches;
 
+use Config;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Cache\TaggableStore;
 use \Memcache;
@@ -63,7 +64,7 @@ class CacheMemcache extends TaggableStore implements Store
     public function setConnection(): bool
     {
         $this->_setCache(new Memcache());
-        $this->getCache()->connect(config("cache.stores.memcache.host"), config("cache.stores.memcache.port"));
+        $this->getCache()->connect(Config::get("cache.stores.memcache.host"), Config::get("cache.stores.memcache.port"));
 
         return true;
     }
@@ -100,7 +101,7 @@ class CacheMemcache extends TaggableStore implements Store
     public function put($key, $value, $seconds): bool
     {
         $index = $this->getPrefix() . $key;
-        $compress = config("cache.stores.memcache.compress") ? MEMCACHE_COMPRESSED : 0;
+        $compress = Config::get("cache.stores.memcache.compress") ? MEMCACHE_COMPRESSED : 0;
         $status = $this->getCache()->set($index, serialize($value), $compress, $seconds * 60);
 
         return $status;

@@ -42,7 +42,7 @@ class GeocoderGoogle extends Geocoder
 
         if($address)
         {
-            $url = 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&key=' . Config::get("map.key");
+            $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&key=' . Config::get("geocoder.channels.google.key");
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_HEADER, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

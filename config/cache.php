@@ -88,7 +88,13 @@ return [
         'mongodb' => [
             'driver' => 'mongodb',
             'table' => 'caches'
-        ]
+        ],
+        'memcache' => [
+            'driver' => 'memcache',
+            'host' => 'localhost',
+            'port' => 11211,
+            'compress' => false
+        ],
 
     ],
 

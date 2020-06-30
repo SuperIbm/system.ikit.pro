@@ -33,6 +33,8 @@ return [
     |
     */
 
+    'timeSlow' => 2,
+
     'connections' => [
 
         'sqlite' => [

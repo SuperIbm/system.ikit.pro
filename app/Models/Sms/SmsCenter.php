@@ -14,7 +14,6 @@ use App\Models\Contracts\Sms;
 use Storage;
 use Config;
 
-
 /**
  * Классы драйвер для отправик СМС сообщений с сайта с использованием СмсЦентр - www.smsc.ru.
  *
@@ -38,15 +37,15 @@ class SmsCenter extends Sms
      * @version 1.0
      * @see \App\Models\Contracts\Sms::send
      */
-    public function send(string $phone, string $message, string $sender = null, bool $isTranslit = false)
+    public function send(string $phone, string $message, string $sender, bool $isTranslit = false)
     {
         $msg = iconv("utf-8", "windows-1251", $message);
-        $url = "http://smsc.ru/sys/send.php?login=" . Config::get("sms.login") . "&psw=" . Config::get("sms.password") . "&phones=" . $phone . "&mes=" . $msg . "&sender=" . $sender . "&fmt=3";
+        $url = "http://smsc.ru/sys/send.php?login=" . Config::get("sms.center.login") . "&psw=" . Config::get("sms.center.password") . "&phones=" . $phone . "&mes=" . $msg . "&sender=" . $sender . "&fmt=3";
 
         $respose = Storage::url($url);
         $result = json_decode($respose, true);
 
-        switch(@$result["error_code"])
+        switch(isset($result["error_code"]))
         {
             case 1:
                 $this->addError("noSend", "Ошибка в параметрах.", 1);

@@ -10,9 +10,9 @@
 
 namespace App\Models\Sessions;
 
+use Config;
 use SessionHandlerInterface;
 use \Memcache;
-
 
 /**
  * Класс драйвер сессии на основе Memcache.
@@ -51,7 +51,7 @@ class SessionMemcache implements SessionHandlerInterface
     public function __construct()
     {
         $this->_setCache(new Memcache());
-        $this->getCache()->connect(config("session.memcache.host"), config("session.memcache.port"));
+        $this->getCache()->connect(Config::get("session.memcache.host"), Config::get("session.memcache.port"));
     }
 
     /**
@@ -92,7 +92,7 @@ class SessionMemcache implements SessionHandlerInterface
      */
     public function read($sessionId)
     {
-        $index = config("session.connection.memcache.project") . "_" . $this->_indexSessions;
+        $index = Config::get("app.url") . "_" . $this->_indexSessions;
         $data = $this->getCache()->get($index);
 
         if($data)
@@ -115,7 +115,7 @@ class SessionMemcache implements SessionHandlerInterface
      */
     public function write($sessionId, $data): bool
     {
-        $index = config("session.connection.memcache.project") . "_" . $this->_indexSessions;
+        $index = Config::get("app.url") . "_" . $this->_indexSessions;
         $result = $this->getCache()->get($index);
 
         if(isset($result)) $result[$sessionId] = $data;
@@ -128,8 +128,8 @@ class SessionMemcache implements SessionHandlerInterface
             ];
         }
 
-        $compress = config("session.connection.memcache.compress") ? MEMCACHE_COMPRESSED : 0;
-        return $this->getCache()->set($index, $result, $compress, config("session.lifetime") * 60);
+        $compress = Config::get("cache.stores.memcache.compress") ? MEMCACHE_COMPRESSED : 0;
+        return $this->getCache()->set($index, $result, $compress, Config::get("session.lifetime") * 60);
     }
 
     /**
@@ -143,7 +143,7 @@ class SessionMemcache implements SessionHandlerInterface
      */
     public function destroy($sessionId): bool
     {
-        $index = config("session.connection.memcache.project") . "_" . $this->_indexSessions;
+        $index = Config::get("app.url") . "_" . $this->_indexSessions;
         $data = $this->getCache()->get($index);
 
         if(isset($data))
@@ -151,8 +151,8 @@ class SessionMemcache implements SessionHandlerInterface
             if(isset($data[$sessionId]))
             {
                 unset($data[$sessionId]);
-                $compress = config("session.connection.memcache.compress") ? MEMCACHE_COMPRESSED : 0;
-                $this->getCache()->set($index, $data, $compress, config("session.lifetime") * 60);
+                $compress = Config::get("cache.stores.memcache.compress") ? MEMCACHE_COMPRESSED : 0;
+                $this->getCache()->set($index, $data, $compress, Config::get("session.lifetime") * 60);
             }
         }
 
