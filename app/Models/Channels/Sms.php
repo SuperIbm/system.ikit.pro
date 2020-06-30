@@ -35,14 +35,14 @@ class Sms
      */
     public function send($notifiable, Notification $notification)
     {
-        $Message = $notification->toSms($notifiable);
+        $message = $notification->toSms($notifiable);
 
         return SmsFacade::send
         (
             $notifiable->routeNotificationForPhone(),
-            $Message->message,
-            $Message->sender,
-            $Message->translit
+            $message->message,
+            $message->sender,
+            $message->translit
         );
     }
 }

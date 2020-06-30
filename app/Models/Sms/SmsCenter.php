@@ -38,7 +38,7 @@ class SmsCenter extends Sms
      * @version 1.0
      * @see \App\Models\Contracts\Sms::send
      */
-    public function send($phone, $message, $sender = null, $isTranslit = false)
+    public function send(string $phone, string $message, string $sender = null, bool $isTranslit = false)
     {
         $msg = iconv("utf-8", "windows-1251", $message);
         $url = "http://smsc.ru/sys/send.php?login=" . Config::get("sms.login") . "&psw=" . Config::get("sms.password") . "&phones=" . $phone . "&mes=" . $msg . "&sender=" . $sender . "&fmt=3";
@@ -73,9 +73,7 @@ class SmsCenter extends Sms
                 $this->addError("noSend", "Сообщение на указанный номер не может быть доставлено.", 8);
                 break;
             case 9:
-                $this->addError("noSend",
-                    "Отправка более одного одинакового запроса на передачу SMS-сообщения либо более пяти одинаковых запросов на получение стоимости сообщения в течение минуты.",
-                    9);
+                $this->addError("noSend", "Отправка более одного одинакового запроса на передачу SMS-сообщения либо более пяти одинаковых запросов на получение стоимости сообщения в течение минуты.", 9);
                 break;
         }
 
@@ -99,7 +97,7 @@ class SmsCenter extends Sms
      * @version 1.0
      * @see \App\Models\Contracts\Sms::check
      */
-    public function check($index, $phone): bool
+    public function check(string $index, string $phone): bool
     {
         $url = "http://smsc.ru/sys/status.php?login=" . Config::get("sms.center.login") . "&psw=" . Config::get("sms.center.password") . "&phone=" . $phone . "&id=" . $index . "&fmt=3";
 

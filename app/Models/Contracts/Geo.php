@@ -45,5 +45,5 @@ abstract class Geo
      * @since 1.0
      * @version 1.0
      */
-    abstract public function get(array $geoObject = null, string $ip = null);
+    abstract public function get(string $geoObject = null, string $ip = null);
 }

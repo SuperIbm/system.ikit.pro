@@ -31,7 +31,7 @@ abstract class Currency
      * @param \Carbon\Carbon $carbon Дата на которую нужно получить котировки.
      * @param string $charCode Код валюты для получения котировки. Если не указать, то вернет все валюты.
      *
-     * @return array|int|false Массив данных запрашиваемой валюты.
+     * @return array|int|bool Массив данных запрашиваемой валюты.
      * @since 1.0
      * @version 1.0
      */

@@ -48,7 +48,6 @@ class Act extends Repository
         return $this->_get(['Act', 'ActItem'], $id);
     }
 
-
     /**
      * Чтение данных.
      *

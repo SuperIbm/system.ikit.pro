@@ -45,14 +45,12 @@ class SmsLog extends Sms
         $sender = $sender ? $sender : Config::get("phone.sender");
         $sender = str_replace(["+", "-", ""], "", $sender);
 
-        Log::notice("Send SMS",
-            [
-                'module' => "SMS",
-                'to' => $phone,
-                'sender' => $sender,
-                'message' => $message
-            ]
-        );
+        Log::notice("Send SMS", [
+            'module' => "SMS",
+            'to' => $phone,
+            'sender' => $sender,
+            'message' => $message
+        ]);
 
         return true;
     }

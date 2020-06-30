@@ -43,13 +43,14 @@ class Observable
      */
     public function add($observer, string $action, callable $function = null): Observable
     {
-        if(!isset($this->_observers[$action])) $this->_observers[$action] = Array();
+        if(!isset($this->_observers[$action])) $this->_observers[$action] = [];
 
         $ln = count($this->_observers[$action]);
 
-        $this->_observers[$action][$ln] = Array();
-        $this->_observers[$action][$ln]["obj"] = $observer;
-        $this->_observers[$action][$ln]["function"] = $function;
+        $this->_observers[$action][$ln] = [
+            "obj" => $observer,
+            "function" => $function
+        ];
 
         return $this;
     }
@@ -100,7 +101,7 @@ class Observable
     {
         if(isset($this->_observers[$action]))
         {
-            $values = Array();
+            $values = [];
 
             for($i = 0; $i < count($this->_observers[$action]); $i++)
             {
@@ -111,10 +112,11 @@ class Observable
                 {
                     array_unshift($params, $this->_observers[$action][$i]["obj"]);
 
-                    if($this->_observers[$action][$i]["function"]) $values[] = call_user_func_array($this->_observers[$action][$i]["function"],
-                        $params);
-                    else $values[] = call_user_func_array(array($this->_observers[$action][$i]["obj"], $action),
-                        $params);
+                    if($this->_observers[$action][$i]["function"]) $values[] = call_user_func_array($this->_observers[$action][$i]["function"], $params);
+                    else $values[] = call_user_func_array(array(
+                        $this->_observers[$action][$i]["obj"],
+                        $action
+                    ), $params);
 
                     if($stopIfFalse == true && $values[count($values) - 1] === false) break;
                 }

@@ -62,7 +62,6 @@ class Util
         return $string;
     }
 
-
     /**
      * Очистка строки с переводом тэга &lt;br /&gt; к \\r\\n и удаление HTML разметки.
      *
@@ -80,7 +79,6 @@ class Util
 
         return $string;
     }
-
 
     /**
      * Очистка строки с переводом каретки к тэгу &lt;br /&gt; и удаление HTML разметки.
@@ -100,7 +98,6 @@ class Util
         return $string;
     }
 
-
     /**
      * Очистка строки с переводом каретки к тэгу &lt;br /&gt; с сохранением HTML разметки.
      *
@@ -117,7 +114,6 @@ class Util
         return $string;
     }
 
-
     /**
      * Очистка строки с сохранением HTML разметки.
      *
@@ -132,7 +128,6 @@ class Util
         $string = trim($string);
         return $string;
     }
-
 
     /**
      * Обработка строки с переводом тэга &lt;br /&gt; к \\r\\n.
@@ -149,7 +144,6 @@ class Util
         $str = str_replace("<br>", "\r\n", $str);
         return $str;
     }
-
 
     /**
      * Обработка строки с переводом корретки к тэгу &lt;br /&gt;.
@@ -183,7 +177,6 @@ class Util
         $string = trim($string);
         return $string;
     }
-
 
     /**
      * Транслирует текст.
@@ -351,7 +344,6 @@ class Util
         return $latin;
     }
 
-
     /**
      * Метод проверит является ли массив ассоциативным.
      *
@@ -461,17 +453,22 @@ class Util
      * @param float $number Число для форматирования.
      * @param bool $digits Отображать дробные числа.
      * @param string $label Знак валюты.
+     * @param bool $beginning Ставить ли знак валюты в начале.
      *
      * @return string Вернет отформатированное число.
      * @since 1.0
      * @version 1.0
      */
-    public function getMoney(float $number, bool $digits = true, string $label = '$'): string
+    public function getMoney(float $number, bool $digits = true, string $label = '$', bool $beginning = true): string
     {
         $digits = $digits == false ? 0 : 2;
         $money = $this->_number($number, $digits);
 
-        if($label) $money = $label . $money;
+        if($label)
+        {
+            if($beginning) $money = $label . $money;
+            else $money = $money." ".$label;
+        }
 
         return $money;
     }

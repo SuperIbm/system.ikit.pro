@@ -26,7 +26,7 @@ class FormRequest extends FormRequestNative
 {
     /**
      * Формирования ответа.
-     * Формируем собственный формат JSON для ответа, чтобы у ExtJs была возможность его прочесть.
+     * Формируем собственный формат JSON для ответа, чтобы была возможность его прочесть.
      *
      * @param array $errors Массив ошибок.
      *
@@ -50,13 +50,10 @@ class FormRequest extends FormRequestNative
             }
 
             return new JsonResponse
-            (
-                [
-                    'success' => false,
-                    'message' => $message
-                ],
-                400
-            );
+            ([
+                'success' => false,
+                'message' => $message
+            ], 400);
         }
         else return parent::response($errors);
     }

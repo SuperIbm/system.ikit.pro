@@ -10,8 +10,8 @@
 
 namespace App\Models\Sms;
 
+use Config;
 use Illuminate\Support\Manager;
-
 
 /**
  * Класс системы отправки СМС сообщений.
@@ -28,6 +28,6 @@ class SmsManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['sms.driver'];
+        return Config::get('sms.driver');
     }
 }

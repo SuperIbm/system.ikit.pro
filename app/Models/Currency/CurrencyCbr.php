@@ -46,13 +46,12 @@ class CurrencyCbr extends Currency
 
             foreach($htmldom->Valute as $item)
             {
-                $data[$item->CharCode->asText()] = array
-                (
+                $data[$item->CharCode->asText()] = [
                     "numCode" => $item->NumCode->asText(),
                     "nominal" => $item->Nominal->asText(),
                     "name" => $item->Name->asText(),
                     'value' => (float)str_replace(",", ".", $item->Value->asText())
-                );
+                ];
             }
 
             if(isset($data[$charCode])) return $data[$charCode];

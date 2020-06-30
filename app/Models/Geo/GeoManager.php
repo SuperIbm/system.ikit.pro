@@ -10,8 +10,8 @@
 
 namespace App\Models\Geo;
 
+use Config;
 use Illuminate\Support\Manager;
-
 
 /**
  * Класс системы геопозиционирования.
@@ -28,6 +28,6 @@ class GeoManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['geo.driver'];
+        return Config::get('geo.driver');
     }
 }

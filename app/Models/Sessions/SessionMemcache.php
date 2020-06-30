@@ -81,7 +81,6 @@ class SessionMemcache implements SessionHandlerInterface
         return true;
     }
 
-
     /**
      * Считывыне сессии.
      *
@@ -103,7 +102,6 @@ class SessionMemcache implements SessionHandlerInterface
         }
         return null;
     }
-
 
     /**
      * Запись сессии.
@@ -133,7 +131,6 @@ class SessionMemcache implements SessionHandlerInterface
         $compress = config("session.connection.memcache.compress") ? MEMCACHE_COMPRESSED : 0;
         return $this->getCache()->set($index, $result, $compress, config("session.lifetime") * 60);
     }
-
 
     /**
      * Уничтожение сессии.
@@ -176,7 +173,6 @@ class SessionMemcache implements SessionHandlerInterface
         return true;
     }
 
-
     /**
      * Получение объекта кеширования на основе Memcache.
      *
@@ -192,15 +188,15 @@ class SessionMemcache implements SessionHandlerInterface
     /**
      * Получение объекта кеширования на основе Memcache.
      *
-     * @param \Memcache $Memcache Объект кеширования на основе Memcache.
+     * @param \Memcache $memcache Объект кеширования на основе Memcache.
      *
      * @return \App\Models\Sessions\SessionMemcache
      * @since 1.0
      * @version 1.0
      */
-    private function _setCache(Memcache $Memcache): SessionMemcache
+    private function _setCache(Memcache $memcache): SessionMemcache
     {
-        $this->_memcache = $Memcache;
+        $this->_memcache = $memcache;
         return $this;
     }
 }

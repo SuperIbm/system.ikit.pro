@@ -33,7 +33,7 @@ abstract class Geocoder
      * @param string $region Регион.
      * @param string $street Уличца.
      *
-     * @return array|false Вернет кооридинату местоположения.
+     * @return array|bool Вернет кооридинату местоположения.
      * @since 1.0
      * @version 1.0
      */

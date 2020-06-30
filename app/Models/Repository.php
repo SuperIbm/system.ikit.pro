@@ -182,7 +182,7 @@ abstract class Repository
     }
 
     /**
-     * Перевод ключ значение к формату репозитария для филтрации данных.
+     * Перевод ключ значение к формату репозитария для фильтрации данных.
      *
      * @param array $filters Массив значений для фильтрации.
      * @param array $allows Массив допустимых параметров.
@@ -221,12 +221,15 @@ abstract class Repository
      * @param array $tags Массив тэгов для кеширования.
      * @param int $id Первичный ключ.
      * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
+     * @param array $filters Фильтрация данных.
+     * @param array $with Массив связанных моделей.
+     * @param array|string $selects Выражения для выборки.
      *
      * @return array|bool Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    abstract protected function _get(array $tags, int $id, bool $active = null);
+    abstract protected function _get(array $tags, int $id = null, bool $active = null, array $filters = null, array $with = null, array $selects = null);
 
     /**
      * Чтение данных.

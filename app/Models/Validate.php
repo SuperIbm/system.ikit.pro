@@ -67,8 +67,7 @@ trait Validate
     {
         parent::boot();
 
-        static::saving(function($model)
-        {
+        static::saving(function($model) {
             $status = $model->validate();
 
             if(!$status) return false;
@@ -91,11 +90,11 @@ trait Validate
             if(is_null($v)) unset($attributes[$k]);
         }
 
-        $Valided = Validator::make($attributes, static::getRules(), static::getMessages(), static::getNames());
+        $valided = Validator::make($attributes, static::getRules(), static::getMessages(), static::getNames());
 
-        if($Valided->passes()) return true;
+        if($valided->passes()) return true;
 
-        $errors = $Valided->messages()->toArray();
+        $errors = $valided->messages()->toArray();
 
         foreach($errors as $key => $value)
         {

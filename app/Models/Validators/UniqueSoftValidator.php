@@ -33,7 +33,7 @@ class UniqueSoftValidator
      * @since 1.0
      * @version 1.0
      */
-    public function validate($attribute, $value, array $parameters): bool
+    public function validate(string $attribute, $value, array $parameters): bool
     {
         $value = str_replace(' ', '', $value);
         $value = strtolower($value);

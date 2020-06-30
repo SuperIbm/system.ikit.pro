@@ -32,7 +32,7 @@ class PhoneValidator
      * @since 1.0
      * @version 1.0
      */
-    public function validate($attribute, $value, array $parameters): bool
+    public function validate(string $attribute, $value, array $parameters): bool
     {
         return preg_match('/\+'.$parameters[0].'( )?(\(|-)\d{3,3}\)?(-| )\d{3,3}-\d{4,4}/', $value);
     }

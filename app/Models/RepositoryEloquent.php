@@ -13,11 +13,11 @@ namespace App\Models;
 use DB;
 use Util;
 use Cache;
+use Eloquent;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Database\Eloquent\Builder;
-
 
 /**
  * Трейт репозитария работающий с Eloquent.
@@ -35,21 +35,28 @@ trait RepositoryEloquent
      * @param array $tags Массив тэгов для кеширования.
      * @param int $id Первичный ключ.
      * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
+     * @param array $filters Фильтрация данных.
      * @param array $with Массив связанных моделей.
+     * @param array|string $selects Выражения для выборки.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    protected function _get(array $tags, int $id, bool $active = null, array $with = null)
+    protected function _get(array $tags, int $id = null, bool $active = null, array $filters = null, array $with = null, array $selects = null)
     {
-        $values = $this->_read($tags, false, [
-            [
+        $filters = !$filters ? [] : $filters;
+
+        if($id)
+        {
+            $filters[] = [
                 'table' => $this->getModel()->getTable(),
                 'property' => $this->getModel()->getKeyName(),
                 'value' => $id
-            ]
-        ], $active, null, null, null, $with);
+            ];
+        }
+
+        $values = $this->_read($tags, false, $filters, $active, null, null, null, $with, null, $selects);
 
         if($values) return $values[0];
         else return null;
@@ -67,8 +74,7 @@ trait RepositoryEloquent
      */
     protected static function _queryFilters(Builder $query, array $filters): Builder
     {
-        $query->where(function($query) use ($filters)
-        {
+        $query->where(function($query) use ($filters) {
             for($i = 0; $i < count($filters); $i++)
             {
                 if(Util::isAssoc($filters[$i])) self::_queryFilter($query, $filters[$i]);
@@ -93,9 +99,8 @@ trait RepositoryEloquent
     {
         if(isset($filter["with"]))
         {
-            $query->whereHas($filter["with"], function($query) use ($filter)
-            {
-                if(@$filter['value'])
+            $query->whereHas($filter["with"], function($query) use ($filter) {
+                if(isset($filter['value']))
                 {
                     $logic = isset($filter['logic']) ? $filter['logic'] : "AND";
 
@@ -120,7 +125,6 @@ trait RepositoryEloquent
 
         return $query;
     }
-
 
     /**
      * Чтение данных.
@@ -261,8 +265,7 @@ trait RepositoryEloquent
             ->getName(), $query->toSql(), $query->getBindings(), $countString, $with, $toTree);
 
         $data = Cache::tags($tags)
-            ->remember($cacheKey, $this->getCacheMinutes(), function() use ($query, $count, $toTree)
-            {
+            ->remember($cacheKey, $this->getCacheMinutes(), function() use ($query, $count, $toTree) {
                 if($count) return $query->count();
                 else if($toTree) return $query->get()->toTree()->toArray();
                 else return $query->get()->toArray();
@@ -272,7 +275,6 @@ trait RepositoryEloquent
         else if($count) return 0;
         else return null;
     }
-
 
     /**
      * Создание.
@@ -378,7 +380,6 @@ trait RepositoryEloquent
 
         return $status;
     }
-
 
     /**
      * Получение нового экземпляра модели.

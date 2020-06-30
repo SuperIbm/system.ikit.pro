@@ -40,12 +40,12 @@ class GeoBase extends Geo
      * Если не указать, то вернет массив со всеми данными.
      * @param string $ip IP пользователя. Если не указать, получить IP текущего пользователя.
      *
-     * @return string|array|false Вернет значения по указанным параметрам.
+     * @return string|array|bool Вернет значения по указанным параметрам.
      * @since 1.0
      * @version 1.0
      * @see \App\Models\Contracts\Geo::get
      */
-    public function get($geoObject = null, $ip = null)
+    public function get(string $geoObject = null, string $ip = null)
     {
         $ip = isset($ip) ? $ip : Request::ip();
         $keyArray = ['inetnum', 'country', 'city', 'region', 'district', 'lat', 'lng'];
