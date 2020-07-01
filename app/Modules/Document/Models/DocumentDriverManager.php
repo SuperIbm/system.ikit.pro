@@ -13,7 +13,6 @@ namespace App\Modules\Document\Models;
 use Config;
 use Illuminate\Support\Manager;
 
-
 /**
  * Класс драйвер хранения документов.
  *

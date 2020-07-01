@@ -81,7 +81,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function create($path);
+    abstract public function create(string $path);
 
     /**
      * Обновление.
@@ -93,8 +93,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function update($id, $path);
-
+    abstract public function update(int $id, string $path);
 
     /**
      * Обновление байт кода документа.
@@ -106,7 +105,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function updateByte($id, $byte);
+    abstract public function updateByte(int $id, string $byte);
 
     /**
      * Удаление.
@@ -119,7 +118,6 @@ abstract class Document extends Repository
      */
     abstract public function destroy($id);
 
-
     /**
      * Проверяет вес документа в байтах.
      *
@@ -131,14 +129,13 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function isWeight($weight, $weightMin = null, $weightMax = null)
+    public function isWeight(int $weight, int $weightMin = null, int $weightMax = null)
     {
         if($weightMin != null && $weightMin > $weight) return false;
         if($weightMax != null && $weightMax < $weight) return false;
 
         return true;
     }
-
 
     /**
      * Проверка веса документа указывая файл.
@@ -151,7 +148,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function isWeightByFile($path, $weightMin = null, $weightMax = null)
+    public function isWeightByFile(string $path, int $weightMin = null, int $weightMax = null)
     {
         $weight = filesize($path);
         return $this->isWeight($weight, $weightMin, $weightMax);
@@ -167,14 +164,13 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function copy($path)
+    public function copy(string $path)
     {
         $tmpfname = $this->tmp(pathinfo($path)["extension"]);
         File::copy($path, $tmpfname);
 
         return $tmpfname;
     }
-
 
     /**
      * Получение пути к файлу для временного изображения.
@@ -185,7 +181,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function tmp($format)
+    public function tmp(string $format)
     {
         return storage_path('app/tmp/doc_' . time() . mt_rand(1, 100000) . '.' . $format);
     }

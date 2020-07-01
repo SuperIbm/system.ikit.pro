@@ -36,23 +36,20 @@ class CacheController extends Controller
      */
     public function clean()
     {
-        Log::info('Cache is deleted.', [
-            "login" => Auth::user()->login,
-            "module" => "Cache",
-            'type' => 'destroy'
-        ]);
-
         Cache::flush();
 
         Artisan::call("view:clear");
         Artisan::call("config:cache");
 
-        $files = Storage::disk('pages')->allFiles();
-        Storage::delete($files);
+        Log::info('Кешь удален.', [
+            "login" => Auth::user()->login,
+            "module" => "Cache",
+            'type' => 'destroy'
+        ]);
 
         return response()->json([
             'success' => true,
-            'message' => "We've cleaned all the cache."
+            'message' => trans('act::models.cache.controller.cache.clean')
         ]);
     }
 }

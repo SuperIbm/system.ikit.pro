@@ -15,7 +15,6 @@ use Path;
 use Config;
 use Storage;
 
-
 /**
  * Класс драйвер хранения документов с использованием FTP протокола.
  *
@@ -65,7 +64,6 @@ class DocumentDriverFtp extends DocumentDriver
         }
     }
 
-
     /**
      * Диструктор.
      * Производим отключение от сервера.
@@ -78,7 +76,6 @@ class DocumentDriverFtp extends DocumentDriver
         ftp_close(self::$_connection);
     }
 
-
     /**
      * Метод получения пути к документу.
      *
@@ -89,11 +86,10 @@ class DocumentDriverFtp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path($id, $format)
+    public function path(int $id, string $format)
     {
         return 'doc/read/' . $id . '.' . $format;
     }
-
 
     /**
      * Метод получения физического пути к документу.
@@ -105,11 +101,10 @@ class DocumentDriverFtp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource($id, $format)
+    public function pathSource(int $id, string $format)
     {
         return Config::get("app.url") . $this->path($id, $format);
     }
-
 
     /**
      * Метод чтения документа.
@@ -118,10 +113,11 @@ class DocumentDriverFtp extends DocumentDriver
      * @param string $format Формат документа.
      *
      * @return string Вернет байт код документа.
+     * @throws
      * @since 1.0
      * @version 1.0
      */
-    public function read($id, $format)
+    public function read(int $id, string $format)
     {
         if(self::$_connection && self::$_login)
         {
@@ -138,7 +134,6 @@ class DocumentDriverFtp extends DocumentDriver
         return false;
     }
 
-
     /**
      * Метод создания документа.
      *
@@ -150,12 +145,11 @@ class DocumentDriverFtp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create($id, $format, $path)
+    public function create(int $id, string $format, string $path): bool
     {
         if(self::$_connection && self::$_login) return ftp_put(self::$_connection, Config::get('document.store.ftp.path') . $id . "." . $format, $path, FTP_BINARY);
         else return false;
     }
-
 
     /**
      * Метод обновления документа.
@@ -168,12 +162,11 @@ class DocumentDriverFtp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, $format, $path)
+    public function update(int $id, string $format, string $path): bool
     {
         if(self::$_connection && self::$_login) return ftp_put(self::$_connection, Config::get('document.store.ftp.path') . $id . "." . $format, $path, FTP_BINARY);
         else return false;
     }
-
 
     /**
      * Метод удаления документа.
@@ -185,7 +178,7 @@ class DocumentDriverFtp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id, $format)
+    public function destroy(int $id, string $format): bool
     {
         if(self::$_connection && self::$_login)
         {

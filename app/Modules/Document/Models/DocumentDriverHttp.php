@@ -15,7 +15,6 @@ use Config;
 use \CURLFile;
 use File;
 
-
 /**
  * Класс драйвер хранения документов с использованием HTTP протокола.
  *
@@ -36,11 +35,10 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path($id, $format)
+    public function path(int $id, string $format)
     {
         return Config::get('document.store.http.read') . $id . '.' . $format;
     }
-
 
     /**
      * Метод получения физического пути к документу.
@@ -52,11 +50,10 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource($id, $format)
+    public function pathSource(int $id, string $format)
     {
         return $this->path($id, $format);
     }
-
 
     /**
      * Метод чтения документа.
@@ -68,11 +65,10 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function read($id, $format)
+    public function read(int $id, string $format)
     {
         return null;
     }
-
 
     /**
      * Метод создания документа.
@@ -85,18 +81,17 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create($id, $format, $path)
+    public function create(int $id, string $format, string $path): bool
     {
         $ch = curl_init();
         $tmp = storage_path('app/tmp/' . basename($path));
         File::copy($path, $tmp);
 
-        $data =
-            [
-                'id' => $id,
-                'format' => $format,
-                'file' => new CURLFile($tmp)
-            ];
+        $data = [
+            'id' => $id,
+            'format' => $format,
+            'file' => new CURLFile($tmp)
+        ];
 
         curl_setopt($ch, CURLOPT_URL, Config::get('document.store.http.create'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -109,7 +104,6 @@ class DocumentDriverHttp extends DocumentDriver
         return true;
     }
 
-
     /**
      * Метод обновления документа.
      *
@@ -121,18 +115,17 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, $format, $path)
+    public function update(int $id, string $format, string $path): bool
     {
         $ch = curl_init();
         $tmp = storage_path('app/tmp/' . basename($path));
         File::copy($path, $tmp);
 
-        $data =
-            [
-                'id' => $id,
-                'format' => $format,
-                'file' => new CURLFile($tmp)
-            ];
+        $data = [
+            'id' => $id,
+            'format' => $format,
+            'file' => new CURLFile($tmp)
+        ];
 
         curl_setopt($ch, CURLOPT_URL, Config::get('document.store.http.update'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -156,15 +149,14 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id, $format)
+    public function destroy(int $id, string $format): bool
     {
         $ch = curl_init();
 
-        $data =
-            [
-                'id' => $id,
-                'format' => $format
-            ];
+        $data = [
+            'id' => $id,
+            'format' => $format
+        ];
 
         curl_setopt($ch, CURLOPT_URL, Config::get('document.store.http.destroy'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

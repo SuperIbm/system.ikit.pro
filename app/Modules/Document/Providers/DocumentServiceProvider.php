@@ -33,7 +33,6 @@ use Illuminate\Database\Eloquent\Factory;
 
 use App\Modules\Document\Commands\DocumentMigrateCommand;
 
-
 /**
  * Класс сервис-провайдера для настройки этого модуля.
  *

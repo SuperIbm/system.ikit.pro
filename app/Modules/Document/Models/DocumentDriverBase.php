@@ -16,7 +16,6 @@ use Document as DocumentRepository;
 use File;
 use Config;
 
-
 /**
  * Класс драйвер хранения документов в базе данных.
  *
@@ -37,11 +36,10 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path($id, $format)
+    public function path(int $id,string $format)
     {
         return 'doc/read/' . $id . '.' . $format;
     }
-
 
     /**
      * Метод получения физического пути к документу.
@@ -53,11 +51,10 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource($id, $format)
+    public function pathSource(int $id, string $format)
     {
         return Config::get("app.url") . $this->path($id, $format);
     }
-
 
     /**
      * Метод чтения документа.
@@ -69,28 +66,27 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function read($id, $format)
+    public function read(int $id, string $format)
     {
         return DocumentRepository::getByte(pathinfo($id . '.' . $format, PATHINFO_FILENAME));
     }
-
 
     /**
      * Метод создания документа.
      *
      * @param int $id Индификатор документа.
-     * @param string $path Путь к документу.
      * @param string $format Формат документа.
+     * @param string $path Путь к документу.
      *
+     * @throws
      * @return bool Вернет статус успешности создания документа.
      * @since 1.0
      * @version 1.0
      */
-    public function create($id, $format, $path)
+    public function create(int $id, string $format, string $path): bool
     {
         return DocumentRepository::updateByte($id, File::get($path));
     }
-
 
     /**
      * Метод обновления документа.
@@ -99,15 +95,15 @@ class DocumentDriverBase extends DocumentDriver
      * @param string $format Формат документа.
      * @param string $path Путь к документу.
      *
+     * @throws
      * @return bool Вернет статус успешности обновления документа.
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, $format, $path)
+    public function update(int $id, string $format, string $path): bool
     {
         return DocumentRepository::updateByte($id, File::get($path));
     }
-
 
     /**
      * Метод удаления документа.
@@ -119,7 +115,7 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id, $format)
+    public function destroy(int $id, string $format): bool
     {
         return true;
     }

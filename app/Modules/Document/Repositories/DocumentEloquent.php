@@ -35,7 +35,7 @@ class DocumentEloquent extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function create($path)
+    public function create(string $path)
     {
         $model = $this->newInstance();
         $model->path = $path;
@@ -61,7 +61,7 @@ class DocumentEloquent extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, $path)
+    public function update(int $id, string $path)
     {
         $model = $this->newInstance()->find($id);
 
@@ -95,11 +95,9 @@ class DocumentEloquent extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function updateByte($id, $byte)
+    public function updateByte(int $id, string $byte)
     {
-        $status = DB::table($this->newInstance()->getTable())
-            ->where('id', $id)
-            ->update(['byte' => $byte]);
+        $status = DB::table($this->newInstance()->getTable())->where('id', $id)->update(['byte' => $byte]);
 
         Cache::tags(['Document', 'DocumentItem'])->forget($id);
 
@@ -115,7 +113,7 @@ class DocumentEloquent extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function get($id)
+    public function get(int $id)
     {
         $document = $this->_getById($id);
 
@@ -126,9 +124,8 @@ class DocumentEloquent extends Document
         }
         else
         {
-            $data = Cache::tags(['Document', 'DocumentItem'])->remember($id, $this->getCacheMinutes(),
-                function() use ($id)
-                {
+            $data = Cache::tags(['Document', 'DocumentItem'])
+                ->remember($id, $this->getCacheMinutes(), function() use ($id) {
                     $model = $this->getModel()->find($id);
 
                     if($model)
@@ -145,8 +142,7 @@ class DocumentEloquent extends Document
                     }
 
                     else return null;
-                }
-            );
+                });
 
             if($data) return $data;
             else return null;
@@ -162,16 +158,14 @@ class DocumentEloquent extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function getByte($id)
+    public function getByte(int $id)
     {
         $document = $this->_getById($id);
 
         if($document) return $document['byte'];
         else
         {
-            $document = DB::table($this->newInstance()->getTable())
-                ->where('id', $id)
-                ->first();
+            $document = DB::table($this->newInstance()->getTable())->where('id', $id)->first();
 
             if($document) return $document['byte'];
             else return false;
@@ -189,7 +183,6 @@ class DocumentEloquent extends Document
     {
         return $this->newInstance()->all();
     }
-
 
     /**
      * Удаление.

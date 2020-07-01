@@ -40,7 +40,6 @@ class Alert extends Repository
         return $this->_get(['Alert', 'AlertItem'], $id, $active);
     }
 
-
     /**
      * Чтение данных.
      *

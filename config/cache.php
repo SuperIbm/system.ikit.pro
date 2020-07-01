@@ -95,7 +95,6 @@ return [
             'port' => 11211,
             'compress' => false
         ],
-
     ],
 
     /*

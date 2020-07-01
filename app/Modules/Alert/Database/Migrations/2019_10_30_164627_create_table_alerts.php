@@ -35,7 +35,6 @@ class CreateTableAlerts extends Migration
         });
     }
 
-
     /**
      * Запуск отката миграции.
      *
@@ -47,5 +46,4 @@ class CreateTableAlerts extends Migration
     {
         Schema::drop('alerts');
     }
-
 }

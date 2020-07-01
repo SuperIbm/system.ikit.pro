@@ -16,9 +16,9 @@ use Alert;
 use Log;
 use Auth;
 
-use App\Modules\Alert\Http\Requests\AlertAdminReadRequest;
-use App\Modules\Alert\Http\Requests\AlertAdminDestroyRequest;
-use App\Modules\Alert\Http\Requests\AlertAdminToReadRequest;
+use App\Modules\Alert\Http\Requests\AlertReadRequest;
+use App\Modules\Alert\Http\Requests\AlertDestroyRequest;
+use App\Modules\Alert\Http\Requests\AlertToReadRequest;
 
 /**
  * Класс контроллер для работы с предупреждениями в административной системе.
@@ -28,18 +28,18 @@ use App\Modules\Alert\Http\Requests\AlertAdminToReadRequest;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AlertAdminController extends Controller
+class AlertController extends Controller
 {
     /**
      * Чтение данных.
      *
-     * @param \App\Modules\Alert\Http\Requests\AlertAdminReadRequest $request Запрос.
+     * @param \App\Modules\Alert\Http\Requests\AlertReadRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function read(AlertAdminReadRequest $request)
+    public function read(AlertReadRequest $request)
     {
         $filter = $request->input('filter');
 
@@ -104,20 +104,20 @@ class AlertAdminController extends Controller
      * Установка предупреждения как прочитанное.
      *
      * @param int $id ID предупреждения.
-     * @param \App\Modules\Alert\Http\Requests\AlertAdminToReadRequest $request Запрос.
+     * @param \App\Modules\Alert\Http\Requests\AlertToReadRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function toRead($id, AlertAdminToReadRequest $request)
+    public function toRead($id, AlertToReadRequest $request)
     {
         if($request->get("status")) Alert::toUnread($id);
         else Alert::toRead($id);
 
         if(!Alert::hasError())
         {
-            Log::info('Success: Update the alert.', [
+            Log::info('Обновление предупреждения.', [
                 'module' => "Alert",
                 'login' => Auth::user()->login,
                 'type' => 'update'
@@ -129,10 +129,11 @@ class AlertAdminController extends Controller
         }
         else
         {
-            Log::info('Fail: Update the alert.', [
+            Log::info('Обновление предупреждения.', [
                 'module' => "Alert",
                 'login' => Auth::user()->login,
-                'type' => 'update'
+                'type' => 'update',
+                'error' => Alert::getErrorMessage()
             ]);
 
             $data = [
@@ -147,13 +148,13 @@ class AlertAdminController extends Controller
     /**
      * Удаление данных.
      *
-     * @param \App\Modules\Alert\Http\Requests\AlertAdminDestroyRequest $request Запрос.
+     * @param \App\Modules\Alert\Http\Requests\AlertDestroyRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(AlertAdminDestroyRequest $request)
+    public function destroy(AlertDestroyRequest $request)
     {
         $ids = json_decode($request->input('ids'), true);
 
@@ -161,7 +162,7 @@ class AlertAdminController extends Controller
 
         if($result)
         {
-            Log::info('Success: Destroy the alert.', [
+            Log::info('Удаление предупреждения.', [
                 'module' => "Alert",
                 'login' => Auth::user()->login,
                 'type' => 'destroy'
@@ -174,10 +175,11 @@ class AlertAdminController extends Controller
         }
         else
         {
-            Log::warning('Fail: Destroy the alert.', [
+            Log::warning('Удаление предупреждения.', [
                 'module' => "Alert",
                 'login' => Auth::user()->login,
-                'type' => 'destroy'
+                'type' => 'destroy',
+                'error' => Alert::getErrorMessage()
             ]);
 
             $data = [

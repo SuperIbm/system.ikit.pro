@@ -135,9 +135,8 @@ class DocumentMongoDb extends MongoDb
     protected function getRules()
     {
         return [
-            'byte' => 'Bytes',
-            'format' => 'Format',
-            'cache' => 'Cache'
+            'format' => 'required|between:1,20',
+            'cache' => 'max:50'
         ];
     }
 
@@ -150,9 +149,9 @@ class DocumentMongoDb extends MongoDb
     protected function getNames()
     {
         return [
-            'byte' => 'Bytes',
-            'format' => 'Format',
-            'cache' => 'Cache'
+            'byte' => trans('act::document.document.byte'),
+            'format' => trans('act::document.document.format'),
+            'cache' => trans('act::document.document.cache')
         ];
     }
 

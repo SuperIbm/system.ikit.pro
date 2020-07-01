@@ -34,9 +34,8 @@ class DocumentListener
      */
     public function created($document)
     {
-        return App::make('document.driver')->create($document->id_document, $document->format, $document->path);
+        return App::make('document.driver')->create($document->id, $document->format, $document->path);
     }
-
 
     /**
      * Обработчик события при обновлении записи.
@@ -49,10 +48,9 @@ class DocumentListener
      */
     public function updated($document)
     {
-        App::make('document.driver')->destroy($document->getOriginal()['id_document'], $document->getOriginal()['format']);
-        return App::make('document.driver')->update($document->id_document, $document->format, $document->path);
+        App::make('document.driver')->destroy($document->getOriginal()['id'], $document->getOriginal()['format']);
+        return App::make('document.driver')->update($document->id, $document->format, $document->path);
     }
-
 
     /**
      * Обработчик события при чтении данных.
@@ -76,7 +74,6 @@ class DocumentListener
         return true;
     }
 
-
     /**
      * Обработчик события при удалении записи.
      *
@@ -88,7 +85,7 @@ class DocumentListener
      */
     public function deleted($document)
     {
-        if(!Config::get("document.softDeletes")) return App::make('document.driver')->destroy($document->id_document, $document->format);
+        if(!Config::get("document.softDeletes")) return App::make('document.driver')->destroy($document->id, $document->format);
         else return true;
     }
 }

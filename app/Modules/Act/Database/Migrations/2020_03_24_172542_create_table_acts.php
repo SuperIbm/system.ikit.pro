@@ -31,7 +31,6 @@ class CreateTableActs extends Migration
         });
     }
 
-
     /**
      * Запуск отката миграции.
      *

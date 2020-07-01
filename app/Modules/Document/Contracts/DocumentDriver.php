@@ -31,7 +31,7 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function path($id, $format);
+    abstract public function path(int $id, string $format);
 
     /**
      * Абстрактный метод получения физического пути к документу.
@@ -43,7 +43,7 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function pathSource($id, $format);
+    abstract public function pathSource(int $id, string $format);
 
     /**
      * Абстрактный метод чтения документа.
@@ -55,19 +55,20 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function read($id, $format);
+    abstract public function read(int $id, string $format);
 
     /**
      * Абстрактный метод создания документа.
      *
      * @param int $id Индификатор документа.
+     * @param string $format Формат документа.
      * @param string $path Путь к документу.
      *
      * @return bool Вернет статус успешности создания документа.
      * @since 1.0
      * @version 1.0
      */
-    abstract public function create($id, $format, $path);
+    abstract public function create(int $id, string $format, string $path): bool;
 
     /**
      * Абстрактный метод обновления документа.
@@ -80,7 +81,7 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function update($id, $format, $path);
+    abstract public function update(int $id, string $format, string $path): bool;
 
     /**
      * Абстрактный метод удаления документа.
@@ -92,5 +93,5 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function destroy($id, $format);
+    abstract public function destroy(int $id, string $format): bool;
 }

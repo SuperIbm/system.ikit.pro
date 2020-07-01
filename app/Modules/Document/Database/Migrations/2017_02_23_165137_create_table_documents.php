@@ -33,7 +33,6 @@ class CreateTableDocuments extends Migration
         });
     }
 
-
     /**
      * Запуск отката миграции.
      *

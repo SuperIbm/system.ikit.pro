@@ -14,7 +14,6 @@ use App\Modules\Document\Contracts\DocumentDriver;
 use Config;
 use File;
 
-
 /**
  * Класс драйвер хранения документов в локальной папке.
  *
@@ -35,11 +34,10 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path($id, $format)
+    public function path(int $id, string $format)
     {
         return Config::get('document.store.local.path') . $id . '.' . $format;
     }
-
 
     /**
      * Метод получения физического пути к документу.
@@ -51,11 +49,10 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource($id, $format)
+    public function pathSource(int $id, string $format)
     {
         return Config::get('document.store.local.pathSource') . $id . '.' . $format;
     }
-
 
     /**
      * Метод чтения документа.
@@ -67,11 +64,10 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function read($id, $format)
+    public function read(int $id, string $format)
     {
         return null;
     }
-
 
     /**
      * Метод создания документа.
@@ -84,11 +80,10 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create($id, $format, $path)
+    public function create(int $id, string $format, string $path): bool
     {
         return File::copy($path, $this->pathSource($id, $format));
     }
-
 
     /**
      * Метод обновления документа.
@@ -101,11 +96,10 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, $format, $path)
+    public function update(int $id, string $format, string $path): bool
     {
         return File::copy($path, $this->pathSource($id, $format));
     }
-
 
     /**
      * Метод удаления документа.
@@ -117,7 +111,7 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id, $format)
+    public function destroy(int $id, string $format): bool
     {
         return File::delete($this->pathSource($id, $format));
     }

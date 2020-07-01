@@ -35,7 +35,7 @@ class DocumentMongoDb extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function create($path)
+    public function create(string $path)
     {
         $model = $this->newInstance();
         $model->id = round((time() * 1000) + microtime(true));
@@ -62,7 +62,7 @@ class DocumentMongoDb extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, $path)
+    public function update(int $id, string $path)
     {
         $model = $this->newInstance()->find($id);
 
@@ -96,7 +96,7 @@ class DocumentMongoDb extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function updateByte($id, $byte)
+    public function updateByte(int $id, string $byte)
     {
         $status = DB::connection('mongodb')
             ->collection($this->newInstance()->getTable())
@@ -117,7 +117,7 @@ class DocumentMongoDb extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function get($id)
+    public function get(int $id)
     {
         $document = $this->_getById($id);
 
@@ -128,9 +128,8 @@ class DocumentMongoDb extends Document
         }
         else
         {
-            $data = Cache::tags(['Document', 'DocumentItem'])->remember($id, $this->getCacheMinutes(),
-                function() use ($id)
-                {
+            $data = Cache::tags(['Document', 'DocumentItem'])
+                ->remember($id, $this->getCacheMinutes(), function() use ($id) {
                     $model = $this->getModel()->find($id);
 
                     if($model)
@@ -147,8 +146,7 @@ class DocumentMongoDb extends Document
                     }
 
                     else return null;
-                }
-            );
+                });
 
             if($data) return $data;
             else return null;
@@ -164,7 +162,7 @@ class DocumentMongoDb extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function getByte($id)
+    public function getByte(int $id)
     {
         $document = $this->_getById($id);
 

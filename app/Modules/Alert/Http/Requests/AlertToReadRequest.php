@@ -13,14 +13,14 @@ namespace App\Modules\Alert\Http\Requests;
 use App\Models\FormRequest;
 
 /**
- * Класс запрос для удаления предупреждений.
+ * Класс запрос для установки предупреждения в статус прочитанного.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AlertAdminDestroyRequest extends FormRequest
+class AlertToReadRequest extends FormRequest
 {
     /**
      * Возвращает правила проверки.
@@ -32,7 +32,7 @@ class AlertAdminDestroyRequest extends FormRequest
     public function rules()
     {
         return [
-            'ids' => 'required|json'
+            'status' => 'required|bool',
         ];
     }
 
@@ -46,7 +46,7 @@ class AlertAdminDestroyRequest extends FormRequest
     public function attributes()
     {
         return [
-            'ids' => 'ID'
+            'status' => trans('act::http.request.status')
         ];
     }
 }

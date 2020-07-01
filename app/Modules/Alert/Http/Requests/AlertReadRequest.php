@@ -20,7 +20,7 @@ use App\Models\FormRequest;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AlertAdminReadRequest extends FormRequest
+class AlertReadRequest extends FormRequest
 {
     /**
      * Возвращает правила проверки.
@@ -47,8 +47,8 @@ class AlertAdminReadRequest extends FormRequest
     public function attributes()
     {
         return [
-            'start' => 'Start',
-            'unread' => 'Unread'
+            'start' => trans('act::http.request.start'),
+            'unread' => trans('act::http.request.unread')
         ];
     }
 }

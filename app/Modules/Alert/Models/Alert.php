@@ -114,12 +114,12 @@ class Alert extends Eloquent
     protected function getNames()
     {
         return [
-            'pattern' => 'Title',
-            'description' => 'Description',
-            'url' => 'URL',
-            'icon' => 'Icon',
-            'color' => 'Color',
-            'status' => 'Status'
+            'pattern' => trans('act::models.alert.pattern'),
+            'description' => trans('act::models.alert.description'),
+            'url' => trans('act::models.alert.url'),
+            'icon' => trans('act::models.alert.icon'),
+            'color' => trans('act::models.alert.color'),
+            'status' => trans('act::models.alert.status')
         ];
     }
 }
