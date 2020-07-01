@@ -62,7 +62,6 @@ class DocumentController extends Controller
         else return (new Response(null, 404));
     }
 
-
     /**
      * Создание документа.
      *
@@ -78,7 +77,6 @@ class DocumentController extends Controller
         return response()->json(['success' => true]);
     }
 
-
     /**
      * Обновление документа.
      *
@@ -93,7 +91,6 @@ class DocumentController extends Controller
         $request->file('file')->move(storage_path('app/public/documents/'), $request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);
     }
-
 
     /**
      * Удаление документа.

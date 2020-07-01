@@ -10,6 +10,7 @@
 
 namespace App\Modules\Document\Contracts;
 
+use App\Models\Error;
 
 /**
  * Абстрактный класс позволяющий проектировать собственные классы для хранения документов.
@@ -21,6 +22,8 @@ namespace App\Modules\Document\Contracts;
  */
 abstract class DocumentDriver
 {
+    use Error;
+
     /**
      * Абстрактный метод получения пути к документу.
      *
