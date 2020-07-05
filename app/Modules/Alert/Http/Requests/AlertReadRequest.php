@@ -47,8 +47,8 @@ class AlertReadRequest extends FormRequest
     public function attributes()
     {
         return [
-            'start' => trans('act::http.request.start'),
-            'unread' => trans('act::http.request.unread')
+            'start' => trans('alert::http.request.start'),
+            'unread' => trans('alert::http.request.unread')
         ];
     }
 }

@@ -55,7 +55,7 @@ class Alert extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read($filters = null, $active = null, $sorts = null, $offset = null, $limit = null, $with = null)
+    public function read(array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null)
     {
         return $this->_read(['Alert', 'AlertItem'], false, $filters, $active, $sorts, $offset, $limit, $with);
     }
@@ -71,7 +71,7 @@ class Alert extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count($filters = null, $active = null, $with = null)
+    public function count(array $filters = null, bool $active = null, array $with = null)
     {
         return $this->_read(['Alert', 'AlertItem'], true, $filters, $active, null, null, null, $with);
     }
@@ -100,7 +100,7 @@ class Alert extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         return $this->_update(['AlertItem'], $id, $data);
     }
@@ -114,7 +114,7 @@ class Alert extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         return $this->_destroy(['AlertItem'], $id);
     }

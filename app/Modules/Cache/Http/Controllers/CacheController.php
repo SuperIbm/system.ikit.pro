@@ -49,7 +49,7 @@ class CacheController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => trans('act::models.cache.controller.cache.clean')
+            'message' => trans('cache::http.controller.cache.clean.message')
         ]);
     }
 }

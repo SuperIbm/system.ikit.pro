@@ -16,6 +16,7 @@ use Alert;
 use Log;
 use Auth;
 
+use Illuminate\Http\JsonResponse;
 use App\Modules\Alert\Http\Requests\AlertReadRequest;
 use App\Modules\Alert\Http\Requests\AlertDestroyRequest;
 use App\Modules\Alert\Http\Requests\AlertToReadRequest;
@@ -39,7 +40,7 @@ class AlertController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function read(AlertReadRequest $request)
+    public function read(AlertReadRequest $request): JsonResponse
     {
         $filter = $request->input('filter');
 
@@ -110,7 +111,7 @@ class AlertController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function toRead($id, AlertToReadRequest $request)
+    public function toRead(int $id, AlertToReadRequest $request): JsonResponse
     {
         if($request->get("status")) Alert::toUnread($id);
         else Alert::toRead($id);
@@ -133,6 +134,7 @@ class AlertController extends Controller
                 'module' => "Alert",
                 'login' => Auth::user()->login,
                 'type' => 'update',
+                'request' => $request->all(),
                 'error' => Alert::getErrorMessage()
             ]);
 
@@ -154,7 +156,7 @@ class AlertController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(AlertDestroyRequest $request)
+    public function destroy(AlertDestroyRequest $request): JsonResponse
     {
         $ids = json_decode($request->input('ids'), true);
 
@@ -179,6 +181,7 @@ class AlertController extends Controller
                 'module' => "Alert",
                 'login' => Auth::user()->login,
                 'type' => 'destroy',
+                'request' => $request->all(),
                 'error' => Alert::getErrorMessage()
             ]);
 

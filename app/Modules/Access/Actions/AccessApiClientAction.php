@@ -10,12 +10,10 @@
 
 namespace App\Modules\Access\Actions;
 
-use Composer\Cache;
 use OAuth;
 use App\Models\Action;
 use Hash;
 use App\Modules\User\Repositories\User;
-
 
 /**
  * Класс действия для генерации клиента.

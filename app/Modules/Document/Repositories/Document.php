@@ -129,7 +129,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function isWeight(int $weight, int $weightMin = null, int $weightMax = null)
+    public function isWeight(int $weight, int $weightMin = null, int $weightMax = null): bool
     {
         if($weightMin != null && $weightMin > $weight) return false;
         if($weightMax != null && $weightMax < $weight) return false;
@@ -148,7 +148,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function isWeightByFile(string $path, int $weightMin = null, int $weightMax = null)
+    public function isWeightByFile(string $path, int $weightMin = null, int $weightMax = null): bool
     {
         $weight = filesize($path);
         return $this->isWeight($weight, $weightMin, $weightMax);
@@ -164,7 +164,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function copy(string $path)
+    public function copy(string $path): string
     {
         $tmpfname = $this->tmp(pathinfo($path)["extension"]);
         File::copy($path, $tmpfname);
@@ -181,7 +181,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function tmp(string $format)
+    public function tmp(string $format): string
     {
         return storage_path('app/tmp/doc_' . time() . mt_rand(1, 100000) . '.' . $format);
     }

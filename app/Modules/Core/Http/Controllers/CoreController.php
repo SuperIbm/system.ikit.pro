@@ -15,7 +15,6 @@ use Config;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-
 /**
  * Класс контроллер для ядра.
  *
@@ -29,6 +28,7 @@ class CoreController extends Controller
     public function __invoke(Request $request)
     {
         $source = App::environment('local') ? file_get_contents('http://localhost:8000/__laravel_nuxt__') : file_get_contents(Config::get('nuxt.page'));
+
         return $source;
     }
 }

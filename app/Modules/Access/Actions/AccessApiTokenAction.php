@@ -13,7 +13,6 @@ namespace App\Modules\Access\Actions;
 use OAuth;
 use App\Models\Action;
 
-
 /**
  * Класс действия для генерации токена.
  *

@@ -67,7 +67,7 @@ class Act extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'index' => 'required|between:1,255|unique:acts,index,' . $this->id . ',id',
@@ -82,7 +82,7 @@ class Act extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
             'index' => trans('act::models.act.index'),

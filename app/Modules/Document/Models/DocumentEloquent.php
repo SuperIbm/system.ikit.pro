@@ -139,9 +139,9 @@ class DocumentEloquent extends Eloquent
     protected function getNames()
     {
         return [
-            'byte' => trans('document::model.document.byte'),
-            'format' => trans('document::model.document.format'),
-            'cache' => trans('document::model.document.cache')
+            'byte' => trans('document::models.document.byte'),
+            'format' => trans('document::models.document.format'),
+            'cache' => trans('document::models.document.cache')
         ];
     }
 

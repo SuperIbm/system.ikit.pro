@@ -5,5 +5,5 @@ Route::group([
     "as" => "api.ajax.cache.cache"
 ], function()
 {
-    Route::post('clean/', 'CacheController@clean')->middleware('auth.api', 'auth.admin')->name('clean');
+    Route::post('clean/', 'CacheController@clean')->middleware('auth.api')->name('clean');
 });

@@ -11,7 +11,6 @@
 namespace App\Modules\Document\Models;
 
 use App\Modules\Document\Contracts\DocumentDriver;
-use Path;
 use Config;
 use Storage;
 

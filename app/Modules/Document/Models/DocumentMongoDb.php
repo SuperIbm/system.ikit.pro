@@ -149,9 +149,9 @@ class DocumentMongoDb extends MongoDb
     protected function getNames()
     {
         return [
-            'byte' => trans('act::document.document.byte'),
-            'format' => trans('act::document.document.format'),
-            'cache' => trans('act::document.document.cache')
+            'byte' => trans('document::models.document.byte'),
+            'format' => trans('document::models.document.format'),
+            'cache' => trans('document::models.document.cache')
         ];
     }
 

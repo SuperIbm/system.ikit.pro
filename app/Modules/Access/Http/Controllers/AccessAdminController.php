@@ -16,7 +16,6 @@ use Gate;
 use App\Modules\Access\Actions\AccessGateAction;
 use Illuminate\Http\Request;
 
-
 /**
  * Класс контроллер для авторизации и аунтификации: администратора.
  *

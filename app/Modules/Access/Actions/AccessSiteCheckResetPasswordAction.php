@@ -34,13 +34,10 @@ class AccessSiteCheckResetPasswordAction extends Action
     {
         $accessSiteCheckCodeResetPasswordTask = app(AccessSiteCheckCodeResetPasswordTask::class);
 
-        $status = $accessSiteCheckCodeResetPasswordTask->setParameters
-        (
-            [
-                "id" => $this->getParameter("id"),
-                "code" => $this->getParameter("code")
-            ]
-        )->run();
+        $status = $accessSiteCheckCodeResetPasswordTask->setParameters([
+            "id" => $this->getParameter("id"),
+            "code" => $this->getParameter("code")
+        ])->run();
 
         if($status) return true;
         else

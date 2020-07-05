@@ -62,7 +62,7 @@ class Act extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read($filters = null, $sorts = null, $offset = null, $limit = null)
+    public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null)
     {
         return $this->_read(['Act', 'ActItem'], false, $filters, null, $sorts, $offset, $limit);
     }
@@ -76,7 +76,7 @@ class Act extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count($filters = null)
+    public function count(array $filters = null)
     {
         return $this->_read(['Act', 'ActItem'], true, $filters);
     }
@@ -105,7 +105,7 @@ class Act extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         return $this->_update(['ActItem'], $id, $data);
     }
@@ -119,7 +119,7 @@ class Act extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         return $this->_destroy(['ActItem'], $id);
     }

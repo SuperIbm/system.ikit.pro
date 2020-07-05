@@ -46,7 +46,7 @@ class AlertToReadRequest extends FormRequest
     public function attributes()
     {
         return [
-            'status' => trans('act::http.request.status')
+            'status' => trans('alert::http.request.status')
         ];
     }
 }
