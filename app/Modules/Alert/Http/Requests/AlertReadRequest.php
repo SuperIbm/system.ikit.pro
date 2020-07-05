@@ -32,7 +32,8 @@ class AlertReadRequest extends FormRequest
     public function rules()
     {
         return [
-            'count' => 'integer|digits_between:0,20',
+            'start' => 'nullable|integer|digits_between:0,20',
+            'limit' => 'nullable|integer|digits_between:0,20',
             'unread' => 'nullable|bool',
         ];
     }
@@ -47,8 +48,9 @@ class AlertReadRequest extends FormRequest
     public function attributes()
     {
         return [
-            'start' => trans('alert::http.request.start'),
-            'unread' => trans('alert::http.request.unread')
+            'start' => trans('alert::http.requests.alertRead.start'),
+            'limit' => trans('alert::http.requests.alertRead.limit'),
+            'unread' => trans('alert::http.requests.alertRead.unread')
         ];
     }
 }

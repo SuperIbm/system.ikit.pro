@@ -47,8 +47,8 @@ class DocumentDestroyRequest extends FormRequest
     public function attributes()
     {
         return [
-            'id' => trans('document::http.request.id'),
-            'format' => trans('document::http.request.format')
+            'id' => trans('document::http.requests.documentDestroy.file'),
+            'format' => trans('document::http.requests.documentDestroy.format')
         ];
     }
 }

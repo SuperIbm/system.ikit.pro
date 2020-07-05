@@ -49,7 +49,7 @@ class CacheController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => trans('cache::http.controller.cache.clean.message')
+            'message' => trans('cache::http.controllers.cache.clean.message')
         ]);
     }
 }

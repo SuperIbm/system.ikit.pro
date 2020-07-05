@@ -46,7 +46,7 @@ class AlertDestroyRequest extends FormRequest
     public function attributes()
     {
         return [
-            'ids' => trans('alert::http.request.ids')
+            'ids' => trans('alert::http.requests.alertDestroy.ids')
         ];
     }
 }
