@@ -1,15 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
+Route::get('{uri}', '\\' . App\Modules\Core\Http\Controllers\CoreController::class)->where('uri', '(((?!api/).)[a-zA-Z0-9-_/]*)|(/?)');
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 

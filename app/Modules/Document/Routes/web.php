@@ -1,6 +1,6 @@
 <?php
 Route::group([
-    'middleware' => 'web'
+
 ], function() {
     Route::get('/doc/read/{name}', 'DocumentController@read');
     Route::post('/doc/create/', 'DocumentController@create');

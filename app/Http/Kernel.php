@@ -40,10 +40,11 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
+        'api' => [
+
+        ],
+
         'ajax' => [
-            \App\Http\Middleware\EncryptCookies::class,
-            //\Illuminate\Session\Middleware\StartSession::class,
-            //\App\Http\Middleware\VerifyCsrfToken::class,
             \App\Http\Middleware\AllowOnlyAjaxRequests::class
         ],
     ];
@@ -58,12 +59,8 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \App\Modules\Access\Http\Middleware\Allow::class,
         'auth.api' => \App\Modules\Access\Http\Middleware\AllowOAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
 }
