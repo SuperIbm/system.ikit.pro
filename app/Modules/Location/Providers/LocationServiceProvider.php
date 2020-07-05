@@ -28,11 +28,18 @@ use App\Modules\Location\Contracts\Location as LocationContract;
 class LocationServiceProvider extends ServiceProvider
 {
     /**
-     * Индификатор отложенной загрузки.
+     * Название модуля.
      *
-     * @var bool
+     * @var string $moduleName
      */
-    protected $defer = false;
+    protected $moduleName = 'Location';
+
+    /**
+     * Название модуля в нижнем регисте.
+     *
+     * @var string $moduleNameLower
+     */
+    protected $moduleNameLower = 'location';
 
     /**
      * Обработчик события загрузки приложения.
@@ -45,7 +52,7 @@ class LocationServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
     }
 
     /**
@@ -71,9 +78,9 @@ class LocationServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__ . '/../Config/config.php' => config_path('location.php'),
+            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
-        $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'location');
+        $this->mergeConfigFrom(module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower);
     }
 
     /**
@@ -83,18 +90,15 @@ class LocationServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/location');
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
-        $sourcePath = __DIR__ . '/../Resources/views';
+        $sourcePath = module_path($this->moduleName, 'Resources/views');
 
         $this->publishes([
             $sourcePath => $viewPath
-        ], 'views');
+        ], ['views', $this->moduleNameLower . '-module-views']);
 
-        $this->loadViewsFrom(array_merge(array_map(function($path)
-        {
-            return $path . '/modules/location';
-        }, \Config::get('view.paths')), [$sourcePath]), 'location');
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
     /**
@@ -104,15 +108,15 @@ class LocationServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/location');
+        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
         if(is_dir($langPath))
         {
-            $this->loadTranslationsFrom($langPath, 'location');
+            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
         }
         else
         {
-            $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'location');
+            $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
         }
     }
 
@@ -125,7 +129,7 @@ class LocationServiceProvider extends ServiceProvider
     {
         if(!app()->environment('production') && $this->app->runningInConsole())
         {
-            app(Factory::class)->load(__DIR__ . '/../Database/factories');
+            app(Factory::class)->load(module_path($this->moduleName, 'Database/factories'));
         }
     }
 
@@ -137,5 +141,23 @@ class LocationServiceProvider extends ServiceProvider
     public function provides()
     {
         return [];
+    }
+
+    /**
+     * Получить пути к опубликованным шаблонам.
+     *
+     * @return array
+     */
+    private function getPublishableViewPaths(): array
+    {
+        $paths = [];
+        foreach(\Config::get('view.paths') as $path)
+        {
+            if(is_dir($path . '/modules/' . $this->moduleNameLower))
+            {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
+            }
+        }
+        return $paths;
     }
 }

@@ -18,6 +18,7 @@ use App\Models\Validators\UniqueSoftValidator;
 use App\Models\Validators\FloatValidator;
 use App\Models\Validators\PhoneValidator;
 use App\Models\Validators\FloatBetweenValidator;
+use App\Models\Validators\IpMaskValidator;
 
 /**
  * Класс сервис-провайдера для валидации.
@@ -43,5 +44,6 @@ class ValidatorServiceProvider extends ServiceProvider
         Validator::extend('float', FloatValidator::class);
         Validator::extend('phone', PhoneValidator::class);
         Validator::extend('float_between', FloatBetweenValidator::class);
+        Validator::extend('ip_mask', IpMaskValidator::class);
     }
 }

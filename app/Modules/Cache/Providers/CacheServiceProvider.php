@@ -24,13 +24,18 @@ use Illuminate\Database\Eloquent\Factory;
 class CacheServiceProvider extends ServiceProvider
 {
     /**
-     * Индификатор отложенной загрузки.
+     * Название модуля.
      *
-     * @var bool
-     * @version 1.0
-     * @since 1.0
+     * @var string $moduleName
      */
-    protected $defer = false;
+    protected $moduleName = 'Cache';
+
+    /**
+     * Название модуля в нижнем регисте.
+     *
+     * @var string $moduleNameLower
+     */
+    protected $moduleNameLower = 'cache';
 
     /**
      * Обработчик события загрузки приложения.
@@ -64,60 +69,49 @@ class CacheServiceProvider extends ServiceProvider
      * Регистрация настроек.
      *
      * @return void
-     * @version 1.0
-     * @since 1.0
      */
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__ . '/../Config/config.php' => config_path('cache.php'),
+            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
-        $this->mergeConfigFrom(
-            __DIR__ . '/../Config/config.php', 'cache'
-        );
+        $this->mergeConfigFrom(module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower);
     }
 
     /**
      * Регистрация представлений.
      *
      * @return void
-     * @version 1.0
-     * @since 1.0
      */
     public function registerViews()
     {
-        $viewPath = base_path('resources/views/modules/cache');
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
-        $sourcePath = __DIR__ . '/../Resources/views';
+        $sourcePath = module_path($this->moduleName, 'Resources/views');
 
         $this->publishes([
             $sourcePath => $viewPath
-        ]);
+        ], ['views', $this->moduleNameLower . '-module-views']);
 
-        $this->loadViewsFrom(array_merge(array_map(function($path)
-        {
-            return $path . '/modules/cache';
-        }, \Config::get('view.paths')), [$sourcePath]), 'cache');
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
     /**
      * Регистрация локалей.
      *
      * @return void
-     * @version 1.0
-     * @since 1.0
      */
     public function registerTranslations()
     {
-        $langPath = base_path('resources/lang/modules/cache');
+        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
         if(is_dir($langPath))
         {
-            $this->loadTranslationsFrom($langPath, 'cache');
+            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
         }
         else
         {
-            $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'cache');
+            $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
         }
     }
 
@@ -128,8 +122,9 @@ class CacheServiceProvider extends ServiceProvider
      */
     public function registerFactories()
     {
-        if (! app()->environment('production')) {
-            app(Factory::class)->load(__DIR__ . '/../Database/factories');
+        if(!app()->environment('production') && $this->app->runningInConsole())
+        {
+            app(Factory::class)->load(module_path($this->moduleName, 'Database/factories'));
         }
     }
 
@@ -137,11 +132,27 @@ class CacheServiceProvider extends ServiceProvider
      * Получение сервисов через сервис-провайдер.
      *
      * @return array
-     * @version 1.0
-     * @since 1.0
      */
     public function provides()
     {
         return [];
+    }
+
+    /**
+     * Получить пути к опубликованным шаблонам.
+     *
+     * @return array
+     */
+    private function getPublishableViewPaths(): array
+    {
+        $paths = [];
+        foreach(\Config::get('view.paths') as $path)
+        {
+            if(is_dir($path . '/modules/' . $this->moduleNameLower))
+            {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
+            }
+        }
+        return $paths;
     }
 }

@@ -58,7 +58,6 @@ use App\Modules\User\Models\UserRolePage as UserRolePageModel;
 use App\Modules\User\Repositories\UserRolePage as UserRolePageRepository;
 use Illuminate\Database\Eloquent\Factory;
 
-
 /**
  * Класс сервис-провайдера для настройки этого модуля.
  *
@@ -70,13 +69,18 @@ use Illuminate\Database\Eloquent\Factory;
 class UserServiceProvider extends ServiceProvider
 {
     /**
-     * Индификатор отложенной загрузки.
+     * Название модуля.
      *
-     * @var bool
-     * @version 1.0
-     * @since 1.0
+     * @var string $moduleName
      */
-    protected $defer = false;
+    protected $moduleName = 'User';
+
+    /**
+     * Название модуля в нижнем регисте.
+     *
+     * @var string $moduleNameLower
+     */
+    protected $moduleNameLower = 'user';
 
     /**
      * Обработчик события загрузки приложения.
@@ -91,7 +95,7 @@ class UserServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
     }
 
     /**
@@ -105,169 +109,112 @@ class UserServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
 
-        Validator::extend('ipMask',
-            function($attribute, $value)
-            {
-                return preg_match('/^(([0-9]{1,3})|(\*{1}))\.(([0-9]{1,3})|(\*{1}))\.(([0-9]{1,3})|(\*{1}))\.(([0-9]{1,3})|(\*{1}))$/', $value);
-            }
-        );
+        App::singleton(BlockIpRepository::class, function() {
+            return new BlockIpRepository(new BlockIpModel());
+        });
 
-        App::singleton(BlockIpRepository::class,
-            function()
-            {
-                return new BlockIpRepository(new BlockIpModel());
-            }
-        );
-
-        App::singleton(UserRepository::class,
-            function()
-            {
-                return new UserRepository(new UserModel());
-            }
-        );
+        App::singleton(UserRepository::class, function() {
+            return new UserRepository(new UserModel());
+        });
 
         UserModel::observe(UserListener::class);
 
-        App::singleton(UserGroupRepository::class,
-            function()
-            {
-                return new UserGroupRepository(new UserGroupModel());
-            }
-        );
+        App::singleton(UserGroupRepository::class, function() {
+            return new UserGroupRepository(new UserGroupModel());
+        });
 
         UserModel::observe(UserGroupListener::class);
 
-        App::singleton(UserCompanyRepository::class,
-            function()
-            {
-                return new UserCompanyRepository(new UserCompanyModel());
-            }
-        );
+        App::singleton(UserCompanyRepository::class, function() {
+            return new UserCompanyRepository(new UserCompanyModel());
+        });
 
-        App::singleton(UserAddressRepository::class,
-            function()
-            {
-                return new UserAddressRepository(new UserAddressModel());
-            }
-        );
+        App::singleton(UserAddressRepository::class, function() {
+            return new UserAddressRepository(new UserAddressModel());
+        });
 
-        App::singleton(UserGroupUserRepository::class,
-            function()
-            {
-                return new UserGroupUserRepository(new UserGroupUserModel());
-            }
-        );
+        App::singleton(UserGroupUserRepository::class, function() {
+            return new UserGroupUserRepository(new UserGroupUserModel());
+        });
 
-        App::singleton(UserGroupPageRepository::class,
-            function()
-            {
-                return new UserGroupPageRepository(new UserGroupPageModel());
-            }
-        );
+        App::singleton(UserGroupPageRepository::class, function() {
+            return new UserGroupPageRepository(new UserGroupPageModel());
+        });
 
-        App::singleton(UserGroupRoleRepository::class,
-            function()
-            {
-                return new UserGroupRoleRepository(new UserGroupRoleModel());
-            }
-        );
+        App::singleton(UserGroupRoleRepository::class, function() {
+            return new UserGroupRoleRepository(new UserGroupRoleModel());
+        });
 
-        App::singleton(UserRoleRepository::class,
-            function()
-            {
-                return new UserRoleRepository(new UserRoleModel());
-            }
-        );
+        App::singleton(UserRoleRepository::class, function() {
+            return new UserRoleRepository(new UserRoleModel());
+        });
 
         UserRoleModel::observe(UserRoleListener::class);
 
-        App::singleton(UserRoleAdminSectionRepository::class,
-            function()
-            {
-                return new UserRoleAdminSectionRepository(new UserRoleAdminSectionModel());
-            }
-        );
+        App::singleton(UserRoleAdminSectionRepository::class, function() {
+            return new UserRoleAdminSectionRepository(new UserRoleAdminSectionModel());
+        });
 
-        App::singleton(UserRolePageRepository::class,
-            function()
-            {
-                return new UserRolePageRepository(new UserRolePageModel());
-            }
-        );
+        App::singleton(UserRolePageRepository::class, function() {
+            return new UserRolePageRepository(new UserRolePageModel());
+        });
 
-        App::singleton(UserVerificationRepository::class,
-            function()
-            {
-                return new UserVerificationRepository(new UserVerificationModel());
-            }
-        );
+        App::singleton(UserVerificationRepository::class, function() {
+            return new UserVerificationRepository(new UserVerificationModel());
+        });
 
-        App::singleton(UserRecoveryRepository::class,
-            function()
-            {
-                return new UserRecoveryRepository(new UserRecoveryModel());
-            }
-        );
+        App::singleton(UserRecoveryRepository::class, function() {
+            return new UserRecoveryRepository(new UserRecoveryModel());
+        });
     }
 
     /**
      * Регистрация настроек.
      *
      * @return void
-     * @version 1.0
-     * @since 1.0
      */
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__ . '/../Config/config.php' => config_path('user.php'),
-        ]);
-        $this->mergeConfigFrom(
-            __DIR__ . '/../Config/config.php', 'user'
-        );
+            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
+        ], 'config');
+        $this->mergeConfigFrom(module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower);
     }
 
     /**
      * Регистрация представлений.
      *
      * @return void
-     * @version 1.0
-     * @since 1.0
      */
     public function registerViews()
     {
-        $viewPath = base_path('resources/views/modules/user');
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
-        $sourcePath = __DIR__ . '/../Resources/views';
+        $sourcePath = module_path($this->moduleName, 'Resources/views');
 
         $this->publishes([
             $sourcePath => $viewPath
-        ]);
+        ], ['views', $this->moduleNameLower . '-module-views']);
 
-        $this->loadViewsFrom(array_merge(array_map(function($path)
-        {
-            return $path . '/modules/user';
-        }, \Config::get('view.paths')), [$sourcePath]), 'user');
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
     /**
      * Регистрация локалей.
      *
      * @return void
-     * @version 1.0
-     * @since 1.0
      */
     public function registerTranslations()
     {
-        $langPath = base_path('resources/lang/modules/user');
+        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
         if(is_dir($langPath))
         {
-            $this->loadTranslationsFrom($langPath, 'user');
+            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
         }
         else
         {
-            $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'user');
+            $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
         }
     }
 
@@ -278,9 +225,9 @@ class UserServiceProvider extends ServiceProvider
      */
     public function registerFactories()
     {
-        if(!app()->environment('production'))
+        if(!app()->environment('production') && $this->app->runningInConsole())
         {
-            app(Factory::class)->load(__DIR__ . '/../Database/factories');
+            app(Factory::class)->load(module_path($this->moduleName, 'Database/factories'));
         }
     }
 
@@ -288,11 +235,27 @@ class UserServiceProvider extends ServiceProvider
      * Получение сервисов через сервис-провайдер.
      *
      * @return array
-     * @version 1.0
-     * @since 1.0
      */
     public function provides()
     {
         return [];
+    }
+
+    /**
+     * Получить пути к опубликованным шаблонам.
+     *
+     * @return array
+     */
+    private function getPublishableViewPaths(): array
+    {
+        $paths = [];
+        foreach(\Config::get('view.paths') as $path)
+        {
+            if(is_dir($path . '/modules/' . $this->moduleNameLower))
+            {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
+            }
+        }
+        return $paths;
     }
 }

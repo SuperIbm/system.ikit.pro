@@ -24,13 +24,18 @@ use Illuminate\Database\Eloquent\Factory;
 class TypographServiceProvider extends ServiceProvider
 {
     /**
-     * Индификатор отложенной загрузки.
+     * Название модуля.
      *
-     * @var bool
-     * @since 1.0
-     * @version 1.0
+     * @var string $moduleName
      */
-    protected $defer = false;
+    protected $moduleName = 'Typograph';
+
+    /**
+     * Название модуля в нижнем регисте.
+     *
+     * @var string $moduleNameLower
+     */
+    protected $moduleNameLower = 'typograph';
 
     /**
      * Обработчик события загрузки приложения.
@@ -45,7 +50,7 @@ class TypographServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
     }
 
     /**
@@ -64,60 +69,49 @@ class TypographServiceProvider extends ServiceProvider
      * Регистрация настроек.
      *
      * @return void
-     * @since 1.0
-     * @version 1.0
      */
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__ . '/../Config/config.php' => config_path('typograph.php'),
+            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
-        $this->mergeConfigFrom(
-            __DIR__ . '/../Config/config.php', 'typograph'
-        );
+        $this->mergeConfigFrom(module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower);
     }
 
     /**
      * Регистрация представлений.
      *
      * @return void
-     * @since 1.0
-     * @version 1.0
      */
     public function registerViews()
     {
-        $viewPath = base_path('resources/views/modules/typograph');
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
-        $sourcePath = __DIR__ . '/../Resources/views';
+        $sourcePath = module_path($this->moduleName, 'Resources/views');
 
         $this->publishes([
             $sourcePath => $viewPath
-        ]);
+        ], ['views', $this->moduleNameLower . '-module-views']);
 
-        $this->loadViewsFrom(array_merge(array_map(function($path)
-        {
-            return $path . '/modules/typograph';
-        }, \Config::get('view.paths')), [$sourcePath]), 'typograph');
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
     /**
      * Регистрация локалей.
      *
      * @return void
-     * @since 1.0
-     * @version 1.0
      */
     public function registerTranslations()
     {
-        $langPath = base_path('resources/lang/modules/typograph');
+        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
         if(is_dir($langPath))
         {
-            $this->loadTranslationsFrom($langPath, 'typograph');
+            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
         }
         else
         {
-            $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'typograph');
+            $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
         }
     }
 
@@ -128,9 +122,9 @@ class TypographServiceProvider extends ServiceProvider
      */
     public function registerFactories()
     {
-        if(!app()->environment('production'))
+        if(!app()->environment('production') && $this->app->runningInConsole())
         {
-            app(Factory::class)->load(__DIR__ . '/../Database/factories');
+            app(Factory::class)->load(module_path($this->moduleName, 'Database/factories'));
         }
     }
 
@@ -138,11 +132,27 @@ class TypographServiceProvider extends ServiceProvider
      * Получение сервисов через сервис-провайдер.
      *
      * @return array
-     * @since 1.0
-     * @version 1.0
      */
     public function provides()
     {
         return [];
+    }
+
+    /**
+     * Получить пути к опубликованным шаблонам.
+     *
+     * @return array
+     */
+    private function getPublishableViewPaths(): array
+    {
+        $paths = [];
+        foreach(\Config::get('view.paths') as $path)
+        {
+            if(is_dir($path . '/modules/' . $this->moduleNameLower))
+            {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
+            }
+        }
+        return $paths;
     }
 }

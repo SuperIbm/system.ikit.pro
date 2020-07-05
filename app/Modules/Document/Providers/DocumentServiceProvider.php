@@ -44,11 +44,18 @@ use App\Modules\Document\Commands\DocumentMigrateCommand;
 class DocumentServiceProvider extends ServiceProvider
 {
     /**
-     * Индификатор отложенной загрузки.
+     * Название модуля.
      *
-     * @var bool
+     * @var string $moduleName
      */
-    protected $defer = false;
+    protected $moduleName = 'Document';
+
+    /**
+     * Название модуля в нижнем регисте.
+     *
+     * @var string $moduleNameLower
+     */
+    protected $moduleNameLower = 'document';
 
     /**
      * Регистрация сервис провайдеров.
@@ -61,7 +68,7 @@ class DocumentServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
     }
 
     /**
@@ -149,11 +156,9 @@ class DocumentServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__ . '/../Config/config.php' => config_path('document.php'),
-        ]);
-        $this->mergeConfigFrom(
-            __DIR__ . '/../Config/config.php', 'document'
-        );
+            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
+        ], 'config');
+        $this->mergeConfigFrom(module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower);
     }
 
     /**
@@ -163,18 +168,15 @@ class DocumentServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = base_path('resources/views/modules/document');
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
-        $sourcePath = __DIR__ . '/../Resources/views';
+        $sourcePath = module_path($this->moduleName, 'Resources/views');
 
         $this->publishes([
             $sourcePath => $viewPath
-        ]);
+        ], ['views', $this->moduleNameLower . '-module-views']);
 
-        $this->loadViewsFrom(array_merge(array_map(function($path)
-        {
-            return $path . '/modules/document';
-        }, \Config::get('view.paths')), [$sourcePath]), 'document');
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
     /**
@@ -184,15 +186,15 @@ class DocumentServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = base_path('resources/lang/modules/document');
+        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
         if(is_dir($langPath))
         {
-            $this->loadTranslationsFrom($langPath, 'document');
+            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
         }
         else
         {
-            $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'document');
+            $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
         }
     }
 
@@ -203,9 +205,9 @@ class DocumentServiceProvider extends ServiceProvider
      */
     public function registerFactories()
     {
-        if(!app()->environment('production'))
+        if(!app()->environment('production') && $this->app->runningInConsole())
         {
-            app(Factory::class)->load(__DIR__ . '/../Database/factories');
+            app(Factory::class)->load(module_path($this->moduleName, 'Database/factories'));
         }
     }
 
@@ -217,5 +219,23 @@ class DocumentServiceProvider extends ServiceProvider
     public function provides()
     {
         return [];
+    }
+
+    /**
+     * Получить пути к опубликованным шаблонам.
+     *
+     * @return array
+     */
+    private function getPublishableViewPaths(): array
+    {
+        $paths = [];
+        foreach(\Config::get('view.paths') as $path)
+        {
+            if(is_dir($path . '/modules/' . $this->moduleNameLower))
+            {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
+            }
+        }
+        return $paths;
     }
 }
