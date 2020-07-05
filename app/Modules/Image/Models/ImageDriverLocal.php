@@ -14,7 +14,6 @@ use App\Modules\Image\Contracts\ImageDriver;
 use Config;
 use File;
 
-
 /**
  * Класс драйвер хранения изображений в локальной папке.
  *

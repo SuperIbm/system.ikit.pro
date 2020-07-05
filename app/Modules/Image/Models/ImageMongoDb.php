@@ -11,10 +11,8 @@
 namespace App\Modules\Image\Models;
 
 use MongoDb;
-use Util;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 
 /**
  * Класс модель для таблицы изображений на основе MongoDb.

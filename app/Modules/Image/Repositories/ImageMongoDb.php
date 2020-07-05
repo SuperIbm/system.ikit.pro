@@ -222,7 +222,7 @@ class ImageMongoDb extends Image
     /**
      * Удаление.
      *
-     * @param int|array $id Id записи для удаления.
+     * @param int $id Id записи для удаления.
      *
      * @return bool Вернет булево значение успешности операции.
      * @since 1.0

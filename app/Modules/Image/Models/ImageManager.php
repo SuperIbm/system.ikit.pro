@@ -13,7 +13,6 @@ namespace App\Modules\Image\Models;
 use Config;
 use Illuminate\Support\Manager;
 
-
 /**
  * Класс драйвер хранения записей об изображениях.
  *

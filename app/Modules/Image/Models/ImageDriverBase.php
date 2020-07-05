@@ -11,7 +11,6 @@
 namespace App\Modules\Image\Models;
 
 use App\Modules\Image\Contracts\ImageDriver;
-use Path;
 use Image as ImageRepository;
 use Config;
 
