@@ -42,7 +42,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    protected static function _getById($id)
+    protected static function _getById(int $id)
     {
         if(isset(self::$_images[$id])) return self::$_images[$id];
         else return false;
@@ -58,7 +58,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    protected static function _setById($id, $image)
+    protected static function _setById(int $id, string $image)
     {
         self::$_images[$id] = $image;
     }
@@ -81,7 +81,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function create($path);
+    abstract public function create(string $path);
 
     /**
      * Обновление.
@@ -93,7 +93,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function update($id, $path);
+    abstract public function update(int $id, string $path);
 
     /**
      * Обновление байт кода картинки.
@@ -105,7 +105,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function updateByte($id, $byte);
+    abstract public function updateByte(int $id, string $byte);
 
     /**
      * Удаление.
@@ -116,7 +116,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function destroy($id);
+    abstract public function destroy(int $id);
 
     /**
      * Создание копии изображения.
@@ -128,7 +128,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function copy($path)
+    public function copy(string $path)
     {
         $pro = @getImageSize($path);
 
@@ -148,11 +148,12 @@ abstract class Image extends Repository
      * @param string $path Путь к изображению.
      * @param string $formatTo Новый формат для изображения.
      *
+     * @throws
      * @return string Возвращает путь к новому изображению.
      * @since 1.0
      * @version 1.0
      */
-    public function convertTo($path, $formatTo)
+    public function convertTo(string $path, string $formatTo)
     {
         if($this->isRasterGt($path) == true)
         {
@@ -172,7 +173,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function isRasterGt($path)
+    public function isRasterGt(string $path): bool
     {
         $pro = @getImageSize($path);
 
@@ -195,7 +196,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function isVektor($path)
+    public function isVektor(string $path): bool
     {
         $pro = @getImageSize($path);
 
@@ -218,7 +219,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function isImage($path)
+    public function isImage(string $path): bool
     {
         if($this->isRasterGt($path) == true || $this->isVektor($path) == true) return true;
         else return false;
@@ -233,7 +234,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function isImageByExtension($extension)
+    public function isImageByExtension(string $extension): bool
     {
         if($this->isRastorGtByExtension($extension) || $this->isVektorByExtension($extension)) return true;
         else return false;
@@ -248,7 +249,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function isRastorGtByExtension($extension)
+    public function isRastorGtByExtension(string $extension): bool
     {
         if(in_array($extension, array("jpg", "jpeg", "gif", "png"))) return true;
         else return false;
@@ -263,7 +264,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function isVektorByExtension($extension)
+    public function isVektorByExtension(string $extension): bool
     {
         if(in_array($extension, array("swf", "flw"))) return true;
         else return false;
@@ -278,7 +279,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function getFormatText($format)
+    public function getFormatText(int $format)
     {
         switch($format)
         {
@@ -320,7 +321,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function tmp($format)
+    public function tmp(string $format): string
     {
         $format = is_numeric($format) ? $this->getFormatText($format) : $format;
         return storage_path('app/tmp/img_' . time() . mt_rand(1, 100000) . '.' . $format);

@@ -1,8 +1,8 @@
 <?php
 Route::group([
     'middleware' => ['ajax'],
-    'prefix' => 'api/ajax/location/location_controller/',
-    "as" => "api.ajax.location.location_controller"
+    'prefix' => 'api/ajax/location/location/',
+    "as" => "api.ajax.location.location"
 ], function()
 {
     Route::get('countries/', 'LocationController@countries');

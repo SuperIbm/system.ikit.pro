@@ -35,7 +35,7 @@ class ImageMongoDb extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function create($path)
+    public function create(string $path)
     {
         $pro = getImageSize($path);
         $model = $this->newInstance();
@@ -80,7 +80,7 @@ class ImageMongoDb extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, $path)
+    public function update(int $id, string $path)
     {
         $model = $this->newInstance()->find($id);
 
@@ -129,7 +129,7 @@ class ImageMongoDb extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function updateByte($id, $byte)
+    public function updateByte(int $id, string $byte)
     {
         $status = DB::connection('mongodb')
             ->collection($this->newInstance()->getTable())
@@ -150,7 +150,7 @@ class ImageMongoDb extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function get($id)
+    public function get(int $id)
     {
         $image = $this->_getById($id);
 
@@ -161,26 +161,23 @@ class ImageMongoDb extends Image
         }
         else
         {
-            $data = Cache::tags(['Image', 'ImageItem'])->remember($id, $this->getCacheMinutes(),
-                function() use ($id)
+            $data = Cache::tags(['Image', 'ImageItem'])->remember($id, $this->getCacheMinutes(), function() use ($id) {
+                $model = $this->getModel()->find($id);
+
+                if($model)
                 {
-                    $model = $this->getModel()->find($id);
+                    $data = $model->toArray();
+                    $data['path'] = $model->path;
+                    $data['pathCache'] = $model->pathCache;
+                    $data['pathSource'] = $model->pathSource;
 
-                    if($model)
-                    {
-                        $data = $model->toArray();
-                        $data['path'] = $model->path;
-                        $data['pathCache'] = $model->pathCache;
-                        $data['pathSource'] = $model->pathSource;
+                    $this->_setById($id, $data);
 
-                        $this->_setById($id, $data);
-
-                        unset($data['byte']);
-                        return $data;
-                    }
-                    else return null;
+                    unset($data['byte']);
+                    return $data;
                 }
-            );
+                else return null;
+            });
 
             if($data) return $data;
             else return null;
@@ -196,17 +193,14 @@ class ImageMongoDb extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function getByte($id)
+    public function getByte(int $id)
     {
         $image = $this->_getById($id);
 
         if($image) return $image['byte'];
         else
         {
-            $image = DB::connection('mongodb')
-                ->collection($this->newInstance()->getTable())
-                ->where('id', $id)
-                ->first();
+            $image = DB::connection('mongodb')->collection($this->newInstance()->getTable())->where('id', $id)->first();
 
             if($image) return $image['byte'];
             else return false;
@@ -234,7 +228,7 @@ class ImageMongoDb extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $model = $this->newInstance();
         $status = $model->destroy($id);

@@ -99,9 +99,9 @@ class OAuthRefreshTokenEloquent extends Eloquent
     protected function getNames()
     {
         return [
-            'oauth_token_id' => 'ID token',
-            'refresh_token' => 'Refresh token',
-            'expires_at' => 'Expires date'
+            'oauth_token_id' => trans('oauth::models.OAuthRefreshToken.oauth_token_id'),
+            'refresh_token' => trans('oauth::models.OAuthRefreshToken.refresh_token'),
+            'expires_at' => trans('oauth::models.OAuthRefreshToken.expires_at')
         ];
     }
 

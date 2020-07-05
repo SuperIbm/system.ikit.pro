@@ -193,7 +193,7 @@ class DocumentEloquent extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $model = $this->newInstance();
         $status = $model->destroy($id);

@@ -96,11 +96,9 @@ class OAuthDriverDatabase extends OAuthDriver
     {
         $expiresAtToken = Carbon::now()->addSeconds(Config::get("token.secret_life"));
         $expiresAtRefreshToken = Carbon::now()->addSeconds(Config::get("token.refresh_token_life"));
-        $issue = $this->issue(
-            [
-                "user" => $userId
-            ]
-            , $expiresAtToken, $expiresAtRefreshToken);
+        $issue = $this->issue([
+            "user" => $userId
+        ], $expiresAtToken, $expiresAtRefreshToken);
 
         $this->_oAuthClientEloquent->create([
             'user_id' => $userId,

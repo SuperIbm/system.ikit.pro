@@ -101,9 +101,9 @@ class OAuthClientEloquent extends Eloquent
     protected function getNames()
     {
         return [
-            'user_id' => 'ID user',
-            'secret' => 'Secret',
-            'expires_at' => 'Expires date'
+            'user_id' => trans('oauth::models.OAuthClient.user_id'),
+            'secret' => trans('oauth::models.OAuthClient.secret'),
+            'expires_at' => trans('oauth::models.OAuthClient.expires_at')
         ];
     }
 

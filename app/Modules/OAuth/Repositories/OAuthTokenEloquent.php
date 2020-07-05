@@ -29,17 +29,17 @@ class OAuthTokenEloquent extends Repository
      * Получить по первичному ключу.
      *
      * @param int $id Первичный ключ.
+     * @param array $filters Фильтрация данных.
      * @param array $with Массив связанных моделей.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function get($id, $with = null)
+    public function get(int $id = null, array $filters = null, $with = null)
     {
         return $this->_get(['OAuth', 'OAuthClient', 'OAuthToken'], $id, null, $with);
     }
-
 
     /**
      * Чтение данных.
@@ -54,7 +54,7 @@ class OAuthTokenEloquent extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read($filters = null, $sorts = null, $offset = null, $limit = null, $with = null)
+    public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null)
     {
         return $this->_read(['OAuth', 'OAuthClient', 'OAuthToken'], false, $filters, null, $sorts, $offset, $limit, $with);
     }
@@ -69,7 +69,7 @@ class OAuthTokenEloquent extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count($filters = null, $with = null)
+    public function count(array $filters = null, array $with = null)
     {
         return $this->_read(['OAuth', 'OAuthClient', 'OAuthToken'], true, $filters, null, $with);
     }
@@ -98,7 +98,7 @@ class OAuthTokenEloquent extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         return $this->_update(['OAuthToken'], $id, $data);
     }
@@ -113,7 +113,7 @@ class OAuthTokenEloquent extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id, $force = false)
+    public function destroy(int $id, $force = false)
     {
         return $this->_destroy(['OAuthToken'], $id, $force);
     }

@@ -141,16 +141,17 @@ abstract class OAuthDriver
 
         try
         {
-            $values = (array) JWT::decode($token, $key, ['HS256']);
+            $values = (array)JWT::decode($token, $key, ['HS256']);
 
             if($values)
             {
-                if(Carbon::now()->format("U") <= $values["exp"] && $values["iss"] == Config::get("app.url") && $values["aud"] == Config::get("app.name") && $values["type"] == $type)
+                if(Carbon::now()
+                        ->format("U") <= $values["exp"] && $values["iss"] == Config::get("app.url") && $values["aud"] == Config::get("app.name") && $values["type"] == $type)
                 {
-                    return (array) $values["data"];
+                    return (array)$values["data"];
                 }
                 else
-               {
+                {
                     $this->addError("token", "The token is invalid.");
 
                     return false;

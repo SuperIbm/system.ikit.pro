@@ -33,7 +33,7 @@ class OAuthTokenEloquentListener
      */
     public function deleting(OAuthTokenEloquent $oAuthTokenEloquent)
     {
-        $oAuthTokenEloquent->deleteRelation($oAuthTokenEloquent->refreshToken(), $oAuthTokenEloquent);
+        $oAuthTokenEloquent->deleteRelation($oAuthTokenEloquent->refreshToken(), $oAuthTokenEloquent->isForceDeleting());
 
         return true;
     }

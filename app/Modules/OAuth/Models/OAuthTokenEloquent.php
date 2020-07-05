@@ -100,9 +100,9 @@ class OAuthTokenEloquent extends Eloquent
     protected function getNames()
     {
         return [
-            'oauth_client_id' => 'ID client',
-            'token' => 'Token',
-            'expires_at' => 'Expires date'
+            'oauth_client_id' => trans('oauth::models.OAuthToken.oauth_client_id'),
+            'token' => trans('oauth::models.OAuthToken.token'),
+            'expires_at' => trans('oauth::models.OAuthToken.expires_at')
         ];
     }
 

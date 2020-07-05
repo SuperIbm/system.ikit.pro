@@ -42,7 +42,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    protected static function _getById($id)
+    protected static function _getById(int $id)
     {
         if(isset(self::$_documents[$id])) return self::$_documents[$id];
         else return false;
@@ -58,7 +58,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    protected static function _setById($id, $document)
+    protected static function _setById(int $id, array $document)
     {
         self::$_documents[$id] = $document;
     }
@@ -116,7 +116,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function destroy($id);
+    abstract public function destroy(int $id);
 
     /**
      * Проверяет вес документа в байтах.

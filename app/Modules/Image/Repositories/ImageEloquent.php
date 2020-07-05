@@ -35,7 +35,7 @@ class ImageEloquent extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function create($path)
+    public function create(string $path)
     {
         $model = $this->newInstance();
         $pro = getImageSize($path);
@@ -78,7 +78,7 @@ class ImageEloquent extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, $path)
+    public function update(int $id, string $path)
     {
         $model = $this->newInstance()->find($id);
 
@@ -127,7 +127,7 @@ class ImageEloquent extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function updateByte($id, $byte)
+    public function updateByte(int $id, string $byte)
     {
         $status = DB::table($this->newInstance()->getTable())
             ->where('id', $id)
@@ -147,7 +147,7 @@ class ImageEloquent extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function get($id)
+    public function get(int $id)
     {
         $image = $this->_getById($id);
 
@@ -193,7 +193,7 @@ class ImageEloquent extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function getByte($id)
+    public function getByte(int $id)
     {
         $image = $this->_getById($id);
 
@@ -230,7 +230,7 @@ class ImageEloquent extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $model = $this->newInstance();
         $status = $model->destroy($id);

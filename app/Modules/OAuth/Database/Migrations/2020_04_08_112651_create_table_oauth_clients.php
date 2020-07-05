@@ -24,7 +24,6 @@ class CreateTableOauthClients extends Migration {
         DB::statement('CREATE UNIQUE INDEX secret ON oauth_clients (secret(250));');
 	}
 
-
 	/**
 	 * Reverse the migrations.
 	 *
@@ -34,5 +33,4 @@ class CreateTableOauthClients extends Migration {
 	{
 		Schema::drop('oauth_clients');
 	}
-
 }

@@ -24,7 +24,6 @@ class CreateTableOauthRefreshTokens extends Migration {
         DB::statement('CREATE UNIQUE INDEX refresh_token ON oauth_refresh_tokens (refresh_token(250));');
 	}
 
-
 	/**
 	 * Reverse the migrations.
 	 *
@@ -34,5 +33,4 @@ class CreateTableOauthRefreshTokens extends Migration {
 	{
 		Schema::drop('oauth_refresh_tokens');
 	}
-
 }

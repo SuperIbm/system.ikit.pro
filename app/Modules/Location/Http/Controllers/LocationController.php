@@ -7,8 +7,10 @@
  * @since 1.0
  * @version 1.0
  */
+
 namespace App\Modules\Location\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Modules\Location\Models\Location;
@@ -48,13 +50,11 @@ class LocationController extends Controller
     /**
      * Получить все страны.
      *
-     * @param Request $request Запрос.
-     *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @version 1.0
      * @since 1.0
      */
-    public function countries(Request $request)
+    public function countries(): JsonResponse
     {
         $data = $this->_location->getCountries();
 
@@ -105,7 +105,7 @@ class LocationController extends Controller
      * @version 1.0
      * @since 1.0
      */
-    public function regions(string $country)
+    public function regions(string $country): JsonResponse
     {
         $data = $this->_location->getRegions($country);
         $data = $data ? $data : [];

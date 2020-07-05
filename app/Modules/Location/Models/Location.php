@@ -11,7 +11,6 @@
 namespace App\Modules\Location\Models;
 
 use Geographer;
-use App\Modules\Order\Models\OrderDeliveryZone;
 use Util;
 use Cache;
 use App\Modules\Location\Contracts\Location as Contract;

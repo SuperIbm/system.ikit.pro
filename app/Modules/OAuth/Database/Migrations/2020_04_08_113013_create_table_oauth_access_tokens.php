@@ -24,7 +24,6 @@ class CreateTableOauthAccessTokens extends Migration {
         DB::statement('CREATE UNIQUE INDEX token ON oauth_tokens (token(250));');
 	}
 
-
 	/**
 	 * Reverse the migrations.
 	 *
