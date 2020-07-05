@@ -39,7 +39,7 @@ class DocumentController extends Controller
      * @version 1.0
      * @since 1.0
      */
-    public function read($name)
+    public function read(string $name): Response
     {
         $pathinfo = pathinfo($name);
 
@@ -71,7 +71,7 @@ class DocumentController extends Controller
      * @version 1.0
      * @since 1.0
      */
-    public function create(DocumentCreateRequest $request)
+    public function create(DocumentCreateRequest $request): Response
     {
         $request->file('file')->move(storage_path('app/public/documents/'), $request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);
@@ -86,7 +86,7 @@ class DocumentController extends Controller
      * @version 1.0
      * @since 1.0
      */
-    public function update(DocumentUpdateRequest $request)
+    public function update(DocumentUpdateRequest $request): Response
     {
         $request->file('file')->move(storage_path('app/public/documents/'), $request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);
@@ -101,7 +101,7 @@ class DocumentController extends Controller
      * @version 1.0
      * @since 1.0
      */
-    public function destroy(DocumentDestroyRequest $request)
+    public function destroy(DocumentDestroyRequest $request): Response
     {
         Storage::disk('documents')->delete($request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);

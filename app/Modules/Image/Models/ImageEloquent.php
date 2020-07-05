@@ -15,7 +15,6 @@ use App\Models\Delete;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 /**
  * Класс модель для таблицы изображений на основе Eloquent.
  *
@@ -139,11 +138,11 @@ class ImageEloquent extends Eloquent
     protected function getNames()
     {
         return [
-            'byte' => 'Bytes',
-            'format' => 'Format',
-            'cache' => 'Cache',
-            'width' => 'Width',
-            'height' => 'Height'
+            'byte' => trans('image::model.image.byte'),
+            'format' => trans('image::model.image.format'),
+            'cache' => trans('image::model.image.cache'),
+            'width' => trans('image::model.image.width'),
+            'height' => trans('image::model.image.height')
         ];
     }
 

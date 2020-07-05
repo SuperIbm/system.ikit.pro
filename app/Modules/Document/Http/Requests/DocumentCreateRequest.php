@@ -48,9 +48,9 @@ class DocumentCreateRequest extends FormRequest
     public function attributes()
     {
         return [
-            'file' => 'File',
-            'id' => 'ID',
-            'format' => 'Format'
+            'file' => trans('document::http.request.file'),
+            'id' => trans('document::http.request.id'),
+            'format' => trans('document::http.request.format')
         ];
     }
 }

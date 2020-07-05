@@ -35,7 +35,6 @@ class CreateTableImages extends Migration
         });
     }
 
-
     /**
      * Запуск отката миграции.
      *
@@ -47,5 +46,4 @@ class CreateTableImages extends Migration
     {
         Schema::drop('images');
     }
-
 }

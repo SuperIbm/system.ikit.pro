@@ -10,6 +10,7 @@
 
 namespace App\Modules\Image\Events\Listeners;
 
+use Eloquent;
 use App;
 use Config;
 
@@ -32,11 +33,10 @@ class ImageListener
      * @version 1.0
      * @since 1.0
      */
-    public function created($image)
+    public function created(Eloquent $image)
     {
         return App::make('image.store.driver')->create($image->id, $image->format, $image->path);
     }
-
 
     /**
      * Обработчик события при обновлении записи.
@@ -47,12 +47,11 @@ class ImageListener
      * @version 1.0
      * @since 1.0
      */
-    public function updated($image)
+    public function updated(Eloquent $image)
     {
         App::make('image.store.driver')->destroy($image->getOriginal()['id'], $image->getOriginal()['format']);
         return App::make('image.store.driver')->update($image->id, $image->format, $image->path);
     }
-
 
     /**
      * Обработчик события при чтении данных.
@@ -63,7 +62,7 @@ class ImageListener
      * @version 1.0
      * @since 1.0
      */
-    public function readed($image)
+    public function readed(Eloquent $image)
     {
         $image->path = Config::get("app.url").App::make('image.store.driver')->path($image->id, $image->format);
         $image->pathCache = $image->path;
@@ -76,7 +75,6 @@ class ImageListener
         return true;
     }
 
-
     /**
      * Обработчик события при удалении записи.
      *
@@ -86,7 +84,7 @@ class ImageListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleted($image)
+    public function deleted(Eloquent $image)
     {
         if(!Config::get("image.store.softDeletes")) return App::make('image.store.driver')->destroy($image->id, $image->format);
         else return true;

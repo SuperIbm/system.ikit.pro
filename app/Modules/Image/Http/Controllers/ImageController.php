@@ -39,7 +39,7 @@ class ImageController extends Controller
      * @version 1.0
      * @since 1.0
      */
-    public function read($name)
+    public function read(string $name): Response
     {
         $pathinfo = pathinfo($name);
 
@@ -68,7 +68,6 @@ class ImageController extends Controller
         return (new Response(null, 404));
     }
 
-
     /**
      * Создание изображения.
      *
@@ -78,12 +77,11 @@ class ImageController extends Controller
      * @version 1.0
      * @since 1.0
      */
-    public function create(ImageCreateRequest $request)
+    public function create(ImageCreateRequest $request): Response
     {
         $request->file('file')->move(storage_path('app/public/images/'), $request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);
     }
-
 
     /**
      * Обновление изображения.
@@ -94,12 +92,11 @@ class ImageController extends Controller
      * @version 1.0
      * @since 1.0
      */
-    public function update(ImageUpdateRequest $request)
+    public function update(ImageUpdateRequest $request): Response
     {
         $request->file('file')->move(storage_path('app/public/images/'), $request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);
     }
-
 
     /**
      * Удаление изображения.
@@ -110,7 +107,7 @@ class ImageController extends Controller
      * @version 1.0
      * @since 1.0
      */
-    public function destroy(ImageDestroyRequest $request)
+    public function destroy(ImageDestroyRequest $request): Response
     {
         Storage::disk('images')->delete($request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);

@@ -35,11 +35,10 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path($id, $format)
+    public function path(int $id, string $format)
     {
         return 'img/read/' . $id . '.' . $format;
     }
-
 
     /**
      * Метод получения физического пути к изображению.
@@ -51,11 +50,10 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource($id, $format)
+    public function pathSource(int $id, string $format)
     {
         return Config::get("app.url") . $this->path($id, $format);
     }
-
 
     /**
      * Метод чтения изображения.
@@ -67,11 +65,10 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function read($id, $format)
+    public function read(int $id, string $format)
     {
         return ImageRepository::getByte(pathinfo($id . '.' . $format, PATHINFO_FILENAME));
     }
-
 
     /**
      * Метод создания изображения.
@@ -84,7 +81,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create($id, $format, $path)
+    public function create(int $id, string $format, string $path)
     {
         $pro = getImageSize($path);
         $imgResource = ImageRepository::getResourceByFormat($pro[2], $path);
@@ -92,7 +89,6 @@ class ImageDriverBase extends ImageDriver
 
         return ImageRepository::updateByte($id, $byte);
     }
-
 
     /**
      * Метод обновления изображения.
@@ -105,7 +101,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, $format, $path)
+    public function update(int $id, string $format, string $path)
     {
         $pro = getImageSize($path);
         $imgResource = ImageRepository::getResourceByFormat($pro[2], $path);
@@ -113,7 +109,6 @@ class ImageDriverBase extends ImageDriver
 
         return ImageRepository::updateByte($id, $byte);
     }
-
 
     /**
      * Метод удаления изображения.
@@ -125,7 +120,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id, $format)
+    public function destroy(int $id, string $format)
     {
         return true;
     }

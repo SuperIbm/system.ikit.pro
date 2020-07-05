@@ -10,6 +10,7 @@
 
 namespace App\Modules\Image\Contracts;
 
+use App\Models\Error;
 
 /**
  * Абстрактный класс позволяющий проектировать собственные классы для хранения изображений.
@@ -21,6 +22,8 @@ namespace App\Modules\Image\Contracts;
  */
 abstract class ImageDriver
 {
+    use Error;
+
     /**
      * Абстрактный метод получения пути к изображению.
      *
@@ -31,7 +34,7 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function path($id, $format);
+    abstract public function path(int $id, string $format);
 
     /**
      * Абстрактный метод получения физического пути к изображению.
@@ -43,7 +46,7 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function pathSource($id, $format);
+    abstract public function pathSource(int $id, string $format);
 
     /**
      * Абстрактный метод чтения изображения.
@@ -55,7 +58,7 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function read($id, $format);
+    abstract public function read(int $id, string $format);
 
     /**
      * Абстрактный метод создания изображения.
@@ -68,7 +71,7 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function create($id, $format, $path);
+    abstract public function create(int $id, string $format, string $path);
 
     /**
      * Абстрактный метод обновления изображения.
@@ -81,7 +84,7 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function update($id, $format, $path);
+    abstract public function update(int $id, string $format, string $path);
 
     /**
      * Абстрактный метод удаления изображения.
@@ -93,5 +96,5 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function destroy($id, $format);
+    abstract public function destroy(int $id, string $format);
 }

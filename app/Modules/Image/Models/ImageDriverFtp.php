@@ -15,7 +15,6 @@ use Path;
 use Config;
 use Storage;
 
-
 /**
  * Класс драйвер хранения изображений с использованием FTP протокола.
  *
@@ -87,7 +86,7 @@ class ImageDriverFtp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path($id, $format)
+    public function path(int $id, string $format)
     {
         return 'img/read/' . $id . '.' . $format;
     }
@@ -102,7 +101,7 @@ class ImageDriverFtp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource($id, $format)
+    public function pathSource(int $id, string $format)
     {
         return Config::get("app.url") . $this->path($id, $format);
     }
@@ -113,11 +112,12 @@ class ImageDriverFtp extends ImageDriver
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
+     * @throws
      * @return string Вернет байт код изображения.
      * @since 1.0
      * @version 1.0
      */
-    public function read($id, $format)
+    public function read(int $id, string $format)
     {
         if(self::$_connection && self::$_login)
         {
@@ -143,7 +143,7 @@ class ImageDriverFtp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create($id, $format, $path)
+    public function create(int $id, string $format, string $path)
     {
         if(self::$_connection && self::$_login) return ftp_put(self::$_connection, Config::get('image.store.ftp.path') . $id . "." . $format, $path, FTP_BINARY);
         else return false;
@@ -160,7 +160,7 @@ class ImageDriverFtp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, $format, $path)
+    public function update(int $id, string $format, string $path)
     {
         if(self::$_connection && self::$_login) return ftp_put(self::$_connection, Config::get('image.store.ftp.path') . $id . "." . $format, $path, FTP_BINARY);
         else return false;
@@ -176,7 +176,7 @@ class ImageDriverFtp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id, $format)
+    public function destroy(int $id, string $format)
     {
         if(self::$_connection && self::$_login) return ftp_delete(self::$_connection, Config::get('image.store.ftp.path') . $id . '.' . $format);
 

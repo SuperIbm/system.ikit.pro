@@ -166,11 +166,11 @@ class ImageMongoDb extends MongoDb
     protected function getNames()
     {
         return [
-            'byte' => 'Bytes',
-            'format' => 'Format',
-            'cache' => 'Cache',
-            'width' => 'Width',
-            'height' => 'Height'
+            'byte' => trans('image::model.image.byte'),
+            'format' => trans('image::model.image.format'),
+            'cache' => trans('image::model.image.cache'),
+            'width' => trans('image::model.image.width'),
+            'height' => trans('image::model.image.height')
         ];
     }
 

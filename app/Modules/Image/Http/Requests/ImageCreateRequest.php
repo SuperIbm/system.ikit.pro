@@ -48,9 +48,9 @@ class ImageCreateRequest extends FormRequest
     public function attributes()
     {
         return [
-            'file' => 'File',
-            'id' => 'ID',
-            'format' => 'Format'
+            'file' => trans('image::http.request.file'),
+            'id' => trans('image::http.request.id'),
+            'format' => trans('image::http.request.format')
         ];
     }
 }

@@ -15,7 +15,6 @@ use Config;
 use \CURLFile;
 use File;
 
-
 /**
  * Класс драйвер хранения изображений с использованием HTTP протокола.
  *
@@ -36,7 +35,7 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path($id, $format)
+    public function path(int $id, string $format)
     {
         return Config::get('image.store.http.read') . $id . '.' . $format;
     }
@@ -51,7 +50,7 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource($id, $format)
+    public function pathSource(int $id, string $format)
     {
         return $this->path($id, $format);
     }
@@ -66,7 +65,7 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function read($id, $format)
+    public function read(int $id, string $format)
     {
         return null;
     }
@@ -82,7 +81,7 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create($id, $format, $path)
+    public function create(int $id, string $format, string $path)
     {
         $ch = curl_init();
         $tmp = storage_path('app/tmp/' . basename($path));
@@ -116,7 +115,7 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, $format, $path)
+    public function update(int $id, string $format, string $path)
     {
         $ch = curl_init();
         $tmp = storage_path('app/tmp/' . basename($path));
@@ -149,7 +148,7 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id, $format)
+    public function destroy(int $id, string $format)
     {
         $ch = curl_init();
 
