@@ -13,19 +13,27 @@ namespace App\Modules\School\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+/**
+ * Класс сервис-провайдера для настройки путей этого модуля.
+ *
+ * @version 1.0
+ * @since 1.0
+ * @copyright Weborobot.
+ * @author Инчагов Тимофей Александрович.
+ */
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * The module namespace to assume when generating URLs to actions.
+     * Пространство имен модуля, которое предполагается использовать при создании URL-адресов для действий.
      *
      * @var string
      */
     protected $moduleNamespace = 'App\Modules\School\Http\Controllers';
 
     /**
-     * Called before routes are registered.
+     * Вызвать до того как пути будут зарегистрированы.
      *
-     * Register any model bindings or pattern based filters.
+     * Зарегистрируйте любые привязки моделей или шаблонные фильтры.
      *
      * @return void
      */
@@ -35,7 +43,7 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the routes for the application.
+     * Определяем пути для приложения.
      *
      * @return void
      */
@@ -47,9 +55,9 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the "web" routes for the application.
+     * Определяем пути "web" для приложения.
      *
-     * These routes all receive session state, CSRF protection, etc.
+     * Эти пути получают сессии, защиту от крос домен атак и т.д.
      *
      * @return void
      */
@@ -61,9 +69,9 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the "api" routes for the application.
+     * Определяем пуьои для "API" для приложения.
      *
-     * These routes are typically stateless.
+     * Эти пути ничем не нагружены.
      *
      * @return void
      */
