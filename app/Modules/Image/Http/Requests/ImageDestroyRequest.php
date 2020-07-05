@@ -47,8 +47,8 @@ class ImageDestroyRequest extends FormRequest
     public function attributes()
     {
         return [
-            'id' => trans('image::http.request.id'),
-            'format' => trans('image::http.request.format')
+            'id' => trans('image::http.requests.imageDestroy.id'),
+            'format' => trans('image::http.requests.imageDestroy.format')
         ];
     }
 }
