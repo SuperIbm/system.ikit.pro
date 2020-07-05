@@ -12,9 +12,8 @@ namespace App\Modules\Typograph\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 
-use App\Modules\Typograph\Http\Requests\TypographAdminGetRequest;
+use Illuminate\Http\Request;
 use EMT\EMTypograph;
-
 
 /**
  * Класс контроллер для работы с типографом в административной части.
@@ -29,13 +28,13 @@ class TypographAdminController extends Controller
     /**
      * Получение типографированного текста.
      *
-     * @param \App\Modules\Typograph\Http\Requests\TypographAdminGetRequest $request Запрос.
+     * @param \Illuminate\Http\Request $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function get(TypographAdminGetRequest $request)
+    public function get(Request $request)
     {
         $text = str_replace("\t", '', $request->input('text'));
         $text = str_replace("\n\r", '', $text);

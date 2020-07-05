@@ -93,9 +93,10 @@ abstract class OAuthDriver
      */
     public function issue($value, Carbon $expiresAtToken, Carbon $expiresAtRefreshToken = null): array
     {
+        $time = Carbon::now()->format("U");
         $key = Config::get("app.key");
-        $extendToken = $expiresAtToken->format("U") - Carbon::now()->format("U");
-        $extendRefreshToken = $expiresAtRefreshToken->format("U") - Carbon::now()->format("U");
+        $extendToken = $expiresAtToken->format("U") - $time;
+        $extendRefreshToken = $expiresAtRefreshToken->format("U") - $time;
 
         $accessToken = [
             "iss" => Config::get("app.url"),
@@ -103,7 +104,8 @@ abstract class OAuthDriver
             "exp" => $expiresAtToken->format("U"),
             "type" => "accessToken",
             "data" => $value,
-            "extend" => $extendToken
+            "extend" => $extendToken,
+            "time" => $time
         ];
 
         $accessToken = JWT::encode($accessToken, $key);
@@ -114,7 +116,8 @@ abstract class OAuthDriver
             "exp" => $expiresAtRefreshToken->format("U"),
             "type" => "refreshToken",
             "data" => $value,
-            "extend" => $extendRefreshToken
+            "extend" => $extendRefreshToken,
+            "time" => $time
         ];
 
         $refreshToken = JWT::encode($refreshToken, $key);
