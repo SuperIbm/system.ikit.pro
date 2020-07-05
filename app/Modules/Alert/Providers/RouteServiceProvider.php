@@ -55,7 +55,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')->namespace($this->moduleNamespace)->group(__DIR__ . '/../Routes/web.php');
+        Route::middleware('web')->namespace($this->moduleNamespace)->group(module_path('Alert', '/Routes/web.php'));
     }
 
     /**
@@ -70,6 +70,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->moduleNamespace)
-            ->group(__DIR__ . '/../Routes/api.php');
+            ->group(module_path('Alert', '/Routes/api.php'));
     }
 }
