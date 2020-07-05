@@ -14,6 +14,7 @@ use Eloquent;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\User\Models\UserRoleSection;
+use Kalnoy\Nestedset\NodeTrait;
 use App\Models\Status;
 use App\Models\Delete;
 
@@ -47,7 +48,7 @@ use App\Models\Delete;
  */
 class Section extends Eloquent
 {
-    use Validate, SoftDeletes, Status, Delete;
+    use Validate, SoftDeletes, Status, Delete, NodeTrait;
 
     /**
      * Определяет необходимость отметок времени для модели.
@@ -67,11 +68,10 @@ class Section extends Eloquent
      */
     protected $fillable = [
         'id',
+        'parent_id',
         "index",
         'label',
-        'bundle',
         'icon',
-        'weight',
         'status'
     ];
 
@@ -84,11 +84,10 @@ class Section extends Eloquent
     protected function getRules(): array
     {
         return [
+            'parent_id' => 'integer|digits_between:0,20',
             'label' => 'required|between:1,191',
             'index' => 'required|between:1,191|unique_soft:admin_sections,index,' . $this->id . ',id',
-            'bundle' => 'required',
             'icon' => 'max:191',
-            'weight' => 'required|integer|digits_between:0,20',
             'status' => 'required|boolean'
         ];
     }
@@ -102,12 +101,11 @@ class Section extends Eloquent
     protected function getNames(): array
     {
         return [
-            'index' => 'Index',
-            'label' => 'Label',
-            'bundle' => 'Bundle',
-            'icon' => 'Icon',
-            'weight' => 'Weight',
-            'status' => 'Status'
+            'parent_id' => trans('section::models.section.parent_id'),
+            'index' => trans('section::models.section.index'),
+            'label' => trans('section::models.section.label'),
+            'icon' => trans('section::models.section.icon'),
+            'status' => trans('section::models.section.status')
         ];
     }
 

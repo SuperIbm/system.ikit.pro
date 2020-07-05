@@ -26,11 +26,10 @@ class CreateTableSections extends Migration
             $table->increments('id');
             $table->string('index', 191)->index();
             $table->string('label', 191);
-            $table->string('bundle', 191);
             $table->string('icon')->nullable();
-            $table->boolean('weight')->nullable()->index();
             $table->boolean('status')->default(0)->index();
 
+            $table->nestedSet();
             $table->timestamps();
             $table->softDeletes();
         });

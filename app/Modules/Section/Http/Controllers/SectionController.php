@@ -15,10 +15,8 @@ use Illuminate\Routing\Controller;
 
 use Log;
 use Auth;
-use Config;
-use Util;
 
-use App\Modules\Section\Actions\SectionMenuAction;
+use App\Modules\Section\Actions\SectionReadAction;
 
 /**
  * Класс контроллер для разделов системы.
@@ -39,7 +37,7 @@ class SectionController extends Controller
      */
     public function sections(): JsonResponse
     {
-        $action = app(SectionMenuAction::class);
+        $action = app(SectionReadAction::class);
         $data = $action->run();
 
         if(!$action->hasError())

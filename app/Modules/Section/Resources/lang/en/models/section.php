@@ -1,10 +1,9 @@
 <?php
 
 return [
+    'parent_id' => 'ID of parent',
     'index' => 'Index',
     'label' => 'Label',
-    'bundle' => 'Bundle',
     'icon' => 'Icon',
-    'weight' => 'Weight',
     'status' => 'Status'
 ];

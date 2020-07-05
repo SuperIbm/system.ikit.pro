@@ -10,8 +10,8 @@
 
 namespace App\Modules\Section\Repositories;
 
-use App\Models\RepositoryEloquent;
 use App\Models\Repository;
+use App\Models\RepositoryTreeEloquent;
 
 /**
  * Класс репозитария разделов на основе Eloquent.
@@ -23,7 +23,7 @@ use App\Models\Repository;
  */
 class Section extends Repository
 {
-    use RepositoryEloquent;
+    use RepositoryTreeEloquent;
 
     /**
      * Получить по первичному ключу.
@@ -63,6 +63,88 @@ class Section extends Repository
             'Section',
             'SectionItem'
         ], false, $filters, $active, $sorts, $offset, $limit, $with, $groups);
+    }
+
+    /**
+     * Получение дерева разделов.
+     *
+     * @param array $filters Фильтрация данных.
+     * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
+     * @param array $with Массив связанных моделей.
+     *
+     * @return array Массив данных.
+     * @since 1.0
+     * @version 1.0
+     */
+    public function tree(array $filters = null, $active = null, array $with = null)
+    {
+        $tree = $this->_tree(['Section', 'SectionItem'], $filters, $active, null, $with);
+
+        return $tree;
+    }
+
+    /**
+     * Получение всех родительских разделов.
+     *
+     * @param int $id ID раздела у которой нужно получить всех родителей.
+     *
+     * @return array Вернет массив разделов.
+     * @since 1.0
+     * @version 1.0
+     */
+    public function parents(int $id)
+    {
+        return $this->_parents(['Section', 'SectionItem'], $id);
+    }
+
+    /**
+     * Получение всех потомков раздела.
+     *
+     * @param int $id ID раздела у которого нужно получить всех потомков.
+     *
+     * @return array Вернет массив разделов.
+     * @since 1.0
+     * @version 1.0
+     */
+    public function children(int $id)
+    {
+        return $this->_children(['Section', 'SectionItem'], $id);
+    }
+
+    /**
+     * Поднятие узла.
+     *
+     * @param int $id ID раздела у которой нужно получить всех потомков.
+     * @param int $amount На какое количество поднять узел.
+     *
+     * @return bool Вернет успешность операци.
+     * @since 1.0
+     * @version 1.0
+     */
+    public function up(int $id, int $amount = 1): bool
+    {
+        $status = $this->_up(['PageItem'], $id, $amount);
+        $this->_fix();
+
+        return $status;
+    }
+
+    /**
+     * Опускание узла.
+     *
+     * @param int $id ID раздела у которой нужно получить всех потомков.
+     * @param int $amount На какое количество опустить узел.
+     *
+     * @return bool Вернет успешность операци.
+     * @since 1.0
+     * @version 1.0
+     */
+    public function down(int $id, int $amount = 1): bool
+    {
+        $status = $this->_down(['PageItem'], $id, $amount);
+        $this->_fix();
+
+        return $status;
     }
 
     /**
