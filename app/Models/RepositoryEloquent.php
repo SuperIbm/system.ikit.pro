@@ -137,7 +137,7 @@ trait RepositoryEloquent
      * @param int $offset Отступ вывода.
      * @param int $limit Лимит вывода.
      * @param array $with Массив связанных моделей.
-     * @param array $group Массив для группировки.
+     * @param array $groups Массив для группировки.
      * @param array $selects Выражения для выборки.
      * @param bool $toTree Переведет все в дерево.
      *
@@ -145,7 +145,7 @@ trait RepositoryEloquent
      * @since 1.0
      * @version 1.0
      */
-    protected function _read(array $tags, $count = false, array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null, array $group = null, array $selects = null, bool $toTree = false)
+    protected function _read(array $tags, $count = false, array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null, array $groups = null, array $selects = null, bool $toTree = false)
     {
         $query = $this->newInstance()->newQuery();
 
@@ -258,7 +258,7 @@ trait RepositoryEloquent
 
         if($offset) $query->offset($offset);
         if($limit) $query->limit($limit);
-        if($group) $query->groupBy($group);
+        if($groups) $query->groupBy($groups);
 
         $countString = $count == true ? 'count' : 'rows';
         $cacheKey = Util::getKey($query->getConnection()

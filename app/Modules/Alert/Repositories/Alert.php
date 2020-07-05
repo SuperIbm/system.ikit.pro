@@ -114,7 +114,7 @@ class Alert extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id)
+    public function destroy($id)
     {
         return $this->_destroy(['AlertItem'], $id);
     }

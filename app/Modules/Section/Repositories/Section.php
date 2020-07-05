@@ -1,38 +1,29 @@
 <?php
 /**
- * Модуль Запоминания действий.
- * Этот модуль содержит все классы для работы с запоминанием и контролем действий пользователя.
+ * Модуль Разделы системы.
+ * Этот модуль содержит все классы для работы с разделами системы.
  *
- * @package App\Modules\Act
- * @version 1.0
+ * @package App\Modules\Section
  * @since 1.0
+ * @version 1.0
  */
 
-namespace App\Modules\Act\Repositories;
+namespace App\Modules\Section\Repositories;
 
 use App\Models\RepositoryEloquent;
 use App\Models\Repository;
 
 /**
- * Класс репозитария действий на основе Eloquent.
+ * Класс репозитария разделов на основе Eloquent.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class Act extends Repository
+class Section extends Repository
 {
     use RepositoryEloquent;
-
-    /**
-     * Количество минут на сколько должен сохранятся кешь.
-     *
-     * @var int
-     * @version 1.0
-     * @since 1.0
-     */
-    protected $_cacheMinutes = 1;
 
     /**
      * Получить по первичному ключу.
@@ -40,45 +31,54 @@ class Act extends Repository
      * @param int $id Первичный ключ.
      * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
      * @param array $filters Фильтрация данных.
+     * @param array $with Массив связанных моделей.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id = null, bool $active = null, array $filters = null)
+    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null)
     {
-        return $this->_get(['Act', 'ActItem'], $id, $active, $filters);
+        return $this->_get(['Section', 'SectionItem'], $id, $active, $filters, $with);
     }
 
     /**
      * Чтение данных.
      *
      * @param array $filters Фильтрация данных.
+     * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
      * @param array $sorts Массив значений для сортировки.
      * @param int $offset Отступ вывода.
      * @param int $limit Лимит вывода.
+     * @param array $with Массив связанных моделей.
+     * @param array $groups Массив для группировки.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null)
+    public function read(array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null, array $groups = null)
     {
-        return $this->_read(['Act', 'ActItem'], false, $filters, null, $sorts, $offset, $limit);
+        return $this->_read([
+            'Section',
+            'SectionItem'
+        ], false, $filters, $active, $sorts, $offset, $limit, $with, $groups);
     }
 
     /**
      * Подсчет общего количества записей.
      *
      * @param array $filters Фильтрация данных.
+     * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
+     * @param array $with Массив связанных моделей.
      *
      * @return int Количество.
      * @since 1.0
      * @version 1.0
      */
-    public function count(array $filters = null)
+    public function count(array $filters = null, bool $active = null, array $with = null)
     {
-        return $this->_read(['Act', 'ActItem'], true, $filters);
+        return $this->_read(['Section', 'SectionItem'], true, $filters, $active, null, null, null, $with);
     }
 
     /**
@@ -92,7 +92,7 @@ class Act extends Repository
      */
     public function create(array $data)
     {
-        return $this->_create(['ActItem'], $data);
+        return $this->_create(['SectionItem'], $data);
     }
 
     /**
@@ -107,7 +107,7 @@ class Act extends Repository
      */
     public function update(int $id, array $data)
     {
-        return $this->_update(['ActItem'], $id, $data);
+        return $this->_update(['SectionItem'], $id, $data);
     }
 
     /**
@@ -121,6 +121,6 @@ class Act extends Repository
      */
     public function destroy($id)
     {
-        return $this->_destroy(['ActItem'], $id);
+        return $this->_destroy(['SectionItem'], $id);
     }
 }

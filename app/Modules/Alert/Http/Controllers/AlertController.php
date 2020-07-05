@@ -130,7 +130,7 @@ class AlertController extends Controller
         }
         else
         {
-            Log::info('Обновление предупреждения.', [
+            Log::warning('Обновление предупреждения.', [
                 'module' => "Alert",
                 'login' => Auth::user()->login,
                 'type' => 'update',

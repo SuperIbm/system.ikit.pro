@@ -200,10 +200,12 @@ class DocumentMongoDb extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id)
+    public function destroy($id)
     {
         $model = $this->newInstance();
-        $status = $model->destroy($id);
+
+        if(is_numeric($id)) $status = $model->destroy($id);
+        else $status = $model->whereIn('id', $id)->delete();
 
         if(!$status) $this->setErrors($model->getErrors());
         else Cache::tags(['Document', 'DocumentItem'])->forget($id);

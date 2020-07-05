@@ -116,7 +116,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function destroy(int $id);
+    abstract public function destroy($id);
 
     /**
      * Проверяет вес документа в байтах.
