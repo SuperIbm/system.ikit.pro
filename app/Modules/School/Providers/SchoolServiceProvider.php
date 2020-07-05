@@ -1,20 +1,17 @@
 <?php
 /**
- * Модуль предупреждений.
- * Этот модуль содержит все классы для работы с предупреждениями.
+ * Модуль Школ.
+ * Этот модуль содержит все классы для работы школами.
  *
- * @package App\Modules\Alert
- * @since 1.0
+ * @package App\Modules\School
  * @version 1.0
+ * @since 1.0
  */
-namespace App\Modules\Alert\Providers;
+
+namespace App\Modules\School\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use App;
-use App\Modules\Alert\Models\AlertImplement;
-use App\Modules\Alert\Models\Alert as AlertModel;
-use App\Modules\Alert\Repositories\Alert as AlertRepository;
 
 /**
  * Класс сервис-провайдера для настройки этого модуля.
@@ -24,21 +21,21 @@ use App\Modules\Alert\Repositories\Alert as AlertRepository;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AlertServiceProvider extends ServiceProvider
+class SchoolServiceProvider extends ServiceProvider
 {
     /**
      * Название модуля.
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Alert';
+    protected $moduleName = 'School';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'alert';
+    protected $moduleNameLower = 'school';
 
     /**
      * Обработчик события загрузки приложения.
@@ -62,18 +59,6 @@ class AlertServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-
-        App::singleton(AlertRepository::class, function()
-        {
-            return new AlertRepository(new AlertModel());
-        });
-
-        App::singleton('alert',
-            function($app)
-            {
-                return new AlertImplement($app->make(AlertRepository::class));
-            }
-        );
     }
 
     /**

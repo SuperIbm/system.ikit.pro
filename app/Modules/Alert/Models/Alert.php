@@ -16,7 +16,6 @@ use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Status;
 
-
 /**
  * Класс модель для таблицы псевдонимов на основе Eloquent.
  *
