@@ -41,13 +41,10 @@ class Allow
         {
             if($request->ajax())
             {
-                return response()->json
-                (
-                    [
-                        'success' => false,
-                        'message' => 'Access to this part of the application has been ended, please log in again!'
-                    ]
-                );
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Access to this part of the application has been ended, please log in again!'
+                ]);
             }
             else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
             else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));
@@ -64,13 +61,10 @@ class Allow
                 {
                     if($request->ajax())
                     {
-                        return response()->json
-                        (
-                            [
-                                'success' => false,
-                                'message' => 'Access to this part of the application has been ended, please log in again!'
-                            ]
-                        );
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Access to this part of the application has been ended, please log in again!'
+                        ]);
                     }
                     else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
                     else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));

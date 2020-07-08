@@ -14,7 +14,6 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \App\Http\Middleware\Locale::class,
         // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
         \Fruitcake\Cors\HandleCors::class,
@@ -51,6 +50,10 @@ class Kernel extends HttpKernel
         'school' => [
             \App\Modules\School\Http\Middleware\SetSchool::class
         ],
+
+        'locale' => [
+            \App\Http\Middleware\Locale::class,
+        ],
     ];
 
     /**
@@ -63,7 +66,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \App\Modules\Access\Http\Middleware\Allow::class,
         'auth.api' => \App\Modules\Access\Http\Middleware\AllowOAuth::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        //'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];

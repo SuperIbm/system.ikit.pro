@@ -28,13 +28,12 @@ class Locale
      *
      * @param \Illuminate\Http\Request $request Запрос.
      * @param \Closure $next Функция последющего действия.
-     * @param string|null $guard Значение доступа.
      *
      * @return mixed Вернет результат продолжение запроса.
      */
-    public function handle(Request $request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next)
     {
-        if($request->get("ln") == "en")
+        if($request->get("locale") == "en")
         {
             setlocale(LC_ALL, ['en_US.utf8']);
             setlocale(LC_NUMERIC, ['en_US.utf8']);
@@ -45,7 +44,7 @@ class Locale
             setlocale(LC_NUMERIC, ['ru_RU.utf8']);
         }
 
-        App::setLocale($request->get("ln", "ru"));
+        App::setLocale($request->get("locale", "ru"));
 
         return $next($request);
     }

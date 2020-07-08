@@ -65,24 +65,14 @@ class LogAction
 
         $executeMemory = $executeMemory / 1048576;
 
-        if
-        (
-            Config::get('app.log_slow_time', 0) == 0 ||
-            Config::get('app.log_slow_memory', 0) == 0 ||
-            Config::get('app.log_slow_cpu', 0) == 0 ||
-            $executeTime > Config::get('app.log_slow_time') ||
-            $executeMemory > Config::get('app.log_slow_memory') ||
-            $cpu > Config::get('app.log_slow_cpu')
-        )
+        if(Config::get('app.log_slow_time', 0) == 0 || Config::get('app.log_slow_memory', 0) == 0 || Config::get('app.log_slow_cpu', 0) == 0 || $executeTime > Config::get('app.log_slow_time') || $executeMemory > Config::get('app.log_slow_memory') || $cpu > Config::get('app.log_slow_cpu'))
         {
-            Log::alert($request->fullUrl(),
-                [
-                    "time" => $executeTime,
-                    "memory" => $executeMemory,
-                    "cpu" => $cpu,
-                    "type" => "execute"
-                ]
-            );
+            Log::alert($request->fullUrl(), [
+                "time" => $executeTime,
+                "memory" => $executeMemory,
+                "cpu" => $cpu,
+                "type" => "execute"
+            ]);
         }
 
         return $response;
