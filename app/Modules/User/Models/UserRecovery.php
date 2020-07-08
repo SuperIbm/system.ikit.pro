@@ -65,14 +65,13 @@ class UserRecovery extends Eloquent
         'code'
     ];
 
-
     /**
      * Метод, который должен вернуть все правила валидации.
      *
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'user_id' => 'required|integer|digits_between:1,20',
@@ -80,18 +79,17 @@ class UserRecovery extends Eloquent
         ];
     }
 
-
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
-            'user_id' => 'ID user',
-            'code' => 'Code'
+            'user_id' => trans('user::model.userRecovery.user_id'),
+            'code' => trans('user::model.userRecovery.code')
         ];
     }
 

@@ -11,16 +11,10 @@
 namespace App\Modules\User\Models;
 
 use App\Models\Validate;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Session;
+use Eloquent;
 use Size;
 use ImageStore;
-use Laravel\Passport\HasApiTokens;
-use Illuminate\Http\UploadedFile;
 use App\Models\Status;
-use App\Modules\Order\Models\OrderUser;
-use App\Models\Flags;
 
 /**
  * Класс модель для таблицы верификации пользователей на основе Eloquent.
@@ -46,7 +40,7 @@ use App\Models\Flags;
  * @author Инчагов Тимофей Александрович.
  * @mixin \Eloquent
  */
-class UserVerification extends Authenticatable
+class UserVerification extends Eloquent
 {
     use Validate, Status;
 
@@ -73,14 +67,13 @@ class UserVerification extends Authenticatable
         'status'
     ];
 
-
     /**
      * Метод, который должен вернуть все правила валидации.
      *
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'user_id' => 'required|integer|digits_between:1,20',
@@ -89,19 +82,18 @@ class UserVerification extends Authenticatable
         ];
     }
 
-
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
-            'user_id' => 'ID user',
-            'code' => 'Code',
-            'status' => 'Status'
+            'user_id' => trans('user::model.userVerification.user_id'),
+            'code' => trans('user::model.userVerification.code'),
+            'status' => trans('user::model.userVerification.status')
         ];
     }
 

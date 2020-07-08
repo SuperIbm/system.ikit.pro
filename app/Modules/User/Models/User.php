@@ -17,7 +17,6 @@ use Size;
 use ImageStore;
 use Illuminate\Http\UploadedFile;
 use App\Models\Status;
-use App\Modules\Order\Models\OrderUser;
 use App\Models\Flags;
 use App\Models\Delete;
 
@@ -94,14 +93,13 @@ class User extends Authenticatable
         'flags'
     ];
 
-
     /**
      * Метод, который должен вернуть все правила валидации.
      *
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'image_small_id' => 'integer|digits_between:0,20',
@@ -116,26 +114,25 @@ class User extends Authenticatable
         ];
     }
 
-
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
-            'image_small_id' => 'Small image',
-            'image_middle_id' => 'Middle image',
-            'login' => 'Login',
-            'password' => 'Password',
-            'remember_token' => 'Token',
-            'first_name' => 'Firstname',
-            'second_name' => 'Inchagov',
-            'email' => 'E-mail',
-            'telephone' => 'Telephone',
-            'status' => 'Status'
+            'image_small_id' => trans('user::model.user.image_small_id'),
+            'image_middle_id' => trans('user::model.user.image_middle_id'),
+            'login' => trans('user::model.user.login'),
+            'password' => trans('user::model.user.password'),
+            'remember_token' => trans('user::model.user.remember_token'),
+            'first_name' => trans('user::model.user.first_name'),
+            'second_name' => trans('user::model.user.second_name'),
+            'email' => trans('user::model.user.email'),
+            'telephone' => trans('user::model.user.telephone'),
+            'status' => trans('user::model.user.status')
         ];
     }
 
@@ -265,42 +262,6 @@ class User extends Authenticatable
     {
         if(is_numeric($value)) return ImageStore::get($value);
         else return $value;
-    }
-
-    /**
-     * Получить запись выбранных групп для пользователя.
-     *
-     * @return \App\Modules\User\Models\UserGroupUser[]|\Illuminate\Database\Eloquent\Relations\HasMany Модель выбраные группы для пользователей.
-     * @version 1.0
-     * @since 1.0
-     */
-    public function userGroupUsers()
-    {
-        return $this->hasMany(UserGroupUser::class);
-    }
-
-    /**
-     * Получение всех групп пользователя.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough Модель групп пользователя.
-     * @version 1.0
-     * @since 1.0
-     */
-    public function userGroups()
-    {
-        return $this->hasManyThrough(UserGroup::class, UserGroupUser::class, "user_id", "id");
-    }
-
-    /**
-     * Получение всех ролей пользователя.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough Модель ролей пользователя.
-     * @version 1.0
-     * @since 1.0
-     */
-    public function userGroupRoles()
-    {
-        return $this->hasManyThrough(UserGroupRole::class, UserGroupUser::class, "user_id", "user_group_id", "id", "user_group_id");
     }
 
     /**

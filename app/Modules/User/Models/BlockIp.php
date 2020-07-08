@@ -69,7 +69,7 @@ class BlockIp extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'ip' => 'required|ipMask|unique_soft:block_ips,ip,' . $this->id . ',id',
@@ -84,11 +84,11 @@ class BlockIp extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
-            'ip' => 'IP mask',
-            'status' => 'Status'
+            'ip' => trans('user::model.blockIp.ip'),
+            'status' => trans('user::model.blockIp.status')
         ];
     }
 }

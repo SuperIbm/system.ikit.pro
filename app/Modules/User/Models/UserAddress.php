@@ -66,7 +66,7 @@ class UserAddress extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             "user_id" => 'required|integer|digits_between:1,20',
@@ -88,26 +88,26 @@ class UserAddress extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
-            "user_id" => 'ID user',
-            'postal_code' => 'Postal code',
-            'country' => 'Country code',
-            'country_name' => 'Country',
-            'region' => 'Region code',
-            'region_name' => 'Region',
-            'city' => 'City',
-            'street_address' => 'Street address',
-            'latitude' => 'Latitude',
-            'longitude' => 'Longitude'
+            "user_id" => trans('user::model.userAddress.user_id'),
+            'postal_code' => trans('user::model.userAddress.postal_code'),
+            'country' => trans('user::model.userAddress.country'),
+            'country_name' => trans('user::model.userAddress.country_name'),
+            'region' => trans('user::model.userAddress.region'),
+            'region_name' => trans('user::model.userAddress.region_name'),
+            'city' => trans('user::model.userAddress.city'),
+            'street_address' => trans('user::model.userAddress.street_address'),
+            'latitude' => trans('user::model.userAddress.latitude'),
+            'longitude' => trans('user::model.userAddress.longitude')
         ];
     }
 
     /**
-     * Получить запись выбранных групп.
+     * Получить пользователя.
      *
-     * @return \App\Modules\User\Models\User[]|\Illuminate\Database\Eloquent\Relations\HasOne Модель пользователей.
+     * @return \App\Modules\User\Models\User|\Illuminate\Database\Eloquent\Relations\HasOne Модель пользователей.
      * @version 1.0
      * @since 1.0
      */
