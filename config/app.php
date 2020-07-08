@@ -306,6 +306,7 @@ return [
         'Util' => App\Models\Facades\Util::class,
         'Bot' => App\Models\Facades\Bot::class,
         'Act' => App\Modules\Act\Facades\Act::class,
+        'School' => App\Modules\Act\Facades\School::class,
         'Currency' => App\Models\Facades\Currency::class,
         'Sms' => App\Models\Facades\Sms::class,
         'Geo' => App\Models\Facades\Geo::class,
@@ -314,9 +315,7 @@ return [
         'ImageStore' => App\Modules\Image\Facades\Image::class,
         'Document' => App\Modules\Document\Facades\Document::class,
         'Alert' => App\Modules\Alert\Facades\Alert::class,
-        //'Size' => Intervention\Image\Facades\Image::class,
-        'Meta' => App\Models\Facades\Meta::class,
-        'Widget' => App\Models\Facades\Widget::class,
+        'Size' => Intervention\Image\Facades\Image::class,
         'OAuth' => App\Modules\OAuth\Facades\OAuth::class
     ],
 

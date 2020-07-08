@@ -10,6 +10,10 @@
 
 namespace App\Modules\School\Providers;
 
+use App;
+use App\Modules\School\Models\School as ModelSchool;
+use App\Modules\School\Models\Implement as Implement;
+use App\Modules\School\Repositories\School as RepositorySchool;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
@@ -59,6 +63,16 @@ class SchoolServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+
+        App::singleton(RepositorySchool::class, function()
+        {
+            return new RepositorySchool(new ModelSchool());
+        });
+
+        App::bind('school', function()
+        {
+            return app(Implement::class);
+        });
     }
 
     /**

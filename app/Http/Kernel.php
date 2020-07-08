@@ -47,6 +47,10 @@ class Kernel extends HttpKernel
         'ajax' => [
             \App\Http\Middleware\AllowOnlyAjaxRequests::class
         ],
+
+        'school' => [
+            \App\Modules\School\Http\Middleware\SetSchool::class
+        ],
     ];
 
     /**

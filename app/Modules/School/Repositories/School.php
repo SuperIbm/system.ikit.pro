@@ -8,7 +8,7 @@
  * @since 1.0
  */
 
-namespace App\Modules\Alert\Repositories;
+namespace App\Modules\School\Repositories;
 
 use App\Models\RepositoryEloquent;
 use App\Models\Repository;
