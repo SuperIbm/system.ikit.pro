@@ -63,15 +63,6 @@ class User extends Authenticatable
     use Validate, Notifiable, Status, Flags, Delete;
 
     /**
-     * Определяет необходимость отметок времени для модели.
-     *
-     * @var bool
-     * @version 1.0
-     * @since 1.0
-     */
-    public $timestamps = true;
-
-    /**
      * Атрибуты, для которых разрешено массовое назначение.
      *
      * @var array

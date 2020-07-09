@@ -39,7 +39,6 @@ class CreateTableUserAddresses extends Migration
         });
     }
 
-
     /**
      * Запуск отката миграции.
      *

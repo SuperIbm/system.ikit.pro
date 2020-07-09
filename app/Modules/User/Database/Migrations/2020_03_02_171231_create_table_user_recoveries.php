@@ -32,7 +32,6 @@ class CreateTableUserRecoveries extends Migration
         });
     }
 
-
     /**
      * Запуск отката миграции.
      *

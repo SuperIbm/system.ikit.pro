@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -10,9 +11,8 @@ use Illuminate\Database\Schema\Blueprint;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class CreateTableUserRoleAdminSections extends Migration
+class CreateTableSchoolRoles extends Migration
 {
-
     /**
      * Запуск миграции.
      *
@@ -22,21 +22,20 @@ class CreateTableUserRoleAdminSections extends Migration
      */
     public function up()
     {
-        Schema::create('user_role_admin_sections', function(Blueprint $table)
-        {
+        Schema::create('school_roles', function(Blueprint $table) {
             $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('user_role_id')->unsigned()->index();
-            $table->bigInteger('admin_section_id')->unsigned()->index();
-            $table->boolean('read')->default(0);
-            $table->boolean('update')->default(0);
-            $table->boolean('create')->default(0);
-            $table->boolean('destroy')->default(0);
+            $table->bigInteger('school_id')->unsigned()->index();
+            $table->bigInteger('user_role_id')->unsigned()->nullable()->index();
+
+            $table->string('name_role', 191);
+            $table->string('description_role', 191)->nullable();
+
+            $table->boolean('status')->default(1)->index();
 
             $table->timestamps();
             $table->softDeletes();
         });
     }
-
 
     /**
      * Запуск отката миграции.
@@ -47,7 +46,6 @@ class CreateTableUserRoleAdminSections extends Migration
      */
     public function down()
     {
-        Schema::drop('user_role_admin_sections');
+        Schema::drop('school_roles');
     }
-
 }

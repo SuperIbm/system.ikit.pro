@@ -12,7 +12,6 @@ use Illuminate\Database\Schema\Blueprint;
  */
 class CreateTableBlockIps extends Migration
 {
-
     /**
      * Запуск миграции.
      *
@@ -33,7 +32,6 @@ class CreateTableBlockIps extends Migration
         });
     }
 
-
     /**
      * Запуск отката миграции.
      *
@@ -45,5 +43,4 @@ class CreateTableBlockIps extends Migration
     {
         Schema::drop('block_ips');
     }
-
 }

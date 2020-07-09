@@ -13,11 +13,11 @@ namespace App\Modules\User\Models;
 use Eloquent;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Status;
 use App\Models\Delete;
+use App\Modules\School\Models\School;
 
 /**
- * Класс модель для таблицы ролей пользователей на основе Eloquent.
+ * Класс модель для таблицы соотношений пользователя со школами на основе Eloquent.
  *
  * @version 1.0
  * @since 1.0
@@ -26,9 +26,9 @@ use App\Models\Delete;
  *
  * @mixin \Eloquent
  */
-class UserRole extends Eloquent
+class UserSchool extends Eloquent
 {
-    use Validate, SoftDeletes, Status, Delete;
+    use Validate, SoftDeletes, Delete;
 
     /**
      * Атрибуты, для которых разрешено массовое назначение.
@@ -39,9 +39,8 @@ class UserRole extends Eloquent
      */
     protected $fillable = [
         'id',
-        'name_role',
-        'description_role',
-        'status'
+        'user_id',
+        'school_id'
     ];
 
     /**
@@ -53,9 +52,8 @@ class UserRole extends Eloquent
     protected function getRules()
     {
         return [
-            'name_role' => 'required|between:1,100|unique_soft:user_roles,name_role,' . $this->id . ',id',
-            'description_role' => 'max:191',
-            'status' => 'required|boolean'
+            'user_id' => 'required|integer|digits_between:1,20',
+            'school_id' => 'required|integer|digits_between:1,20'
         ];
     }
 
@@ -68,9 +66,32 @@ class UserRole extends Eloquent
     protected function getNames()
     {
         return [
-            'name_role' => trans('user::model.userRole.name_role'),
-            'description_role' => trans('user::model.userRole.description_role'),
-            'status' => trans('user::model.userRole.status')
+            'user_id' => trans('user::model.userSchool.user_id'),
+            'school_id' => trans('user::model.userSchool.school_id')
         ];
+    }
+
+    /**
+     * Получить пользователя.
+     *
+     * @return \App\Modules\User\Models\User|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель пользователя.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Получить школу.
+     *
+     * @return \App\Modules\School\Models\School|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function school()
+    {
+        return $this->belongsTo(School::class);
     }
 }

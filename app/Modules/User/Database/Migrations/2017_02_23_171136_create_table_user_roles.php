@@ -34,7 +34,6 @@ class CreateTableUserRoles extends Migration
         });
     }
 
-
     /**
      * Запуск отката миграции.
      *
@@ -46,5 +45,4 @@ class CreateTableUserRoles extends Migration
     {
         Schema::drop('user_roles');
     }
-
 }

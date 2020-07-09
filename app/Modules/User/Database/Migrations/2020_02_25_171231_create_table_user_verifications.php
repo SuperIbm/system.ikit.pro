@@ -33,7 +33,6 @@ class CreateTableUserVerifications extends Migration
         });
     }
 
-
     /**
      * Запуск отката миграции.
      *

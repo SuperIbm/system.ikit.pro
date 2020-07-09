@@ -10,7 +10,7 @@ use Illuminate\Database\Schema\Blueprint;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class CreateTableUserGroups extends Migration
+class CreateTableUserSchools extends Migration
 {
 
     /**
@@ -22,18 +22,17 @@ class CreateTableUserGroups extends Migration
      */
     public function up()
     {
-        Schema::create('user_groups', function(Blueprint $table)
+        Schema::create('user_schools', function(Blueprint $table)
         {
             $table->bigInteger('id', true)->unsigned();
-            $table->string('name_group', 191);
-            $table->string('description_group', 191)->nullable();
-            $table->boolean('status')->default(0)->index();
+
+            $table->bigInteger('user_id')->unsigned()->index();
+            $table->bigInteger('school_id')->unsigned()->index();
 
             $table->timestamps();
             $table->softDeletes();
         });
     }
-
 
     /**
      * Запуск отката миграции.
@@ -44,7 +43,6 @@ class CreateTableUserGroups extends Migration
      */
     public function down()
     {
-        Schema::drop('user_groups');
+        Schema::drop('user_schools');
     }
-
 }

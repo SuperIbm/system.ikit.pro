@@ -42,7 +42,6 @@ class CreateTableUsers extends Migration
         });
     }
 
-
     /**
      * Запуск отката миграции.
      *

@@ -86,24 +86,6 @@ class DocumentMongoDb extends MongoDb
     protected $connection = 'mongodb';
 
     /**
-     * Связанная с моделью первичный ключь.
-     *
-     * @var string
-     * @since 1.0
-     * @version 1.0
-     */
-    protected $primaryKey = 'id';
-
-    /**
-     * Определяет необходимость отметок времени для модели.
-     *
-     * @var bool
-     * @since 1.0
-     * @version 1.0
-     */
-    public $timestamps = true;
-
-    /**
      * Расширенные пользователькие события.
      *
      * @var array

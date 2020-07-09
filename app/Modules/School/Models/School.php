@@ -31,15 +31,6 @@ class School extends Eloquent
     use Validate, Status, Delete;
 
     /**
-     * Определяет необходимость отметок времени для модели.
-     *
-     * @var bool
-     * @version 1.0
-     * @since 1.0
-     */
-    public $timestamps = true;
-
-    /**
      * Атрибуты, для которых разрешено массовое назначение.
      *
      * @var array
@@ -234,5 +225,17 @@ class School extends Eloquent
     {
         if(is_numeric($value)) return ImageStore::get($value);
         else return $value;
+    }
+
+    /**
+     * Получить роли школы.
+     *
+     * @return \App\Modules\School\Models\SchoolRole[]|\Illuminate\Database\Eloquent\Relations\HasMany Модели ролей школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function roles()
+    {
+        return $this->hasMany(SchoolRole::class);
     }
 }

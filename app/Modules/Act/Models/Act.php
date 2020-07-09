@@ -39,15 +39,6 @@ class Act extends Eloquent
     use Validate, Delete;
 
     /**
-     * Определяет необходимость отметок времени для модели.
-     *
-     * @var bool
-     * @since 1.0
-     * @version 1.0
-     */
-    public $timestamps = true;
-
-    /**
      * Атрибуты, для которых разрешено массовое назначение.
      *
      * @var array

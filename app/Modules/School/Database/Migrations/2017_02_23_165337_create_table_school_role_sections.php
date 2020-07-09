@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -10,9 +11,8 @@ use Illuminate\Database\Schema\Blueprint;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class CreateTableUserGroupPages extends Migration
+class CreateTableSchoolRoleSections extends Migration
 {
-
     /**
      * Запуск миграции.
      *
@@ -22,17 +22,21 @@ class CreateTableUserGroupPages extends Migration
      */
     public function up()
     {
-        Schema::create('user_group_pages', function(Blueprint $table)
-        {
+        Schema::create('school_role_sections', function(Blueprint $table) {
             $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('user_group_id')->unsigned()->index();
-            $table->bigInteger('page_id')->unsigned()->index();
+
+            $table->bigInteger('school_role_id')->unsigned()->index();
+            $table->bigInteger('section_id')->unsigned()->index();
+
+            $table->boolean('read')->default(0);
+            $table->boolean('update')->default(0);
+            $table->boolean('create')->default(0);
+            $table->boolean('destroy')->default(0);
 
             $table->timestamps();
             $table->softDeletes();
         });
     }
-
 
     /**
      * Запуск отката миграции.
@@ -43,7 +47,6 @@ class CreateTableUserGroupPages extends Migration
      */
     public function down()
     {
-        Schema::drop('user_group_pages');
+        Schema::drop('school_role_sections');
     }
-
 }
