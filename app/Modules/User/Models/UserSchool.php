@@ -88,6 +88,18 @@ class UserSchool extends Eloquent
     }
 
     /**
+     * Получить роли пользователя в рамках школы.
+     *
+     * @return \App\Modules\User\Models\UserSchoolRole[]|\Illuminate\Database\Eloquent\Relations\HasMany Модели ролей школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function roles()
+    {
+        return $this->hasMany(UserSchoolRole::class);
+    }
+
+    /**
      * Получить школу.
      *
      * @return \App\Modules\School\Models\School|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель школы.

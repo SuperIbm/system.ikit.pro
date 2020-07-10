@@ -18,6 +18,8 @@ use Illuminate\Http\UploadedFile;
 use App\Models\Status;
 use App\Models\Delete;
 use App\Modules\User\Models\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modules\User\Models\UserSchool;
 
 /**
  * Класс модель для таблицы школ на основе Eloquent.
@@ -29,7 +31,7 @@ use App\Modules\User\Models\User;
  */
 class School extends Eloquent
 {
-    use Validate, Status, Delete;
+    use Validate, Status, Delete, SoftDeletes;
 
     /**
      * Атрибуты, для которых разрешено массовое назначение.
@@ -253,5 +255,17 @@ class School extends Eloquent
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Получить пользователей школы.
+     *
+     * @return \App\Modules\User\Models\UserSchool[]|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель пользователей школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function userSchools()
+    {
+        return $this->belongsTo(UserSchool::class);
     }
 }

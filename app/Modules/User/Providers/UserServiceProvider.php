@@ -29,6 +29,7 @@ use App\Modules\User\Repositories\UserSchool as UserSchoolRepository;
 
 use App\Modules\User\Models\UserSchoolRole as UserSchoolRoleModel;
 use App\Modules\User\Repositories\UserSchoolRole as UserSchoolRoleRepository;
+use App\Modules\User\Events\Listeners\UserSchoolListener;
 
 use App\Modules\User\Models\UserRole as UserRoleModel;
 use App\Modules\User\Repositories\UserRole as UserRoleRepository;
@@ -116,6 +117,8 @@ class UserServiceProvider extends ServiceProvider
         App::singleton(UserSchoolRepository::class, function() {
             return new UserSchoolRepository(new UserSchoolModel());
         });
+
+        UserSchoolModel::observe(UserSchoolListener::class);
 
         //
 

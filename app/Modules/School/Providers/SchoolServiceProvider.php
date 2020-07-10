@@ -11,9 +11,19 @@
 namespace App\Modules\School\Providers;
 
 use App;
-use App\Modules\School\Models\School as ModelSchool;
 use App\Modules\School\Models\Implement as Implement;
-use App\Modules\School\Repositories\School as RepositorySchool;
+
+use App\Modules\School\Models\School as SchoolModel;
+use App\Modules\School\Repositories\School as SchoolRepository;
+use App\Modules\School\Events\Listeners\SchoolListener;
+
+use App\Modules\School\Models\SchoolRole as SchoolRoleModel;
+use App\Modules\School\Repositories\SchoolRole as SchoolRoleRepository;
+use App\Modules\School\Events\Listeners\SchoolRoleListener;
+
+use App\Modules\School\Models\SchoolRoleSection as SchoolRoleSectionModel;
+use App\Modules\School\Repositories\SchoolRoleSection as SchoolRoleSectionRepository;
+
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
@@ -64,14 +74,34 @@ class SchoolServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
 
-        App::singleton(RepositorySchool::class, function()
-        {
-            return new RepositorySchool(new ModelSchool());
-        });
-
         App::bind('school', function()
         {
             return app(Implement::class);
+        });
+
+        //
+
+        App::singleton(SchoolRepository::class, function()
+        {
+            return new SchoolRepository(new SchoolModel());
+        });
+
+        SchoolModel::observe(SchoolListener::class);
+
+        //
+
+        App::singleton(SchoolRoleRepository::class, function()
+        {
+            return new SchoolRoleRepository(new SchoolRoleModel());
+        });
+
+        SchoolRoleModel::observe(SchoolRoleListener::class);
+
+        //
+
+        App::singleton(SchoolRoleSectionRepository::class, function()
+        {
+            return new SchoolRoleSectionRepository(new SchoolRoleSectionModel());
         });
     }
 

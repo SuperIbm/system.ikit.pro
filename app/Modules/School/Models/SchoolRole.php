@@ -15,6 +15,7 @@ use App\Models\Validate;
 use App\Models\Status;
 use App\Models\Delete;
 use App\Modules\User\Models\UserRole;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Класс модель для таблицы ролей школы на основе Eloquent.
@@ -26,7 +27,7 @@ use App\Modules\User\Models\UserRole;
  */
 class SchoolRole extends Eloquent
 {
-    use Validate, Status, Delete;
+    use Validate, Status, Delete, SoftDeletes;
 
     /**
      * Атрибуты, для которых разрешено массовое назначение.

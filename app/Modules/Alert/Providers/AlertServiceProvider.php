@@ -9,9 +9,9 @@
  */
 namespace App\Modules\Alert\Providers;
 
+use App;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use App;
 use App\Modules\Alert\Models\AlertImplement;
 use App\Modules\Alert\Models\Alert as AlertModel;
 use App\Modules\Alert\Repositories\Alert as AlertRepository;
