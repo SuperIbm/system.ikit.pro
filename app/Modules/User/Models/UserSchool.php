@@ -15,6 +15,7 @@ use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
 use App\Modules\School\Models\School;
+use App\Models\Status;
 
 /**
  * Класс модель для таблицы соотношений пользователя со школами на основе Eloquent.
@@ -28,7 +29,7 @@ use App\Modules\School\Models\School;
  */
 class UserSchool extends Eloquent
 {
-    use Validate, SoftDeletes, Delete;
+    use Validate, SoftDeletes, Delete, Status;
 
     /**
      * Атрибуты, для которых разрешено массовое назначение.
@@ -40,7 +41,8 @@ class UserSchool extends Eloquent
     protected $fillable = [
         'id',
         'user_id',
-        'school_id'
+        'school_id',
+        'status'
     ];
 
     /**
@@ -53,7 +55,8 @@ class UserSchool extends Eloquent
     {
         return [
             'user_id' => 'required|integer|digits_between:1,20',
-            'school_id' => 'required|integer|digits_between:1,20'
+            'school_id' => 'required|integer|digits_between:1,20',
+            'status' => 'required|boolean'
         ];
     }
 
@@ -67,7 +70,8 @@ class UserSchool extends Eloquent
     {
         return [
             'user_id' => trans('user::model.userSchool.user_id'),
-            'school_id' => trans('user::model.userSchool.school_id')
+            'school_id' => trans('user::model.userSchool.school_id'),
+            'status' => trans('user::model.userSchool.status')
         ];
     }
 

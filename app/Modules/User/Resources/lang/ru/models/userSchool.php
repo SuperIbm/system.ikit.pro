@@ -2,5 +2,6 @@
 
 return [
     'user_id' => "ID пользователя",
-    'school_id' => "ID школы"
+    'school_id' => "ID школы",
+    'status' => 'Статус'
 ];
