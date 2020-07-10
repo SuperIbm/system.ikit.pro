@@ -13,12 +13,11 @@ namespace App\Modules\User\Models;
 use Eloquent;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Status;
 use App\Models\Delete;
 use App\Modules\School\Models\SchoolRole;
 
 /**
- * Класс модель для таблицы ролей пользователей на основе Eloquent.
+ * Класс модель для таблицы соотношений пользователя с ролями школы на основе Eloquent.
  *
  * @version 1.0
  * @since 1.0
@@ -27,9 +26,9 @@ use App\Modules\School\Models\SchoolRole;
  *
  * @mixin \Eloquent
  */
-class UserRole extends Eloquent
+class UserSchoolRole extends Eloquent
 {
-    use Validate, SoftDeletes, Status, Delete;
+    use Validate, SoftDeletes, Delete;
 
     /**
      * Атрибуты, для которых разрешено массовое назначение.
@@ -40,9 +39,8 @@ class UserRole extends Eloquent
      */
     protected $fillable = [
         'id',
-        'name_role',
-        'description_role',
-        'status'
+        'user_id',
+        'school_role_id'
     ];
 
     /**
@@ -54,9 +52,8 @@ class UserRole extends Eloquent
     protected function getRules()
     {
         return [
-            'name_role' => 'required|between:1,100|unique_soft:user_roles,name_role,' . $this->id . ',id',
-            'description_role' => 'max:191',
-            'status' => 'required|boolean'
+            'user_id' => 'required|integer|digits_between:1,20',
+            'school_role_id' => 'required|integer|digits_between:1,20'
         ];
     }
 
@@ -69,21 +66,32 @@ class UserRole extends Eloquent
     protected function getNames()
     {
         return [
-            'name_role' => trans('user::model.userRole.name_role'),
-            'description_role' => trans('user::model.userRole.description_role'),
-            'status' => trans('user::model.userRole.status')
+            'user_id' => trans('user::model.userSchoolRole.user_id'),
+            'school_role_id' => trans('user::model.userSchoolRole.school_role_id')
         ];
     }
 
     /**
-     * Получить роли школ.
+     * Получить пользователя.
      *
-     * @return \App\Modules\School\Models\SchoolRole[]|\Illuminate\Database\Eloquent\Relations\HasMany Модели ролей школы.
+     * @return \App\Modules\User\Models\User|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель пользователя.
      * @version 1.0
      * @since 1.0
      */
-    public function schoolRoles()
+    public function user()
     {
-        return $this->hasMany(SchoolRole::class);
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Получить роль в школе.
+     *
+     * @return \App\Modules\School\Models\SchoolRole|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель роли школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function role()
+    {
+        return $this->belongsTo(SchoolRole::class);
     }
 }

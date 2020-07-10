@@ -29,17 +29,18 @@ class UserRecovery extends Repository
      * Получить по первичному ключу.
      *
      * @param int $id Первичный ключ.
-     * @param array $with Массив связанных моделей.
+     * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
+     * @param array $filters Фильтрация данных.
+     * @param array|string $selects Выражения для выборки.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function get($id, $with = null)
+    public function get(int $id = null, bool $active = null, array $filters = null, array $selects = null)
     {
-        return $this->_get(['User', 'UserRecovery'], $id, null, $with);
+        return $this->_get(['User', 'UserRecovery'], $id, $active, $filters, null, $selects);
     }
-
 
     /**
      * Чтение данных.
@@ -54,7 +55,7 @@ class UserRecovery extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read($filters = null, $sorts = null, $offset = null, $limit = null, $with = null)
+    public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null)
     {
         return $this->_read(['User', 'UserRecovery'], false, $filters, null, $sorts, $offset, $limit, $with);
     }
@@ -69,7 +70,7 @@ class UserRecovery extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count($filters = null, $with = null)
+    public function count(array $filters = null, array $with = null)
     {
         return $this->_read(['User', 'UserRecovery'], true, $filters, null, null, null, null, $with);
     }
@@ -98,7 +99,7 @@ class UserRecovery extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         return $this->_update(['UserRecovery'], $id, $data);
     }

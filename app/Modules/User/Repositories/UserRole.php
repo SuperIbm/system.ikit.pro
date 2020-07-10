@@ -14,14 +14,14 @@ use App\Models\RepositoryEloquent;
 use App\Models\Repository;
 
 /**
- * Класс репозитария групп пользователей на основе Eloquent.
+ * Класс репозитария для ролей на основе Eloquent.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class UserGroup extends Repository
+class UserRole extends Repository
 {
     use RepositoryEloquent;
 
@@ -30,22 +30,23 @@ class UserGroup extends Repository
      *
      * @param int $id Первичный ключ.
      * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
+     * @param array $filters Фильтрация данных.
+     * @param array $with Массив связанных моделей.
+     * @param array|string $selects Выражения для выборки.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function get($id, $active = null)
+    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null, array $selects = null)
     {
-        return $this->_get(['User', 'UserGroup'], $id, $active);
+        return $this->_get(['User', 'UserItem', 'UserRole'], $id, $active, $filters, $with, $selects);
     }
-
 
     /**
      * Чтение данных.
      *
      * @param array $filters Фильтрация данных.
-     * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
      * @param array $sorts Массив значений для сортировки.
      * @param int $offset Отступ вывода.
      * @param int $limit Лимит вывода.
@@ -55,25 +56,24 @@ class UserGroup extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read($filters = null, $active = null, $sorts = null, $offset = null, $limit = null, $with = null)
+    public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null)
     {
-        return $this->_read(['User', 'UserGroup'], false, $filters, $active, $sorts, $offset, $limit, $with);
+        return $this->_read(['User', 'UserItem', 'UserRole'], false, $filters, null, $sorts, $offset, $limit, $with);
     }
 
     /**
      * Подсчет общего количества записей.
      *
      * @param array $filters Фильтрация данных.
-     * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
      * @param array $with Массив связанных моделей.
      *
      * @return int Количество.
      * @since 1.0
      * @version 1.0
      */
-    public function count($filters = null, $active = null, $with = null)
+    public function count(array $filters = null, array $with = null)
     {
-        return $this->_read(['User', 'UserGroup'], true, $filters, $active, null, null, null, $with);
+        return $this->_read(['User', 'UserItem', 'UserRole'], true, $filters, null, null, null, null, $with);
     }
 
     /**
@@ -87,7 +87,7 @@ class UserGroup extends Repository
      */
     public function create(array $data)
     {
-        return $this->_create(['UserGroup'], $data);
+        return $this->_create(['UserItem', 'UserRole'], $data);
     }
 
     /**
@@ -100,9 +100,9 @@ class UserGroup extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
-        return $this->_update(['UserGroup'], $id, $data);
+        return $this->_update(['UserItem', 'UserRole'], $id, $data);
     }
 
     /**
@@ -116,6 +116,6 @@ class UserGroup extends Repository
      */
     public function destroy($id)
     {
-        return $this->_destroy(['UserGroup'], $id);
+        return $this->_destroy(['UserItem', 'UserRole'], $id);
     }
 }

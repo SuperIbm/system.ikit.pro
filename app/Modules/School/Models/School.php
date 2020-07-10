@@ -17,6 +17,7 @@ use ImageStore;
 use Illuminate\Http\UploadedFile;
 use App\Models\Status;
 use App\Models\Delete;
+use App\Modules\User\Models\User;
 
 /**
  * Класс модель для таблицы школ на основе Eloquent.
@@ -39,6 +40,7 @@ class School extends Eloquent
      */
     protected $fillable = [
         'id',
+        'user_id',
         'image_small_id',
         'image_middle_id',
         'image_big_id',
@@ -58,6 +60,7 @@ class School extends Eloquent
     protected function getRules(): array
     {
         return [
+            'user_id' => 'required|integer|digits_between:1,20',
             'image_small_id' => 'integer|digits_between:0,20',
             'image_middle_id' => 'integer|digits_between:0,20',
             'image_big_id' => 'integer|digits_between:0,20',
@@ -78,6 +81,7 @@ class School extends Eloquent
     protected function getNames(): array
     {
         return [
+            'user_id' => trans('school::models.school.user_id'),
             'image_small_id' => trans('school::models.school.image_small_id'),
             'image_middle_id' => trans('school::models.school.image_middle_id'),
             'image_big_id' => trans('school::models.school.image_big_id'),
@@ -237,5 +241,17 @@ class School extends Eloquent
     public function roles()
     {
         return $this->hasMany(SchoolRole::class);
+    }
+
+    /**
+     * Получить основателя школы.
+     *
+     * @return \App\Modules\User\Models\User|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель пользователя.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

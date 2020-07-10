@@ -11,6 +11,7 @@
 namespace App\Modules\User\Models;
 
 use App\Models\Validate;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Size;
@@ -60,7 +61,7 @@ use App\Models\Delete;
  */
 class User extends Authenticatable
 {
-    use Validate, Notifiable, Status, Flags, Delete;
+    use Validate, Notifiable, Status, Flags, Delete, SoftDeletes;
 
     /**
      * Атрибуты, для которых разрешено массовое назначение.
@@ -289,5 +290,29 @@ class User extends Authenticatable
     public function recovery()
     {
         return $this->hasOne(UserRecovery::class);
+    }
+
+    /**
+     * Получить школы пользователя.
+     *
+     * @return \App\Modules\User\Models\UserSchool[]|\Illuminate\Database\Eloquent\Relations\HasMany Модели школ.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function schools()
+    {
+        return $this->hasMany(UserSchool::class);
+    }
+
+    /**
+     * Получить школьные роли пользователя.
+     *
+     * @return \App\Modules\User\Models\UserSchoolRole[]|\Illuminate\Database\Eloquent\Relations\HasMany Модели школьных ролей пользователя.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function schoolRoles()
+    {
+        return $this->hasMany(UserSchoolRole::class);
     }
 }

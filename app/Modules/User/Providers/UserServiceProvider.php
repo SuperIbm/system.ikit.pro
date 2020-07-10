@@ -12,7 +12,6 @@ namespace App\Modules\User\Providers;
 
 use App;
 use App\Modules\User\Repositories\UserVerification;
-use Validator;
 use Illuminate\Support\ServiceProvider;
 
 use App\Modules\User\Models\BlockIp as BlockIpModel;
@@ -22,31 +21,18 @@ use App\Modules\User\Models\User as UserModel;
 use App\Modules\User\Repositories\User as UserRepository;
 use App\Modules\User\Events\Listeners\UserListener;
 
-use App\Modules\User\Models\UserGroup as UserGroupModel;
-use App\Modules\User\Repositories\UserGroup as UserGroupRepository;
-use App\Modules\User\Events\Listeners\UserGroupListener;
-
-use App\Modules\User\Models\UserCompany as UserCompanyModel;
-use App\Modules\User\Repositories\UserCompany as UserCompanyRepository;
-
 use App\Modules\User\Models\UserAddress as UserAddressModel;
 use App\Modules\User\Repositories\UserAddress as UserAddressRepository;
 
-use App\Modules\User\Models\UserGroupUser as UserGroupUserModel;
-use App\Modules\User\Repositories\UserGroupUser as UserGroupUserRepository;
+use App\Modules\User\Models\UserSchool as UserSchoolModel;
+use App\Modules\User\Repositories\UserSchool as UserSchoolRepository;
 
-use App\Modules\User\Models\UserGroupPage as UserGroupPageModel;
-use App\Modules\User\Repositories\UserGroupPage as UserGroupPageRepository;
-
-use App\Modules\User\Models\UserGroupRole as UserGroupRoleModel;
-use App\Modules\User\Repositories\UserGroupRole as UserGroupRoleRepository;
+use App\Modules\User\Models\UserSchoolRole as UserSchoolRoleModel;
+use App\Modules\User\Repositories\UserSchoolRole as UserSchoolRoleRepository;
 
 use App\Modules\User\Models\UserRole as UserRoleModel;
 use App\Modules\User\Repositories\UserRole as UserRoleRepository;
 use App\Modules\User\Events\Listeners\UserRoleListener;
-
-use App\Modules\User\Models\UserRoleAdminSection as UserRoleAdminSectionModel;
-use App\Modules\User\Repositories\UserRoleAdminSection as UserRoleAdminSectionRepository;
 
 use App\Modules\User\Models\UserVerification as UserVerificationModel;
 use App\Modules\User\Repositories\UserVerification as UserVerificationRepository;
@@ -54,8 +40,6 @@ use App\Modules\User\Repositories\UserVerification as UserVerificationRepository
 use App\Modules\User\Models\UserRecovery as UserRecoveryModel;
 use App\Modules\User\Repositories\UserRecovery as UserRecoveryRepository;
 
-use App\Modules\User\Models\UserRolePage as UserRolePageModel;
-use App\Modules\User\Repositories\UserRolePage as UserRolePageRepository;
 use Illuminate\Database\Eloquent\Factory;
 
 /**
@@ -113,37 +97,33 @@ class UserServiceProvider extends ServiceProvider
             return new BlockIpRepository(new BlockIpModel());
         });
 
+        //
+
         App::singleton(UserRepository::class, function() {
             return new UserRepository(new UserModel());
         });
 
         UserModel::observe(UserListener::class);
 
-        App::singleton(UserGroupRepository::class, function() {
-            return new UserGroupRepository(new UserGroupModel());
-        });
-
-        UserModel::observe(UserGroupListener::class);
-
-        App::singleton(UserCompanyRepository::class, function() {
-            return new UserCompanyRepository(new UserCompanyModel());
-        });
+        //
 
         App::singleton(UserAddressRepository::class, function() {
             return new UserAddressRepository(new UserAddressModel());
         });
 
-        App::singleton(UserGroupUserRepository::class, function() {
-            return new UserGroupUserRepository(new UserGroupUserModel());
+        //
+
+        App::singleton(UserSchoolRepository::class, function() {
+            return new UserSchoolRepository(new UserSchoolModel());
         });
 
-        App::singleton(UserGroupPageRepository::class, function() {
-            return new UserGroupPageRepository(new UserGroupPageModel());
+        //
+
+        App::singleton(UserSchoolRoleRepository::class, function() {
+            return new UserSchoolRoleRepository(new UserSchoolRoleModel());
         });
 
-        App::singleton(UserGroupRoleRepository::class, function() {
-            return new UserGroupRoleRepository(new UserGroupRoleModel());
-        });
+        //
 
         App::singleton(UserRoleRepository::class, function() {
             return new UserRoleRepository(new UserRoleModel());
@@ -151,17 +131,13 @@ class UserServiceProvider extends ServiceProvider
 
         UserRoleModel::observe(UserRoleListener::class);
 
-        App::singleton(UserRoleAdminSectionRepository::class, function() {
-            return new UserRoleAdminSectionRepository(new UserRoleAdminSectionModel());
-        });
-
-        App::singleton(UserRolePageRepository::class, function() {
-            return new UserRolePageRepository(new UserRolePageModel());
-        });
+        //
 
         App::singleton(UserVerificationRepository::class, function() {
             return new UserVerificationRepository(new UserVerificationModel());
         });
+
+        //
 
         App::singleton(UserRecoveryRepository::class, function() {
             return new UserRecoveryRepository(new UserRecoveryModel());

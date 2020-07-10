@@ -31,15 +31,17 @@ class User extends Repository
      *
      * @param int $id Первичный ключ.
      * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
+     * @param array $filters Фильтрация данных.
      * @param array $with Массив связанных моделей.
+     * @param array|string $selects Выражения для выборки.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function get($id, $active = null, $with = null)
+    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null, array $selects = null)
     {
-        return $this->_get(['User', 'UserItem'], $id, $active, $with);
+        return $this->_get(['User', 'UserItem'], $id, $active, $filters, $with, $selects);
     }
 
     /**
@@ -52,7 +54,7 @@ class User extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function flags($id, $active = null)
+    public function flags(int $id, bool $active = null)
     {
         $result = $this->get($id, $active);
 
@@ -70,7 +72,7 @@ class User extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function setFlags($id, array $flags)
+    public function setFlags(int $id, array $flags): bool
     {
         $model = $this->getModel()->find($id);
 
@@ -113,7 +115,7 @@ class User extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read($filters = null, $active = null, $sorts = null, $offset = null, $limit = null, $with = null)
+    public function read(array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null)
     {
         return $this->_read(['User', 'UserItem'], false, $filters, $active, $sorts, $offset, $limit, $with);
     }
@@ -129,7 +131,7 @@ class User extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count($filters = null, $active = null, $with = null)
+    public function count(array $filters = null, bool $active = null, array $with = null)
     {
         return $this->_read(['User', 'UserItem'], true, $filters, $active, null, null, null, $with);
     }
@@ -158,7 +160,7 @@ class User extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         return $this->_update(['UserItem'], $id, $data);
     }

@@ -37,12 +37,11 @@ class UserListener
         if($user->image_small_id) ImageStore::destroy($user->image_small_id["id"]);
         if($user->image_middle_id) ImageStore::destroy($user->image_middle_id["id"]);
 
-        $user->deleteRelation($user->userGroupRoles());
-        $user->deleteRelation($user->verification());
-        $user->deleteRelation($user->recovery());
-        $user->deleteRelation($user->orderUsers());
-        $user->deleteRelation($user->userCompany());
-        $user->deleteRelation($user->userAddress());
+        $user->deleteRelation($user->verification(), $user->isForceDeleting());
+        $user->deleteRelation($user->recovery(), $user->isForceDeleting());
+        $user->deleteRelation($user->userAddress(), $user->isForceDeleting());
+        $user->deleteRelation($user->schools(), $user->isForceDeleting());
+        $user->deleteRelation($user->schoolRoles(), $user->isForceDeleting());
 
         return true;
     }

@@ -33,9 +33,7 @@ class UserRoleListener
      */
     public function deleting(UserRole $userRole)
     {
-        $userRole->deleteRelation($userRole->userGroupRoles(), $userRole->isForceDeleting());
-        $userRole->deleteRelation($userRole->userRoleAdminSections(), $userRole->isForceDeleting());
-        $userRole->deleteRelation($userRole->userRolePages(), $userRole->isForceDeleting());
+        $userRole->deleteRelation($userRole->schoolRoles(), $userRole->isForceDeleting());
 
         return true;
     }

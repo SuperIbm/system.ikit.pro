@@ -14,14 +14,14 @@ use App\Models\RepositoryEloquent;
 use App\Models\Repository;
 
 /**
- * Класс репозитария выбранных разделов группы на основе Eloquent.
+ * Класс репозитария для соотношения пользователей с ролями школы на основе Eloquent.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class UserGroupSection extends Repository
+class UserSchoolRole extends Repository
 {
     use RepositoryEloquent;
 
@@ -29,16 +29,19 @@ class UserGroupSection extends Repository
      * Получить по первичному ключу.
      *
      * @param int $id Первичный ключ.
+     * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
+     * @param array $filters Фильтрация данных.
+     * @param array $with Массив связанных моделей.
+     * @param array|string $selects Выражения для выборки.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function get($id)
+    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null, array $selects = null)
     {
-        return $this->_get(['User', 'UserGroupSection'], $id);
+        return $this->_get(['User', 'UserItem', 'UserSchool', 'UserSchoolRole'], $id, $active, $filters, $with, $selects);
     }
-
 
     /**
      * Чтение данных.
@@ -53,9 +56,9 @@ class UserGroupSection extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read($filters = null, $sorts = null, $offset = null, $limit = null, $with = null)
+    public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null)
     {
-        return $this->_read(['User', 'UserGroupSection'], false, $filters, null, $sorts, $offset, $limit, $with);
+        return $this->_read(['User', 'UserItem', 'UserSchool', 'UserSchoolRole'], false, $filters, null, $sorts, $offset, $limit, $with);
     }
 
     /**
@@ -68,9 +71,9 @@ class UserGroupSection extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count($filters = null, $with = null)
+    public function count(array $filters = null, array $with = null)
     {
-        return $this->_read(['User', 'UserGroupSection'], true, $filters, null, null, null, null, $with);
+        return $this->_read(['User', 'UserItem', 'UserSchool', 'UserSchoolRole'], true, $filters, null, null, null, null, $with);
     }
 
     /**
@@ -84,7 +87,7 @@ class UserGroupSection extends Repository
      */
     public function create(array $data)
     {
-        return $this->_create(['UserGroupSection'], $data);
+        return $this->_create(['UserItem', 'UserSchool', 'UserSchoolRole'], $data);
     }
 
     /**
@@ -97,9 +100,9 @@ class UserGroupSection extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
-        return $this->_update(['UserGroupSection'], $id, $data);
+        return $this->_update(['UserItem', 'UserSchool', 'UserSchoolRole'], $id, $data);
     }
 
     /**
@@ -113,6 +116,6 @@ class UserGroupSection extends Repository
      */
     public function destroy($id)
     {
-        return $this->_destroy(['UserGroupSection'], $id);
+        return $this->_destroy(['UserItem', 'UserSchool', 'UserSchoolRole'], $id);
     }
 }

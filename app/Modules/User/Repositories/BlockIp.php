@@ -30,14 +30,17 @@ class BlockIp extends Repository
      *
      * @param int $id Первичный ключ.
      * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
+     * @param array $filters Фильтрация данных.
+     * @param array $with Массив связанных моделей.
+     * @param array|string $selects Выражения для выборки.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function get($id, $active = null)
+    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null, array $selects = null)
     {
-        return $this->_get(['User', 'UserBlockIp'], $id, $active);
+        return $this->_get(['User', 'UserBlockIp'], $id, $active, $filters, $with, $selects);
     }
 
 
@@ -54,7 +57,7 @@ class BlockIp extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read($filters = null, $active = null, $sorts = null, $offset = null, $limit = null)
+    public function read(array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null)
     {
         return $this->_read(['User', 'UserBlockIp'], false, $filters, $active, $sorts, $offset, $limit);
     }
@@ -69,7 +72,7 @@ class BlockIp extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count($filters = null, $active = null)
+    public function count(array $filters = null, bool $active = null)
     {
         return $this->_read(['User', 'UserBlockIp'], true, $filters, $active);
     }
@@ -98,7 +101,7 @@ class BlockIp extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         return $this->_update(['UserBlockIp'], $id, $data);
     }

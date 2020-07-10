@@ -29,16 +29,19 @@ class UserAddress extends Repository
      * Получить по первичному ключу.
      *
      * @param int $id Первичный ключ.
+     * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
+     * @param array $filters Фильтрация данных.
+     * @param array $with Массив связанных моделей.
+     * @param array|string $selects Выражения для выборки.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function get($id)
+    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null, array $selects = null)
     {
-        return $this->_get(['User', 'UserItem', 'UserAddress'], $id);
+        return $this->_get(['User', 'UserItem', 'UserAddress'], $id, $active, $filters, $with, $selects);
     }
-
 
     /**
      * Чтение данных.
@@ -53,7 +56,7 @@ class UserAddress extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read($filters = null, $sorts = null, $offset = null, $limit = null, $with = null)
+    public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null)
     {
         return $this->_read(['User', 'UserItem', 'UserAddress'], false, $filters, null, $sorts, $offset, $limit, $with);
     }
@@ -68,7 +71,7 @@ class UserAddress extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count($filters = null, $with = null)
+    public function count(array $filters = null, array $with = null)
     {
         return $this->_read(['User', 'UserItem', 'UserAddress'], true, $filters, null, null, null, null, $with);
     }
@@ -97,7 +100,7 @@ class UserAddress extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         return $this->_update(['UserItem', 'UserAddress'], $id, $data);
     }
