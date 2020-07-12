@@ -11,7 +11,7 @@ use Illuminate\Database\Schema\Blueprint;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class CreateTableSchoolRoleSections extends Migration
+class CreateTableSchoolLimits extends Migration
 {
     /**
      * Запуск миграции.
@@ -22,17 +22,12 @@ class CreateTableSchoolRoleSections extends Migration
      */
     public function up()
     {
-        Schema::create('school_role_sections', function(Blueprint $table) {
+        Schema::create('school_limits', function(Blueprint $table) {
             $table->bigInteger('id', true)->unsigned();
-
-            $table->bigInteger('school_role_id')->unsigned()->index();
-            $table->bigInteger('section_id')->unsigned()->index();
-            $table->bigInteger('plan_role_section_id')->unsigned()->index();
-
-            $table->boolean('read')->default(0);
-            $table->boolean('update')->default(0);
-            $table->boolean('create')->default(0);
-            $table->boolean('destroy')->default(0);
+            $table->bigInteger('plan_id')->unsigned()->index();
+            $table->integer('limit')->unsigned();
+            $table->dateTime('date_from')->nullable();
+            $table->dateTime('date_to')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -48,6 +43,6 @@ class CreateTableSchoolRoleSections extends Migration
      */
     public function down()
     {
-        Schema::drop('school_role_sections');
+        Schema::drop('school_limits');
     }
 }
