@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Status;
 use App\Models\Delete;
 use App\Modules\School\Models\SchoolRole;
+use App\Modules\Plan\Models\PlanRole;
 
 /**
  * Класс модель для таблицы ролей пользователей на основе Eloquent.
@@ -85,5 +86,17 @@ class UserRole extends Eloquent
     public function schoolRoles()
     {
         return $this->hasMany(SchoolRole::class);
+    }
+
+    /**
+     * Получить роли тарифа.
+     *
+     * @return \App\Modules\Plan\Models\PlanRole|\Illuminate\Database\Eloquent\Relations\HasMany Модели роли тарифа.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function planRole()
+    {
+        return $this->hasMany(PlanRole::class);
     }
 }

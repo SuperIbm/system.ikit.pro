@@ -10,6 +10,7 @@
 
 namespace App\Modules\Plan\Models;
 
+use App\Modules\User\Models\UserRole;
 use Eloquent;
 use App\Models\Validate;
 use App\Models\Status;
@@ -67,5 +68,29 @@ class PlanRole extends Eloquent
             'plan_id' => trans('plan::models.planRole.plan_id'),
             'user_role_id' => trans('plan::models.planRole.user_role_id'),
         ];
+    }
+
+    /**
+     * Получить роль.
+     *
+     * @return \App\Modules\User\Models\UserRole|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель роли.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function userRole()
+    {
+        return $this->belongsTo(UserRole::class);
+    }
+
+    /**
+     * Получить разделы школы.
+     *
+     * @return \App\Modules\Plan\Models\PlanRoleSection[]|\Illuminate\Database\Eloquent\Relations\HasMany Разделы школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function sections()
+    {
+        return $this->hasMany(PlanRoleSection::class);
     }
 }

@@ -24,6 +24,9 @@ use App\Modules\School\Events\Listeners\SchoolRoleListener;
 use App\Modules\School\Models\SchoolRoleSection as SchoolRoleSectionModel;
 use App\Modules\School\Repositories\SchoolRoleSection as SchoolRoleSectionRepository;
 
+use App\Modules\School\Models\SchoolLimit as SchoolLimitModel;
+use App\Modules\School\Repositories\SchoolLimit as SchoolLimitRepository;
+
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
@@ -102,6 +105,13 @@ class SchoolServiceProvider extends ServiceProvider
         App::singleton(SchoolRoleSectionRepository::class, function()
         {
             return new SchoolRoleSectionRepository(new SchoolRoleSectionModel());
+        });
+
+        //
+
+        App::singleton(SchoolLimitRepository::class, function()
+        {
+            return new SchoolLimitRepository(new SchoolLimitModel());
         });
     }
 

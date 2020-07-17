@@ -15,6 +15,7 @@ use App\Models\Validate;
 use App\Models\Status;
 use App\Models\Delete;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modules\School\Models\SchoolLimit;
 
 /**
  * Класс модель для таблицы лимитов тарифов на основе Eloquent.
@@ -67,7 +68,6 @@ class PlanLimit extends Eloquent
             'price' => 'required|float',
             'monthly' => 'required|boolean',
             'status' => 'required|boolean',
-
         ];
     }
 
@@ -80,12 +80,28 @@ class PlanLimit extends Eloquent
     protected function getNames(): array
     {
         return [
-            'plan_role_id' => trans('plan::models.planRoleSection.plan_role_id'),
-            'section_id' => trans('plan::models.planRoleSection.section_id'),
-            'read' => trans('plan::models.planRoleSection.read'),
-            'update' => trans('plan::models.planRoleSection.update'),
-            'create' => trans('plan::models.planRoleSection.create'),
-            'destroy' => trans('plan::models.planRoleSection.destroy')
+            'name' => trans('plan::models.planLimit.name'),
+            'description' => trans('plan::models.planLimit.description'),
+            'type' => trans('plan::models.planLimit.type'),
+            'from' => trans('plan::models.planLimit.from'),
+            'to' => trans('plan::models.planLimit.to'),
+            'step' => trans('plan::models.planLimit.step'),
+            'unit' => trans('plan::models.planLimit.unit'),
+            'price' => trans('plan::models.planLimit.price'),
+            'monthly' => trans('plan::models.planLimit.monthly'),
+            'status' => trans('plan::models.planLimit.status'),
         ];
+    }
+
+    /**
+     * Получить школьные лимиты.
+     *
+     * @return \App\Modules\School\Models\SchoolLimit[]|\Illuminate\Database\Eloquent\Relations\HasMany Модель раздела.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function schoolLimits()
+    {
+        return $this->hasMany(SchoolLimit::class);
     }
 }

@@ -1,8 +1,7 @@
 <?php
 
 return [
-    'plan_id' => 'ID тарифа',
-    'limit' => 'Лимит',
-    'date_from' => 'Дата начала',
-    'date_to' => 'Дата окончания',
+    'school_id' => 'ID школы',
+    'plan_limit_id' => 'ID лимита тарифа',
+    'limit' => 'Лимит'
 ];

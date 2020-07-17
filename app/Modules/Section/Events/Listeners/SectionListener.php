@@ -33,7 +33,8 @@ class SectionListener
      */
     public function deleting(Section $section)
     {
-        $section->deleteRelation($section->userRoleSections(), $section->isForceDeleting());
+        $section->deleteRelation($section->planRoleSections(), $section->isForceDeleting());
+        $section->deleteRelation($section->schoolRoleSections(), $section->isForceDeleting());
 
         return true;
     }

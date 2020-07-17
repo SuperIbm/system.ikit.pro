@@ -74,4 +74,16 @@ class Plan extends Eloquent
             'status' => trans('plan::models.plan.status')
         ];
     }
+
+    /**
+     * Получить роли школы.
+     *
+     * @return \App\Modules\Plan\Models\PlanRole[]|\Illuminate\Database\Eloquent\Relations\HasMany Модели ролей школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function roles()
+    {
+        return $this->hasMany(PlanRole::class);
+    }
 }

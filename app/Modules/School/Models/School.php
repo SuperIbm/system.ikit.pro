@@ -268,4 +268,16 @@ class School extends Eloquent
     {
         return $this->belongsTo(UserSchool::class);
     }
+
+    /**
+     * Получить лимиты школы.
+     *
+     * @return \App\Modules\School\Models\SchoolLimit[]|\Illuminate\Database\Eloquent\Relations\HasMany Модели лимитов школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function limits()
+    {
+        return $this->hasMany(SchoolLimit::class);
+    }
 }

@@ -24,10 +24,9 @@ class CreateTableSchoolLimits extends Migration
     {
         Schema::create('school_limits', function(Blueprint $table) {
             $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('plan_id')->unsigned()->index();
+            $table->bigInteger('school_id')->unsigned()->index();
+            $table->bigInteger('plan_limit_id')->unsigned()->index();
             $table->integer('limit')->unsigned();
-            $table->dateTime('date_from')->nullable();
-            $table->dateTime('date_to')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

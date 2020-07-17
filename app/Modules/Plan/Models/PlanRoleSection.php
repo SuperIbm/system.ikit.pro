@@ -15,6 +15,7 @@ use App\Models\Validate;
 use App\Models\Status;
 use App\Models\Delete;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modules\Section\Models\Section;
 
 /**
  * Класс модель для таблицы разделов ролей тарифов на основе Eloquent.
@@ -79,5 +80,29 @@ class PlanRoleSection extends Eloquent
             'create' => trans('plan::models.planRoleSection.create'),
             'destroy' => trans('plan::models.planRoleSection.destroy')
         ];
+    }
+
+    /**
+     * Получить роль.
+     *
+     * @return \App\Modules\Plan\Models\PlanRole|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель роли.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function role()
+    {
+        return $this->belongsTo(PlanRole::class);
+    }
+
+    /**
+     * Получить раздел.
+     *
+     * @return \App\Modules\Section\Models\Section|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель раздела.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
     }
 }

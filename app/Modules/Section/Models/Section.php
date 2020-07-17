@@ -13,10 +13,11 @@ namespace App\Modules\Section\Models;
 use Eloquent;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Modules\User\Models\UserRoleSection;
+use App\Modules\Plan\Models\PlanRoleSection;
 use Kalnoy\Nestedset\NodeTrait;
 use App\Models\Status;
 use App\Models\Delete;
+use App\Modules\School\Models\SchoolRoleSection;
 
 /**
  * Класс модель для таблицы разделов системы на основе Eloquent.
@@ -32,8 +33,6 @@ use App\Models\Delete;
  * @property string $icon Иконка.
  * @property bool $weight Вес раздела в меню системы.
  * @property string $status Значение статуса.
- *
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modules\User\Models\UserRoleSection[] $userRoleSections
  *
  * @method static \Illuminate\Database\Query\Builder|\App\Modules\Section\Models\Section whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Modules\Section\Models\Section whereNameSection($value)
@@ -101,14 +100,26 @@ class Section extends Eloquent
     }
 
     /**
-     * Получить запись выбранных разделов системы.
+     * Получить все разделы ролей плана.
      *
-     * @return \App\Modules\User\Models\UserRoleSection[]|\Illuminate\Database\Eloquent\Relations\HasMany Модель выбранных разделов системы.
+     * @return \App\Modules\Plan\Models\PlanRoleSection[]|\Illuminate\Database\Eloquent\Relations\HasMany Модель разделов ролей плана.
      * @version 1.0
      * @since 1.0
      */
-    public function userRoleSections()
+    public function planRoleSections()
     {
-        return $this->hasMany(UserRoleSection::class);
+        return $this->hasMany(PlanRoleSection::class);
+    }
+
+    /**
+     * Получить все разделы ролей школы.
+     *
+     * @return \App\Modules\School\Models\SchoolRoleSection[]|\Illuminate\Database\Eloquent\Relations\HasMany Модель разделов ролей школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function schoolRoleSections()
+    {
+        return $this->hasMany(SchoolRoleSection::class);
     }
 }

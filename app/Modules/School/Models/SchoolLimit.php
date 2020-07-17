@@ -15,6 +15,7 @@ use App\Models\Validate;
 use App\Models\Status;
 use App\Models\Delete;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modules\Plan\Models\PlanLimit;
 
 /**
  * Класс модель для таблицы лимитов школы на основе Eloquent.
@@ -37,22 +38,9 @@ class SchoolLimit extends Eloquent
      */
     protected $fillable = [
         'id',
-        'plan_id',
-        'limit',
-        'date_from',
-        'date_to'
-    ];
-
-    /**
-     * Атрибуты, который содержат дату.
-     *
-     * @var array
-     * @since 1.0
-     * @version 1.0
-     */
-    protected $dates = [
-        'date_from',
-        'date_to'
+        'school_id',
+        'plan_limit_id',
+        'limit'
     ];
 
     /**
@@ -64,10 +52,9 @@ class SchoolLimit extends Eloquent
     protected function getRules(): array
     {
         return [
-            'plan_id' => 'required|integer|digits_between:0,20',
-            'limit' => 'required|between:1,191',
-            'date_from' => 'nullable|date_format:Y-m-d H:i:s',
-            'date_to' => 'nullable|date_format:Y-m-d H:i:s',
+            'school_id' => 'required|integer|digits_between:0,20',
+            'plan_limit_id' => 'required|integer|digits_between:0,20',
+            'limit' => 'required|integer|digits_between:0,10'
         ];
     }
 
@@ -80,10 +67,33 @@ class SchoolLimit extends Eloquent
     protected function getNames(): array
     {
         return [
-            'plan_id' => trans('school::models.schoolLimit.plan_id'),
-            'limit' => trans('school::models.schoolLimit.limit'),
-            'date_from' => trans('school::models.schoolLimit.date_from'),
-            'date_to' => trans('school::models.schoolLimit.date_to')
+            'school_id' => trans('school::models.schoolLimit.school_id'),
+            'plan_limit_id' => trans('school::models.schoolLimit.plan_limit_id'),
+            'limit' => trans('school::models.schoolLimit.limit')
         ];
+    }
+
+    /**
+     * Получить школу.
+     *
+     * @return \App\Modules\School\Models\School|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
+
+    /**
+     * Получить лимиты плана.
+     *
+     * @return \App\Modules\Plan\Models\PlanLimit|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель лимитов плана.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function planLimit()
+    {
+        return $this->belongsTo(PlanLimit::class);
     }
 }

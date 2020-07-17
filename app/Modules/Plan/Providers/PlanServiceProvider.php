@@ -1,24 +1,61 @@
 <?php
+/**
+ * Модуль Тарифа.
+ * Этот модуль содержит все классы для работы тарифами.
+ *
+ * @package App\Modules\Plan
+ * @version 1.0
+ * @since 1.0
+ */
 
 namespace App\Modules\Plan\Providers;
+
+use App;
+
+use App\Modules\Plan\Models\Plan as PlanModel;
+use App\Modules\Plan\Repositories\Plan as PlanRepository;
+use App\Modules\Plan\Events\Listeners\PlanListener;
+
+use App\Modules\Plan\Models\PlanLimit as PlanLimitModel;
+use App\Modules\Plan\Repositories\PlanLimit as PlanLimitRepository;
+use App\Modules\Plan\Events\Listeners\PlanLimitListener;
+
+use App\Modules\Plan\Models\PlanRole as PlanRoleModel;
+use App\Modules\Plan\Repositories\PlanRole as PlanRoleRepository;
+use App\Modules\Plan\Events\Listeners\PlanRoleListener;
+
+use App\Modules\Plan\Models\PlanRoleSection as PlanRoleSectionModel;
+use App\Modules\Plan\Repositories\PlanRoleSection as PlanRoleSectionRepository;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
+/**
+ * Класс сервис-провайдера для настройки этого модуля.
+ *
+ * @version 1.0
+ * @since 1.0
+ * @copyright Weborobot.
+ * @author Инчагов Тимофей Александрович.
+ */
 class PlanServiceProvider extends ServiceProvider
 {
     /**
+     * Название модуля.
+     *
      * @var string $moduleName
      */
     protected $moduleName = 'Plan';
 
     /**
+     * Название модуля в нижнем регисте.
+     *
      * @var string $moduleNameLower
      */
     protected $moduleNameLower = 'plan';
 
     /**
-     * Boot the application events.
+     * Обработчик события загрузки приложения.
      *
      * @return void
      */
@@ -32,17 +69,53 @@ class PlanServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the service provider.
+     * Регистрация сервис провайдеров.
      *
      * @return void
      */
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+
+        //
+
+        App::singleton(PlanRepository::class, function()
+        {
+            return new PlanRepository(new PlanModel());
+        });
+
+        PlanModel::observe(PlanListener::class);
+
+        //
+
+        App::singleton(PlanLimitRepository::class, function()
+        {
+            return new PlanLimitRepository(new PlanLimitModel());
+        });
+
+        PlanLimitModel::observe(PlanLimitListener::class);
+
+        //
+
+        App::singleton(PlanRoleRepository::class, function()
+        {
+            return new PlanRoleRepository(new PlanRoleModel());
+        });
+
+        PlanRoleModel::observe(PlanRoleListener::class);
+
+        //
+
+        App::singleton(PlanRoleSectionRepository::class, function()
+        {
+            return new PlanRoleSectionRepository(new PlanRoleSectionModel());
+        });
+
+        //
     }
 
     /**
-     * Register config.
+     * Регистрация настроек.
      *
      * @return void
      */
@@ -57,7 +130,7 @@ class PlanServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register views.
+     * Регистрация представлений.
      *
      * @return void
      */
@@ -75,7 +148,7 @@ class PlanServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register translations.
+     * Регистрация локалей.
      *
      * @return void
      */
@@ -91,7 +164,7 @@ class PlanServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register an additional directory of factories.
+     * Регистрация дополнительной директории для фабрик.
      *
      * @return void
      */
@@ -103,7 +176,7 @@ class PlanServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get the services provided by the provider.
+     * Получение сервисов через сервис-провайдер.
      *
      * @return array
      */
@@ -112,6 +185,11 @@ class PlanServiceProvider extends ServiceProvider
         return [];
     }
 
+    /**
+     * Получить пути к опубликованным шаблонам.
+     *
+     * @return array
+     */
     private function getPublishableViewPaths(): array
     {
         $paths = [];
