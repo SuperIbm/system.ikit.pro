@@ -24,12 +24,12 @@ class CreateTableUserVerifications extends Migration
         Schema::create('user_verifications', function(Blueprint $table)
         {
             $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('user_id')->unsigned()->index();
+            $table->bigInteger('user_id')->unsigned()->index('user_id');
             $table->string('code', 191)->unique();
-            $table->boolean('status')->default(0)->index();
+            $table->boolean('status')->default(0)->index('status');
 
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->index('deleted_at');
         });
     }
 

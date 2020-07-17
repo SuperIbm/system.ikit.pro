@@ -29,9 +29,9 @@ class CreateTableAlerts extends Migration
             $table->string('url', 191)->nullable();
             $table->string('icon', 50)->nullable();
             $table->string('color', 50)->nullable();
-            $table->boolean('status')->default(1)->index();
+            $table->boolean('status')->default(1)->index('status');
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->index('deleted_at');
         });
     }
 

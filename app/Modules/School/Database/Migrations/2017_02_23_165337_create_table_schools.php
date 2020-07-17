@@ -24,21 +24,21 @@ class CreateTableSchools extends Migration
     {
         Schema::create('schools', function(Blueprint $table) {
             $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('user_id')->unsigned()->index();
+            $table->bigInteger('user_id')->unsigned()->index('user_id');
 
-            $table->bigInteger('image_small_id')->unsigned()->nullable()->index();
-            $table->bigInteger('image_middle_id')->unsigned()->nullable()->index();
-            $table->bigInteger('image_big_id')->unsigned()->nullable()->index();
+            $table->bigInteger('image_small_id')->unsigned()->nullable()->index('image_small_id');
+            $table->bigInteger('image_middle_id')->unsigned()->nullable()->index('image_middle_id');
+            $table->bigInteger('image_big_id')->unsigned()->nullable()->index('image_big_id');
 
             $table->string('name', 191);
             $table->string('index', 191)->unique("index");
             $table->string('full_name', 191)->nullable();
             $table->text('description')->nullable();
 
-            $table->boolean('status')->default(1)->index();
+            $table->boolean('status')->default(1)->index('status');
 
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->index('deleted_at');
         });
     }
 

@@ -31,7 +31,7 @@ class CreateTableImages extends Migration
             $table->smallInteger('height')->unsigned()->nullable();
 
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->index('deleted_at');
         });
     }
 

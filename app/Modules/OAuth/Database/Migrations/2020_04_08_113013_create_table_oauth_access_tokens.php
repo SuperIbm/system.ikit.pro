@@ -15,9 +15,9 @@ class CreateTableOauthAccessTokens extends Migration {
 		Schema::create('oauth_tokens', function(Blueprint $table)
 		{
             $table->increments('id');
-			$table->bigInteger('oauth_client_id')->unsigned()->index();
+			$table->bigInteger('oauth_client_id')->unsigned()->index('oauth_client_id');
 			$table->string('token', 500);
-            $table->dateTime('expires_at')->index();
+            $table->dateTime('expires_at')->index('expires_at');
 			$table->timestamps();
 		});
 

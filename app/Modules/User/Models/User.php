@@ -259,7 +259,7 @@ class User extends Authenticatable
     /**
      * Получение адреса пользоватеяля.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne Модель адреса пользователя.
+     * @return \App\Modules\User\Models\UserAddress|\Illuminate\Database\Eloquent\Relations\HasOne Модель адреса пользователя.
      * @version 1.0
      * @since 1.0
      */

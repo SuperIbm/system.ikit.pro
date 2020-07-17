@@ -18,17 +18,17 @@ class CreateTablePlanLimits extends Migration {
 
 			$table->string('name', 191);
             $table->string('description', 191)->nullable();
-            $table->string('type', 191)->index();
+            $table->string('type', 191)->index('type');
             $table->integer('from')->unsigned();
-            $table->integer('to')->unsigned();
+            $table->integer('to')->unsigned()->nullable();
             $table->integer('step')->unsigned();
             $table->string('unit', 50);
             $table->float('price', 8, 2)->unsigned();
             $table->boolean('monthly')->default(0);
-            $table->boolean('status')->default(1)->index();
+            $table->boolean('status')->default(1)->index('status');
 
 			$table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->index('deleted_at');
 		});
 	}
 

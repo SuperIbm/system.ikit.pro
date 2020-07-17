@@ -18,10 +18,10 @@ class CreateTablePlans extends Migration {
 			$table->string('name', 191);
             $table->float('priceMonth', 8, 2)->unsigned();
             $table->float('priceYear', 8, 2)->unsigned();
-            $table->boolean('status')->default(1)->index();
+            $table->boolean('status')->default(1)->index('status');
 
 			$table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->index('deleted_at');
 		});
 	}
 

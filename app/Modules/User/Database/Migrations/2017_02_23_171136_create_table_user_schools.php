@@ -26,11 +26,11 @@ class CreateTableUserSchools extends Migration
         {
             $table->bigInteger('id', true)->unsigned();
 
-            $table->bigInteger('user_id')->unsigned()->index();
-            $table->bigInteger('school_id')->unsigned()->index();
+            $table->bigInteger('user_id')->unsigned()->index('user_id');
+            $table->bigInteger('school_id')->unsigned()->index('school_id');
 
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->index('deleted_at');
         });
     }
 

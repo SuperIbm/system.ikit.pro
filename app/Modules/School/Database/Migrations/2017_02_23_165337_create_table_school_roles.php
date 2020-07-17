@@ -24,16 +24,16 @@ class CreateTableSchoolRoles extends Migration
     {
         Schema::create('school_roles', function(Blueprint $table) {
             $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('school_id')->unsigned()->index();
-            $table->bigInteger('user_role_id')->unsigned()->nullable()->index();
+            $table->bigInteger('school_id')->unsigned()->index('school_id');
+            $table->bigInteger('user_role_id')->unsigned()->nullable()->index('user_role_id');
 
             $table->string('name_role', 191);
             $table->string('description_role', 191)->nullable();
 
-            $table->boolean('status')->default(1)->index();
+            $table->boolean('status')->default(1)->index('status');
 
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->index('deleted_at');
         });
     }
 

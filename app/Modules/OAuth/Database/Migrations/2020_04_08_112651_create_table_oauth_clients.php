@@ -15,9 +15,9 @@ class CreateTableOauthClients extends Migration {
 		Schema::create('oauth_clients', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->bigInteger('user_id')->unsigned()->index();
+			$table->bigInteger('user_id')->unsigned()->index('user_id');
 			$table->string('secret', 500);
-            $table->dateTime('expires_at')->index();
+            $table->dateTime('expires_at')->index('expires_at');
 			$table->timestamps();
 		});
 

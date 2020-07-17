@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -10,7 +11,7 @@ use Illuminate\Database\Schema\Blueprint;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class CreateTableUserRecoveries extends Migration
+class CreateTableOrderPayments extends Migration
 {
     /**
      * Запуск миграции.
@@ -21,16 +22,23 @@ class CreateTableUserRecoveries extends Migration
      */
     public function up()
     {
-        Schema::create('user_recoveries', function(Blueprint $table)
+        Schema::create('order_payments', function(Blueprint $table)
         {
-            $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('user_id')->unsigned()->index('user_id');
-            $table->string('code', 191)->index('code');
+            $table->increments('id');
+
+            $table->string('name', 191);
+            $table->string('description', 191)->nullable();
+            $table->json('parameters')->nullable();
+            $table->string('system', 191);
+            $table->boolean('online')->default(true);
+            $table->bigInteger('image_id')->unsigned()->nullable()->index('image_id');
+            $table->boolean('status')->default(true)->index('status');
 
             $table->timestamps();
             $table->softDeletes()->index('deleted_at');
         });
     }
+
 
     /**
      * Запуск отката миграции.
@@ -41,6 +49,6 @@ class CreateTableUserRecoveries extends Migration
      */
     public function down()
     {
-        Schema::drop('user_recoveries');
+        Schema::drop('order_payments');
     }
 }

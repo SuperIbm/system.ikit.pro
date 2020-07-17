@@ -24,7 +24,7 @@ class CreateTableUserAddresses extends Migration
         Schema::create('user_addresses', function(Blueprint $table)
         {
             $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('user_id')->unsigned()->index();
+            $table->bigInteger('user_id')->unsigned()->index('user_id');
             $table->string('postal_code', 191)->nullable();
             $table->string('country', 191)->nullable();
             $table->string('country_name', 191)->nullable();
@@ -35,7 +35,7 @@ class CreateTableUserAddresses extends Migration
             $table->float('latitude', 14, 10)->index('latitude')->nullable();
             $table->float('longitude', 14, 10)->index('longitude')->nullable();
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->index('deleted_at');
         });
     }
 
