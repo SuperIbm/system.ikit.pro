@@ -69,7 +69,7 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Определяем пуьои для "API" для приложения.
+     * Определяем пути для "API" для приложения.
      *
      * Эти пути ничем не нагружены.
      *

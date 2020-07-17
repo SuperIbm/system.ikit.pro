@@ -26,7 +26,6 @@ class CreateTableOrderCharges extends Migration
         {
             $table->increments('id');
             $table->bigInteger('order_invoice_id')->unsigned()->index('order_invoice_id')->nullable();
-            $table->bigInteger('order_payment_id')->unsigned()->index('order_payment_id')->nullable();
 
             $table->string('charge', 191);
 

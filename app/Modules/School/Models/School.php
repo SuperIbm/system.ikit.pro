@@ -20,6 +20,7 @@ use App\Models\Delete;
 use App\Modules\User\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\User\Models\UserSchool;
+use App\Modules\Order\Models\Order;
 
 /**
  * Класс модель для таблицы школ на основе Eloquent.
@@ -279,5 +280,17 @@ class School extends Eloquent
     public function limits()
     {
         return $this->hasMany(SchoolLimit::class);
+    }
+
+    /**
+     * Получить заказы.
+     *
+     * @return \App\Modules\Order\Models\Order[]|\Illuminate\Database\Eloquent\Relations\HasMany Модели заказов.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

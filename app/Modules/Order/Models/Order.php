@@ -16,6 +16,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
 use App\Modules\School\Models\School;
 
+/**
+ * Класс модель для таблицы заказов на основе Eloquent.
+ *
+ * @version 1.0
+ * @since 1.0
+ * @copyright Weborobot.
+ * @author Инчагов Тимофей Александрович.
+ *
+ * @mixin \Eloquent
+ */
 class Order extends Eloquent
 {
     use Validate, SoftDeletes, Delete;
@@ -92,7 +102,19 @@ class Order extends Eloquent
     }
 
     /**
-     * Получить модели к которой относиться заказ.
+     * Получить выставленные счета.
+     *
+     * @return \App\Modules\Order\Models\OrderInvoice[]|\Illuminate\Database\Eloquent\Relations\HasMany Модели выставленных счетов.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function invoices()
+    {
+        return $this->hasMany(OrderInvoice::class);
+    }
+
+    /**
+     * Получить модели к которые относиться заказ.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo Получить модель к которой относиться заказ.
      * @version 1.0

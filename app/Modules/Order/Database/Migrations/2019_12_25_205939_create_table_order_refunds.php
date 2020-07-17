@@ -26,17 +26,13 @@ class CreateTableOrderRefunds extends Migration
         {
             $table->increments('id');
             $table->bigInteger('order_charge_id')->unsigned()->index('order_charge_id')->nullable();
-            $table->bigInteger('order_payment_id')->unsigned()->index('order_payment_id')->nullable();
-
             $table->string('refund', 191);
-
             $table->boolean('status')->default(0)->index('status');
 
             $table->timestamps();
             $table->softDeletes()->index('deleted_at');
         });
     }
-
 
     /**
      * Запуск отката миграции.

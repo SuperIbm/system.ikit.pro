@@ -15,8 +15,8 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Modules\Section\Models\Section as SectionModel;
 use App\Modules\Section\Repositories\Section as SectionRepository;
-
 use App\Modules\Section\Events\Listeners\SectionListener;
+
 use Illuminate\Database\Eloquent\Factory;
 
 /**
