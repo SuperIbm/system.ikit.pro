@@ -27,6 +27,7 @@ abstract class DocumentDriver
     /**
      * Абстрактный метод получения пути к документу.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -34,11 +35,12 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function path(int $id, string $format);
+    abstract public function path(string $folder, int $id, string $format);
 
     /**
      * Абстрактный метод получения физического пути к документу.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -46,11 +48,12 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function pathSource(int $id, string $format);
+    abstract public function pathSource(string $folder, int $id, string $format);
 
     /**
      * Абстрактный метод чтения документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -58,11 +61,12 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function read(int $id, string $format);
+    abstract public function read(string $folder, int $id, string $format);
 
     /**
      * Абстрактный метод создания документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      * @param string $path Путь к документу.
@@ -71,11 +75,12 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function create(int $id, string $format, string $path): bool;
+    abstract public function create(string $folder, int $id, string $format, string $path): bool;
 
     /**
      * Абстрактный метод обновления документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      * @param string $path Путь к документу.
@@ -84,11 +89,12 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function update(int $id, string $format, string $path): bool;
+    abstract public function update(string $folder, int $id, string $format, string $path): bool;
 
     /**
      * Абстрактный метод удаления документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -96,5 +102,5 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function destroy(int $id, string $format): bool;
+    abstract public function destroy(string $folder, int $id, string $format): bool;
 }

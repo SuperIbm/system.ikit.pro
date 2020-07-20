@@ -28,6 +28,7 @@ class DocumentDriverLocal extends DocumentDriver
     /**
      * Метод получения пути к документу.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -35,14 +36,15 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(int $id, string $format)
+    public function path(string $folder, int $id, string $format)
     {
-        return Config::get('document.store.local.path') . School::getId() . "/" . $id . '.' . $format;
+        return Config::get('document.store.local.path') . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
 
     /**
      * Метод получения физического пути к документу.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -50,14 +52,15 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format)
     {
-        return Config::get('document.store.local.pathSource') . School::getId() . "/" . $id . '.' . $format;
+        return Config::get('document.store.local.pathSource') . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
 
     /**
      * Метод чтения документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -65,7 +68,7 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function read(int $id, string $format)
+    public function read(string $folder, int $id, string $format)
     {
         return null;
     }
@@ -73,6 +76,7 @@ class DocumentDriverLocal extends DocumentDriver
     /**
      * Метод создания документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $path Путь к документу.
      * @param string $format Формат документа.
@@ -81,14 +85,15 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create(int $id, string $format, string $path): bool
+    public function create(string $folder, int $id, string $format, string $path): bool
     {
-        return File::copy($path, $this->pathSource($id, $format));
+        return File::copy($path, $this->pathSource($folder, $id, $format));
     }
 
     /**
      * Метод обновления документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      * @param string $path Путь к документу.
@@ -97,14 +102,15 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update(int $id, string $format, string $path): bool
+    public function update(string $folder, int $id, string $format, string $path): bool
     {
-        return File::copy($path, $this->pathSource($id, $format));
+        return File::copy($path, $this->pathSource($folder, $id, $format));
     }
 
     /**
      * Метод удаления документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -112,8 +118,8 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id, string $format): bool
+    public function destroy(string $folder, int $id, string $format): bool
     {
-        return File::delete($this->pathSource($id, $format));
+        return File::delete($this->pathSource($folder, $id, $format));
     }
 }

@@ -3,5 +3,6 @@
 return [
     'byte' => 'Bytes',
     'format' => 'Format',
-    'cache' => 'Cache'
+    'cache' => 'Cache',
+    'folder' => 'Folder'
 ];

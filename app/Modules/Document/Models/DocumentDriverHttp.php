@@ -29,6 +29,7 @@ class DocumentDriverHttp extends DocumentDriver
     /**
      * Метод получения пути к документу.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -36,14 +37,15 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(int $id, string $format)
+    public function path(string $folder, int $id, string $format)
     {
-        return Config::get('document.store.http.read') . School::getId() . "/" . $id . '.' . $format;
+        return Config::get('document.store.http.read') . School::getId() . $folder. "/" . "/" . $id . '.' . $format;
     }
 
     /**
      * Метод получения физического пути к документу.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -51,14 +53,15 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format)
     {
-        return $this->path($id, $format);
+        return $this->path($folder, $id, $format);
     }
 
     /**
      * Метод чтения документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -66,7 +69,7 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function read(int $id, string $format)
+    public function read(string $folder, int $id, string $format)
     {
         return null;
     }
@@ -74,6 +77,7 @@ class DocumentDriverHttp extends DocumentDriver
     /**
      * Метод создания документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $path Путь к документу.
      * @param string $format Формат документа.
@@ -82,7 +86,7 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create(int $id, string $format, string $path): bool
+    public function create(string $folder, int $id, string $format, string $path): bool
     {
         $ch = curl_init();
         $tmp = storage_path('app/tmp/' . basename($path));
@@ -91,7 +95,8 @@ class DocumentDriverHttp extends DocumentDriver
         $data = [
             'id' => $id,
             'format' => $format,
-            'file' => new CURLFile($tmp)
+            'file' => new CURLFile($tmp),
+            'folder' => $folder
         ];
 
         curl_setopt($ch, CURLOPT_URL, Config::get('document.store.http.create'));
@@ -108,6 +113,7 @@ class DocumentDriverHttp extends DocumentDriver
     /**
      * Метод обновления документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      * @param string $path Путь к документу.
@@ -116,7 +122,7 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update(int $id, string $format, string $path): bool
+    public function update(string $folder, int $id, string $format, string $path): bool
     {
         $ch = curl_init();
         $tmp = storage_path('app/tmp/' . basename($path));
@@ -125,7 +131,8 @@ class DocumentDriverHttp extends DocumentDriver
         $data = [
             'id' => $id,
             'format' => $format,
-            'file' => new CURLFile($tmp)
+            'file' => new CURLFile($tmp),
+            'folder' => $folder
         ];
 
         curl_setopt($ch, CURLOPT_URL, Config::get('document.store.http.update'));
@@ -143,6 +150,7 @@ class DocumentDriverHttp extends DocumentDriver
     /**
      * Метод удаления документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -150,13 +158,14 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id, string $format): bool
+    public function destroy(string $folder, int $id, string $format): bool
     {
         $ch = curl_init();
 
         $data = [
             'id' => $id,
-            'format' => $format
+            'format' => $format,
+            'folder' => $folder
         ];
 
         curl_setopt($ch, CURLOPT_URL, Config::get('document.store.http.destroy'));

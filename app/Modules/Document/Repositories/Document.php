@@ -34,6 +34,15 @@ abstract class Document extends Repository
     private static $_documents = [];
 
     /**
+     * Папка для хранения.
+     *
+     * @var string
+     * @version 1.0
+     * @since 1.0
+     */
+    private $_folder;
+
+    /**
      * Получение документа по его ID из базы ранее полученных документов.
      *
      * @param int $id ID документа.
@@ -184,5 +193,33 @@ abstract class Document extends Repository
     public function tmp(string $format): string
     {
         return storage_path('app/tmp/doc_' . time() . mt_rand(1, 100000) . '.' . $format);
+    }
+
+    /**
+     * Установка папки хранения.
+     *
+     * @param string $folder Название папки.
+     *
+     * @return $this Вернет текущий объект.
+     * @since 1.0
+     * @version 1.0
+     */
+    public function setFolder(string $folder)
+    {
+        $this->_folder = $folder;
+
+        return $this;
+    }
+
+    /**
+     * Получение папки хранения.
+     *
+     * @return string Вернет название папки.
+     * @since 1.0
+     * @version 1.0
+     */
+    public function getFolder(): string
+    {
+        return $this->_folder;
     }
 }

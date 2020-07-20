@@ -26,6 +26,7 @@ class CreateTableDocuments extends Migration
             $table->bigInteger('id', true)->unsigned();
             $table->binary('byte')->nullable();
             $table->string('format', 6);
+            $table->string('folder', 191);
             $table->string('cache', 50)->nullable();
 
             $table->timestamps();

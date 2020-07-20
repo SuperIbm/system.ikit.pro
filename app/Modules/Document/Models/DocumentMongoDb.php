@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @author Инчагов Тимофей Александрович.
  *
  * @property int $id_document ID документа.
+ * @property int $folder Папка.
  * @property mixed $byte Байт код документа.
  * @property mixed $format Формат документа.
  * @property string $cache Предиката для кеширования.
@@ -105,7 +106,8 @@ class DocumentMongoDb extends MongoDb
         'id',
         'byte',
         'format',
-        'cache'
+        'cache',
+        'folder'
     ];
 
     /**
@@ -118,7 +120,8 @@ class DocumentMongoDb extends MongoDb
     {
         return [
             'format' => 'required|between:1,20',
-            'cache' => 'max:50'
+            'cache' => 'max:50',
+            'folder' => 'required|between:1,191'
         ];
     }
 
@@ -133,7 +136,8 @@ class DocumentMongoDb extends MongoDb
         return [
             'byte' => trans('document::models.document.byte'),
             'format' => trans('document::models.document.format'),
-            'cache' => trans('document::models.document.cache')
+            'cache' => trans('document::models.document.cache'),
+            'folder' => trans('document::models.document.folder')
         ];
     }
 

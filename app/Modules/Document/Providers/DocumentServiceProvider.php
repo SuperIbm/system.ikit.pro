@@ -12,7 +12,7 @@ namespace App\Modules\Document\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App;
-use Document;
+use DocumentStore;
 
 use App\Modules\Document\Models\DocumentEloquent as DocumentEloquentModel;
 use App\Modules\Document\Repositories\DocumentEloquent;
@@ -87,14 +87,14 @@ class DocumentServiceProvider extends ServiceProvider
             ]
         );
 
-        App::singleton('document',
+        App::singleton('document.store',
             function($app)
             {
                 return new DocumentManager($app);
             }
         );
 
-        Document::extend('database',
+        DocumentStore::extend('database',
             function($app)
             {
                 return new DocumentEloquent(new DocumentEloquentModel());
@@ -103,7 +103,7 @@ class DocumentServiceProvider extends ServiceProvider
 
         DocumentEloquentModel::observe(DocumentListener::class);
 
-        Document::extend('mongodb',
+        DocumentStore::extend('mongodb',
             function()
             {
                 return new DocumentMongoDb(new DocumentMongoDbModel());
@@ -112,35 +112,35 @@ class DocumentServiceProvider extends ServiceProvider
 
         DocumentMongoDbModel::observe(DocumentListener::class);
 
-        App::singleton('document.driver',
+        App::singleton('document.store.driver',
             function($app)
             {
                 return new DocumentDriverManager($app);
             }
         );
 
-        App::make('document.driver')->extend('base',
+        App::make('document.store.driver')->extend('base',
             function()
             {
                 return new DocumentDriverBase();
             }
         );
 
-        App::make('document.driver')->extend('ftp',
+        App::make('document.store.driver')->extend('ftp',
             function()
             {
                 return new DocumentDriverFtp();
             }
         );
 
-        App::make('document.driver')->extend('local',
+        App::make('document.store.driver')->extend('local',
             function()
             {
                 return new DocumentDriverLocal();
             }
         );
 
-        App::make('document.driver')->extend('http',
+        App::make('document.store.driver')->extend('http',
             function()
             {
                 return new DocumentDriverHttp();

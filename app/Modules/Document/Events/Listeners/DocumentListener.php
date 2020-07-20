@@ -35,7 +35,7 @@ class DocumentListener
      */
     public function created(Eloquent $document)
     {
-        return App::make('document.driver')->create($document->id, $document->format, $document->path);
+        return App::make('document.store.driver')->create($document->folder, $document->id, $document->format, $document->path);
     }
 
     /**
@@ -49,8 +49,8 @@ class DocumentListener
      */
     public function updated(Eloquent $document)
     {
-        App::make('document.driver')->destroy($document->getOriginal()['id'], $document->getOriginal()['format']);
-        return App::make('document.driver')->update($document->id, $document->format, $document->path);
+        App::make('document.store.driver')->destroy($document->getOriginal()['folder'], $document->getOriginal()['id'], $document->getOriginal()['format']);
+        return App::make('document.store.driver')->update($document->getOriginal()['folder'], $document->id, $document->format, $document->path);
     }
 
     /**
@@ -64,13 +64,13 @@ class DocumentListener
      */
     public function readed(Eloquent $document)
     {
-        $document->path = App::make('document.driver')->path($document->id, $document->format);
+        $document->path = App::make('document.store.driver')->path($document->folder, $document->id, $document->format);
         $document->pathCache = $document->path;
-        $document->byte = App::make('document.driver')->read($document->id, $document->format);
+        $document->byte = App::make('document.store.driver')->read($document->folder, $document->id, $document->format);
 
         if($document->cache) $document->path .= "?" . $document->cache;
 
-        $document->pathSource = App::make('document.driver')->pathSource($document->id, $document->format);
+        $document->pathSource = App::make('document.store.driver')->pathSource($document->folder, $document->id, $document->format);
 
         return true;
     }
@@ -86,7 +86,7 @@ class DocumentListener
      */
     public function deleted(Eloquent $document)
     {
-        if(!Config::get("document.softDeletes")) return App::make('document.driver')->destroy($document->id, $document->format);
+        if(!Config::get("document.softDeletes")) return App::make('document.store.driver')->destroy($document->folder, $document->id, $document->format);
         else return true;
     }
 }

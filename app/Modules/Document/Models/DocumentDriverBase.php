@@ -29,6 +29,7 @@ class DocumentDriverBase extends DocumentDriver
     /**
      * Метод получения пути к документу.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -36,14 +37,15 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(int $id, string $format)
+    public function path(string $folder, int $id, string $format)
     {
-        return 'doc/read/' . School::getId() . "/" . $id . '.' . $format;
+        return 'doc/read/' . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
 
     /**
      * Метод получения физического пути к документу.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -51,14 +53,15 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format)
     {
-        return Config::get("app.url") . $this->path($id, $format);
+        return Config::get("app.url") . $this->path($folder, $id, $format);
     }
 
     /**
      * Метод чтения документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -66,7 +69,7 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function read(int $id, string $format)
+    public function read(string $folder, int $id, string $format)
     {
         return DocumentRepository::getByte(pathinfo($id . '.' . $format, PATHINFO_FILENAME));
     }
@@ -74,6 +77,7 @@ class DocumentDriverBase extends DocumentDriver
     /**
      * Метод создания документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      * @param string $path Путь к документу.
@@ -83,7 +87,7 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create(int $id, string $format, string $path): bool
+    public function create(string $folder, int $id, string $format, string $path): bool
     {
         return DocumentRepository::updateByte($id, File::get($path));
     }
@@ -91,6 +95,7 @@ class DocumentDriverBase extends DocumentDriver
     /**
      * Метод обновления документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      * @param string $path Путь к документу.
@@ -100,7 +105,7 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update(int $id, string $format, string $path): bool
+    public function update(string $folder, int $id, string $format, string $path): bool
     {
         return DocumentRepository::updateByte($id, File::get($path));
     }
@@ -108,6 +113,7 @@ class DocumentDriverBase extends DocumentDriver
     /**
      * Метод удаления документа.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор документа.
      * @param string $format Формат документа.
      *
@@ -115,7 +121,7 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id, string $format): bool
+    public function destroy(string $folder, int $id, string $format): bool
     {
         return true;
     }
