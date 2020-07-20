@@ -41,6 +41,16 @@ use App\Modules\User\Repositories\UserVerification as UserVerificationRepository
 use App\Modules\User\Models\UserRecovery as UserRecoveryModel;
 use App\Modules\User\Repositories\UserRecovery as UserRecoveryRepository;
 
+use App\Modules\User\Models\UserWallet as UserWalletModel;
+use App\Modules\User\Repositories\UserWallet as UserWalletRepository;
+use App\Modules\User\Events\Listeners\UserWalletListener;
+
+use App\Modules\User\Models\UserWalletInput as UserWalletInputModel;
+use App\Modules\User\Repositories\UserWalletInput as UserWalletInputRepository;
+
+use App\Modules\User\Models\UserWalletOutput as UserWalletOutputModel;
+use App\Modules\User\Repositories\UserWalletOutput as UserWalletOutputRepository;
+
 use Illuminate\Database\Eloquent\Factory;
 
 /**
@@ -145,6 +155,27 @@ class UserServiceProvider extends ServiceProvider
         App::singleton(UserRecoveryRepository::class, function() {
             return new UserRecoveryRepository(new UserRecoveryModel());
         });
+
+        //
+
+        App::singleton(UserWalletRepository::class, function() {
+            return new UserWalletRepository(new UserWalletModel());
+        });
+
+        UserWalletModel::observe(UserWalletListener::class);
+
+        //
+
+        App::singleton(UserWalletInputRepository::class, function() {
+            return new UserWalletInputRepository(new UserWalletInputModel());
+        });
+
+        //
+
+        App::singleton(UserWalletOutputRepository::class, function() {
+            return new UserWalletOutputRepository(new UserWalletOutputModel());
+        });
+
     }
 
     /**

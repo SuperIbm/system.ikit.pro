@@ -40,6 +40,7 @@ class Plan extends Eloquent
         'name',
         'priceMonth',
         'priceYear',
+        'currency',
         'status'
     ];
 
@@ -55,6 +56,7 @@ class Plan extends Eloquent
             'name' => 'required|between:1,191|unique_soft:plans,name,' . $this->id . ',id',
             'priceMonth' => 'required|float',
             'priceYear'=> 'required|float',
+            'currency' => 'required|between:3,3',
             'status' => 'required|boolean'
         ];
     }
@@ -71,6 +73,7 @@ class Plan extends Eloquent
             'name' => trans('plan::models.plan.name'),
             'priceMonth' => trans('plan::models.plan.priceMonth'),
             'priceYear'=> trans('plan::models.plan.priceYear'),
+            'currency' => trans('plan::models.plan.currency'),
             'status' => trans('plan::models.plan.status')
         ];
     }

@@ -42,6 +42,7 @@ class UserListener
         $user->deleteRelation($user->userAddress(), $user->isForceDeleting());
         $user->deleteRelation($user->schools(), $user->isForceDeleting());
         $user->deleteRelation($user->schoolRoles(), $user->isForceDeleting());
+        $user->deleteRelation($user->wallet(), $user->isForceDeleting());
 
         return true;
     }

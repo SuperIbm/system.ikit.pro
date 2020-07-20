@@ -13,6 +13,14 @@ namespace App\Modules\Order\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+/**
+ * Класс сервис-провайдера для настройки путей этого модуля.
+ *
+ * @version 1.0
+ * @since 1.0
+ * @copyright Weborobot.
+ * @author Инчагов Тимофей Александрович.
+ */
 class RouteServiceProvider extends ServiceProvider
 {
     /**

@@ -315,4 +315,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserSchoolRole::class);
     }
+
+    /**
+     * Получить кошелек.
+     *
+     * @return \App\Modules\User\Models\UserWallet|\Illuminate\Database\Eloquent\Relations\HasOne Модель кошелька.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function wallet()
+    {
+        return $this->hasOne(UserWallet::class);
+    }
 }
