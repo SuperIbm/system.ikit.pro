@@ -13,6 +13,7 @@ namespace App\Modules\Document\Models;
 use App\Modules\Document\Contracts\DocumentDriver;
 use Config;
 use Storage;
+use School;
 
 /**
  * Класс драйвер хранения документов с использованием FTP протокола.
@@ -87,7 +88,7 @@ class DocumentDriverFtp extends DocumentDriver
      */
     public function path(int $id, string $format)
     {
-        return 'doc/read/' . $id . '.' . $format;
+        return 'doc/read/' . School::getId() . "/" . $id . '.' . $format;
     }
 
     /**

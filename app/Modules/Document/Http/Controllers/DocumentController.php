@@ -15,6 +15,7 @@ use Illuminate\Routing\Controller;
 use Util;
 use Document;
 use Storage;
+use School;
 
 use App\Modules\Document\Http\Requests\DocumentCreateRequest;
 use App\Modules\Document\Http\Requests\DocumentUpdateRequest;
@@ -33,14 +34,17 @@ class DocumentController extends Controller
     /**
      * Получение байт кода документа.
      *
+     * @param int $school Школа.
      * @param string $name Название документа.
      *
      * @return \Illuminate\Http\Response Ответ.
      * @version 1.0
      * @since 1.0
      */
-    public function read(string $name): Response
+    public function read(int $school, string $name): Response
     {
+        School::setById($school);
+
         $pathinfo = pathinfo($name);
 
         $id = substr($pathinfo["basename"], 0, Util::strlen($pathinfo["basename"]) - Util::strlen($pathinfo["extension"]) - 1);
@@ -65,14 +69,17 @@ class DocumentController extends Controller
     /**
      * Создание документа.
      *
+     * @param int $school Школа.
      * @param \App\Modules\Document\Http\Requests\DocumentCreateRequest $request Запрос.
      *
      * @return \Illuminate\Http\Response Ответ.
      * @version 1.0
      * @since 1.0
      */
-    public function create(DocumentCreateRequest $request): Response
+    public function create(int $school, DocumentCreateRequest $request): Response
     {
+        School::setById($school);
+
         $request->file('file')->move(storage_path('app/public/documents/'), $request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);
     }
@@ -80,14 +87,17 @@ class DocumentController extends Controller
     /**
      * Обновление документа.
      *
+     * @param int $school Школа.
      * @param \App\Modules\Document\Http\Requests\DocumentUpdateRequest $request Запрос.
      *
      * @return \Illuminate\Http\Response Ответ.
      * @version 1.0
      * @since 1.0
      */
-    public function update(DocumentUpdateRequest $request): Response
+    public function update(int $school, DocumentUpdateRequest $request): Response
     {
+        School::setById($school);
+
         $request->file('file')->move(storage_path('app/public/documents/'), $request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);
     }
@@ -95,14 +105,17 @@ class DocumentController extends Controller
     /**
      * Удаление документа.
      *
+     * @param int $school Школа.
      * @param \App\Modules\Document\Http\Requests\DocumentDestroyRequest $request Запрос.
      *
      * @return \Illuminate\Http\Response Ответ.
      * @version 1.0
      * @since 1.0
      */
-    public function destroy(DocumentDestroyRequest $request): Response
+    public function destroy(int $school, DocumentDestroyRequest $request): Response
     {
+        School::setById($school);
+
         Storage::disk('documents')->delete($request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);
     }

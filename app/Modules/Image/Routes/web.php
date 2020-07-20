@@ -4,7 +4,7 @@ Route::group([
 
 ], function() {
     Route::get('/img/read/{school}/{name}', 'ImageController@read');
-    Route::post('/img/{school}/create/', 'ImageController@create');
-    Route::post('/img/{school}/update/', 'ImageController@update');
-    Route::post('/img/{school}/destroy/', 'ImageController@destroy');
+    Route::post('/img/create/{school}', 'ImageController@create');
+    Route::post('/img/update/{school}', 'ImageController@update');
+    Route::post('/img/destroy/{school}', 'ImageController@destroy');
 });

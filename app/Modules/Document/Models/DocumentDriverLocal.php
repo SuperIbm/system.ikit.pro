@@ -13,6 +13,7 @@ namespace App\Modules\Document\Models;
 use App\Modules\Document\Contracts\DocumentDriver;
 use Config;
 use File;
+use School;
 
 /**
  * Класс драйвер хранения документов в локальной папке.
@@ -36,7 +37,7 @@ class DocumentDriverLocal extends DocumentDriver
      */
     public function path(int $id, string $format)
     {
-        return Config::get('document.store.local.path') . $id . '.' . $format;
+        return Config::get('document.store.local.path') . School::getId() . "/" . $id . '.' . $format;
     }
 
     /**
@@ -51,7 +52,7 @@ class DocumentDriverLocal extends DocumentDriver
      */
     public function pathSource(int $id, string $format)
     {
-        return Config::get('document.store.local.pathSource') . $id . '.' . $format;
+        return Config::get('document.store.local.pathSource') . School::getId() . "/" . $id . '.' . $format;
     }
 
     /**

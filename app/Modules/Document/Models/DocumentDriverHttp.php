@@ -14,6 +14,7 @@ use App\Modules\Document\Contracts\DocumentDriver;
 use Config;
 use \CURLFile;
 use File;
+use School;
 
 /**
  * Класс драйвер хранения документов с использованием HTTP протокола.
@@ -37,7 +38,7 @@ class DocumentDriverHttp extends DocumentDriver
      */
     public function path(int $id, string $format)
     {
-        return Config::get('document.store.http.read') . $id . '.' . $format;
+        return Config::get('document.store.http.read') . School::getId() . "/" . $id . '.' . $format;
     }
 
     /**

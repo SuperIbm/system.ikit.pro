@@ -14,6 +14,7 @@ use App\Modules\Document\Contracts\DocumentDriver;
 use Document as DocumentRepository;
 use File;
 use Config;
+use School;
 
 /**
  * Класс драйвер хранения документов в базе данных.
@@ -35,9 +36,9 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(int $id,string $format)
+    public function path(int $id, string $format)
     {
-        return 'doc/read/' . $id . '.' . $format;
+        return 'doc/read/' . School::getId() . "/" . $id . '.' . $format;
     }
 
     /**
@@ -77,8 +78,8 @@ class DocumentDriverBase extends DocumentDriver
      * @param string $format Формат документа.
      * @param string $path Путь к документу.
      *
-     * @throws
      * @return bool Вернет статус успешности создания документа.
+     * @throws
      * @since 1.0
      * @version 1.0
      */
@@ -94,8 +95,8 @@ class DocumentDriverBase extends DocumentDriver
      * @param string $format Формат документа.
      * @param string $path Путь к документу.
      *
-     * @throws
      * @return bool Вернет статус успешности обновления документа.
+     * @throws
      * @since 1.0
      * @version 1.0
      */
