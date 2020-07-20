@@ -68,9 +68,9 @@ class OrderCharge extends Eloquent
     protected function getNames(): array
     {
         return [
-            "order_invoice_id" => trans('user::model.orderCharge.order_invoice_id'),
-            "charge" => trans('user::model.orderCharge.charge'),
-            "status" => trans('user::model.orderCharge.status')
+            "order_invoice_id" => trans('order::model.orderCharge.order_invoice_id'),
+            "charge" => trans('order::model.orderCharge.charge'),
+            "status" => trans('order::model.orderCharge.status')
         ];
     }
 

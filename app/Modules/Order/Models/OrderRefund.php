@@ -68,9 +68,9 @@ class OrderRefund extends Eloquent
     protected function getNames()
     {
         return [
-            "order_charge_id" => trans('user::model.orderRefund.order_charge_id'),
-            "refund" => trans('user::model.orderRefund.refund'),
-            "status" => trans('user::model.orderRefund.status')
+            "order_charge_id" => trans('order::model.orderRefund.order_charge_id'),
+            "refund" => trans('order::model.orderRefund.refund'),
+            "status" => trans('order::model.orderRefund.status')
         ];
     }
 

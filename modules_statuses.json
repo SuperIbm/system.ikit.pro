@@ -1,5 +1,6 @@
 {
     "School": true,
     "Plan": true,
-    "Order": true
+    "Order": true,
+    "Referral": true
 }
