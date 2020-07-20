@@ -27,6 +27,7 @@ abstract class ImageDriver
     /**
      * Абстрактный метод получения пути к изображению.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -34,11 +35,12 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function path(int $id, string $format);
+    abstract public function path(string $folder, int $id, string $format);
 
     /**
      * Абстрактный метод получения физического пути к изображению.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -46,11 +48,12 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function pathSource(int $id, string $format);
+    abstract public function pathSource(string $folder, int $id, string $format);
 
     /**
      * Абстрактный метод чтения изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -58,11 +61,12 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function read(int $id, string $format);
+    abstract public function read(string $folder, int $id, string $format);
 
     /**
      * Абстрактный метод создания изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      * @param string $path Путь к изображению.
@@ -71,11 +75,12 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function create(int $id, string $format, string $path);
+    abstract public function create(string $folder, int $id, string $format, string $path);
 
     /**
      * Абстрактный метод обновления изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      * @param string $path Путь к изображению.
@@ -84,11 +89,12 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function update(int $id, string $format, string $path);
+    abstract public function update(string $folder, int $id, string $format, string $path);
 
     /**
      * Абстрактный метод удаления изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -96,5 +102,5 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function destroy(int $id, string $format);
+    abstract public function destroy(string $folder, int $id, string $format);
 }

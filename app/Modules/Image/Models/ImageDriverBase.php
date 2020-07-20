@@ -28,6 +28,7 @@ class ImageDriverBase extends ImageDriver
     /**
      * Метод получения пути к изображению.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -35,14 +36,15 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(int $id, string $format)
+    public function path(string $folder, int $id, string $format)
     {
-        return 'img/read/' . School::getId() . "/" . $id . '.' . $format;
+        return 'img/read/' . School::getId() . "/". $folder . "/" . $id . '.' . $format;
     }
 
     /**
      * Метод получения физического пути к изображению.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -50,14 +52,15 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format)
     {
-        return Config::get("app.url") . $this->path($id, $format);
+        return Config::get("app.url") . $this->path($folder, $id, $format);
     }
 
     /**
      * Метод чтения изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -65,7 +68,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function read(int $id, string $format)
+    public function read(string $folder, int $id, string $format)
     {
         return ImageRepository::getByte(pathinfo($id . '.' . $format, PATHINFO_FILENAME));
     }
@@ -73,6 +76,7 @@ class ImageDriverBase extends ImageDriver
     /**
      * Метод создания изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $path Путь к изображению.
      * @param string $format Формат изображения.
@@ -81,7 +85,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create(int $id, string $format, string $path)
+    public function create(string $folder, int $id, string $format, string $path)
     {
         $pro = getImageSize($path);
         $imgResource = ImageRepository::getResourceByFormat($pro[2], $path);
@@ -93,6 +97,7 @@ class ImageDriverBase extends ImageDriver
     /**
      * Метод обновления изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      * @param string $path Путь к изображению.
@@ -101,7 +106,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update(int $id, string $format, string $path)
+    public function update(string $folder, int $id, string $format, string $path)
     {
         $pro = getImageSize($path);
         $imgResource = ImageRepository::getResourceByFormat($pro[2], $path);
@@ -113,6 +118,7 @@ class ImageDriverBase extends ImageDriver
     /**
      * Метод удаления изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -120,7 +126,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id, string $format)
+    public function destroy(string $folder, int $id, string $format)
     {
         return true;
     }

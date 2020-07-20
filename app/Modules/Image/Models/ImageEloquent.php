@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property int $id ID изображения.
  * @property int $format Формат изображения.
+ * @property int $folder Папка.
  * @property mixed $byte Байт код изображения.
  * @property string $cache Предиката для кеширования.
  * @property int $width Ширина изображения.
@@ -98,6 +99,7 @@ class ImageEloquent extends Eloquent
     protected $fillable = [
         'id',
         'byte',
+        'folder',
         'format',
         'cache',
         'width',
@@ -114,6 +116,7 @@ class ImageEloquent extends Eloquent
     {
         return [
             'format' => 'required|between:1,20',
+            'folder' => 'required|between:1,191',
             'cache' => 'max:50',
             'width' => 'integer|digits_between:1,5',
             'height' => 'integer|digits_between:1,5'
@@ -130,6 +133,7 @@ class ImageEloquent extends Eloquent
     {
         return [
             'byte' => trans('image::model.image.byte'),
+            'folder' => trans('image::model.image.folder'),
             'format' => trans('image::model.image.format'),
             'cache' => trans('image::model.image.cache'),
             'width' => trans('image::model.image.width'),

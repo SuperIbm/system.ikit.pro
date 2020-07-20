@@ -60,8 +60,8 @@ class ImageMigrateCommand extends Command
 
         for($i = 0; $i < $count; $i++)
         {
-            $pathSourceFrom = App::make('image.store.driver')->driver($this->argument('from'))->pathSource($images[$i]['id'], $images[$i]['format']);
-            App::make('image.store.driver')->driver($this->argument('to'))->create($images[$i]['id'], $images[$i]['format'], $pathSourceFrom);
+            $pathSourceFrom = App::make('image.store.driver')->driver($this->argument('from'))->pathSource($images[$i]['folder'], $images[$i]['id'], $images[$i]['format']);
+            App::make('image.store.driver')->driver($this->argument('to'))->create($images[$i]['folder'], $images[$i]['id'], $images[$i]['format'], $pathSourceFrom);
             $bar->advance();
         }
 

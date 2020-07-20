@@ -40,21 +40,20 @@ class ImageEloquent extends Image
         $model = $this->newInstance();
         $pro = getImageSize($path);
 
+        $model->path = $path;
+        $model->cache = time();
+        $model->folder = $this->getFolder();
+
         if($pro)
         {
-            $model->path = $path;
             $model->width = $pro[0];
             $model->height = $pro[1];
             $model->format = $this->getFormatText($pro[2]);
-            $model->cache = time();
         }
         else
         {
             $pathinfo = pathinfo($path);
-
-            $model->path = $path;
             $model->format = $pathinfo['extension'];
-            $model->cache = time();
         }
 
         $status = $model->save();
@@ -82,25 +81,24 @@ class ImageEloquent extends Image
     {
         $model = $this->newInstance()->find($id);
 
+        $model->path = $path;
+        $model->cache = time();
+        $model->folder = $this->getFolder();
+
         if($model)
         {
             $pro = @getImageSize($path);
 
             if($pro)
             {
-                $model->path = $path;
                 $model->width = $pro[0];
                 $model->height = $pro[1];
                 $model->format = $this->getFormatText($pro[2]);
-                $model->cache = time();
             }
             else
             {
                 $pathinfo = pathinfo($path);
-
-                $model->path = $path;
                 $model->format = $pathinfo['extension'];
-                $model->cache = time();
             }
 
             $status = $model->save();

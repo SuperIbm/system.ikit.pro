@@ -29,6 +29,7 @@ class ImageDriverHttp extends ImageDriver
     /**
      * Метод получения пути к изображению.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -36,14 +37,15 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(int $id, string $format)
+    public function path(string $folder, int $id, string $format)
     {
-        return Config::get('image.store.http.read') . School::getId() . "/" . $id . '.' . $format;
+        return Config::get('image.store.http.read') . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
 
     /**
      * Метод получения физического пути к изображению.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -51,14 +53,15 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format)
     {
-        return $this->path($id, $format);
+        return $this->path($folder, $id, $format);
     }
 
     /**
      * Метод чтения изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -66,7 +69,7 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function read(int $id, string $format)
+    public function read(string $folder, int $id, string $format)
     {
         return null;
     }
@@ -74,6 +77,7 @@ class ImageDriverHttp extends ImageDriver
     /**
      * Метод создания изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      * @param string $path Путь к изображению.
@@ -82,7 +86,7 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create(int $id, string $format, string $path)
+    public function create(string $folder, int $id, string $format, string $path)
     {
         $ch = curl_init();
         $tmp = storage_path('app/tmp/' . basename($path));
@@ -91,7 +95,8 @@ class ImageDriverHttp extends ImageDriver
         $data = [
             'id' => $id,
             'format' => $format,
-            'file' => new CURLFile($tmp)
+            'file' => new CURLFile($tmp),
+            'folder' => $folder
         ];
 
         curl_setopt($ch, CURLOPT_URL, Config::get('image.store.http.create'));
@@ -108,6 +113,7 @@ class ImageDriverHttp extends ImageDriver
     /**
      * Метод обновления изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      * @param string $path Путь к изображению.
@@ -116,7 +122,7 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update(int $id, string $format, string $path)
+    public function update(string $folder, int $id, string $format, string $path)
     {
         $ch = curl_init();
         $tmp = storage_path('app/tmp/' . basename($path));
@@ -125,7 +131,8 @@ class ImageDriverHttp extends ImageDriver
         $data = [
             'id' => $id,
             'format' => $format,
-            'file' => new CURLFile($tmp)
+            'file' => new CURLFile($tmp),
+            'folder' => $folder
         ];
 
         curl_setopt($ch, CURLOPT_URL, Config::get('image.store.http.update'));
@@ -142,6 +149,7 @@ class ImageDriverHttp extends ImageDriver
     /**
      * Метод удаления изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -149,13 +157,14 @@ class ImageDriverHttp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id, string $format)
+    public function destroy(string $folder, int $id, string $format)
     {
         $ch = curl_init();
 
         $data = [
             'id' => $id,
-            'format' => $format
+            'format' => $format,
+            'folder' => $folder
         ];
 
         curl_setopt($ch, CURLOPT_URL, Config::get('image.store.http.destroy'));

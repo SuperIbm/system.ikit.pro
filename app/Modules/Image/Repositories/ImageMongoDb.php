@@ -41,22 +41,20 @@ class ImageMongoDb extends Image
         $model = $this->newInstance();
 
         $model->id = round((time() * 1000) + microtime(true));
+        $model->path = $path;
+        $model->cache = time();
+        $model->folder = $this->getFolder();
 
         if($pro)
         {
-            $model->path = $path;
             $model->width = $pro[0];
             $model->height = $pro[1];
             $model->format = $this->getFormatText($pro[2]);
-            $model->cache = time();
         }
         else
         {
             $pathinfo = pathinfo($path);
-
-            $model->path = $path;
             $model->format = $pathinfo['extension'];
-            $model->cache = time();
         }
 
         $status = $model->save();
@@ -87,22 +85,20 @@ class ImageMongoDb extends Image
         if($model)
         {
             $pro = getImageSize($path);
+            $model->path = $path;
+            $model->cache = time();
+            $model->folder = $this->getFolder();
 
             if($pro)
             {
-                $model->path = $path;
                 $model->width = $pro[0];
                 $model->height = $pro[1];
                 $model->format = $this->getFormatText($pro[2]);
-                $model->cache = time();
             }
             else
             {
                 $pathinfo = pathinfo($path);
-
-                $model->path = $path;
                 $model->format = $pathinfo['extension'];
-                $model->cache = time();
             }
 
             $status = $model->save();

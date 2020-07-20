@@ -35,7 +35,7 @@ class ImageListener
      */
     public function created(Eloquent $image)
     {
-        return App::make('image.store.driver')->create($image->id, $image->format, $image->path);
+        return App::make('image.store.driver')->create($image->folder, $image->id, $image->format, $image->path);
     }
 
     /**
@@ -49,8 +49,8 @@ class ImageListener
      */
     public function updated(Eloquent $image)
     {
-        App::make('image.store.driver')->destroy($image->getOriginal()['id'], $image->getOriginal()['format']);
-        return App::make('image.store.driver')->update($image->id, $image->format, $image->path);
+        App::make('image.store.driver')->destroy($image->getOriginal()['folder'], $image->getOriginal()['id'], $image->getOriginal()['format']);
+        return App::make('image.store.driver')->update($image->folder, $image->id, $image->format, $image->path);
     }
 
     /**
@@ -64,13 +64,13 @@ class ImageListener
      */
     public function readed(Eloquent $image)
     {
-        $image->path = Config::get("app.url").App::make('image.store.driver')->path($image->id, $image->format);
+        $image->path = Config::get("app.url").App::make('image.store.driver')->path($image->folder, $image->id, $image->format);
         $image->pathCache = $image->path;
-        $image->byte = App::make('image.store.driver')->read($image->id, $image->format);
+        $image->byte = App::make('image.store.driver')->read($image->folder, $image->id, $image->format);
 
         if($image->cache) $image->path .= "?" . $image->cache;
 
-        $image->pathSource = App::make('image.store.driver')->pathSource($image->id, $image->format);
+        $image->pathSource = App::make('image.store.driver')->pathSource($image->folder, $image->id, $image->format);
 
         return true;
     }
@@ -86,7 +86,7 @@ class ImageListener
      */
     public function deleted(Eloquent $image)
     {
-        if(!Config::get("image.store.softDeletes")) return App::make('image.store.driver')->destroy($image->id, $image->format);
+        if(!Config::get("image.store.softDeletes")) return App::make('image.store.driver')->destroy($image->folder, $image->id, $image->format);
         else return true;
     }
 }

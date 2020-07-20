@@ -28,6 +28,7 @@ class ImageDriverLocal extends ImageDriver
     /**
      * Метод получения пути к изображению.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -35,14 +36,15 @@ class ImageDriverLocal extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(int $id, string $format)
+    public function path(string $folder, int $id, string $format)
     {
-        return Config::get('image.store.local.path') . School::getId() . "/" . $id . '.' . $format;
+        return Config::get('image.store.local.path') . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
 
     /**
      * Метод получения физического пути к изображению.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -50,14 +52,15 @@ class ImageDriverLocal extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format)
     {
-        return Config::get('image.store.local.pathSource') . $id . '.' . $format;
+        return Config::get('image.store.local.pathSource') . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
 
     /**
      * Метод чтения изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -65,7 +68,7 @@ class ImageDriverLocal extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function read(int $id, string $format)
+    public function read(string $folder, int $id, string $format)
     {
         return null;
     }
@@ -73,6 +76,7 @@ class ImageDriverLocal extends ImageDriver
     /**
      * Метод создания изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      * @param string $path Путь к изображению.
@@ -81,14 +85,15 @@ class ImageDriverLocal extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create(int $id, string $format, string $path)
+    public function create(string $folder, int $id, string $format, string $path)
     {
-        return File::copy($path, $this->pathSource($id, $format));
+        return File::copy($path, $this->pathSource($folder, $id, $format));
     }
 
     /**
      * Метод обновления изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      * @param string $path Путь к изображению.
@@ -97,14 +102,15 @@ class ImageDriverLocal extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update(int $id, string $format, string $path)
+    public function update(string $folder, int $id, string $format, string $path)
     {
-        return File::copy($path, $this->pathSource($id, $format));
+        return File::copy($path, $this->pathSource($folder, $id, $format));
     }
 
     /**
      * Метод удаления изображения.
      *
+     * @param string $folder Папка.
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
@@ -112,8 +118,8 @@ class ImageDriverLocal extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id, string $format)
+    public function destroy(string $folder, int $id, string $format)
     {
-        return File::delete($this->pathSource($id, $format));
+        return File::delete($this->pathSource($folder, $id, $format));
     }
 }
