@@ -349,36 +349,55 @@ trait RepositoryEloquent
      *
      * @param array $tags Массив тэгов для кеширования.
      * @param int|array $id Id записи для удаления.
+     * @param array $filters Фильтрация данных.
      * @param bool $force Просим удалить записи полностью.
      *
      * @return bool Вернет булево значение успешности операции.
      * @since 1.0
      * @version 1.0
      */
-    protected function _destroy(array $tags, $id, $force = false): bool
+    protected function _destroy(array $tags, $id = null, array $filters = null, bool $force = false): bool
     {
-        $model = $this->newInstance();
+        $query = $this->newInstance()->newQuery();
 
-        if($force)
+        if($id) $query = $query->whereIn("id", is_array($id) ? $id : [$id]);
+
+        if($filters)
         {
-            $models = $model->whereIn("id", is_array($id) ? $id : [$id])->get();
+            $filtersValues = [];
 
-            if($models)
+            if($filters)
             {
-                foreach($models as $model)
-                {
-                    $model->forceDelete();
-                }
+                $filtersValues = self::filters($filters, $this->newInstance()->getFillable(), $query->getModel()
+                    ->getTable());
             }
 
-            $status = true;
+            if(count($filtersValues)) $query = $this->_queryFilters($query, $filtersValues);
         }
-        else $status = $model->destroy($id);
 
-        if(!$status && $model->hasError()) $this->setErrors($model->getErrors());
-        else Cache::tags($tags)->flush();
+        $models = $query->get();
 
-        return $status;
+        if($models)
+        {
+            foreach($models as $model)
+            {
+                if($force) $model->forceDelete();
+                else $model->delete();
+            }
+        }
+
+        if($model->hasError())
+        {
+            $this->setErrors($model->getErrors());
+
+            return false;
+        }
+        else
+        {
+            Cache::tags($tags)->flush();
+
+            return true;
+        }
     }
 
     /**
@@ -391,7 +410,7 @@ trait RepositoryEloquent
      * @since 1.0
      * @version 1.0
      */
-    public function newInstance(array $data = array(), $exists = false): Eloquent
+    public function newInstance(array $data = array(), bool $exists = false): Eloquent
     {
         $model = $this->getModel()->newInstance($data, $exists);
 

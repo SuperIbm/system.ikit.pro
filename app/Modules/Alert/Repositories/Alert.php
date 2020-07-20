@@ -108,14 +108,15 @@ class Alert extends Repository
     /**
      * Удаление.
      *
-     * @param int|array $id Id записи для удаления.
+     * @param int $id Id записи для удаления.
+     * @param array $filters Фильтрация данных.
      *
      * @return bool Вернет булево значение успешности операции.
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id)
+    public function destroy(int $id = null, array $filters = null): bool
     {
-        return $this->_destroy(['AlertItem'], $id);
+        return $this->_destroy(['AlertItem'], $id, $filters);
     }
 }

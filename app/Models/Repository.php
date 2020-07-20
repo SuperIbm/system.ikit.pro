@@ -282,12 +282,14 @@ abstract class Repository
      *
      * @param array $tags Массив тэгов для кеширования.
      * @param int|array $id Id записи для удаления.
+     * @param array $filters Фильтрация данных.
+     * @param bool $force Просим удалить записи полностью.
      *
      * @return bool Вернет булево значение успешности операции.
      * @since 1.0
      * @version 1.0
      */
-    abstract protected function _destroy(array $tags, $id): bool;
+    abstract protected function _destroy(array $tags, $id, array $filters, bool $force = false): bool;
 
     /**
      * Получение нового экземпляра модели.
