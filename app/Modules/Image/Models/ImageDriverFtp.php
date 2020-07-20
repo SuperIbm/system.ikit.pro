@@ -13,6 +13,7 @@ namespace App\Modules\Image\Models;
 use App\Modules\Image\Contracts\ImageDriver;
 use Config;
 use Storage;
+use School;
 
 /**
  * Класс драйвер хранения изображений с использованием FTP протокола.
@@ -87,7 +88,7 @@ class ImageDriverFtp extends ImageDriver
      */
     public function path(int $id, string $format)
     {
-        return 'img/read/' . $id . '.' . $format;
+        return 'img/read/' . School::getId() . "/" . $id . '.' . $format;
     }
 
     /**
@@ -111,8 +112,8 @@ class ImageDriverFtp extends ImageDriver
      * @param int $id Индификатор изображения.
      * @param string $format Формат изображения.
      *
-     * @throws
      * @return string Вернет байт код изображения.
+     * @throws
      * @since 1.0
      * @version 1.0
      */

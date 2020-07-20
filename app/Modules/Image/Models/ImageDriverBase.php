@@ -13,6 +13,7 @@ namespace App\Modules\Image\Models;
 use App\Modules\Image\Contracts\ImageDriver;
 use Image as ImageRepository;
 use Config;
+use School;
 
 /**
  * Класс драйвер хранения изображений в базе данных.
@@ -36,7 +37,7 @@ class ImageDriverBase extends ImageDriver
      */
     public function path(int $id, string $format)
     {
-        return 'img/read/' . $id . '.' . $format;
+        return 'img/read/' . School::getId() . "/" . $id . '.' . $format;
     }
 
     /**

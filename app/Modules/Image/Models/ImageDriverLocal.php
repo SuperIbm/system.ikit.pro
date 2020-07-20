@@ -13,6 +13,7 @@ namespace App\Modules\Image\Models;
 use App\Modules\Image\Contracts\ImageDriver;
 use Config;
 use File;
+use School;
 
 /**
  * Класс драйвер хранения изображений в локальной папке.
@@ -36,7 +37,7 @@ class ImageDriverLocal extends ImageDriver
      */
     public function path(int $id, string $format)
     {
-        return Config::get('image.store.local.path') . $id . '.' . $format;
+        return Config::get('image.store.local.path') . School::getId() . "/" . $id . '.' . $format;
     }
 
     /**

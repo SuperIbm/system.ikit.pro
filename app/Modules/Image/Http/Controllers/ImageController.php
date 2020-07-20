@@ -15,6 +15,7 @@ use Illuminate\Routing\Controller;
 use Util;
 use ImageStore;
 use Storage;
+use School;
 
 use App\Modules\Image\Http\Requests\ImageCreateRequest;
 use App\Modules\Image\Http\Requests\ImageUpdateRequest;
@@ -33,14 +34,17 @@ class ImageController extends Controller
     /**
      * Получение байт кода изображения.
      *
+     * @param int $school Школа.
      * @param string $name Название изображения.
      *
      * @return \Illuminate\Http\Response Ответ.
      * @version 1.0
      * @since 1.0
      */
-    public function read(string $name): Response
+    public function read(int $school, string $name): Response
     {
+        School::setById($school);
+
         $pathinfo = pathinfo($name);
 
         $id = substr($pathinfo["basename"], 0, Util::strlen($pathinfo["basename"]) - Util::strlen($pathinfo["extension"]) - 1);
@@ -71,14 +75,17 @@ class ImageController extends Controller
     /**
      * Создание изображения.
      *
+     * @param int $school Школа.
      * @param \App\Modules\Image\Http\Requests\ImageCreateRequest $request Запрос.
      *
      * @return \Illuminate\Http\Response Ответ.
      * @version 1.0
      * @since 1.0
      */
-    public function create(ImageCreateRequest $request): Response
+    public function create(int $school, ImageCreateRequest $request): Response
     {
+        School::setById($school);
+
         $request->file('file')->move(storage_path('app/public/images/'), $request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);
     }
@@ -86,14 +93,17 @@ class ImageController extends Controller
     /**
      * Обновление изображения.
      *
+     * @param int $school Школа.
      * @param \App\Modules\Image\Http\Requests\ImageUpdateRequest $request Запрос.
      *
      * @return \Illuminate\Http\Response Ответ.
      * @version 1.0
      * @since 1.0
      */
-    public function update(ImageUpdateRequest $request): Response
+    public function update(int $school, ImageUpdateRequest $request): Response
     {
+        School::setById($school);
+
         $request->file('file')->move(storage_path('app/public/images/'), $request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);
     }
@@ -101,14 +111,17 @@ class ImageController extends Controller
     /**
      * Удаление изображения.
      *
+     * @param int $school Школа.
      * @param \App\Modules\Image\Http\Requests\ImageDestroyRequest $request Запрос.
      *
      * @return \Illuminate\Http\Response Ответ.
      * @version 1.0
      * @since 1.0
      */
-    public function destroy(ImageDestroyRequest $request): Response
+    public function destroy(int $school, ImageDestroyRequest $request): Response
     {
+        School::setById($school);
+
         Storage::disk('images')->delete($request->input('id') . '.' . $request->input('format'));
         return response()->json(['success' => true]);
     }

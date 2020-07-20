@@ -14,6 +14,7 @@ use App\Modules\Image\Contracts\ImageDriver;
 use Config;
 use \CURLFile;
 use File;
+use School;
 
 /**
  * Класс драйвер хранения изображений с использованием HTTP протокола.
@@ -37,7 +38,7 @@ class ImageDriverHttp extends ImageDriver
      */
     public function path(int $id, string $format)
     {
-        return Config::get('image.store.http.read') . $id . '.' . $format;
+        return Config::get('image.store.http.read') . School::getId() . "/" . $id . '.' . $format;
     }
 
     /**
