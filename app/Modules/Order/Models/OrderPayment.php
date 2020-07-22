@@ -125,8 +125,8 @@ class OrderPayment extends Eloquent
                 $constraint->upsize();
             })->save($path);
 
-            if(isset($this->attributes['image_id'])) $id = ImageStore::update($this->attributes['image_id'], $path);
-            else $id = ImageStore::create($path);
+            if(isset($this->attributes['image_id'])) $id = ImageStore::update("order_payment", $this->attributes['image_id'], $path);
+            else $id = ImageStore::create("order_payment", $path);
 
             if($id !== false) $this->attributes['image_id'] = $id;
         }

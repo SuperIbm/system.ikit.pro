@@ -120,8 +120,8 @@ class School extends Eloquent
                 $constraint->upsize();
             })->crop(60, 60)->save($path);
 
-            if(isset($this->attributes['image_small_id'])) $id = ImageStore::update($this->attributes['image_small_id'], $path);
-            else $id = ImageStore::create($path);
+            if(isset($this->attributes['image_small_id'])) $id = ImageStore::update("school", $this->attributes['image_small_id'], $path);
+            else $id = ImageStore::create("school", $path);
 
             if($id !== false) $this->attributes['image_small_id'] = $id;
         }
@@ -166,8 +166,8 @@ class School extends Eloquent
                 $constraint->upsize();
             })->crop(300, 300)->save($path);
 
-            if(isset($this->attributes['image_middle_id'])) $id = ImageStore::update($this->attributes['image_middle_id'], $path);
-            else $id = ImageStore::create($path);
+            if(isset($this->attributes['image_middle_id'])) $id = ImageStore::update("school", $this->attributes['image_middle_id'], $path);
+            else $id = ImageStore::create("school", $path);
 
             if($id !== false) $this->attributes['image_middle_id'] = $id;
         }
@@ -212,8 +212,8 @@ class School extends Eloquent
                 $constraint->upsize();
             })->crop(600, 600)->save($path);
 
-            if(isset($this->attributes['image_big_id'])) $id = ImageStore::update($this->attributes['image_big_id'], $path);
-            else $id = ImageStore::create($path);
+            if(isset($this->attributes['image_big_id'])) $id = ImageStore::update("school", $this->attributes['image_big_id'], $path);
+            else $id = ImageStore::create("school", $path);
 
             if($id !== false) $this->attributes['image_big_id'] = $id;
         }
