@@ -27,6 +27,7 @@ class CreateTableSchoolLimits extends Migration
             $table->bigInteger('school_id')->unsigned()->index('school_id');
             $table->bigInteger('plan_limit_id')->unsigned()->index('plan_limit_id');
             $table->integer('limit')->unsigned();
+            $table->integer('remain')->unsigned();
 
             $table->timestamps();
             $table->softDeletes()->index('deleted_at');

@@ -46,6 +46,9 @@ class PlanLimit extends Eloquent
         'step',
         'unit',
         'monthly',
+        "price",
+        'currency',
+        'endless',
         'status'
     ];
 
@@ -66,7 +69,9 @@ class PlanLimit extends Eloquent
             'step' => 'required|integer|digits_between:0,20',
             'unit' => 'required|between:1,191',
             'price' => 'required|float',
+            'currency' => 'required|between:3,3',
             'monthly' => 'required|boolean',
+            'endless' => 'required|boolean',
             'status' => 'required|boolean',
         ];
     }
@@ -88,7 +93,9 @@ class PlanLimit extends Eloquent
             'step' => trans('plan::models.planLimit.step'),
             'unit' => trans('plan::models.planLimit.unit'),
             'price' => trans('plan::models.planLimit.price'),
+            'currency' => trans('plan::models.planLimit.currency'),
             'monthly' => trans('plan::models.planLimit.monthly'),
+            'endless' => trans('plan::models.planLimit.endless'),
             'status' => trans('plan::models.planLimit.status'),
         ];
     }

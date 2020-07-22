@@ -40,7 +40,8 @@ class SchoolLimit extends Eloquent
         'id',
         'school_id',
         'plan_limit_id',
-        'limit'
+        'limit',
+        'remain'
     ];
 
     /**
@@ -54,7 +55,8 @@ class SchoolLimit extends Eloquent
         return [
             'school_id' => 'required|integer|digits_between:0,20',
             'plan_limit_id' => 'required|integer|digits_between:0,20',
-            'limit' => 'required|integer|digits_between:0,10'
+            'limit' => 'required|integer|digits_between:0,10',
+            'remain' => 'required|integer|digits_between:0,10'
         ];
     }
 
@@ -69,7 +71,8 @@ class SchoolLimit extends Eloquent
         return [
             'school_id' => trans('school::models.schoolLimit.school_id'),
             'plan_limit_id' => trans('school::models.schoolLimit.plan_limit_id'),
-            'limit' => trans('school::models.schoolLimit.limit')
+            'limit' => trans('school::models.schoolLimit.limit'),
+            'remain' => trans('school::models.schoolLimit.remain')
         ];
     }
 

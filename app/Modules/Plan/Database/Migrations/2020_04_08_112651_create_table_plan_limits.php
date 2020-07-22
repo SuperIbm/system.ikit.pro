@@ -24,7 +24,9 @@ class CreateTablePlanLimits extends Migration {
             $table->integer('step')->unsigned();
             $table->string('unit', 50);
             $table->float('price', 8, 2)->unsigned();
+            $table->string('currency', 3)->default("RUB");
             $table->boolean('monthly')->default(0);
+            $table->boolean('endless')->default(0);
             $table->boolean('status')->default(1)->index('status');
 
 			$table->timestamps();

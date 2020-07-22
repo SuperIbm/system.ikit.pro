@@ -9,6 +9,8 @@ return [
     'step' => "Step",
     'unit' => "Unit",
     'price' => "Price",
+    'currency' => "Currency",
     'monthly' => "Monthly",
+    'endless' => 'Endless',
     'status' => "Status",
 ];
