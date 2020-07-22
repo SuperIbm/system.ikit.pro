@@ -1,24 +1,44 @@
 <?php
+/**
+ * Модуль Рефералов.
+ * Этот модуль содержит все классы для работы с рефералами.
+ *
+ * @package App\Modules\Referral
+ * @since 1.0
+ * @version 1.0
+ */
 
 namespace App\Modules\Referral\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
+/**
+ * Класс сервис-провайдера для настройки этого модуля.
+ *
+ * @version 1.0
+ * @since 1.0
+ * @copyright Weborobot.
+ * @author Инчагов Тимофей Александрович.
+ */
 class ReferralServiceProvider extends ServiceProvider
 {
     /**
+     * Название модуля.
+     *
      * @var string $moduleName
      */
     protected $moduleName = 'Referral';
 
     /**
+     * Название модуля в нижнем регисте.
+     *
      * @var string $moduleNameLower
      */
     protected $moduleNameLower = 'referral';
 
     /**
-     * Boot the application events.
+     * Обработчик события загрузки приложения.
      *
      * @return void
      */
@@ -32,7 +52,7 @@ class ReferralServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the service provider.
+     * Регистрация сервис провайдеров.
      *
      * @return void
      */
@@ -42,7 +62,7 @@ class ReferralServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register config.
+     * Регистрация настроек.
      *
      * @return void
      */
@@ -51,13 +71,11 @@ class ReferralServiceProvider extends ServiceProvider
         $this->publishes([
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
-        $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
-        );
+        $this->mergeConfigFrom(module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower);
     }
 
     /**
-     * Register views.
+     * Регистрация представлений.
      *
      * @return void
      */
@@ -75,7 +93,7 @@ class ReferralServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register translations.
+     * Регистрация локалей.
      *
      * @return void
      */
@@ -83,27 +101,31 @@ class ReferralServiceProvider extends ServiceProvider
     {
         $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
-        if (is_dir($langPath)) {
+        if(is_dir($langPath))
+        {
             $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
-        } else {
+        }
+        else
+        {
             $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
         }
     }
 
     /**
-     * Register an additional directory of factories.
+     * Регистрация дополнительной директории для фабрик.
      *
      * @return void
      */
     public function registerFactories()
     {
-        if (! app()->environment('production') && $this->app->runningInConsole()) {
+        if(!app()->environment('production') && $this->app->runningInConsole())
+        {
             app(Factory::class)->load(module_path($this->moduleName, 'Database/factories'));
         }
     }
 
     /**
-     * Get the services provided by the provider.
+     * Получение сервисов через сервис-провайдер.
      *
      * @return array
      */
@@ -112,11 +134,18 @@ class ReferralServiceProvider extends ServiceProvider
         return [];
     }
 
+    /**
+     * Получить пути к опубликованным шаблонам.
+     *
+     * @return array
+     */
     private function getPublishableViewPaths(): array
     {
         $paths = [];
-        foreach (\Config::get('view.paths') as $path) {
-            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
+        foreach(\Config::get('view.paths') as $path)
+        {
+            if(is_dir($path . '/modules/' . $this->moduleNameLower))
+            {
                 $paths[] = $path . '/modules/' . $this->moduleNameLower;
             }
         }

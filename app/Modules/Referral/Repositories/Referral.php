@@ -14,7 +14,7 @@ use App\Models\Repository;
 use App\Models\RepositoryEloquent;
 
 /**
- * Класс заказов на основе Eloquent.
+ * Класс рефералов на основе Eloquent.
  *
  * @version 1.0
  * @since 1.0
@@ -51,18 +51,17 @@ class Referral extends Repository
      * @param int $offset Отступ вывода.
      * @param int $limit Лимит вывода.
      * @param array $with Массив связанных моделей.
-     * @param array $groups Массив для группировки.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function read(array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null, array $groups = null)
+    public function read(array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null)
     {
         return $this->_read([
             'Referral',
             'ReferralItem'
-        ], false, $filters, $active, $sorts, $offset, $limit, $with, $groups);
+        ], false, $filters, $active, $sorts, $offset, $limit, $with);
     }
 
     /**
