@@ -33,7 +33,7 @@ class ReferralListener
      */
     public function deleting(Referral $referral)
     {
-        $referral->deleteRelation($referral->referralable(), $referral->isForceDeleting());
+        $referral->deleteRelation($referral->users(), $referral->isForceDeleting());
 
         return true;
     }

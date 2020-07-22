@@ -15,6 +15,7 @@ use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
 use App\Models\Status;
+use App\Modules\User\Models\UserReferral;
 
 /**
  * Класс модель для таблицы реферальных программ на основе Eloquent.
@@ -29,6 +30,7 @@ use App\Models\Status;
 class Referral extends Eloquent
 {
     use Validate, SoftDeletes, Delete, Status;
+
     /**
      * Атрибуты, для которых разрешено массовое назначение.
      *
@@ -41,9 +43,7 @@ class Referral extends Eloquent
         "name",
         "type",
         "price",
-        "percentage",
-        "referral_able_id",
-        "referral_able_type"
+        "percentage"
     ];
 
     /**
@@ -58,9 +58,7 @@ class Referral extends Eloquent
             "name" => 'required|between:1,191',
             "type" => 'required|between:1,191',
             "price" => "required|float",
-            "percentage" => "required|boolean",
-            "referral_able_id" => 'nullable|integer|digits_between:0,20',
-            "referral_able_type" => 'nullable|max:191'
+            "percentage" => "required|boolean"
         ];
     }
 
@@ -76,21 +74,19 @@ class Referral extends Eloquent
             "name" => trans('referral::model.referral.name'),
             "type" => trans('referral::model.referral.type'),
             "price" => trans('referral::model.referral.price'),
-            "percentage" => trans('referral::model.referral.percentage'),
-            "referral_able_id" => trans('referral::model.referral_able_idtype'),
-            "referral_able_type" => trans('referral::model.referral_able_type.type'),
+            "percentage" => trans('referral::model.referral.percentage')
         ];
     }
 
     /**
-     * Получить модели к которые относиться заказ.
+     * Получить рефералов пользователей.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo Получить модель к которой относиться заказ.
+     * @return \App\Modules\User\Models\UserReferral|\Illuminate\Database\Eloquent\Relations\HasMany Модели рефералов пользователей.
      * @version 1.0
      * @since 1.0
      */
-    public function referralable()
+    public function users()
     {
-        return $this->morphTo("referral_able");
+        return $this->hasMany(UserReferral::class);
     }
 }

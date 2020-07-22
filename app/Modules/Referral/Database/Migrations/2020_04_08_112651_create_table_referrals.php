@@ -21,9 +21,6 @@ class CreateTableReferrals extends Migration {
             $table->float('price', 10, 2)->unsigned();
             $table->boolean('percentage')->default(false);
 
-            $table->bigInteger('referral_able_id')->unsigned()->nullable()->index('referral_able_id');
-            $table->string('referral_able_type', 191)->nullable()->index('referral_able_type');
-
             $table->boolean('status')->default(1)->index('status');
 
 			$table->timestamps();

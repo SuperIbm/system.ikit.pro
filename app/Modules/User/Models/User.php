@@ -327,4 +327,28 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserWallet::class);
     }
+
+    /**
+     * Получить рефералы выступая в роли приглашенного.
+     *
+     * @return \App\Modules\User\Models\UserReferral|\Illuminate\Database\Eloquent\Relations\HasMany Модель рефералов.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function referralInvited()
+    {
+        return $this->hasMany(UserReferral::class, "user_invited_id", "id");
+    }
+
+    /**
+     * Получить рефералы выступая в роли приглашающего.
+     *
+     * @return \App\Modules\User\Models\UserReferral|\Illuminate\Database\Eloquent\Relations\HasMany Модель рефералов.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function referralInviting()
+    {
+        return $this->hasMany(UserReferral::class, "user_inviting_id", "id");
+    }
 }
