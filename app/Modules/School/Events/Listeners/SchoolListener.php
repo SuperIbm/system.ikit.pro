@@ -33,9 +33,9 @@ class SchoolListener
      */
     public function deleting(School $school)
     {
-        if($school->image_small_id) ImageStore::destroy($school->image_small_id["id"]);
-        if($school->image_middle_id) ImageStore::destroy($school->image_middle_id["id"]);
-        if($school->image_big_id) ImageStore::destroy($school->image_big_id["id"]);
+        if($school->image_small_id) ImageStore::destroy("school", $school->image_small_id["id"]);
+        if($school->image_middle_id) ImageStore::destroy("school", $school->image_middle_id["id"]);
+        if($school->image_big_id) ImageStore::destroy("school", $school->image_big_id["id"]);
 
         $school->deleteRelation($school->userSchools(), $school->isForceDeleting());
         $school->deleteRelation($school->roles(), $school->isForceDeleting());

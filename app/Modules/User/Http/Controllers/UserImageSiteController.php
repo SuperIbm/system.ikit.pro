@@ -123,8 +123,8 @@ class UserImageSiteController extends Controller
 
         if($data)
         {
-            if($data['image_small_id']) ImageStore::destroy($data['image_small_id']['id']);
-            if($data['image_middle_id']) ImageStore::destroy($data['image_middle_id']['id']);
+            if($data['image_small_id']) ImageStore::destroy("user", $data['image_small_id']['id']);
+            if($data['image_middle_id']) ImageStore::destroy("user", $data['image_middle_id']['id']);
 
             $status = $this->_user->update($id, [
                 'image_small_id' => null,

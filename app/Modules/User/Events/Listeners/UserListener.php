@@ -34,8 +34,8 @@ class UserListener
      */
     public function deleting(User $user)
     {
-        if($user->image_small_id) ImageStore::destroy($user->image_small_id["id"]);
-        if($user->image_middle_id) ImageStore::destroy($user->image_middle_id["id"]);
+        if($user->image_small_id) ImageStore::destroy("user", $user->image_small_id["id"]);
+        if($user->image_middle_id) ImageStore::destroy("user", $user->image_middle_id["id"]);
 
         $user->deleteRelation($user->verification(), $user->isForceDeleting());
         $user->deleteRelation($user->recovery(), $user->isForceDeleting());

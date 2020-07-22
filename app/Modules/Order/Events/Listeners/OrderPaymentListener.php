@@ -34,7 +34,7 @@ class OrderPaymentListener
      */
     public function deleting(OrderPayment $orderPayment)
     {
-        if($orderPayment->image_id) ImageStore::destroy($orderPayment->image_id["id"]);
+        if($orderPayment->image_id) ImageStore::destroy("order_payment", $orderPayment->image_id["id"]);
 
         $orderPayment->deleteRelation($orderPayment->invoices(), $orderPayment->isForceDeleting());
 
