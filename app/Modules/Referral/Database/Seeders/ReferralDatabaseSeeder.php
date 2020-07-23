@@ -1,14 +1,14 @@
 <?php
 /**
- * Модуль Тарифа.
- * Этот модуль содержит все классы для работы тарифами.
+ * Модуль Рефералов.
+ * Этот модуль содержит все классы для работы с рефералами.
  *
- * @package App\Modules\Plan
- * @version 1.0
+ * @package App\Modules\Referral
  * @since 1.0
+ * @version 1.0
  */
 
-namespace App\Modules\Plan\Database\Seeders;
+namespace App\Modules\Referral\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class PlanDatabaseSeeder extends Seeder
+class ReferralDatabaseSeeder extends Seeder
 {
     /**
      * Запуск наполнения начальными данными.
@@ -34,9 +34,6 @@ class PlanDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(PlanSeeder::class);
-        $this->call(PlanLimitSeeder::class);
-        $this->call(PlanRoleSeeder::class);
-        $this->call(PlanRoleSectionSeeder::class);
+        $this->call(ReferralSeeder::class);
     }
 }

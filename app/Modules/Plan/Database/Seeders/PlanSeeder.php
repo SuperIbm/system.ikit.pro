@@ -32,6 +32,8 @@ class PlanSeeder extends Seeder
      */
     public function run()
     {
+        \DB::table('plans')->delete();
+
         \DB::table('plans')->insert(array(
             0 => array(
                 'id' => 1,

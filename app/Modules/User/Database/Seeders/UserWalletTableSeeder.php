@@ -15,14 +15,14 @@ use Crypt;
 use Carbon\Carbon;
 
 /**
- * Класс наполнения начальными данными: верификация пользователя.
+ * Класс наполнения начальными данными: установка кошелька пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class UserVerificationTableSeeder extends Seeder
+class UserWalletTableSeeder extends Seeder
 {
     /**
      * Запуск наполнения начальными данными.
@@ -33,14 +33,14 @@ class UserVerificationTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('user_verifications')->delete();
+        \DB::table('user_wallets')->delete();
 
-        \DB::table('user_verifications')->insert(array(
+        \DB::table('user_wallets')->insert(array(
             0 => array(
                 'id' => 1,
                 'user_id' => 1,
-                'code' => Crypt::encrypt(intval(Carbon::now()->format("U")) + rand(1000000, 100000000)),
-                'status' => 1
+                'amount' => 0,
+                'currency' => "RUB"
             ),
         ));
     }

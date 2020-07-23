@@ -14,7 +14,7 @@ use Illuminate\Database\Seeder;
 use Crypt;
 
 /**
- * Класс наполнения начальными данными: главный администратор по умолчанию.
+ * Класс наполнения начальными данными: пользователь.
  *
  * @version 1.0
  * @since 1.0
@@ -37,7 +37,7 @@ class UserTableSeeder extends Seeder
         \DB::table('users')->insert(array(
             0 => array(
                 'id' => 1,
-                'login' => 'admin@admin.com',
+                'login' => 'test@test.com',
                 'password' => bcrypt('admin'),
                 'status' => 1
             ),

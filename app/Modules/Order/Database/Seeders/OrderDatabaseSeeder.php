@@ -35,5 +35,6 @@ class OrderDatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(OrderPaymentSeeder::class);
+        $this->call(OrderSeeder::class);
     }
 }

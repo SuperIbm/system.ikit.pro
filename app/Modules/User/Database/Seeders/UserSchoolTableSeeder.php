@@ -11,16 +11,18 @@
 namespace App\Modules\User\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Crypt;
+use Carbon\Carbon;
 
 /**
- * Класс наполнения начальными данными выбранные группы пользователя.
+ * Класс наполнения начальными данными: установка школы для пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class UserGroupUserTableSeeder extends Seeder
+class UserSchoolTableSeeder extends Seeder
 {
     /**
      * Запуск наполнения начальными данными.
@@ -31,15 +33,14 @@ class UserGroupUserTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('user_group_users')->delete();
+        \DB::table('user_schools')->delete();
 
-        \DB::table('user_group_users')->insert(array(
-            0 =>
-                array(
-                    'id' => 1,
-                    'user_group_id' => 1,
-                    'user_id' => 1,
-                ),
+        \DB::table('user_schools')->insert(array(
+            0 => array(
+                'user_id' => 1,
+                'school_id' => 1,
+                'status' => true
+            ),
         ));
     }
 }

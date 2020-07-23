@@ -32,6 +32,8 @@ class OrderPaymentSeeder extends Seeder
      */
     public function run()
     {
+        \DB::table('order_payments')->delete();
+
         \DB::table('order_payments')->insert(array(
             0 => array(
                 'id' => 1,

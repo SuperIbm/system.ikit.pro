@@ -32,7 +32,9 @@ class PlanLimitSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('plans')->insert(array(
+        \DB::table('plan_limits')->delete();
+
+        \DB::table('plan_limits')->insert(array(
             0 => array(
                 'id' => 1,
                 'name' => "Пользователей",
@@ -52,7 +54,7 @@ class PlanLimitSeeder extends Seeder
             ),
             1 => array(
                 'id' => 2,
-                'name' => "Пространства",
+                'name' => "Место на жестком диске",
                 'type' => "space",
                 'from' => 10,
                 'to' => 1000,

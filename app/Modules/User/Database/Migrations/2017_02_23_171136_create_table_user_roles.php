@@ -26,6 +26,7 @@ class CreateTableUserRoles extends Migration
         {
             $table->bigInteger('id', true)->unsigned();
             $table->string('name_role', 191);
+            $table->string('index', 191)->index("index");
             $table->string('description_role', 191)->nullable();
             $table->boolean('status')->default(0)->index('status');
 

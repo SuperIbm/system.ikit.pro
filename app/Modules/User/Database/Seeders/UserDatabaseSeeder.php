@@ -10,7 +10,6 @@
 
 namespace App\Modules\User\Database\Seeders;
 
-use App\Modules\User\Models\UserVerification;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,12 +34,11 @@ class UserDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(ModuleTableSeeder::class);
-        $this->call(UserGroupUserTableSeeder::class);
-        $this->call(UserGroupRoleTableSeeder::class);
-        $this->call(UserGroupTableSeeder::class);
         $this->call(UserRoleTableSeeder::class);
         $this->call(UserTableSeeder::class);
+        $this->call(UserWalletTableSeeder::class);
+        $this->call(UserSchoolTableSeeder::class);
+        $this->call(UserSchoolRoleTableSeeder::class);
         $this->call(UserVerificationTableSeeder::class);
     }
 }

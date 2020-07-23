@@ -35,5 +35,8 @@ class SchoolDatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(SchoolSeeder::class);
+        $this->call(SchoolRoleSeeder::class);
+        $this->call(SchoolLimitSeeder::class);
+        $this->call(SchoolRoleSectionSeeder::class);
     }
 }

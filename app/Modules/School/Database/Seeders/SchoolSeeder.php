@@ -32,6 +32,8 @@ class SchoolSeeder extends Seeder
      */
     public function run()
     {
+        \DB::table('schools')->delete();
+
         $schoolId = \DB::table('schools')->insertGetId(array(
             'id' => 1,
             'user_id' => 1,
@@ -43,6 +45,8 @@ class SchoolSeeder extends Seeder
             'updated_at' => Carbon::now(),
             'deleted_at' => null
         ));
+
+        \DB::table('school_limit')->delete();
 
         \DB::table('school_limit')->insert(array(
             0 => array(
@@ -56,7 +60,7 @@ class SchoolSeeder extends Seeder
                 'deleted_at' => null
             ),
             1 => array(
-                'id' => 1,
+                'id' => 2,
                 'school_id' => $schoolId,
                 'plan_limit_id' => 2,
                 'limit' => 10,
@@ -65,8 +69,8 @@ class SchoolSeeder extends Seeder
                 'updated_at' => Carbon::now(),
                 'deleted_at' => null
             ),
-            1 => array(
-                'id' => 1,
+            2 => array(
+                'id' => 3,
                 'school_id' => $schoolId,
                 'plan_limit_id' => 3,
                 'limit' => 1000,

@@ -1,14 +1,14 @@
 <?php
 /**
- * Модуль Тарифа.
- * Этот модуль содержит все классы для работы тарифами.
+ * Модуль Разделы системы.
+ * Этот модуль содержит все классы для работы с разделами системы.
  *
- * @package App\Modules\Plan
- * @version 1.0
+ * @package App\Modules\Section
  * @since 1.0
+ * @version 1.0
  */
 
-namespace App\Modules\Plan\Database\Seeders;
+namespace App\Modules\Section\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class PlanDatabaseSeeder extends Seeder
+class SectionDatabaseSeeder extends Seeder
 {
     /**
      * Запуск наполнения начальными данными.
@@ -34,9 +34,6 @@ class PlanDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(PlanSeeder::class);
-        $this->call(PlanLimitSeeder::class);
-        $this->call(PlanRoleSeeder::class);
-        $this->call(PlanRoleSectionSeeder::class);
+        $this->call(SectionSeeder::class);
     }
 }

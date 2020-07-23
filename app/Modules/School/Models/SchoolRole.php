@@ -41,6 +41,7 @@ class SchoolRole extends Eloquent
         'school_id',
         'user_role_id',
         'name_role',
+        'index',
         'description_role',
         'status'
     ];
@@ -54,9 +55,10 @@ class SchoolRole extends Eloquent
     protected function getRules(): array
     {
         return [
-            'school_id' => 'nullable|integer|digits_between:0,20',
-            'user_role_id' => 'required|integer|digits_between:0,20',
+            'school_id' => 'required|integer|digits_between:0,20',
+            'user_role_id' => 'nullable|integer|digits_between:0,20',
             'name_role' => 'required|between:1,191',
+            'index' => 'required|between:1,191',
             'description_role' => 'nullable|max:191',
             'status' => 'required|boolean'
         ];
@@ -74,6 +76,7 @@ class SchoolRole extends Eloquent
             'school_id' => trans('school::models.schoolRole.school_id'),
             'user_role_id' => trans('school::models.schoolRole.user_role_id'),
             'name_role' => trans('school::models.schoolRole.name'),
+            'index' => trans('school::models.schoolRole.index'),
             'description_role' => trans('school::models.schoolRole.description_role'),
             'status' => trans('school::models.schoolRole.status'),
         ];
