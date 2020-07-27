@@ -126,7 +126,8 @@ return [
             'notifications' => ['path' => 'Notifications', 'generate' => false],
             'resource' => ['path' => 'Transformers', 'generate' => false],
             'action' => ['path' => 'Actions', 'generate' => true],
-            'Pipes' => ['path' => 'Pipes', 'generate' => false],
+            'pipes' => ['path' => 'Pipes', 'generate' => false],
+            'decorator' => ['path' => 'decorators', 'generate' => false],
         ],
     ],
     /*

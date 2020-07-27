@@ -102,7 +102,10 @@ trait Parameter
      */
     public function getParameters(): array
     {
-        return $this->_parameters;
+        $parameters = $this->_parameters;
+        $parameters["decorator"] = $this;
+
+        return $parameters;
     }
 
     /**

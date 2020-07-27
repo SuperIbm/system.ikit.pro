@@ -8,27 +8,22 @@
  * @since 1.0
  */
 
-namespace App\Modules\Access\Actions;
+namespace App\Modules\Order\Pipes\Verified;
 
-use Mail;
-use Crypt;
-use Carbon\Carbon;
-use App\Models\Action;
+use App\Models\Contracts\Pipe;
 use App\Modules\User\Repositories\User;
-use App\Modules\User\Repositories\UserGroupUser;
-use App\Modules\User\Repositories\UserGroup;
 use App\Modules\User\Repositories\UserVerification;
-use App\Modules\Access\Emails\Verification;
+use Closure;
 
 /**
- * Верификация пользователя.
+ * Верификация пользователя: верефицируем пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteVerifiedAction extends Action
+class CheckPipe implements Pipe
 {
     /**
      * Репозитарий пользователей.
@@ -64,30 +59,29 @@ class AccessSiteVerifiedAction extends Action
     }
 
     /**
-     * Метод запуска логики.
+     * Метод который будет вызван у pipeline.
      *
-     * @return mixed Вернет результаты исполнения.
-     * @since 1.0
-     * @version 1.0
+     * @param array $content Содержит массив свойств, которые можно передавать от pipe к pipe.
+     * @param Closure $next Ссылка на следующий pipe.
+     *
+     * @return mixed Вернет значение полученное после выполнения следующего pipe.
      */
-    public function run()
+    public function handle(array $content, Closure $next)
     {
-        $user = $this->_user->get($this->getParameter("id"), true);
+        $user = $this->_user->get($content["id"], true);
 
         if($user)
         {
-            $verification = $this->_userVerification->read([
+            $verification = $this->_userVerification->get(null, null, [
                 [
                     'property' => "user_id",
-                    'value' => $this->getParameter("id")
+                    'value' => $content["id"]
                 ]
             ]);
 
             if($verification)
             {
-                $verification = $verification[0];
-
-                if($verification["code"] == $this->getParameter("code"))
+                if($verification["code"] == $content["code"])
                 {
                     if($verification["status"] == false)
                     {
@@ -95,50 +89,49 @@ class AccessSiteVerifiedAction extends Action
                             'status' => true
                         ]);
 
-                        $gate = app(AccessGateAction::class)->setParameters([
-                            "id" => $user["id"]
-                        ])->run();
-
-                        $accessApiClientAction = app(AccessApiClientAction::class);
-
-                        $client = $accessApiClientAction->setParameters([
-                            "login" => $user["login"],
-                            "force" => true
-                        ])->run();
-
-                        $accessApiTokenAction = app(AccessApiTokenAction::class);
-
-                        $token = $accessApiTokenAction->setParameters([
-                            "secret" => $client["secret"]
-                        ])->run();
-
-                        return [
-                            "gate" => $gate,
-                            "client" => $client,
-                            "token" => $token
-                        ];
+                        return $next($content);
                     }
                     else
                     {
-                        $this->addError("user", "The user has been already verified.");
+                        /**
+                         * @var $entity \App\Modules\Access\Decorators\AccessVerifiedDecorator
+                         */
+                        $entity = $content["entity"];
+                        $entity->addError("user", trans('access::pipes.verified.checkPipe.user_is_verified'));
+
                         return false;
                     }
                 }
                 else
                 {
-                    $this->addError("user", "The verification code is not correct.");
+                    /**
+                     * @var $entity \App\Modules\Access\Decorators\AccessVerifiedDecorator
+                     */
+                    $entity = $content["entity"];
+                    $entity->addError("user", trans('access::pipes.verified.checkPipe.not_correct_code'));
+
                     return false;
                 }
             }
             else
             {
-                $this->addError("user", "The verification code doesn't exist.");
+                /**
+                 * @var $entity \App\Modules\Access\Decorators\AccessVerifiedDecorator
+                 */
+                $entity = $content["entity"];
+                $entity->addError("user", trans('access::pipes.verified.checkPipe.not_exist_code'));
+
                 return false;
             }
         }
         else
         {
-            $this->addError("user", "The user doesn't exist or not find it.");
+            /**
+             * @var $entity \App\Modules\Access\Decorators\AccessVerifiedDecorator
+             */
+            $entity = $content["entity"];
+            $entity->addError("user", trans('access::pipes.verified.checkPipe.not_exist_user'));
+
             return false;
         }
     }

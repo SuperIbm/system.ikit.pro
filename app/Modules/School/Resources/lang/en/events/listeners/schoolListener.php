@@ -1,5 +1,5 @@
 <?php
 
 return [
-    "exist" => 'You cannot add the role because it is already in the database.'
+    "exist" => 'You cannot add the role because it already exists.'
 ];

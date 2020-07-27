@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 
 use App\Modules\Access\Actions\AccessSiteSocialAction;
 use App\Modules\Access\Actions\AccessSiteSignUpAction;
-use App\Modules\Access\Actions\AccessSiteVerifiedAction;
+use App\Modules\Access\Actions\AccessVerifiedAction;
 use App\Modules\Access\Actions\AccessSiteSendEmailVerificationAction;
 use App\Modules\Access\Actions\AccessSiteForgetAction;
 use App\Modules\Access\Actions\AccessSiteCheckResetPasswordAction;
@@ -156,7 +156,7 @@ class AccessSiteController extends Controller
      */
     public function verified(int $id, AccessSiteVerifiedRequest $request)
     {
-        $accessSiteVerifiedAction = app(AccessSiteVerifiedAction::class);
+        $accessSiteVerifiedAction = app(AccessVerifiedAction::class);
 
         $data = $accessSiteVerifiedAction->setParameters([
             "id" => $id,
