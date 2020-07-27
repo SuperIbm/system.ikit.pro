@@ -44,7 +44,7 @@ class GateRole
         {
             for($y = 0; $y < count($nameRoles); $y++)
             {
-                if($gates["roles"][$i]["name_role"] == $nameRoles[$y]) return true;
+                if($gates["roles"][$i]["name"] == $nameRoles[$y]) return true;
             }
         }
 

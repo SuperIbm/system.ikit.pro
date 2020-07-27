@@ -3,8 +3,8 @@
 return [
     'school_id' => "ID school",
     'user_role_id' => "ID role",
-    'name_role' => "Name",
+    'name' => "Name",
     'index' => "Index",
-    'description_role' => "Description",
+    'description' => "Description",
     'status' => "Status",
 ];

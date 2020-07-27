@@ -154,13 +154,13 @@ class UserRoleAdminController extends Controller
                     "logic" => "or"
                 ],
                 [
-                    "property" => "name_role",
+                    "property" => "name",
                     "operator" => "like",
                     "value" => $filter,
                     "logic" => "or"
                 ],
                 [
-                    "property" => "description_role",
+                    "property" => "description",
                     "operator" => "like",
                     "value" => $filter,
                     "logic" => "or"

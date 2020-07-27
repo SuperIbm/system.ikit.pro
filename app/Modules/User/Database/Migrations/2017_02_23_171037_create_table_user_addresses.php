@@ -27,10 +27,8 @@ class CreateTableUserAddresses extends Migration
             $table->bigInteger('user_id')->unsigned()->index('user_id');
             $table->string('postal_code', 191)->nullable();
             $table->string('country', 191)->nullable();
-            $table->string('country_name', 191)->nullable();
             $table->string('city', 191)->nullable();
             $table->string('region', 191)->nullable();
-            $table->string('region_name', 191)->nullable();
             $table->string('street_address', 191)->nullable();
             $table->float('latitude', 14, 10)->index('latitude')->nullable();
             $table->float('longitude', 14, 10)->index('longitude')->nullable();

@@ -16,8 +16,8 @@ class CreateTablePlans extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name', 191);
-            $table->float('priceMonth', 10, 2)->unsigned();
-            $table->float('priceYear', 10, 2)->unsigned();
+            $table->float('price_month', 10, 2)->unsigned();
+            $table->float('price_year', 10, 2)->unsigned();
             $table->string('currency', 3)->default("RUB");
             $table->boolean('status')->default(1)->index('status');
 

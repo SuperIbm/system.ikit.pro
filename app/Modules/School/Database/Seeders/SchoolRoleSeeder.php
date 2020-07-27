@@ -39,7 +39,7 @@ class SchoolRoleSeeder extends Seeder
                 'id' => 1,
                 'school_id' => 1,
                 'user_role_id' => 1,
-                'name_role' => "Администратор",
+                'name' => "Администратор",
                 'index' => "admin",
                 'status' => 1
             ),
@@ -47,7 +47,7 @@ class SchoolRoleSeeder extends Seeder
                 'id' => 2,
                 'school_id' => 1,
                 'user_role_id' => 2,
-                'name_role' => 'Учитель',
+                'name' => 'Учитель',
                 'index' => 'teacher',
                 'status' => 1
             ),
@@ -55,7 +55,7 @@ class SchoolRoleSeeder extends Seeder
                 'id' => 3,
                 'school_id' => 1,
                 'user_role_id' => 3,
-                'name_role' => 'Студент',
+                'name' => 'Студент',
                 'index' => 'student',
                 'status' => 1
             ),
@@ -63,7 +63,7 @@ class SchoolRoleSeeder extends Seeder
                 'id' => 4,
                 'school_id' => 1,
                 'user_role_id' => 4,
-                'name_role' => 'Менеджер',
+                'name' => 'Менеджер',
                 'index' => 'manager',
                 'status' => 1
             ),
@@ -71,7 +71,7 @@ class SchoolRoleSeeder extends Seeder
                 'id' => 5,
                 'school_id' => 1,
                 'user_role_id' => 5,
-                'name_role' => 'Эксперт',
+                'name' => 'Эксперт',
                 'index' => 'expert',
                 'status' => 1
             ),
@@ -79,7 +79,7 @@ class SchoolRoleSeeder extends Seeder
                 'id' => 6,
                 'school_id' => 1,
                 'user_role_id' => 6,
-                'name_role' => 'Родитель',
+                'name' => 'Родитель',
                 'index' => 'parent',
                 'status' => 1
             )

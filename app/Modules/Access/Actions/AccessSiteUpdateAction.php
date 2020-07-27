@@ -154,8 +154,8 @@ class AccessSiteUpdateAction extends Action
 
             $records = $this->_userAddress->read($filters);
 
-            if(!isset($address["country_name"]) || $address["country_name"] == "") $address["country_name"] = $this->_location->getNameCountry($address["country"]);
-            if(!isset($address["region_name"]) || $address["region_name"] == "") $address["region_name"] = $this->_location->getNameRegion($address["country"], $address["region"]);
+            $address["country_name"] = $this->_location->getNameCountry($address["country"]);
+            $address["region_name"] = $this->_location->getNameRegion($address["country"], $address["region"]);
 
             if($records) $this->_userAddress->update($records[0]["id"], $address);
             else $this->_userAddress->create($address);

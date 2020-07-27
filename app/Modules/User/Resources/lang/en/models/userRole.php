@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'name_role' => 'Name role',
+    'name' => 'Name role',
     'index' => 'Index',
-    'description_role' => 'Description',
+    'description' => 'Description',
     'status' => 'Status'
 ];

@@ -2,8 +2,8 @@
 
 return [
     'name' => "Название",
-    'priceMonth' => "Цена за месяц",
-    'priceYear' => "Цена за год",
+    'price_month' => "Цена за месяц",
+    'price_year' => "Цена за год",
     'currency' => 'Currency',
     'status' => "Статус"
 ];

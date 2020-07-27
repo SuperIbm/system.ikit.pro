@@ -41,9 +41,9 @@ class UserRole extends Eloquent
      */
     protected $fillable = [
         'id',
-        'name_role',
+        'name',
         'index',
-        'description_role',
+        'description',
         'status'
     ];
 
@@ -56,9 +56,9 @@ class UserRole extends Eloquent
     protected function getRules()
     {
         return [
-            'name_role' => 'required|between:1,191|unique_soft:user_roles,name_role,' . $this->id . ',id',
+            'name' => 'required|between:1,191|unique_soft:user_roles,name,' . $this->id . ',id',
             'index' => 'required|between:1,191',
-            'description_role' => 'max:191',
+            'description' => 'max:191',
             'status' => 'required|boolean'
         ];
     }
@@ -72,9 +72,9 @@ class UserRole extends Eloquent
     protected function getNames()
     {
         return [
-            'name_role' => trans('user::model.userRole.name_role'),
+            'name' => trans('user::model.userRole.name'),
             'index' => trans('user::model.userRole.index'),
-            'description_role' => trans('user::model.userRole.description_role'),
+            'description' => trans('user::model.userRole.description'),
             'status' => trans('user::model.userRole.status')
         ];
     }

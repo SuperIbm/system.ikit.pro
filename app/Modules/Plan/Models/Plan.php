@@ -38,8 +38,8 @@ class Plan extends Eloquent
     protected $fillable = [
         'id',
         'name',
-        'priceMonth',
-        'priceYear',
+        'price_month',
+        'price_year',
         'currency',
         'status'
     ];
@@ -54,8 +54,8 @@ class Plan extends Eloquent
     {
         return [
             'name' => 'required|between:1,191|unique_soft:plans,name,' . $this->id . ',id',
-            'priceMonth' => 'required|float',
-            'priceYear'=> 'required|float',
+            'price_month' => 'required|float',
+            'price_year'=> 'required|float',
             'currency' => 'required|between:3,3',
             'status' => 'required|boolean'
         ];
@@ -71,8 +71,8 @@ class Plan extends Eloquent
     {
         return [
             'name' => trans('plan::models.plan.name'),
-            'priceMonth' => trans('plan::models.plan.priceMonth'),
-            'priceYear'=> trans('plan::models.plan.priceYear'),
+            'price_month' => trans('plan::models.plan.price_month'),
+            'price_year'=> trans('plan::models.plan.price_year'),
             'currency' => trans('plan::models.plan.currency'),
             'status' => trans('plan::models.plan.status')
         ];

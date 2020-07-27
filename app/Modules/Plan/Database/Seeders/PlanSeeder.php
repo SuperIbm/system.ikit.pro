@@ -38,8 +38,8 @@ class PlanSeeder extends Seeder
             0 => array(
                 'id' => 1,
                 'name' => "Test",
-                'priceMonth' => 2000,
-                'priceYear' => 1500,
+                'price_month' => 2000,
+                'price_year' => 1500,
                 'currency' => "RUB",
                 'status' => 1,
                 'created_at' => Carbon::now(),
