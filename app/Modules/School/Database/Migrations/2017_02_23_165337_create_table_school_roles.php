@@ -28,7 +28,6 @@ class CreateTableSchoolRoles extends Migration
             $table->bigInteger('user_role_id')->unsigned()->nullable()->index('user_role_id');
 
             $table->string('name', 191);
-            $table->string('index', 191)->index("index");
             $table->string('description', 191)->nullable();
 
             $table->boolean('status')->default(1)->index('status');

@@ -42,7 +42,6 @@ class UserRole extends Eloquent
     protected $fillable = [
         'id',
         'name',
-        'index',
         'description',
         'status'
     ];
@@ -57,7 +56,6 @@ class UserRole extends Eloquent
     {
         return [
             'name' => 'required|between:1,191|unique_soft:user_roles,name,' . $this->id . ',id',
-            'index' => 'required|between:1,191',
             'description' => 'max:191',
             'status' => 'required|boolean'
         ];
@@ -73,7 +71,6 @@ class UserRole extends Eloquent
     {
         return [
             'name' => trans('user::model.userRole.name'),
-            'index' => trans('user::model.userRole.index'),
             'description' => trans('user::model.userRole.description'),
             'status' => trans('user::model.userRole.status')
         ];

@@ -54,7 +54,7 @@ class OrderCharge extends Eloquent
     {
         return [
             "order_invoice_id" => 'required|integer|digits_between:1,20',
-            "charge" => 'required|between:1,191',
+            "charge" => 'required|between:1,191|unique_soft:order_charges,name,' . $this->id . ',id',
             "status" => "required|boolean"
         ];
     }

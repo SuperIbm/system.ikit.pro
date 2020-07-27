@@ -25,7 +25,7 @@ class CreateTableUserVerifications extends Migration
         {
             $table->bigInteger('id', true)->unsigned();
             $table->bigInteger('user_id')->unsigned()->index('user_id');
-            $table->string('code', 191)->unique();
+            $table->string('code', 191)->index("code");
             $table->boolean('status')->default(0)->index('status');
 
             $table->timestamps();

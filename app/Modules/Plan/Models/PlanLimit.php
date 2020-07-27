@@ -61,7 +61,7 @@ class PlanLimit extends Eloquent
     protected function getRules(): array
     {
         return [
-            'name' => 'required|between:1,191',
+            'name' => 'required|between:1,191|unique_soft:plan_limits,name,' . $this->id . ',id',
             'description' => 'nullable|max:191',
             'type' => 'required|in:place,users,sms',
             'from' => 'required|integer|digits_between:0,20',

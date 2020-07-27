@@ -26,7 +26,7 @@ class CreateTableOrderPayments extends Migration
         {
             $table->increments('id');
 
-            $table->string('name', 191);
+            $table->string('name', 191)->index("name");
             $table->string('description', 191)->nullable();
             $table->json('parameters')->nullable();
             $table->string('system', 191);

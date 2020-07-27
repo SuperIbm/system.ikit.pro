@@ -55,7 +55,7 @@ class Referral extends Eloquent
     protected function getRules(): array
     {
         return [
-            "name" => 'required|between:1,191',
+            "name" => 'required|between:1,191|unique_soft:referrals,name,' . $this->id . ',id',
             "type" => 'required|between:1,191',
             "price" => "required|float",
             "percentage" => "required|boolean"

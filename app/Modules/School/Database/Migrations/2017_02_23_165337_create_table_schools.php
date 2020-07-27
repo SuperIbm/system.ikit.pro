@@ -31,7 +31,7 @@ class CreateTableSchools extends Migration
             $table->bigInteger('image_big_id')->unsigned()->nullable()->index('image_big_id');
 
             $table->string('name', 191);
-            $table->string('index', 191)->unique("index");
+            $table->string('index', 191)->index("index");
             $table->string('full_name', 191)->nullable();
             $table->text('description')->nullable();
 

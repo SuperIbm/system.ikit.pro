@@ -41,7 +41,6 @@ class SchoolRole extends Eloquent
         'school_id',
         'user_role_id',
         'name',
-        'index',
         'description',
         'status'
     ];
@@ -58,7 +57,6 @@ class SchoolRole extends Eloquent
             'school_id' => 'required|integer|digits_between:0,20',
             'user_role_id' => 'nullable|integer|digits_between:0,20',
             'name' => 'required|between:1,191',
-            'index' => 'required|between:1,191',
             'description' => 'nullable|max:191',
             'status' => 'required|boolean'
         ];
@@ -76,7 +74,6 @@ class SchoolRole extends Eloquent
             'school_id' => trans('school::models.schoolRole.school_id'),
             'user_role_id' => trans('school::models.schoolRole.user_role_id'),
             'name' => trans('school::models.schoolRole.name'),
-            'index' => trans('school::models.schoolRole.index'),
             'description' => trans('school::models.schoolRole.description'),
             'status' => trans('school::models.schoolRole.status'),
         ];

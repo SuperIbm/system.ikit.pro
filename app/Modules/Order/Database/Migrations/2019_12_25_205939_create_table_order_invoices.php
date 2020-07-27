@@ -28,7 +28,7 @@ class CreateTableOrderInvoices extends Migration
             $table->bigInteger('order_id')->unsigned()->index('order_id')->nullable();
             $table->bigInteger('order_payment_id')->unsigned()->index('order_payment_id')->nullable();
 
-            $table->string('invoice', 191);
+            $table->string('invoice', 191)->index("invoice");
 
             $table->boolean('status')->default(0)->index('status');
 

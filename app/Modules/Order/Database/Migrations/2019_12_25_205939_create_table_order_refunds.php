@@ -26,7 +26,7 @@ class CreateTableOrderRefunds extends Migration
         {
             $table->increments('id');
             $table->bigInteger('order_charge_id')->unsigned()->index('order_charge_id')->nullable();
-            $table->string('refund', 191);
+            $table->string('refund', 191)->index("refund");
             $table->boolean('status')->default(0)->index('status');
 
             $table->timestamps();

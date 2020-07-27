@@ -16,7 +16,7 @@ class CreateTableReferrals extends Migration {
 		{
 			$table->increments('id');
 
-            $table->string('name', 191);
+            $table->string('name', 191)->index("name");
             $table->string('type', 191)->index('type');
             $table->float('price', 10, 2)->unsigned();
             $table->boolean('percentage')->default(false);

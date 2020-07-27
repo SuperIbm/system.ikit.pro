@@ -15,7 +15,7 @@ class CreateTablePlans extends Migration {
 		Schema::create('plans', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name', 191);
+			$table->string('name', 191)->index("name");
             $table->float('price_month', 10, 2)->unsigned();
             $table->float('price_year', 10, 2)->unsigned();
             $table->string('currency', 3)->default("RUB");

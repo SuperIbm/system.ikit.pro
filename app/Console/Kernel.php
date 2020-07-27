@@ -12,19 +12,25 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        //
+    protected $commands = [//
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
+     *
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->exec('rm -r ' . storage_path('app/tmp/*'))->daily();
+        $schedule->exec('mysqlcheck --user=' . Config::get('database.connections.mysql.username') . ' --password=' . Config::get('database.connections.mysql.password') . ' --optimize ' . Config::get('database.connections.mysql.database'))
+            ->weekly();
+
+        $schedule->call(function() {
+            OAuth::clean();
+        })->daily();
     }
 
     /**
@@ -34,7 +40,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

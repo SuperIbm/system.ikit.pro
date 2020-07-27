@@ -27,7 +27,7 @@ class CreateTableUsers extends Migration
             $table->bigInteger('id', true)->unsigned();
             $table->bigInteger('image_small_id')->unsigned()->nullable()->index('image_small_id');
             $table->bigInteger('image_middle_id')->unsigned()->nullable();
-            $table->string('login');
+            $table->string('login')->index('login');
             $table->string('password')->index('password')->nullable();
             $table->string('remember_token', 100)->nullable()->index('remember_token');
             $table->string('first_name', 150)->nullable();

@@ -54,7 +54,7 @@ class OrderRefund extends Eloquent
     {
         return [
             "order_charge_id" => 'required|integer|digits_between:1,20',
-            "refund" => 'required|between:1,191',
+            "refund" => 'required|between:1,191unique_soft:order_refunds,name,' . $this->id . ',id',
             'status' => 'required|bool'
         ];
     }

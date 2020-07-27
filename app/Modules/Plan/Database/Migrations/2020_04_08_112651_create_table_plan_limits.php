@@ -16,7 +16,7 @@ class CreateTablePlanLimits extends Migration {
 		{
 			$table->increments('id');
 
-			$table->string('name', 191);
+			$table->string('name', 191)->index("name");
             $table->string('description', 191)->nullable();
             $table->string('type', 191)->index('type');
             $table->integer('from')->unsigned();

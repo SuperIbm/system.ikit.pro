@@ -12,7 +12,6 @@ use Illuminate\Database\Schema\Blueprint;
  */
 class CreateTableUserRoles extends Migration
 {
-
     /**
      * Запуск миграции.
      *
@@ -25,8 +24,7 @@ class CreateTableUserRoles extends Migration
         Schema::create('user_roles', function(Blueprint $table)
         {
             $table->bigInteger('id', true)->unsigned();
-            $table->string('name', 191);
-            $table->string('index', 191)->index("index");
+            $table->string('name', 191)->index("name");
             $table->string('description', 191)->nullable();
             $table->boolean('status')->default(0)->index('status');
 

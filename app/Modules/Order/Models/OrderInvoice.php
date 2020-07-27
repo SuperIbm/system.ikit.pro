@@ -56,7 +56,7 @@ class OrderInvoice extends Eloquent
         return [
             "order_id" => 'required|integer|digits_between:1,20',
             "order_payment_id" => 'required|integer|digits_between:1,20',
-            "invoice" => 'required|between:1,191',
+            "invoice" => 'required|between:1,191|unique_soft:order_invoices,name,' . $this->id . ',id',
             "status" => trans('user::model.orderCharge.status')
         ];
     }
