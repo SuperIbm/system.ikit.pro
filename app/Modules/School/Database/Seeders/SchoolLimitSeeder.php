@@ -40,21 +40,30 @@ class SchoolLimitSeeder extends Seeder
                 'school_id' => 1,
                 'plan_limit_id' => 1,
                 'limit' => 1000,
-                'remain' => 1000
+                'remain' => 1000,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
             1 => array(
                 'id' => 2,
                 'school_id' => 1,
                 'plan_limit_id' => 2,
                 'limit' => 10,
-                'remain' => 10
+                'remain' => 10,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
             2 => array(
-                'id' => 2,
+                'id' => 3,
                 'school_id' => 1,
                 'plan_limit_id' => 3,
                 'limit' => 1000,
-                'remain' => 1000
+                'remain' => 1000,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             )
         ));
     }

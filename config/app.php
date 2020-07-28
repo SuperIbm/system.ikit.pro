@@ -242,7 +242,7 @@ return [
         App\Providers\SmsServiceProvider::class,
         App\Providers\GeoServiceProvider::class,
         App\Providers\GeocoderServiceProvider::class,
-
+        Nwidart\Modules\LaravelModulesServiceProvider::class
     ],
 
     /*
@@ -306,7 +306,7 @@ return [
         'Util' => App\Models\Facades\Util::class,
         'Bot' => App\Models\Facades\Bot::class,
         'Act' => App\Modules\Act\Facades\Act::class,
-        'School' => App\Modules\Act\Facades\School::class,
+        'School' => App\Modules\School\Facades\School::class,
         'Currency' => App\Models\Facades\Currency::class,
         'Sms' => App\Models\Facades\Sms::class,
         'Geo' => App\Models\Facades\Geo::class,

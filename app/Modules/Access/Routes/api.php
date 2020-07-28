@@ -1,11 +1,12 @@
 <?php
+
 Route::group([
     'middleware' => ['ajax'],
-    'prefix' => 'api/ajax/access/access/',
-    "as" => "api.ajax.access.access"
+    'prefix' => 'inside/access/access/',
+    "as" => "inside.access.access"
 ], function()
 {
-    Route::post('gate/', 'AccessController@gate')->middleware('auth.api')->name('gate');
+    Route::post('gate/', 'AccessController@gate')/*->middleware('auth.api')*/->name('gate');
     Route::post('logout/', 'AccessController@logout')->middleware('auth.api')->name('logout');
     Route::post('social/', 'AccessController@social')->name('social');
     Route::post('sign_up/', 'AccessController@signUp')->name('signUp');
@@ -25,10 +26,7 @@ Route::group([
         ->name('password');
 });
 
-Route::group([
-    "prefix" => "api/",
-    "as" => "api."
-], function()
+Route::group([], function()
 {
     Route::post('client', 'AccessApiController@client')->name('client');
     Route::post('token', 'AccessApiController@token')->name('token');

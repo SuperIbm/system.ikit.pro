@@ -40,48 +40,60 @@ class SchoolRoleSeeder extends Seeder
                 'school_id' => 1,
                 'user_role_id' => 1,
                 'name' => "Администратор",
-                'index' => "admin",
-                'status' => 1
+                'status' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
             1 => array(
                 'id' => 2,
                 'school_id' => 1,
                 'user_role_id' => 2,
                 'name' => 'Учитель',
-                'index' => 'teacher',
-                'status' => 1
+                'status' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
             2 => array(
                 'id' => 3,
                 'school_id' => 1,
                 'user_role_id' => 3,
                 'name' => 'Студент',
-                'index' => 'student',
-                'status' => 1
+                'status' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
             3 => array(
                 'id' => 4,
                 'school_id' => 1,
                 'user_role_id' => 4,
                 'name' => 'Менеджер',
-                'index' => 'manager',
-                'status' => 1
+                'status' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
             4 => array(
                 'id' => 5,
                 'school_id' => 1,
                 'user_role_id' => 5,
                 'name' => 'Эксперт',
-                'index' => 'expert',
-                'status' => 1
+                'status' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
             5 => array(
                 'id' => 6,
                 'school_id' => 1,
                 'user_role_id' => 6,
                 'name' => 'Родитель',
-                'index' => 'parent',
-                'status' => 1
+                'status' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             )
         ));
     }

@@ -32,9 +32,9 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('order')->delete();
+        \DB::table('orders')->delete();
 
-        \DB::table('order_payments')->insert(array(
+        \DB::table('orders')->insert(array(
             0 => array(
                 "id" => 1,
                 "school_id" => 1,
@@ -46,8 +46,7 @@ class OrderSeeder extends Seeder
                 "order_able_id" => 1,
                 "order_able_type" => '\App\Modules\Plan\Models\Plan',
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-                'deleted_at' => null
+                'updated_at' => Carbon::now()
             ),
             1 => array(
                 "id" => 2,
@@ -60,8 +59,7 @@ class OrderSeeder extends Seeder
                 "order_able_id" => 1,
                 "order_able_type" => '\App\Modules\Plan\Models\PlanLimit',
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-                'deleted_at' => null
+                'updated_at' => Carbon::now()
             ),
             2 => array(
                 "id" => 3,
@@ -74,20 +72,20 @@ class OrderSeeder extends Seeder
                 "order_able_id" => 2,
                 "order_able_type" => '\App\Modules\Plan\Models\PlanLimit',
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-                'deleted_at' => null
+                'updated_at' => Carbon::now()
             ),
             3 => array(
                 "id" => 4,
                 "school_id" => 1,
                 "name" => "Оплата за СМС",
+                "from" => null,
+                "to" => null,
                 "trial" => false,
                 "type" => "sms",
                 "order_able_id" => 3,
                 "order_able_type" => '\App\Modules\Plan\Models\PlanLimit',
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-                'deleted_at' => null
+                'updated_at' => Carbon::now()
             )
         ));
     }
