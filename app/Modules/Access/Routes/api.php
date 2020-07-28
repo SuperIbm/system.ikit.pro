@@ -1,35 +1,27 @@
 <?php
 Route::group([
     'middleware' => ['ajax'],
-    'prefix' => 'api/ajax/access/access_admin_controller/',
-    "as" => "api.ajax.access.access_admin_controller"
+    'prefix' => 'api/ajax/access/access/',
+    "as" => "api.ajax.access.access"
 ], function()
 {
-    Route::post('gate/', 'AccessAdminController@gate')->middleware('auth.api')->name('gate');
-    Route::post('logout/', 'AccessAdminController@logout')->middleware('auth.api')->name('logout');
-});
+    Route::post('gate/', 'AccessController@gate')->middleware('auth.api')->name('gate');
+    Route::post('logout/', 'AccessController@logout')->middleware('auth.api')->name('logout');
+    Route::post('social/', 'AccessController@social')->name('social');
+    Route::post('sign_up/', 'AccessController@signUp')->name('signUp');
+    Route::post('verified/{id}', 'AccessController@verified')->name('verified');
+    Route::get('verify', 'AccessController@verify')->middleware('auth.api')->name('verify');
+    Route::get('verify/{email}', 'AccessController@verify')->name('verify');
+    Route::post('forget', 'AccessController@forget')->name('forget');
+    Route::get('reset_check/{id}', 'AccessController@resetCheck')->name('resetCheck');
+    Route::post('reset/{id}', 'AccessController@reset')->name('reset');
 
-Route::group([
-    'middleware' => ['ajax'],
-    'prefix' => 'api/ajax/access/access_site_controller/',
-    "as" => "api.ajax.access.access_site_controller"
-], function()
-{
-    Route::post('social/', 'AccessSiteController@social')->name('social');
-    Route::post('sign_up/', 'AccessSiteController@signUp')->name('signUp');
-    Route::post('verified/{id}', 'AccessSiteController@verified')->name('verified');
-    Route::get('verify', 'AccessSiteController@verify')->middleware('auth.api', 'auth.user')->name('verify');
-    Route::get('verify/{email}', 'AccessSiteController@verify')->name('verify');
-    Route::post('forget', 'AccessSiteController@forget')->name('forget');
-    Route::get('reset_check/{id}', 'AccessSiteController@resetCheck')->name('resetCheck');
-    Route::post('reset/{id}', 'AccessSiteController@reset')->name('reset');
-
-    Route::put('update', 'AccessSiteController@update')
-        ->middleware('auth.api', 'auth.user')
+    Route::put('update', 'AccessController@update')
+        ->middleware('auth.api')
         ->name('update');
 
-    Route::put('password', 'AccessSiteController@password')
-        ->middleware('auth.api', 'auth.user')
+    Route::put('password', 'AccessController@password')
+        ->middleware('auth.api')
         ->name('password');
 });
 

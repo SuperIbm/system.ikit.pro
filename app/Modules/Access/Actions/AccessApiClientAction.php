@@ -56,18 +56,15 @@ class AccessApiClientAction extends Action
      */
     public function run()
     {
-        $users = $this->_user->read([
+        $user = $this->_user->get(null, null, [
             [
                 'property' => 'login',
                 'value' => $this->getParameter("login")
             ]
-        ], true, null, null, null, [
-            "userGroupRoles.userRoleAdminSections"
         ]);
 
-        if($users)
+        if($user)
         {
-            $user = $users[0];
             $check = false;
 
             if($this->getParameter("password")) $check = Hash::check($this->getParameter("password"), $user["password"]);
@@ -79,24 +76,9 @@ class AccessApiClientAction extends Action
 
                 if(!OAuth::hasError())
                 {
-                    $admin = false;
-
-                    if(isset($user["user_group_roles"]))
-                    {
-                        for($i = 0; $i < count($user["user_group_roles"]); $i++)
-                        {
-                            if($user["user_group_roles"][$i]["user_role_admin_sections"] && count($user["user_group_roles"][$i]["user_role_admin_sections"]) > 0)
-                            {
-                                $admin = true;
-                                break;
-                            }
-                        }
-                    }
-
                     return [
                         "userId" => $user["id"],
-                        "secret" => $secret,
-                        "admin" => $admin
+                        "secret" => $secret
                     ];
                 }
                 else $this->setErrors(OAuth::getErrors());

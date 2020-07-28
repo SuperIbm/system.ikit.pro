@@ -14,16 +14,7 @@ use Cache;
 use Util;
 use App\Models\Action;
 use App\Modules\User\Repositories\User;
-use App\Modules\User\Repositories\UserGroupUser;
-use App\Modules\User\Repositories\UserGroup;
-use App\Modules\User\Repositories\UserGroupRole;
-use App\Modules\User\Repositories\UserGroupPage;
 use App\Modules\User\Repositories\UserRole;
-use App\Modules\User\Repositories\UserRolePage;
-use App\Modules\User\Repositories\UserRoleAdminSection;
-use App\Modules\AdminSection\Repositories\AdminSection;
-use App\Modules\Page\Repositories\Page;
-use App\Modules\Module\Repositories\Module;
 
 /**
  * Получение всех доступов к разделам.
@@ -45,126 +36,16 @@ class AccessGateAction extends Action
     private $_user;
 
     /**
-     * Репозитарий групп пользователя.
-     *
-     * @var \App\Modules\User\Repositories\UserGroupUser
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_userGroupUser;
-
-    /**
-     * Репозитарий групп.
-     *
-     * @var \App\Modules\User\Repositories\UserGroup
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_userGroup;
-
-    /**
-     * Репозитарий групп ролей.
-     *
-     * @var \App\Modules\User\Repositories\UserGroupRole
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_userGroupRole;
-
-    /**
-     * Репозитарий групп страниц.
-     *
-     * @var \App\Modules\User\Repositories\UserGroupPage
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_userGroupPage;
-
-    /**
-     * Репозитарий ролей.
-     *
-     * @var \App\Modules\User\Repositories\UserRole
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_userRole;
-
-    /**
-     * Репозитарий страниц ролей.
-     *
-     * @var \App\Modules\User\Repositories\UserRolePage
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_userRolePage;
-
-    /**
-     * Репозитарий разделов административной системы в ролях.
-     *
-     * @var \App\Modules\User\Repositories\UserRoleAdminSection
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_userRoleAdminSection;
-
-    /**
-     * Репозитарий разделов административной системы.
-     *
-     * @var \App\Modules\AdminSection\Repositories\AdminSection
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_adminSection;
-
-    /**
-     * Репозитарий страниц.
-     *
-     * @var \App\Modules\Page\Repositories\Page
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_page;
-
-    /**
-     * Репозитарий модулей.
-     *
-     * @var \App\Modules\Module\Repositories\Module
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_module;
-
-    /**
      * Конструктор.
      *
      * @param \App\Modules\User\Repositories\User $user Репозитарий пользователей.
-     * @param \App\Modules\User\Repositories\UserGroupUser $userGroupUser Репозитарий групп пользователя.
-     * @param \App\Modules\User\Repositories\UserGroup $userGroup Репозитарий групп.
-     * @param \App\Modules\User\Repositories\UserGroupRole $userGroupRole Репозитарий групп ролей.
-     * @param \App\Modules\User\Repositories\UserGroupPage $userGroupPage Репозитарий групп страниц.
-     * @param \App\Modules\User\Repositories\UserRole $userRole Репозитарий ролей.
-     * @param \App\Modules\User\Repositories\UserRolePage $userRolePage Репозитарий страниц ролей.
-     * @param \App\Modules\User\Repositories\UserRoleAdminSection $userRoleAdminSection Репозитарий разделов административной системы в ролях.
-     * @param \App\Modules\AdminSection\Repositories\AdminSection $adminSection Репозитарий разделов административной системы.
-     * @param \App\Modules\Page\Repositories\Page $page Репозитарий страниц.
-     * @param \App\Modules\Module\Repositories\Module $module Репозитарий модулей.
      *
      * @since 1.0
      * @version 1.0
      */
-    public function __construct(User $user, UserGroupUser $userGroupUser, UserGroup $userGroup, UserGroupRole $userGroupRole, UserGroupPage $userGroupPage, UserRole $userRole, UserRolePage $userRolePage, UserRoleAdminSection $userRoleAdminSection, AdminSection $adminSection, Page $page, Module $module)
+    public function __construct(User $user)
     {
         $this->_user = $user;
-        $this->_userGroupUser = $userGroupUser;
-        $this->_userGroup = $userGroup;
-        $this->_userGroupRole = $userGroupRole;
-        $this->_userGroupPage = $userGroupPage;
-        $this->_userRole = $userRole;
-        $this->_userRolePage = $userRolePage;
-        $this->_userRoleAdminSection = $userRoleAdminSection;
-        $this->_adminSection = $adminSection;
-        $this->_page = $page;
-        $this->_module = $module;
     }
 
     /**
@@ -184,22 +65,31 @@ class AccessGateAction extends Action
             {
                 $data = [
                     'user' => [],
-                    'sections' => [],
-                    'pages' => [],
-                    'pagesUpdate' => [],
-                    'roles' => [],
-                    'groups' => [],
-                    'verified' => false
+                    'schools' => []
                 ];
 
                 $user = $this->_user->get($id, true,
                     [
                         "verification",
-                        "userCompany",
-                        "userAddress"
+                        "schools.roles.role.userRole",
+                        "schools.roles.role.sections.section"
                     ]
                 );
 
+                if($user)
+                {
+                    unset($data["password"]);
+                    $data["user"] = $user;
+                    unset($data["user"]["schools"]);
+
+
+                }
+                else
+                {
+                    return false;
+                }
+
+                /*
                 if($user)
                 {
                     unset($data["password"]);
@@ -344,6 +234,7 @@ class AccessGateAction extends Action
                     return $data;
                 }
                 else return false;
+                */
             }
         );
 

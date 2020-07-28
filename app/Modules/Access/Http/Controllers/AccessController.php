@@ -10,52 +10,104 @@
 
 namespace App\Modules\Access\Http\Controllers;
 
-use Log;
 use Auth;
+use Log;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
-use App\Modules\Access\Actions\AccessSiteSocialAction;
-use App\Modules\Access\Actions\AccessSiteSignUpAction;
+use App\Modules\Access\Actions\AccessCheckResetPasswordAction;
+use App\Modules\Access\Actions\AccessForgetAction;
+use App\Modules\Access\Actions\AccessResetAction;
+use App\Modules\Access\Actions\AccessSendEmailVerificationAction;
+use App\Modules\Access\Actions\AccessSignUpAction;
+use App\Modules\Access\Actions\AccessSocialAction;
+use App\Modules\Access\Actions\AccessUpdateAction;
 use App\Modules\Access\Actions\AccessVerifiedAction;
-use App\Modules\Access\Actions\AccessSiteSendEmailVerificationAction;
-use App\Modules\Access\Actions\AccessSiteForgetAction;
-use App\Modules\Access\Actions\AccessSiteCheckResetPasswordAction;
-use App\Modules\Access\Actions\AccessSiteResetAction;
-use App\Modules\Access\Actions\AccessSiteUpdateAction;
-use App\Modules\Access\Actions\AccessSitePasswordAction;
+use App\Modules\Access\Actions\AccessGateAction;
 
-use App\Modules\Access\Http\Requests\AccessSiteSocialRequest;
-use App\Modules\Access\Http\Requests\AccessSiteSignUpRequest;
-use App\Modules\Access\Http\Requests\AccessSiteVerifiedRequest;
-use App\Modules\Access\Http\Requests\AccessSiteForgetRequest;
-use App\Modules\Access\Http\Requests\AccessSiteResetCheckRequest;
-use App\Modules\Access\Http\Requests\AccessSiteResetRequest;
-use App\Modules\Access\Http\Requests\AccessSitePasswordRequest;
+use App\Modules\Access\Http\Requests\AccessForgetRequest;
+use App\Modules\Access\Http\Requests\AccessPasswordRequest;
+use App\Modules\Access\Http\Requests\AccessResetCheckRequest;
+use App\Modules\Access\Http\Requests\AccessResetRequest;
+use App\Modules\Access\Http\Requests\AccessSignUpRequest;
+use App\Modules\Access\Http\Requests\AccessSocialRequest;
+use App\Modules\Access\Http\Requests\AccessVerifiedRequest;
 
 /**
- * Класс контроллер для авторизации, аунтификации, регистрации и восстановление пароля.
+ * Класс контроллер для авторизации и аунтификации.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteController extends Controller
+class AccessController extends Controller
 {
     /**
-     * Регистрация или вход через социальную сеть.
-     *
-     * @param \App\Modules\Access\Http\Requests\AccessSiteSocialRequest $request Запрос.
+     * Авторизация.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function social(AccessSiteSocialRequest $request)
+    public function gate()
     {
-        $action = app(AccessSiteSocialAction::class);
+        if(Auth::check())
+        {
+            $data = app(AccessGateAction::class)->setParameters([
+                "id" => Auth::user()->login
+            ])->run();
+
+            if($data)
+            {
+                $data = [
+                    'success' => true,
+                    'data' => $data
+                ];
+            }
+            else
+            {
+                $data = [
+                    'success' => false
+                ];
+            }
+        }
+        else
+        {
+            $data = [
+                'success' => false
+            ];
+        }
+
+        return response()->json($data)->setStatusCode($data["success"] == true ? 200 : 400);
+    }
+
+    /**
+     * Выход пользователя.
+     *
+     * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
+     * @since 1.0
+     * @version 1.0
+     */
+    public function logout()
+    {
+        Auth::logout();
+        return response()->json(['success' => true]);
+    }
+
+    /**
+     * Регистрация или вход через социальную сеть.
+     *
+     * @param \App\Modules\Access\Http\Requests\AccessSocialRequest $request Запрос.
+     *
+     * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
+     * @since 1.0
+     * @version 1.0
+     */
+    public function social(AccessSocialRequest $request)
+    {
+        $action = app(AccessSocialAction::class);
 
         $data = $action->setParameters([
             "id" => $request->get("id"),
@@ -96,17 +148,17 @@ class AccessSiteController extends Controller
     /**
      * Регистрация пользователя.
      *
-     * @param \App\Modules\Access\Http\Requests\AccessSiteSignUpRequest $request Запрос.
+     * @param \App\Modules\Access\Http\Requests\AccessSignUpRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function signUp(AccessSiteSignUpRequest $request)
+    public function signUp(AccessSignUpRequest $request)
     {
-        $accessSiteSignUpAction = app(AccessSiteSignUpAction::class);
+        $accessSignUpAction = app(AccessSignUpAction::class);
 
-        $data = $accessSiteSignUpAction->setParameters([
+        $data = $accessSignUpAction->setParameters([
             "login" => $request->get("login"),
             "password" => $request->get("password"),
             "first_name" => $request->get("first_name"),
@@ -137,7 +189,7 @@ class AccessSiteController extends Controller
 
             $data = [
                 'success' => false,
-                'message' => $accessSiteSignUpAction->getErrorMessage()
+                'message' => $accessSignUpAction->getErrorMessage()
             ];
         }
 
@@ -148,17 +200,17 @@ class AccessSiteController extends Controller
      * Верификация пользователя.
      *
      * @param int $id ID пользователя.
-     * @param \App\Modules\Access\Http\Requests\AccessSiteVerifiedRequest $request Запрос.
+     * @param \App\Modules\Access\Http\Requests\AccessVerifiedRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function verified(int $id, AccessSiteVerifiedRequest $request)
+    public function verified(int $id, AccessVerifiedRequest $request)
     {
-        $accessSiteVerifiedAction = app(AccessVerifiedAction::class);
+        $accessVerifiedAction = app(AccessVerifiedAction::class);
 
-        $data = $accessSiteVerifiedAction->setParameters([
+        $data = $accessVerifiedAction->setParameters([
             "id" => $id,
             "code" => $request->get("code")
         ])->run();
@@ -184,7 +236,7 @@ class AccessSiteController extends Controller
 
             $data = [
                 'success' => false,
-                'message' => $accessSiteVerifiedAction->getErrorMessage()
+                'message' => $accessVerifiedAction->getErrorMessage()
             ];
         }
 
@@ -214,9 +266,9 @@ class AccessSiteController extends Controller
 
         if($checked)
         {
-            $accessSiteSendEmailVerificationAction = app(AccessSiteSendEmailVerificationAction::class);
+            $accessSendEmailVerificationAction = app(AccessSendEmailVerificationAction::class);
 
-            $result = $accessSiteSendEmailVerificationAction->setParameters([
+            $result = $accessSendEmailVerificationAction->setParameters([
                 "email" => $email
             ])->run();
 
@@ -240,7 +292,7 @@ class AccessSiteController extends Controller
 
                 $data = [
                     'success' => false,
-                    'message' => $accessSiteSendEmailVerificationAction->getErrorMessage()
+                    'message' => $accessSendEmailVerificationAction->getErrorMessage()
                 ];
             }
         }
@@ -257,17 +309,17 @@ class AccessSiteController extends Controller
     /**
      * Отправка e-mail для восстановления пароля.
      *
-     * @param \App\Modules\Access\Http\Requests\AccessSiteForgetRequest $request Запрос.
+     * @param \App\Modules\Access\Http\Requests\AccessForgetRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function forget(AccessSiteForgetRequest $request)
+    public function forget(AccessForgetRequest $request)
     {
-        $accessSiteForgetAction = app(AccessSiteForgetAction::class);
+        $accessForgetAction = app(AccessForgetAction::class);
 
-        $data = $accessSiteForgetAction->setParameters([
+        $data = $accessForgetAction->setParameters([
             "login" => $request->get("login")
         ])->run();
 
@@ -292,7 +344,7 @@ class AccessSiteController extends Controller
 
             $data = [
                 'success' => false,
-                'message' => $accessSiteForgetAction->getErrorMessage()
+                'message' => $accessForgetAction->getErrorMessage()
             ];
         }
 
@@ -303,17 +355,17 @@ class AccessSiteController extends Controller
      * Проверка возможности сбить пароль.
      *
      * @param int $id ID пользователя.
-     * @param \App\Modules\Access\Http\Requests\AccessSiteResetCheckRequest $request Запрос.
+     * @param \App\Modules\Access\Http\Requests\AccessResetCheckRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function resetCheck(int $id, AccessSiteResetCheckRequest $request)
+    public function resetCheck(int $id, AccessResetCheckRequest $request)
     {
-        $accessSiteCheckResetPasswordAction = app(AccessSiteCheckResetPasswordAction::class);
+        $accessCheckResetPasswordAction = app(AccessCheckResetPasswordAction::class);
 
-        $status = $accessSiteCheckResetPasswordAction->setParameters
+        $status = $accessCheckResetPasswordAction->setParameters
         (
             [
                 "id" => $id,
@@ -331,7 +383,7 @@ class AccessSiteController extends Controller
         {
             $data = [
                 'success' => false,
-                'message' => $accessSiteCheckResetPasswordAction->getErrorMessage()
+                'message' => $accessCheckResetPasswordAction->getErrorMessage()
             ];
         }
 
@@ -342,17 +394,17 @@ class AccessSiteController extends Controller
      * Установка нового пароля.
      *
      * @param int $id ID пользователя.
-     * @param \App\Modules\Access\Http\Requests\AccessSiteResetRequest $request Запрос.
+     * @param \App\Modules\Access\Http\Requests\AccessResetRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function reset(int $id, AccessSiteResetRequest $request)
+    public function reset(int $id, AccessResetRequest $request)
     {
-        $accessSiteResetAction= app(AccessSiteResetAction::class);
+        $accessResetAction= app(AccessResetAction::class);
 
-        $status = $accessSiteResetAction->setParameters
+        $status = $accessResetAction->setParameters
         (
             [
                 "id" => $id,
@@ -371,7 +423,7 @@ class AccessSiteController extends Controller
         {
             $data = [
                 'success' => false,
-                'message' => $accessSiteResetAction->getErrorMessage()
+                'message' => $accessResetAction->getErrorMessage()
             ];
         }
 
@@ -389,9 +441,9 @@ class AccessSiteController extends Controller
      */
     public function update(Request $request)
     {
-        $accessSiteUpdateAction= app(AccessSiteUpdateAction::class);
+        $accessUpdateAction= app(AccessUpdateAction::class);
 
-        $status = $accessSiteUpdateAction->setParameters
+        $status = $accessUpdateAction->setParameters
         (
             [
                 "user" => Auth::user()->toArray(),
@@ -432,7 +484,7 @@ class AccessSiteController extends Controller
 
             $data = [
                 'success' => false,
-                'message' => $accessSiteUpdateAction->getErrorMessage()
+                'message' => $accessUpdateAction->getErrorMessage()
             ];
         }
 
@@ -442,17 +494,17 @@ class AccessSiteController extends Controller
     /**
      * Изменение пароля.
      *
-     * @param \App\Modules\Access\Http\Requests\AccessSitePasswordRequest $request Запрос.
+     * @param \App\Modules\Access\Http\Requests\AccessPasswordRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function password(AccessSitePasswordRequest $request)
+    public function password(AccessPasswordRequest $request)
     {
-        $accessSiteResetAction= app(AccessSitePasswordAction::class);
+        $accessResetAction= app(AccessPasswordAction::class);
 
-        $status = $accessSiteResetAction->setParameters
+        $status = $accessResetAction->setParameters
         (
             [
                 "user" => Auth::user()->toArray(),
@@ -471,7 +523,7 @@ class AccessSiteController extends Controller
         {
             $data = [
                 'success' => false,
-                'message' => $accessSiteResetAction->getErrorMessage()
+                'message' => $accessResetAction->getErrorMessage()
             ];
         }
 

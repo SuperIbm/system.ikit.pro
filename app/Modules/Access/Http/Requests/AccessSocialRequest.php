@@ -13,14 +13,14 @@ namespace App\Modules\Access\Http\Requests;
 use App\Models\FormRequest;
 
 /**
- * Класс для изменения паролья пользователя через публичную часть сайта.
+ * Класс для авторизации и регистрации пользователя через социальные сети.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteResetRequest extends FormRequest
+class AccessSocialRequest extends FormRequest
 {
     /**
      * Возвращает правила проверки.
@@ -32,8 +32,9 @@ class AccessSiteResetRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required',
-            'password' => 'required|between:6,25|confirmed',
+            'id' => 'required',
+            'type' => 'required',
+            'login' => 'required|between:1,199'
         ];
     }
 
@@ -47,8 +48,9 @@ class AccessSiteResetRequest extends FormRequest
     public function attributes()
     {
         return [
-            'code' => 'Code',
-            'password' => 'Password'
+            'id' => 'ID',
+            'type' => 'Type',
+            'login' => 'Login'
         ];
     }
 }

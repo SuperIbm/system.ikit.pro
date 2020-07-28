@@ -32,9 +32,9 @@ class AccessSiteCheckResetPasswordAction extends Action
      */
     public function run()
     {
-        $accessSiteCheckCodeResetPasswordTask = app(AccessSiteCheckCodeResetPasswordTask::class);
+        $action = app(AccessSiteCheckCodeResetPasswordTask::class);
 
-        $status = $accessSiteCheckCodeResetPasswordTask->setParameters([
+        $status = $action->setParameters([
             "id" => $this->getParameter("id"),
             "code" => $this->getParameter("code")
         ])->run();
@@ -42,7 +42,7 @@ class AccessSiteCheckResetPasswordAction extends Action
         if($status) return true;
         else
         {
-            $this->setErrors($accessSiteCheckCodeResetPasswordTask->getErrors());
+            $this->setErrors($action->getErrors());
 
             return false;
         }

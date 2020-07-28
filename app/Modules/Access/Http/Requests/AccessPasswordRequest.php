@@ -13,14 +13,14 @@ namespace App\Modules\Access\Http\Requests;
 use App\Models\FormRequest;
 
 /**
- * Класс для проверки возможности изменения паролья пользователя через публичную часть сайта.
+ * Класс для изменения паролья пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteResetCheckRequest extends FormRequest
+class AccessPasswordRequest extends FormRequest
 {
     /**
      * Возвращает правила проверки.
@@ -32,7 +32,8 @@ class AccessSiteResetCheckRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required'
+            'password_current' => 'required|between:6,25',
+            'password' => 'required|between:6,25|confirmed',
         ];
     }
 
@@ -46,7 +47,8 @@ class AccessSiteResetCheckRequest extends FormRequest
     public function attributes()
     {
         return [
-            'code' => 'Code'
+            'password_current' => 'Current password',
+            'password' => 'Password'
         ];
     }
 }

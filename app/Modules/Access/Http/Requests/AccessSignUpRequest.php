@@ -13,14 +13,14 @@ namespace App\Modules\Access\Http\Requests;
 use App\Models\FormRequest;
 
 /**
- * Класс для регистрации пользователя через публичную часть сайта.
+ * Класс для регистрации пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteSignUpRequest extends FormRequest
+class AccessSignUpRequest extends FormRequest
 {
     /**
      * Возвращает правила проверки.

@@ -13,14 +13,14 @@ namespace App\Modules\Access\Http\Requests;
 use App\Models\FormRequest;
 
 /**
- * Класс для верификации пользователя через публичную часть сайта.
+ * Класс для проверки возможности изменения паролья пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteVerifiedRequest extends FormRequest
+class AccessResetCheckRequest extends FormRequest
 {
     /**
      * Возвращает правила проверки.

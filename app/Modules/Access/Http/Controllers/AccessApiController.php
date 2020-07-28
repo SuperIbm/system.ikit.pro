@@ -13,7 +13,6 @@ namespace App\Modules\Access\Http\Controllers;
 use Illuminate\Routing\Controller;
 use App\Modules\Access\Http\Requests\AccessApiTokenRequest;
 use App\Modules\Access\Http\Requests\AccessApiRefreshRequest;
-use App\Modules\User\Repositories\User;
 use App\Modules\Access\Actions\AccessApiTokenAction;
 use App\Modules\Access\Actions\AccessApiRefreshAction;
 use App\Modules\Access\Http\Requests\AccessApiClientRequest;
@@ -29,28 +28,6 @@ use App\Modules\Access\Actions\AccessApiClientAction;
  */
 class AccessApiController extends Controller
 {
-    /**
-     * Репозитарий для выбранных групп пользователя.
-     *
-     * @var \App\Modules\User\Repositories\User
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_user;
-
-    /**
-     * Конструктор.
-     *
-     * @param \App\Modules\User\Repositories\User $user Репозитарий пользователей.
-     *
-     * @since 1.0
-     * @version 1.0
-     */
-    public function __construct(User $user)
-    {
-        $this->_user = $user;
-    }
-
     /**
      * Генерация клиента.
      *

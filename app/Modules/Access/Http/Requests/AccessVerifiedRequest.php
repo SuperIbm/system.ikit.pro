@@ -13,14 +13,14 @@ namespace App\Modules\Access\Http\Requests;
 use App\Models\FormRequest;
 
 /**
- * Класс для авторизации и решистрации  пользователя через социальну сеть.
+ * Класс для верификации пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteSocialRequest extends FormRequest
+class AccessVerifiedRequest extends FormRequest
 {
     /**
      * Возвращает правила проверки.
@@ -32,9 +32,7 @@ class AccessSiteSocialRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required',
-            'type' => 'required',
-            'login' => 'required|between:1,199'
+            'code' => 'required'
         ];
     }
 
@@ -48,9 +46,7 @@ class AccessSiteSocialRequest extends FormRequest
     public function attributes()
     {
         return [
-            'id' => 'ID',
-            'type' => 'Type',
-            'login' => 'Login'
+            'code' => 'Code'
         ];
     }
 }

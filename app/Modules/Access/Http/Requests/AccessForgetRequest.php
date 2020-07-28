@@ -20,7 +20,7 @@ use App\Models\FormRequest;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteForgetRequest extends FormRequest
+class AccessForgetRequest extends FormRequest
 {
     /**
      * Возвращает правила проверки.
