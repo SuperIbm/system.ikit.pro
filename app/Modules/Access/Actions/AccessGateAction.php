@@ -60,6 +60,8 @@ class AccessGateAction extends Action
         $id = $this->getParameter("id");
         $key = Util::getKey("Access", "Gate", "User", "UserItem", $id);
 
+        \Cache::flush();
+
         $user = Cache::tags(["User", "UserItem"])->remember($key, 60 * 24 * 30,
             function() use ($id)
             {
@@ -71,18 +73,78 @@ class AccessGateAction extends Action
                 $user = $this->_user->get($id, true, null,
                     [
                         "verification",
+                        "schools.school",
                         "schools.roles.role.userRole",
                         "schools.roles.role.sections.section"
                     ]
                 );
 
-                if($user)
+                if($user && $user["status"] == true)
                 {
-                    unset($data["password"]);
                     $data["user"] = $user;
                     unset($data["user"]["schools"]);
+                    unset($data["user"]["password"]);
 
+                    if($user["verification"]) $data["verified"] = $user["verification"]["status"];
+                    else $data["verified"] = false;
 
+                    unset($data["user"]["verification"]);
+
+                    for($i = 0; $i < count($user["schools"]); $i++)
+                    {
+                        if($user["schools"][$i]["status"] && $user["schools"][$i]["school"] && $user["schools"][$i]["school"]["status"])
+                        {
+                            $data["schools"][$i] = $user["schools"][$i]["school"];
+                            $data["schools"][$i]["roles"] = [];
+                            $data["schools"][$i]["sections"] = [];
+
+                            for($t = 0; $t < count($user["schools"][$i]["roles"]); $t++)
+                            {
+                                if($user["schools"][$i]["roles"][$t]["role"] && $user["schools"][$i]["roles"][$t]["role"]["status"] && (!$user["schools"][$i]["roles"][$t]["role"]["status"]["user_role"] || ($user["schools"][$i]["roles"][$t]["role"]["status"]["user_role"] && $user["schools"][$i]["roles"][$t]["role"]["status"]["user_role"]["status"])))
+                                {
+                                    $ln = count($data["schools"][$i]["roles"]);
+                                    $data["schools"][$i]["roles"][$ln] = $user["schools"][$i]["roles"][$t]["role"];
+                                    unset($data["schools"][$i]["roles"][$ln]["sections"]);
+                                    unset($data["schools"][$i]["roles"][$ln]["user_role"]);
+
+                                    for($u = 0; $u < count($user["schools"][$i]["roles"][$t]["role"]["sections"]); $u++)
+                                    {
+                                        $schoolSection = $user["schools"][$i]["roles"][$t]["role"]["sections"][$u];
+
+                                        if($schoolSection["section"]["status"])
+                                        {
+                                            $index = $schoolSection["section"]["index"];
+
+                                            if(!isset($data["schools"][$i]["sections"][$index]))
+                                            {
+                                                $data["schools"][$i]["sections"][$index] = [
+                                                    "id" => $schoolSection["section"]["id"],
+                                                    "label" => $schoolSection["section"]["label"],
+                                                    "index" => $schoolSection["section"]["index"],
+                                                    "read" => $schoolSection["read"],
+                                                    "create" => $schoolSection["create"],
+                                                    "update" => $schoolSection["update"],
+                                                    "destroy" => $schoolSection["destroy"]
+                                                ];
+                                            }
+                                            else
+                                            {
+                                                if($schoolSection['read']) $data["schools"][$i]["sections"][$index]['read'] = 1;
+
+                                                if($schoolSection['create']) $data["schools"][$i]["sections"][$index]['create'] = 1;
+
+                                                if($schoolSection['update']) $data["schools"][$i]["sections"][$index]['update'] = 1;
+
+                                                if($schoolSection['destroy']) $data["schools"][$i]["sections"][$index]['destroy'] = 1;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    print_r($data);
                 }
                 else
                 {

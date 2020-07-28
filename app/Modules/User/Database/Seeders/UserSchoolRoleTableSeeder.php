@@ -39,7 +39,10 @@ class UserSchoolRoleTableSeeder extends Seeder
             0 => array(
                 'id' => 1,
                 'user_id' => 1,
-                'school_role_id' => 1
+                'school_role_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
         ));
     }

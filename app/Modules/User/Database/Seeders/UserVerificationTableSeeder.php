@@ -40,7 +40,10 @@ class UserVerificationTableSeeder extends Seeder
                 'id' => 1,
                 'user_id' => 1,
                 'code' => Crypt::encrypt(intval(Carbon::now()->format("U")) + rand(1000000, 100000000)),
-                'status' => 1
+                'status' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
         ));
     }

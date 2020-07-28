@@ -10,6 +10,7 @@
 
 namespace App\Modules\User\Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Crypt;
 
@@ -39,7 +40,10 @@ class UserTableSeeder extends Seeder
                 'id' => 1,
                 'login' => 'test@test.com',
                 'password' => bcrypt('admin'),
-                'status' => 1
+                'status' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
         ));
     }

@@ -92,6 +92,6 @@ class UserSchoolRole extends Eloquent
      */
     public function role()
     {
-        return $this->belongsTo(SchoolRole::class);
+        return $this->belongsTo(SchoolRole::class, 'school_role_id', 'id');
     }
 }

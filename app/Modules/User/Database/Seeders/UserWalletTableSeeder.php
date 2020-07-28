@@ -40,7 +40,10 @@ class UserWalletTableSeeder extends Seeder
                 'id' => 1,
                 'user_id' => 1,
                 'amount' => 0,
-                'currency' => "RUB"
+                'currency' => "RUB",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
         ));
     }

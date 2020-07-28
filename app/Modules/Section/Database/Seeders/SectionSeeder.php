@@ -10,6 +10,7 @@
 
 namespace App\Modules\Section\Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use App\Modules\Section\Models\Section;
 
@@ -39,7 +40,10 @@ class SectionSeeder extends Seeder
             "index" => "users",
             'label' => "Пользователи",
             'icon' => "mdi-account",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -47,7 +51,10 @@ class SectionSeeder extends Seeder
             "index" => "courses",
             'label' => "Курсы",
             'icon' => "mdi-book-open-page-variant",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -55,7 +62,10 @@ class SectionSeeder extends Seeder
             "index" => "leads",
             'label' => "Лиды",
             'icon' => "mdi-gift",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -63,7 +73,10 @@ class SectionSeeder extends Seeder
             "index" => "emails",
             'label' => "E-mail маркетинг",
             'icon' => "mdi-email",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -71,7 +84,10 @@ class SectionSeeder extends Seeder
             "index" => "automation",
             'label' => "Автоматизация",
             'icon' => "mdi-video-input-component",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -79,7 +95,10 @@ class SectionSeeder extends Seeder
             "index" => "forms",
             'label' => "Формы",
             'icon' => "mdi-form-textbox",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -87,7 +106,10 @@ class SectionSeeder extends Seeder
             "index" => "lists",
             'label' => "Списки",
             'icon' => "mdi-format-list-text",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -95,7 +117,10 @@ class SectionSeeder extends Seeder
             "index" => "processes",
             'label' => "Процессы",
             'icon' => "mdi-call-split",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -103,7 +128,10 @@ class SectionSeeder extends Seeder
             "index" => "reports",
             'label' => "Отчеты",
             'icon' => "mdi-chart-pie",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -111,7 +139,10 @@ class SectionSeeder extends Seeder
             "index" => "roles",
             'label' => "Роли",
             'icon' => "mdi-account-group",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -119,7 +150,10 @@ class SectionSeeder extends Seeder
             "index" => "site",
             'label' => "Сайт",
             'icon' => "mdi-earth",
-            'status' => 0
+            'status' => 0,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -127,7 +161,10 @@ class SectionSeeder extends Seeder
             "index" => "apps",
             'label' => "Приложения",
             'icon' => "mdi-power-plug",
-            'status' => 0
+            'status' => 0,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -135,7 +172,10 @@ class SectionSeeder extends Seeder
             "index" => "settings",
             'label' => "Настройки",
             'icon' => "mdi-cog",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
 
         Section::create([
@@ -143,7 +183,10 @@ class SectionSeeder extends Seeder
             "index" => "logs",
             'label' => "Логи",
             'icon' => "mdi-clipboard-list",
-            'status' => 1
+            'status' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'deleted_at' => null
         ]);
     }
 }

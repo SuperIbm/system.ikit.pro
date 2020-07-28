@@ -96,7 +96,7 @@ class UserSchool extends Eloquent
      */
     public function roles()
     {
-        return $this->hasMany(UserSchoolRole::class);
+        return $this->hasMany(UserSchoolRole::class, 'user_id', 'user_id');
     }
 
     /**

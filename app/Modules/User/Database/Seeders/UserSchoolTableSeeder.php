@@ -39,7 +39,10 @@ class UserSchoolTableSeeder extends Seeder
             0 => array(
                 'user_id' => 1,
                 'school_id' => 1,
-                'status' => true
+                'status' => true,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null
             ),
         ));
     }
