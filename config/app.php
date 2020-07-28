@@ -242,7 +242,6 @@ return [
         App\Providers\SmsServiceProvider::class,
         App\Providers\GeoServiceProvider::class,
         App\Providers\GeocoderServiceProvider::class,
-        Nwidart\Modules\LaravelModulesServiceProvider::class
     ],
 
     /*
@@ -313,7 +312,7 @@ return [
         'Geocoder' => App\Models\Facades\Geocoder::class,
 
         'ImageStore' => App\Modules\Image\Facades\Image::class,
-        'Document' => App\Modules\Document\Facades\Document::class,
+        'DocumentStore' => App\Modules\Document\Facades\Document::class,
         'Alert' => App\Modules\Alert\Facades\Alert::class,
         'Size' => Intervention\Image\Facades\Image::class,
         'OAuth' => App\Modules\OAuth\Facades\OAuth::class

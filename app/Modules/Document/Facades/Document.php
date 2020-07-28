@@ -29,6 +29,6 @@ class Document extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'document';
+        return 'document.store';
     }
 }

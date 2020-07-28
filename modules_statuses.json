@@ -2,5 +2,18 @@
     "School": true,
     "Plan": true,
     "Order": true,
-    "Referral": true
+    "Referral": true,
+    "Test": true,
+    "Access": true,
+    "Act": true,
+    "Alert": true,
+    "Cache": true,
+    "Core": true,
+    "Document": true,
+    "Image": true,
+    "Location": true,
+    "OAuth": true,
+    "Section": true,
+    "Typograph": true,
+    "User": true
 }
