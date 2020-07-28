@@ -22,7 +22,7 @@ class CreateTableSections extends Migration
      */
     public function up()
     {
-        Schema::create('admin_sections', function(Blueprint $table) {
+        Schema::create('sections', function(Blueprint $table) {
             $table->increments('id');
             $table->string('index', 191)->index('index');
             $table->string('label', 191);
@@ -45,6 +45,6 @@ class CreateTableSections extends Migration
      */
     public function down()
     {
-        Schema::drop('admin_sections');
+        Schema::drop('sections');
     }
 }

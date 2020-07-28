@@ -301,5 +301,5 @@ abstract class Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function newInstance(array $data = [], $exists = false): Eloquent;
+    abstract public function newInstance(array $data = array(), bool $exists = false): Eloquent;
 }

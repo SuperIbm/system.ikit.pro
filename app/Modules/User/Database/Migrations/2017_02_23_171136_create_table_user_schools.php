@@ -28,6 +28,7 @@ class CreateTableUserSchools extends Migration
 
             $table->bigInteger('user_id')->unsigned()->index('user_id');
             $table->bigInteger('school_id')->unsigned()->index('school_id');
+            $table->boolean('status')->default(0)->index('status');
 
             $table->timestamps();
             $table->softDeletes()->index('deleted_at');

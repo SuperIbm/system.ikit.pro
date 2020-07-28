@@ -76,7 +76,7 @@ class Section extends Eloquent
         return [
             'parent_id' => 'integer|digits_between:0,20',
             'label' => 'required|between:1,191',
-            'index' => 'required|between:1,191|unique_soft:admin_sections,index,' . $this->id . ',id',
+            'index' => 'required|between:1,191|unique_soft:sections,index,' . $this->id . ',id',
             'icon' => 'max:191',
             'status' => 'required|boolean'
         ];

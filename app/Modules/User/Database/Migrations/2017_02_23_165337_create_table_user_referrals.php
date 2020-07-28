@@ -27,7 +27,7 @@ class CreateTableUserReferrals extends Migration
             $table->bigInteger('referral_id')->unsigned()->index('referral_id');
 
             $table->bigInteger('user_invited_id')->unsigned()->index('user_invited_id');
-            $table->bigInteger('user_referral_id')->unsigned()->index('user_invited_id');
+            $table->bigInteger('user_referral_id')->unsigned()->index('user_referral_id');
 
             $table->timestamps();
             $table->softDeletes()->index('deleted_at');

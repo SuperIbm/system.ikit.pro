@@ -68,7 +68,7 @@ class AccessGateAction extends Action
                     'schools' => []
                 ];
 
-                $user = $this->_user->get($id, true,
+                $user = $this->_user->get($id, true, null,
                     [
                         "verification",
                         "schools.roles.role.userRole",
