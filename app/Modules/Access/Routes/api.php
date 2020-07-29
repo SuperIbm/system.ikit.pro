@@ -6,7 +6,7 @@ Route::group([
     "as" => "inside.access.access"
 ], function()
 {
-    Route::get('gate/', 'AccessController@gate')/*->middleware('auth.api')*/->name('gate');
+    Route::post('gate/', 'AccessController@gate')->middleware('auth.api')->name('gate');
     Route::post('logout/', 'AccessController@logout')->middleware('auth.api')->name('logout');
     Route::post('social/', 'AccessController@social')->name('social');
     Route::post('sign_up/', 'AccessController@signUp')->name('signUp');

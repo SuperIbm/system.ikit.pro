@@ -53,10 +53,10 @@ class AccessController extends Controller
      */
     public function gate()
     {
-        //if(Auth::check())
-        //{
+        if(Auth::check())
+        {
             $data = app(AccessGateAction::class)->setParameters([
-                "id" => 1//Auth::user()->login
+                "id" => Auth::user()->login
             ])->run();
 
             if($data)
@@ -72,13 +72,13 @@ class AccessController extends Controller
                     'success' => false
                 ];
             }
-        /*}
+        }
         else
         {
             $data = [
                 'success' => false
             ];
-        }*/
+        }
 
         return response()->json($data)->setStatusCode($data["success"] == true ? 200 : 400);
     }

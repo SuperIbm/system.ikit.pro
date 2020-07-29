@@ -15,7 +15,6 @@ use Carbon\Carbon;
 use Util;
 use App\Models\Action;
 use App\Modules\User\Repositories\User;
-use App\Modules\User\Repositories\UserRole;
 
 /**
  * Получение всех доступов к разделам.
@@ -61,43 +60,38 @@ class AccessGateAction extends Action
         $id = $this->getParameter("id");
         $key = Util::getKey("Access", "Gate", "User", "UserItem", $id);
 
-        $user = Cache::tags(["User", "UserItem"])->remember($key, 60 * 24 * 30,
-            function() use ($id)
+        $user = Cache::tags(["User", "UserItem"])->remember($key, 60 * 24 * 30, function() use ($id) {
+            $data = [
+                'user' => [],
+                'schools' => [],
+                'verified' => false
+            ];
+
+            $user = $this->_user->get($id, true, null, [
+                "verification",
+                "schools.school.plan",
+                "schools.school.limits.planLimit",
+                "schools.school.activeOrders.orderable",
+                "schools.roles.role.userRole",
+                "schools.roles.role.sections.section",
+                "wallet"
+            ]);
+
+            if($user && $user["status"] == true)
             {
-                $data = [
-                    'user' => [],
-                    'schools' => [],
-                    'verified' => false
-                ];
+                $data["user"] = $this->_getUser($user);
+                $data["verified"] = $this->_getVerified($user["verification"]);
+                $data["schools"] = $this->_getSchools($user["schools"]);
 
-                $user = $this->_user->get($id, true, null,
-                    [
-                        "verification",
-                        "schools.school.plan",
-                        "schools.school.limits.planLimit",
-                        "schools.school.activeOrders.orderable",
-                        "schools.roles.role.userRole",
-                        "schools.roles.role.sections.section",
-                        "wallet"
-                    ]
-                );
-
-                if($user && $user["status"] == true)
-                {
-                    $data["user"] = $this->_getUser($user);
-                    $data["verified"] = $this->_getVerified($user["verification"]);
-                    $data["schools"] = $this->_getSchools($user["schools"]);
-
-                    return $data;
-                }
-                else return false;
+                return $data;
             }
-        );
+            else return false;
+        });
 
         if($user) return $this->_checkDates($user);
         else
         {
-            $this->addError("user", "The user doesn't exist.");
+            $this->addError("user", trans('access::actions.accessGateAction.not_exist_user'));
             return false;
         }
     }
