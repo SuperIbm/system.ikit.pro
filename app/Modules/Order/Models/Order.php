@@ -45,8 +45,8 @@ class Order extends Eloquent
         "to",
         "trial",
         "type",
-        "order_able_id",
-        "order_able_type"
+        "orderable_id",
+        "orderable_type"
     ];
 
     /**
@@ -64,8 +64,8 @@ class Order extends Eloquent
             "to" => "nullable|date_format:Y-m-d H:i:s",
             "trial" => "required|boolean",
             "type" => 'required|between:1,191',
-            "order_able_id" => 'nullable|integer|digits_between:0,20',
-            "order_able_type" => 'nullable|max:191'
+            "orderable_id" => 'nullable|integer|digits_between:0,20',
+            "orderable_type" => 'nullable|max:191'
         ];
     }
 
@@ -84,8 +84,8 @@ class Order extends Eloquent
             "to" => trans('order::model.order.to'),
             "trial" => trans('order::model.order.trial'),
             "type" => trans('order::model.order.type'),
-            "order_able_id" => trans('order::model.order.order_able_id'),
-            "order_able_type" => trans('order::model.order.order_able_type')
+            "orderable_id" => trans('order::model.order.orderable_id'),
+            "orderable_type" => trans('order::model.order.orderable_type')
         ];
     }
 
@@ -122,6 +122,6 @@ class Order extends Eloquent
      */
     public function orderable()
     {
-        return $this->morphTo("order_able");
+        return $this->morphTo("orderable");
     }
 }

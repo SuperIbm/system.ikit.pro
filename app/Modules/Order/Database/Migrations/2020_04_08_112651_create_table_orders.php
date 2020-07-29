@@ -22,8 +22,8 @@ class CreateTableOrders extends Migration {
             $table->dateTime('to')->index('to')->nullable();
             $table->boolean('trial')->index('trial')->default(false);
             $table->string('type', 191)->index('type');
-            $table->bigInteger('order_able_id')->unsigned()->nullable()->index('order_able_id');
-            $table->string('order_able_type', 191)->nullable()->index('order_able_type');
+            $table->bigInteger('orderable_id')->unsigned()->nullable()->index('orderable_id');
+            $table->string('orderable_type', 191)->nullable()->index('orderable_type');
 
 			$table->timestamps();
             $table->softDeletes()->index('deleted_at');

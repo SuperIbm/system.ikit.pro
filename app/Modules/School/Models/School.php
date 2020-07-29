@@ -10,6 +10,7 @@
 
 namespace App\Modules\School\Models;
 
+use DB;
 use Eloquent;
 use App\Models\Validate;
 use Size;
@@ -21,6 +22,8 @@ use App\Modules\User\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\User\Models\UserSchool;
 use App\Modules\Order\Models\Order;
+use App\Modules\Plan\Models\Plan;
+use Carbon\Carbon;
 
 /**
  * Класс модель для таблицы школ на основе Eloquent.
@@ -44,6 +47,7 @@ class School extends Eloquent
     protected $fillable = [
         'id',
         'user_id',
+        'plan_id',
         'image_small_id',
         'image_middle_id',
         'image_big_id',
@@ -64,6 +68,7 @@ class School extends Eloquent
     {
         return [
             'user_id' => 'required|integer|digits_between:1,20',
+            'plan_id' => 'required|integer|digits_between:1,20',
             'image_small_id' => 'integer|digits_between:0,20',
             'image_middle_id' => 'integer|digits_between:0,20',
             'image_big_id' => 'integer|digits_between:0,20',
@@ -85,6 +90,7 @@ class School extends Eloquent
     {
         return [
             'user_id' => trans('school::models.school.user_id'),
+            'plan_id' => trans('school::models.school.plan_id'),
             'image_small_id' => trans('school::models.school.image_small_id'),
             'image_middle_id' => trans('school::models.school.image_middle_id'),
             'image_big_id' => trans('school::models.school.image_big_id'),
@@ -292,5 +298,41 @@ class School extends Eloquent
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Получить активные заказы.
+     *
+     * @return \App\Modules\Order\Models\Order[]|\Illuminate\Database\Eloquent\Relations\HasMany Модели заказов.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function activeOrders()
+    {
+        return $this->hasMany(Order::class)
+            ->where("from", '<=', Carbon::now())
+            ->where
+            (
+                function($query)
+                {
+                    /**
+                     * @var $query \Illuminate\Database\Eloquent\Builder
+                     */
+                    $query->where('to', '>=', Carbon::now())
+                        ->orWhereNull('to');
+                }
+            );
+    }
+
+    /**
+     * Получить тариф.
+     *
+     * @return \App\Modules\Plan\Models\Plan[]|\Illuminate\Database\Eloquent\Relations\BelongsTo Модели тарифа.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
     }
 }

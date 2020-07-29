@@ -7,6 +7,6 @@ return [
     "to" => "To",
     "trial" => "Trial",
     "type" => "Type",
-    "order_able_id" => "ID order able",
-    "order_able_type" => "Type order able"
+    "orderable_id" => "ID order able",
+    "orderable_type" => "Type order able"
 ];

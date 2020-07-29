@@ -25,6 +25,7 @@ class CreateTableSchools extends Migration
         Schema::create('schools', function(Blueprint $table) {
             $table->bigInteger('id', true)->unsigned();
             $table->bigInteger('user_id')->unsigned()->index('user_id');
+            $table->bigInteger('plan_id')->unsigned()->index('plan_id');
 
             $table->bigInteger('image_small_id')->unsigned()->nullable()->index('image_small_id');
             $table->bigInteger('image_middle_id')->unsigned()->nullable()->index('image_middle_id');

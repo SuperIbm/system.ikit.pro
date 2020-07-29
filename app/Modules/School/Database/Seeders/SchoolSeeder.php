@@ -37,6 +37,7 @@ class SchoolSeeder extends Seeder
         \DB::table('schools')->insertGetId(array(
             'id' => 1,
             'user_id' => 1,
+            'plan_id' => 1,
             'name' => "Test",
             'index' => "test",
             'full_name' => "Test",

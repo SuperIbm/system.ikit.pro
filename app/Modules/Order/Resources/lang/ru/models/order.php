@@ -7,6 +7,6 @@ return [
     "to" => "До",
     "trial" => "Пробная версия",
     "type" => "Тип",
-    "order_able_id" => "ID модели заказа",
-    "order_able_type" => "Тип модели заказа"
+    "orderable_id" => "ID модели заказа",
+    "orderable_type" => "Тип модели заказа"
 ];

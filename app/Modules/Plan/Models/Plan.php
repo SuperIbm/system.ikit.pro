@@ -15,6 +15,8 @@ use App\Models\Validate;
 use App\Models\Status;
 use App\Models\Delete;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modules\School\Models\School;
+use App\Modules\Order\Models\Order;
 
 /**
  * Класс модель для таблицы тарифов на основе Eloquent.
@@ -88,5 +90,29 @@ class Plan extends Eloquent
     public function roles()
     {
         return $this->hasMany(PlanRole::class);
+    }
+
+    /**
+     * Получить школы этого плана.
+     *
+     * @return \App\Modules\School\Models\School[]|\Illuminate\Database\Eloquent\Relations\HasMany Модели школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function schools()
+    {
+        return $this->hasMany(School::class);
+    }
+
+    /**
+     * Получение оплаченных заказов этого тарифа.
+     *
+     * @return \App\Modules\Order\Models\Order[]|\Illuminate\Database\Eloquent\Relations\MorphToMany Модели школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function orders()
+    {
+        return $this->morphToMany(Order::class, 'plan');
     }
 }

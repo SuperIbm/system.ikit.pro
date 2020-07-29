@@ -43,8 +43,8 @@ class OrderSeeder extends Seeder
                 "to" => Carbon::now()->addMonth(),
                 "trial" => false,
                 "type" => "system",
-                "order_able_id" => 1,
-                "order_able_type" => '\App\Modules\Plan\Models\Plan',
+                "orderable_id" => 1,
+                "orderable_type" => '\App\Modules\Plan\Models\Plan',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ),
@@ -56,8 +56,8 @@ class OrderSeeder extends Seeder
                 "to" => Carbon::now()->addMonth(),
                 "trial" => false,
                 "type" => "user",
-                "order_able_id" => 1,
-                "order_able_type" => '\App\Modules\Plan\Models\PlanLimit',
+                "orderable_id" => 1,
+                "orderable_type" => '\App\Modules\Plan\Models\PlanLimit',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ),
@@ -69,8 +69,8 @@ class OrderSeeder extends Seeder
                 "to" => Carbon::now()->addMonth(),
                 "trial" => false,
                 "type" => "space",
-                "order_able_id" => 2,
-                "order_able_type" => '\App\Modules\Plan\Models\PlanLimit',
+                "orderable_id" => 2,
+                "orderable_type" => '\App\Modules\Plan\Models\PlanLimit',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ),
@@ -78,12 +78,12 @@ class OrderSeeder extends Seeder
                 "id" => 4,
                 "school_id" => 1,
                 "name" => "Оплата за СМС",
-                "from" => null,
+                "from" => Carbon::now(),
                 "to" => null,
                 "trial" => false,
                 "type" => "sms",
-                "order_able_id" => 3,
-                "order_able_type" => '\App\Modules\Plan\Models\PlanLimit',
+                "orderable_id" => 3,
+                "orderable_type" => '\App\Modules\Plan\Models\PlanLimit',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             )
