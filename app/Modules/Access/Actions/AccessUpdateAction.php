@@ -25,7 +25,7 @@ use Geocoder;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteUpdateAction extends Action
+class AccessUpdateAction extends Action
 {
     /**
      * Репозитарий пользователей.

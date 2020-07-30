@@ -10,22 +10,23 @@
 
 namespace App\Modules\Access\Actions;
 
+use Crypt;
+use Mail;
+use Carbon\Carbon;
 use App\Models\Action;
 use App\Modules\User\Repositories\User;
 use App\Modules\User\Repositories\UserRecovery;
-use App\Modules\Access\Tasks\AccessSiteCheckCodeResetPasswordTask;
-use App\Modules\Access\Emails\Reset;
-use Mail;
+use App\Modules\Access\Emails\Recovery;
 
 /**
- * Изменение пароля пользователя.
+ * Отправка e-mail для восстановления пароля.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteResetAction extends Action
+class AccessForgetAction extends Action
 {
     /**
      * Репозитарий пользователей.
@@ -69,55 +70,50 @@ class AccessSiteResetAction extends Action
      */
     public function run()
     {
-        $accessSiteCheckCodeResetPasswordTask = app(AccessSiteCheckCodeResetPasswordTask::class);
+        $user = $this->_user->get(null, true, [
+            [
+                'property' => "login",
+                'value' => $this->getParameter("login")
+            ]
+        ]);
 
-        $status = $accessSiteCheckCodeResetPasswordTask->setParameters([
-            "id" => $this->getParameter("id"),
-            "code" => $this->getParameter("code")
-        ])->run();
-
-        if($status)
+        if($user)
         {
-            $user = $this->_user->get($this->getParameter("id"), true, [
-                "recovery"
+            $code = Crypt::encrypt(intval(Carbon::now()->format("U")) + rand(1000000, 100000000));
+
+            $recovery = $this->_userRecovery->read([
+                [
+                    'property' => "user_id",
+                    'value' => $user["id"]
+                ]
             ]);
 
-            if($user)
+            if($recovery)
             {
-                $status = $this->_user->update($user["id"], [
-                    "password" => bcrypt($this->getParameter("password"))
+                $this->_userRecovery->update($recovery[0]["id"], [
+                    "code" => $code
                 ]);
-
-                if($status)
-                {
-                    if($user["recovery"]) $this->_userRecovery->destroy($user["recovery"]["id"]);
-
-                    $data = [
-                        "name" => $user["first_name"] . " " . $user["second_name"]
-                    ];
-
-                    Mail::to($user["login"])->send(new Reset($data));
-
-                    return true;
-                }
-                else
-                {
-                    $this->setErrors($this->_user->getErrors());
-
-                    return false;
-                }
             }
             else
             {
-                $this->addError("user", "The user doesn't exist or not find it.");
-
-                return false;
+                $this->_userRecovery->create([
+                    "user_id" => $user["id"],
+                    "code" => $code
+                ]);
             }
+
+            $data = [
+                "id" => $user["id"],
+                "code" => $code
+            ];
+
+            Mail::to($user["login"])->send(new Recovery($data));
+
+            return true;
         }
         else
         {
-            $this->setErrors($accessSiteCheckCodeResetPasswordTask->getErrors());
-
+            $this->addError("user", "The user doesn't exist or not find it.");
             return false;
         }
     }

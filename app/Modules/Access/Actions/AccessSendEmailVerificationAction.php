@@ -8,22 +8,20 @@
  * @since 1.0
  */
 
-namespace App\Modules\Access\Tasks;
+namespace App\Modules\Access\Actions;
 
-use Mail;
 use App\Models\Action;
 use App\Modules\User\Repositories\User;
-use App\Modules\Access\Emails\Verification;
 
 /**
- * Отправка e-mail сообщения с кодом верификации.
+ * Отправка e-mail сообщения пользователю для верификации.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteSendEmailVerificationTask extends Action
+class AccessSendEmailVerificationAction extends Action
 {
     /**
      * Репозитарий пользователей.
@@ -56,25 +54,36 @@ class AccessSiteSendEmailVerificationTask extends Action
      */
     public function run()
     {
-        $user = $this->_user->get($this->getParameter("id"), true, [
-            "verification"
-        ]);
+        $filters = [
+            [
+                "property" => "login",
+                "operator" => "=",
+                "value" => $this->getParameter("email"),
+                "logic" => "and"
+            ]
+        ];
 
-        if($user)
+        $users = $this->_user->read($filters);
+
+        if($users)
         {
-            $data = [
-                "id" => $user["id"],
-                "code" => $user["verification"]["code"]
-            ];
+            $user = $users[0];
+            $action = app(AccessSendEmailVerificationCodeAction::class);
 
-            Mail::to($user["login"])->send(new Verification($data));
+            $result = $action->setParameters([
+                "id" => $user["id"]
+            ])->run();
 
-            return true;
+            if($result) return true;
+            else
+            {
+                $this->setErrors($action->getErrors());
+                return false;
+            }
         }
         else
         {
-            $this->addError("user", "The user does not exist.");
-
+            $this->addError("user", "The user doesn't exist.");
             return false;
         }
     }

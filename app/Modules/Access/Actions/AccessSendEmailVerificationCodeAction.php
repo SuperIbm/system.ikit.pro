@@ -10,19 +10,20 @@
 
 namespace App\Modules\Access\Actions;
 
+use Mail;
 use App\Models\Action;
 use App\Modules\User\Repositories\User;
-use App\Modules\Access\Tasks\AccessSiteSendEmailVerificationTask;
+use App\Modules\Access\Emails\Verification;
 
 /**
- * Отправка e-mail сообщения пользователю для верификации.
+ * Отправка e-mail сообщения с кодом верификации.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteSendEmailVerificationAction extends Action
+class AccessSendEmailVerificationCodeAction extends Action
 {
     /**
      * Репозитарий пользователей.
@@ -55,36 +56,25 @@ class AccessSiteSendEmailVerificationAction extends Action
      */
     public function run()
     {
-        $filters = [
-            [
-                "property" => "login",
-                "operator" => "=",
-                "value" => $this->getParameter("email"),
-                "logic" => "and"
-            ]
-        ];
+        $user = $this->_user->get($this->getParameter("id"), true, [
+            "verification"
+        ]);
 
-        $users = $this->_user->read($filters);
-
-        if($users)
+        if($user)
         {
-            $user = $users[0];
-            $accessSiteSendEmailVerificationTask = app(AccessSiteSendEmailVerificationTask::class);
+            $data = [
+                "id" => $user["id"],
+                "code" => $user["verification"]["code"]
+            ];
 
-            $result = $accessSiteSendEmailVerificationTask->setParameters([
-                "id" => $user["id"]
-            ])->run();
+            Mail::to($user["login"])->send(new Verification($data));
 
-            if($result) return true;
-            else
-            {
-                $this->setErrors($accessSiteSendEmailVerificationTask->getErrors());
-                return false;
-            }
+            return true;
         }
         else
         {
-            $this->addError("user", "The user doesn't exist.");
+            $this->addError("user", "The user does not exist.");
+
             return false;
         }
     }

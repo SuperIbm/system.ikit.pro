@@ -28,7 +28,7 @@ use App\Modules\User\Repositories\UserCompany;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteSignUpAction extends Action
+class AccessSignUpAction extends Action
 {
     /**
      * Репозитарий пользователей.

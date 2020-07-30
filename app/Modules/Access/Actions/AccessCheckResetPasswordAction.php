@@ -11,7 +11,6 @@
 namespace App\Modules\Access\Actions;
 
 use App\Models\Action;
-use App\Modules\Access\Tasks\AccessSiteCheckCodeResetPasswordTask;
 
 /**
  * Проверка верности кода восстановления пароля.
@@ -21,7 +20,7 @@ use App\Modules\Access\Tasks\AccessSiteCheckCodeResetPasswordTask;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteCheckResetPasswordAction extends Action
+class AccessCheckResetPasswordAction extends Action
 {
     /**
      * Метод запуска логики.
@@ -32,7 +31,7 @@ class AccessSiteCheckResetPasswordAction extends Action
      */
     public function run()
     {
-        $action = app(AccessSiteCheckCodeResetPasswordTask::class);
+        $action = app(AccessCheckCodeResetPasswordAction::class);
 
         $status = $action->setParameters([
             "id" => $this->getParameter("id"),

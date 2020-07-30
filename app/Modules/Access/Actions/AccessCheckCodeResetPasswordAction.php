@@ -8,7 +8,7 @@
  * @since 1.0
  */
 
-namespace App\Modules\Access\Tasks;
+namespace App\Modules\Access\Actions;
 
 use App\Models\Action;
 use App\Modules\User\Repositories\User;
@@ -21,7 +21,7 @@ use App\Modules\User\Repositories\User;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteCheckCodeResetPasswordTask extends Action
+class AccessCheckCodeResetPasswordAction extends Action
 {
     /**
      * Репозитарий пользователей.

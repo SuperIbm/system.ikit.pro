@@ -77,7 +77,7 @@ class AccessApiClientAction extends Action
                 if(!OAuth::hasError())
                 {
                     return [
-                        "userId" => $user["id"],
+                        "user" => $user,
                         "secret" => $secret
                     ];
                 }

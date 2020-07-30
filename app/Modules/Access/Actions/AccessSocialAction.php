@@ -30,7 +30,7 @@ use Kreait\Firebase\Auth;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessSiteSocialAction extends Action
+class AccessSocialAction extends Action
 {
     /**
      * Класс для работы с Firebase.
@@ -136,7 +136,7 @@ class AccessSiteSocialAction extends Action
                 ])->run();
 
                 $gate = app(AccessGateAction::class)->setParameters([
-                    "id" => $client["userId"]
+                    "id" => $client["user"]["id"]
                 ])->run();
 
                 return [
