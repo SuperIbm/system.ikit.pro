@@ -8,22 +8,25 @@
  * @since 1.0
  */
 
-namespace App\Modules\Order\Pipes\Verified;
+namespace App\Modules\Order\Pipes\SignUp;
 
+use Closure;
+use Hash;
 use App\Models\Contracts\Pipe;
 use App\Modules\User\Repositories\User;
 use App\Modules\User\Repositories\UserVerification;
-use Closure;
+use App\Modules\Access\Actions\AccessSendEmailVerificationCodeAction;
+use Carbon\Carbon;
 
 /**
- * Верификация пользователя: верефицируем пользователя.
+ * Регистрация нового пользователя: создания кода на верификации и его отправка пользователю.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class CheckPipe implements Pipe
+class VerificationPipe implements Pipe
 {
     /**
      * Репозитарий пользователей.
@@ -68,58 +71,34 @@ class CheckPipe implements Pipe
      */
     public function handle(array $content, Closure $next)
     {
-        $user = $this->_user->get($content["id"], true);
+        $data["code"] = $content["id"] . Hash::make(intval(Carbon::now()->format("U")) + rand(1000000, 100000000));
 
-        if($user)
+        $this->_userVerification->create([
+            "user_id" => $content["id"],
+            "code" => $data["code"],
+            "status" => $data["verified"]
+        ]);
+
+        if(!$this->_userVerification->hasError())
         {
-            $verification = $this->_userVerification->get(null, null, [
-                [
-                    'property' => "user_id",
-                    'value' => $content["id"]
-                ]
-            ]);
+            $action = app(AccessSendEmailVerificationCodeAction::class);
 
-            if($verification)
+            if(!$data["verified"])
             {
-                if($verification["code"] == $content["code"])
-                {
-                    if($verification["status"] == false)
-                    {
-                        $this->_userVerification->update($verification["id"], [
-                            'status' => true
-                        ]);
-
-                        return $next($content);
-                    }
-                    else
-                    {
-                        /**
-                         * @var $entity \App\Models\Decorator
-                         */
-                        $entity = $content["entity"];
-                        $entity->addError("user", trans('access::pipes.verified.checkPipe.user_is_verified'));
-
-                        return false;
-                    }
-                }
-                else
-                {
-                    /**
-                     * @var $entity \App\Models\Decorator
-                     */
-                    $entity = $content["entity"];
-                    $entity->addError("user", trans('access::pipes.verified.checkPipe.not_correct_code'));
-
-                    return false;
-                }
+                $result = $action->setParameters([
+                    "id" => $content["id"]
+                ])->run();
             }
+            else $result = true;
+
+            if($result) return $next($content);
             else
             {
                 /**
                  * @var $entity \App\Models\Decorator
                  */
                 $entity = $content["entity"];
-                $entity->addError("user", trans('access::pipes.verified.checkPipe.not_exist_code'));
+                $entity->setErrors($action->getErrors());
 
                 return false;
             }
@@ -130,7 +109,9 @@ class CheckPipe implements Pipe
              * @var $entity \App\Models\Decorator
              */
             $entity = $content["entity"];
-            $entity->addError("user", trans('access::pipes.verified.checkPipe.not_exist_user'));
+
+            $this->_user->destroy($content["id"]);
+            $entity->setErrors($this->_userVerification->getErrors());
 
             return false;
         }

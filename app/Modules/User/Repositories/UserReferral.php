@@ -14,14 +14,14 @@ use App\Models\RepositoryEloquent;
 use App\Models\Repository;
 
 /**
- * Класс репозитария для ролей на основе Eloquent.
+ * Класс репозитария для рефералов пользователей на основе Eloquent.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class UserRole extends Repository
+class UserReferral extends Repository
 {
     use RepositoryEloquent;
 
@@ -39,7 +39,7 @@ class UserRole extends Repository
      */
     public function get(int $id = null, bool $active = null, array $filters = null, array $with = null)
     {
-        return $this->_get(['User', 'UserItem', 'UserRole'], $id, $active, $filters, $with);
+        return $this->_get(['User', 'UserItem', 'UserReferral'], $id, $active, $filters, $with);
     }
 
     /**
@@ -57,7 +57,7 @@ class UserRole extends Repository
      */
     public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null)
     {
-        return $this->_read(['User', 'UserItem', 'UserRole'], false, $filters, null, $sorts, $offset, $limit, $with);
+        return $this->_read(['User', 'UserItem', 'UserReferral'], false, $filters, null, $sorts, $offset, $limit, $with);
     }
 
     /**
@@ -72,7 +72,7 @@ class UserRole extends Repository
      */
     public function count(array $filters = null, array $with = null)
     {
-        return $this->_read(['User', 'UserItem', 'UserRole'], true, $filters, null, null, null, null, $with);
+        return $this->_read(['User', 'UserItem', 'UserReferral'], true, $filters, null, null, null, null, $with);
     }
 
     /**
@@ -86,7 +86,7 @@ class UserRole extends Repository
      */
     public function create(array $data)
     {
-        return $this->_create(['UserItem', 'UserRole'], $data);
+        return $this->_create(['UserItem', 'UserReferral'], $data);
     }
 
     /**
@@ -101,7 +101,7 @@ class UserRole extends Repository
      */
     public function update(int $id, array $data)
     {
-        return $this->_update(['UserItem', 'UserRole'], $id, $data);
+        return $this->_update(['UserItem', 'UserReferral'], $id, $data);
     }
 
     /**
@@ -116,6 +116,6 @@ class UserRole extends Repository
      */
     public function destroy(int $id = null, array $filters = null): bool
     {
-        return $this->_destroy(['UserItem', 'UserRole'], $id, $filters);
+        return $this->_destroy(['UserItem', 'UserReferral'], $id, $filters);
     }
 }

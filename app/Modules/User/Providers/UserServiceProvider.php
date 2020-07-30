@@ -35,6 +35,9 @@ use App\Modules\User\Models\UserRole as UserRoleModel;
 use App\Modules\User\Repositories\UserRole as UserRoleRepository;
 use App\Modules\User\Events\Listeners\UserRoleListener;
 
+use App\Modules\User\Models\UserReferral as UserReferralModel;
+use App\Modules\User\Repositories\UserReferral as UserReferralRepository;
+
 use App\Modules\User\Models\UserVerification as UserVerificationModel;
 use App\Modules\User\Repositories\UserVerification as UserVerificationRepository;
 
@@ -143,6 +146,12 @@ class UserServiceProvider extends ServiceProvider
         });
 
         UserRoleModel::observe(UserRoleListener::class);
+
+        //
+
+        App::singleton(UserReferralRepository::class, function() {
+            return new UserReferralRepository(new UserReferralModel());
+        });
 
         //
 

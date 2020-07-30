@@ -165,6 +165,7 @@ class AccessController extends Controller
             "second_name" => $request->get("second_name"),
             "company" => $request->get("company"),
             "telephone" => $request->get("telephone"),
+            "uid" => $request->get("uid"),
             "verified" => true
         ])->run();
 

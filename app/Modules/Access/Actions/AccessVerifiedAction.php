@@ -34,9 +34,9 @@ class AccessVerifiedAction extends Action
      */
     public function run()
     {
-        $decorators = app(AccessVerifiedDecorator::class);
+        $decorator = app(AccessVerifiedDecorator::class);
 
-        $data = $decorators->setActions([
+        $data = $decorator->setActions([
             CheckPipe::class,
             GetPipe::class
         ])->setParameters([
@@ -44,10 +44,10 @@ class AccessVerifiedAction extends Action
             "code" => $this->getParameter("code"),
         ])->run();
 
-        if(!$decorators->hasError()) return $data;
+        if(!$decorator->hasError()) return $data;
         else
         {
-            $this->setErrors($decorators->getErrors());
+            $this->setErrors($decorator->getErrors());
             return false;
         }
     }

@@ -72,7 +72,7 @@ class GetPipe implements Pipe
                 else
                 {
                     /**
-                     * @var $entity \App\Modules\Access\Decorators\AccessVerifiedDecorator
+                     * @var $entity \App\Models\Decorator
                      */
                     $entity = $content["entity"];
                     $entity->setErrors($action->getErrors());
@@ -83,7 +83,7 @@ class GetPipe implements Pipe
             else
             {
                 /**
-                 * @var $entity \App\Modules\Access\Decorators\AccessVerifiedDecorator
+                 * @var $entity \App\Models\Decorator
                  */
                 $entity = $content["entity"];
                 $entity->setErrors($action->getErrors());
@@ -94,7 +94,7 @@ class GetPipe implements Pipe
         else
         {
             /**
-             * @var $entity \App\Modules\Access\Decorators\AccessVerifiedDecorator
+             * @var $entity \App\Models\Decorator
              */
             $entity = $content["entity"];
             $entity->setErrors($action->getErrors());

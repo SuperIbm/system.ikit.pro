@@ -12,5 +12,5 @@ return [
     */
 
     'driver' => env('CURRENCY', 'cbr'),
-
+    'item' => env('CURRENCY_ITEM', 'RUB'),
 ];
