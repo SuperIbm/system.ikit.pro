@@ -108,17 +108,24 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function social(AccessSocialRequest $request)
+    public function social(/*AccessSocialRequest $request*/)
     {
         $action = app(AccessSocialAction::class);
-        $parameters = $request->get("parameters");
+        //$parameters = $request->get("parameters");
 
         $data = $action->setParameters([
-            "id" => $request->get("id"),
+            /*"id" => $request->get("id"),
             "type" => $request->get("type"),
             "login" => $request->get("login"),
             "first_name" => isset($parameters["first_name"]) ? $parameters["first_name"] : null,
             "second_name" => isset($parameters["second_name"]) ? $parameters["second_name"] : null,
+            "verified" => true*/
+
+            "id" => "1",
+            "type" => "instagramm",
+            "login" => "test@test.com",
+            "first_name" => "Tima",
+            "second_name" => "Inchagov",
             "verified" => true
         ])->run();
 

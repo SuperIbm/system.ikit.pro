@@ -32,14 +32,14 @@ class AccessSocialDecorator extends Decorator
      */
     public function run()
     {
-        $parameters = $this->getParameters();
+        $content = app(Pipeline::class)
+            ->send($this->getParameters())
+            ->through($this->getActions())
+            ->then(function($content) {
 
-        app(Pipeline::class)->send($parameters)->through($this->getActions())->then(function($content)
-        {
-            $this->setContent($content);
-        });
+            });
 
-        if(!$this->hasError()) return $this->getContent();
+        if(!$this->hasError()) return $content;
         else return false;
     }
 }

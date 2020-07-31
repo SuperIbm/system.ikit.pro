@@ -1,4 +1,12 @@
 <?php
+/**
+ * Контракты.
+ * Этот пакет содержит контракты ядра системы.
+ *
+ * @package App.Models.Contracts
+ * @since 1.0
+ * @version 1.0
+ */
 
 namespace App\Models\Contracts;
 

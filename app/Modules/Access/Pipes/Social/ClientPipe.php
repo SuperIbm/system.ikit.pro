@@ -55,12 +55,12 @@ class ClientPipe implements Pipe
                 "id" => $client["user"]["id"]
             ])->run();
 
-            $content["create"] = true;
+            $content["create"] = false;
             $content["gate"] = $gate;
             $content["client"] = $client;
             $content["token"] = $token;
 
-            return true;
+            return $content;
         }
         else
         {

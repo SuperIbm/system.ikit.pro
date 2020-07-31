@@ -8,7 +8,7 @@ Route::group([
 {
     Route::post('gate/', 'AccessController@gate')->middleware('auth.api')->name('gate');
     Route::post('logout/', 'AccessController@logout')->middleware('auth.api')->name('logout');
-    Route::post('social/', 'AccessController@social')->name('social');
+    Route::get('social/', 'AccessController@social')->name('social');
     Route::post('sign_up/', 'AccessController@signUp')->name('signUp');
     Route::post('sign_in/', 'AccessController@signIn')->name('signIn');
     Route::post('verified/{id}', 'AccessController@verified')->name('verified');

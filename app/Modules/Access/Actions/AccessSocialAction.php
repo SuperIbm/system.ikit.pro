@@ -45,23 +45,25 @@ class AccessSocialAction extends Action
         $data = $decorator->setActions([
             CheckPipe::class,
             ClientPipe::class,
-            CreatePipe::class,
-            ReferralPipe::class,
-            WalletPipe::class,
-            VerificationPipe::class,
-            GetPipe::class,
-            AuthPipe::class
+            //CreatePipe::class,
+            //ReferralPipe::class,
+            //WalletPipe::class,
+            //VerificationPipe::class,
+            //GetPipe::class,
+            //AuthPipe::class
         ])->setParameters([
             "user" => [
-                "id" => $this->getParameter("id"),
-                "type" => $this->getParameter("type"),
                 "login" => $this->getParameter("login"),
                 "first_name" => $this->getParameter("first_name"),
                 "second_name" => $this->getParameter("second_name"),
                 "verified" => $this->getParameter("verified"),
             ],
+            "id" => $this->getParameter("id"),
+            "type" => $this->getParameter("type"),
             "uid" => $this->getParameter("uid")
         ])->run();
+
+        print_r($data);
 
         if(!$decorator->hasError()) return $data;
         else
