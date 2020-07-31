@@ -61,7 +61,7 @@ class CreatePipe implements Pipe
             "password" => bcrypt($content["user"]["password"]),
             "first_name" => $content["user"]["first_name"],
             "second_name" => $content["user"]["second_name"],
-            "telephone" => $content["user"]["telephone"],
+            "telephone" => isset($content["user"]["telephone"]) ? $content["user"]["telephone"] : null,
             "status" => true
         ];
 

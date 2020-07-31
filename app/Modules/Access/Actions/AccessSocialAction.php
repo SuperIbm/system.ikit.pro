@@ -12,7 +12,14 @@ namespace App\Modules\Access\Actions;
 
 use App\Models\Action;
 use App\Modules\Access\Decorators\AccessSocialDecorator;
+use App\Modules\Access\Pipes\Gate\GetPipe;
+use App\Modules\Access\Pipes\SignIn\AuthPipe;
+use App\Modules\Access\Pipes\SignUp\ReferralPipe;
+use App\Modules\Access\Pipes\SignUp\VerificationPipe;
+use App\Modules\Access\Pipes\SignUp\WalletPipe;
 use App\Modules\Access\Pipes\Social\CheckPipe;
+use App\Modules\Access\Pipes\Social\ClientPipe;
+use App\Modules\Access\Pipes\SignUp\CreatePipe;
 
 /**
  * Регистрация нового пользователя через соцаильные сети.
@@ -37,13 +44,20 @@ class AccessSocialAction extends Action
 
         $data = $decorator->setActions([
             CheckPipe::class,
-
+            ClientPipe::class,
+            CreatePipe::class,
+            ReferralPipe::class,
+            WalletPipe::class,
+            VerificationPipe::class,
+            GetPipe::class,
+            AuthPipe::class
         ])->setParameters([
             "user" => [
                 "id" => $this->getParameter("id"),
                 "type" => $this->getParameter("type"),
                 "login" => $this->getParameter("login"),
-                "parameters" => $this->getParameter("parameters"),
+                "first_name" => $this->getParameter("first_name"),
+                "second_name" => $this->getParameter("second_name"),
                 "verified" => $this->getParameter("verified"),
             ],
             "uid" => $this->getParameter("uid")
