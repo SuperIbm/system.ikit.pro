@@ -17,6 +17,7 @@ use App\Modules\Access\Pipes\SignUp\ReferralPipe;
 use App\Modules\Access\Pipes\SignUp\WalletPipe;
 use App\Modules\Access\Pipes\SignUp\VerificationPipe;
 use App\Modules\Access\Pipes\Gate\GetPipe;
+use App\Modules\Access\Pipes\SignIn\AuthPipe;
 
 /**
  * Регистрация нового пользователя.
@@ -44,7 +45,8 @@ class AccessSignUpAction extends Action
             ReferralPipe::class,
             WalletPipe::class,
             VerificationPipe::class,
-            GetPipe::class
+            GetPipe::class,
+            AuthPipe::class
         ])->setParameters([
             "user" => [
                 "login" => $this->getParameter("login"),

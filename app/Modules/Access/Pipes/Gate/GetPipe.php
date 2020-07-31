@@ -14,8 +14,6 @@ use App\Models\Contracts\Pipe;
 use App\Modules\Access\Actions\AccessApiClientAction;
 use App\Modules\Access\Actions\AccessApiTokenAction;
 use App\Modules\Access\Actions\AccessGateAction;
-use App\Modules\User\Repositories\User;
-use App\Modules\User\Repositories\UserVerification;
 use Closure;
 
 /**
