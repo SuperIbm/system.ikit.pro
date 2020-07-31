@@ -119,14 +119,14 @@ class AccessController extends Controller
             "login" => $request->get("login"),
             "first_name" => isset($parameters["first_name"]) ? $parameters["first_name"] : null,
             "second_name" => isset($parameters["second_name"]) ? $parameters["second_name"] : null,
-            "verified" => true*/
+            "verified" => false*/
 
             "id" => "1",
             "type" => "instagramm",
-            "login" => "test@test.com",
+            "login" => "test2@test.com",
             "first_name" => "Tima",
             "second_name" => "Inchagov",
-            "verified" => true
+            "verified" => false
         ])->run();
 
         if($data)
@@ -225,7 +225,7 @@ class AccessController extends Controller
             "company" => $request->get("company"),
             "telephone" => $request->get("telephone"),
             "uid" => $request->get("uid"),
-            "verified" => true
+            "verified" => false
         ])->run();
 
         if($data)

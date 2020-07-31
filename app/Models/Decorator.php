@@ -34,6 +34,15 @@ abstract class Decorator
     private $_actions = [];
 
     /**
+     * Массив данных который был сформирован при выполнении действия.
+     *
+     * @var array
+     * @version 1.0
+     * @since 1.0
+     */
+    private $_content;
+
+    /**
      * Метод обработчик собития после выполнения всех действий декоратора.
      *
      * @return array|boolean Верент массив данных при выполнении действия.
@@ -85,4 +94,33 @@ abstract class Decorator
     {
         return $this->_actions;
     }
+
+    /**
+     * Установка текущего полученного результата.
+     *
+     * @param mixed $content Контент текущего результата.
+     *
+     * @return \App\Models\Decorator Возвращает теущий объект.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function setContent($content)
+    {
+        $this->_content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Возвращает текущий результат.
+     *
+     * @return mixed Вернет текущий результат.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function getContent()
+    {
+        return $this->_content;
+    }
 }
+

@@ -76,14 +76,14 @@ class VerificationPipe implements Pipe
         $this->_userVerification->create([
             "user_id" => $content["id"],
             "code" => $data["code"],
-            "status" => $data["verified"]
+            "status" => $content["user"]["verified"]
         ]);
 
         if(!$this->_userVerification->hasError())
         {
             $action = app(AccessSendEmailVerificationCodeAction::class);
 
-            if(!$data["verified"])
+            if(!$content["user"]["verified"])
             {
                 $result = $action->setParameters([
                     "id" => $content["id"]

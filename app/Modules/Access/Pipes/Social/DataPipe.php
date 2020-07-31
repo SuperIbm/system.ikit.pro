@@ -11,20 +11,18 @@
 namespace App\Modules\Access\Pipes\Social;
 
 use App\Models\Contracts\Pipe;
-use App\Modules\Access\Actions\AccessApiClientAction;
-use App\Modules\Access\Actions\AccessApiTokenAction;
-use App\Modules\Access\Actions\AccessGateAction;
 use Closure;
+use Str;
 
 /**
- * Регистрация нового пользователя через соцаильные сети: получение клиента.
+ * Регистрация нового пользователя через соцаильные сети: Получение данных для авторизованного пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class ClientPipe implements Pipe
+class DataPipe implements Pipe
 {
     /**
      * Метод который будет вызван у pipeline.
@@ -36,37 +34,20 @@ class ClientPipe implements Pipe
      */
     public function handle(array $content, Closure $next)
     {
-        $action = app(AccessApiClientAction::class);
-
-        $client = $action->setParameters([
-            "login" => $content["user"]["login"],
-            "force" => true
-        ])->run();
-
-        if($client)
+        if($content["create"] && !isset($content["user"]["password"]))
         {
-            $action = app(AccessApiTokenAction::class);
-
-            $token = $action->setParameters([
-                "secret" => $client["secret"]
-            ])->run();
-
-            $gate = app(AccessGateAction::class)->setParameters([
-                "id" => $client["user"]["id"]
-            ])->run();
-
-            $content["create"] = false;
-            $content["gate"] = $gate;
-            $content["client"] = $client;
-            $content["token"] = $token;
-
+            $content["user"]["password"] = bcrypt(Str::random(8));
             return $next($content);
         }
         else
         {
-            $content["create"] = true;
+            $data = [
+                "gate" => $content["gate"],
+                "secret" => $content["client"]["secret"],
+                "token" => $content["token"],
+            ];
 
-            return $next($content);
+            return $data;
         }
     }
 }

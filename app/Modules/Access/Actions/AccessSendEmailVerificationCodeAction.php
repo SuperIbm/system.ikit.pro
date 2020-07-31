@@ -56,7 +56,7 @@ class AccessSendEmailVerificationCodeAction extends Action
      */
     public function run()
     {
-        $user = $this->_user->get($this->getParameter("id"), true, [
+        $user = $this->_user->get($this->getParameter("id"), true, null, [
             "verification"
         ]);
 

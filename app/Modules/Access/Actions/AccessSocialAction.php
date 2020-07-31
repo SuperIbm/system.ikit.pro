@@ -19,6 +19,7 @@ use App\Modules\Access\Pipes\SignUp\VerificationPipe;
 use App\Modules\Access\Pipes\SignUp\WalletPipe;
 use App\Modules\Access\Pipes\Social\CheckPipe;
 use App\Modules\Access\Pipes\Social\ClientPipe;
+use App\Modules\Access\Pipes\Social\DataPipe;
 use App\Modules\Access\Pipes\SignUp\CreatePipe;
 
 /**
@@ -45,12 +46,14 @@ class AccessSocialAction extends Action
         $data = $decorator->setActions([
             CheckPipe::class,
             ClientPipe::class,
-            //CreatePipe::class,
-            //ReferralPipe::class,
-            //WalletPipe::class,
-            //VerificationPipe::class,
-            //GetPipe::class,
-            //AuthPipe::class
+            DataPipe::class,
+            CreatePipe::class,
+            ReferralPipe::class,
+            WalletPipe::class,
+            VerificationPipe::class,
+            GetPipe::class,
+            AuthPipe::class,
+            DataPipe::class,
         ])->setParameters([
             "user" => [
                 "login" => $this->getParameter("login"),
@@ -64,6 +67,7 @@ class AccessSocialAction extends Action
         ])->run();
 
         print_r($data);
+        exit;
 
         if(!$decorator->hasError()) return $data;
         else

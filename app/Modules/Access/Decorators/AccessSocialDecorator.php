@@ -36,10 +36,12 @@ class AccessSocialDecorator extends Decorator
             ->send($this->getParameters())
             ->through($this->getActions())
             ->then(function($content) {
-
+                $this->setContent($content);
             });
 
-        if(!$this->hasError()) return $content;
+        if($content) $this->setContent($content);
+
+        if(!$this->hasError()) return $this->getContent();
         else return false;
     }
 }

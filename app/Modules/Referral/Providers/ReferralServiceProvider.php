@@ -10,6 +10,10 @@
 
 namespace App\Modules\Referral\Providers;
 
+use App;
+use App\Modules\Referral\Events\Listeners\ReferralListener;
+use App\Modules\Referral\Models\Referral as ReferralModel;
+use App\Modules\Referral\Repositories\Referral as ReferralRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
@@ -59,6 +63,12 @@ class ReferralServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+
+        App::singleton(ReferralRepository::class, function() {
+            return new ReferralRepository(new ReferralModel());
+        });
+
+        ReferralModel::observe(ReferralListener::class);
     }
 
     /**
