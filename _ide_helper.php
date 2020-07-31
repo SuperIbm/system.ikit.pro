@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.16.1 on 2020-06-22 20:03:26.
+ * Generated for Laravel 7.22.4 on 2020-07-31 15:35:03.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -780,6 +780,19 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Determine if the given service provider is loaded.
+         *
+         * @param string $provider
+         * @return bool 
+         * @static 
+         */ 
+        public static function providerIsLoaded($provider)
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->providerIsLoaded($provider);
+        }
+        
+        /**
          * Get the application's deferred services.
          *
          * @return array 
@@ -856,6 +869,18 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Get the current application fallback locale.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getFallbackLocale()
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->getFallbackLocale();
+        }
+        
+        /**
          * Set the current application locale.
          *
          * @param string $locale
@@ -866,6 +891,19 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Foundation\Application $instance */
                         $instance->setLocale($locale);
+        }
+        
+        /**
+         * Set the current application fallback locale.
+         *
+         * @param string $fallbackLocale
+         * @return void 
+         * @static 
+         */ 
+        public static function setFallbackLocale($fallbackLocale)
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        $instance->setFallbackLocale($fallbackLocale);
         }
         
         /**
@@ -5468,7 +5506,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Assert if a event was dispatched a number of times.
+         * Assert if an event was dispatched a number of times.
          *
          * @param string $event
          * @param int $times
@@ -6567,6 +6605,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Http\Client\PendingRequest asJson()
      * @method static \Illuminate\Http\Client\PendingRequest asMultipart()
      * @method static \Illuminate\Http\Client\PendingRequest attach(string $name, string $contents, string|null $filename = null, array $headers = [])
+     * @method static \Illuminate\Http\Client\PendingRequest baseUrl(string $url)
      * @method static \Illuminate\Http\Client\PendingRequest beforeSending(callable $callback)
      * @method static \Illuminate\Http\Client\PendingRequest bodyFormat(string $format)
      * @method static \Illuminate\Http\Client\PendingRequest contentType(string $contentType)
@@ -7212,7 +7251,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Unset the given channel instance.
          *
-         * @param string|null $name
+         * @param string|null $driver
          * @return \Illuminate\Log\LogManager 
          * @static 
          */ 
@@ -13541,7 +13580,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $path
          * @param \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $file
-         * @param array $options
+         * @param mixed $options
          * @return string|false 
          * @static 
          */ 
@@ -13557,7 +13596,7 @@ namespace Illuminate\Support\Facades {
          * @param string $path
          * @param \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $file
          * @param string $name
-         * @param array $options
+         * @param mixed $options
          * @return string|false 
          * @static 
          */ 
@@ -15221,6 +15260,19 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\View\Factory $instance */
                         return $instance->hasSection($name);
+        }
+        
+        /**
+         * Check if section does not exist.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function sectionMissing($name)
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        return $instance->sectionMissing($name);
         }
         
         /**
@@ -17378,15 +17430,16 @@ namespace App\Models\Facades {
          * @param float $number Число для форматирования.
          * @param bool $digits Отображать дробные числа.
          * @param string $label Знак валюты.
+         * @param bool $beginning Ставить ли знак валюты в начале.
          * @return string Вернет отформатированное число.
          * @since 1.0
          * @version 1.0
          * @static 
          */ 
-        public static function getMoney($number, $digits = true, $label = '$')
+        public static function getMoney($number, $digits = true, $label = '$', $beginning = true)
         {
                         /** @var \App\Models\Util $instance */
-                        return $instance->getMoney($number, $digits, $label);
+                        return $instance->getMoney($number, $digits, $label, $beginning);
         }
         
         /**
@@ -17402,6 +17455,75 @@ namespace App\Models\Facades {
         {
                         /** @var \App\Models\Util $instance */
                         return $instance->isJson($string);
+        }
+         
+    }
+
+    /**
+     * Фасад класса для работы с устраойствами.
+     *
+     * @version 1.0
+     * @since 1.0
+     * @copyright Weborobot.
+     * @author Инчагов Тимофей Александрович.
+     */ 
+    class Device {
+        
+        /**
+         * Установка агента.
+         *
+         * @param string $agent Данные пользовательского агента.
+         * @return \App\Models\Device Возвращает теущий объект.
+         * @version 1.0
+         * @since 1.0
+         * @static 
+         */ 
+        public static function setAgent($agent)
+        {
+                        /** @var \App\Models\Device $instance */
+                        return $instance->setAgent($agent);
+        }
+        
+        /**
+         * Получение агента.
+         *
+         * @return string Данные пользовательского агента..
+         * @version 1.0
+         * @since 1.0
+         * @static 
+         */ 
+        public static function getAgent()
+        {
+                        /** @var \App\Models\Device $instance */
+                        return $instance->getAgent();
+        }
+        
+        /**
+         * Получение системы и устройства.
+         *
+         * @return array Вернет массив с названием операционной системы и устройством.
+         * @version 1.0
+         * @since 1.0
+         * @static 
+         */ 
+        public static function system()
+        {
+                        /** @var \App\Models\Device $instance */
+                        return $instance->system();
+        }
+        
+        /**
+         * Получение браузера.
+         *
+         * @return string Вернет название браузера.
+         * @version 1.0
+         * @since 1.0
+         * @static 
+         */ 
+        public static function browser()
+        {
+                        /** @var \App\Models\Device $instance */
+                        return $instance->browser();
         }
          
     }
@@ -17702,6 +17824,842 @@ namespace App\Models\Facades {
  
 }
 
+namespace App\Modules\Act\Facades { 
+
+    /**
+     * Фасад класса запоминания действий пользователя.
+     *
+     * @version 1.0
+     * @since 1.0
+     * @copyright Weborobot.
+     * @author Инчагов Тимофей Александрович.
+     */ 
+    class Act {
+        
+        /**
+         * Проверка статуса действий.
+         * 
+         * Позволяет определить, сколько раз выполнялось действие и может ли действие снова быть осуществлено.
+         *
+         * @param string $index Индекс действия.
+         * @param int $maxCount Сколько раз это действий может быть исполнено.
+         * @param int $minutes Через сколько минут это действие будет доступно.
+         * @return bool Если вернет true, то действие может быть выполнено еще раз. Если false, то максимальный порог его выполнения достигнут.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function status($index, $maxCount, $minutes = 60)
+        {
+                        /** @var \App\Modules\Act\Models\Implement $instance */
+                        return $instance->status($index, $maxCount, $minutes);
+        }
+        
+        /**
+         * Добавление действия.
+         *
+         * @param string $index Индекс действия.
+         * @param int $to Добавить к количеству выполненных действий.
+         * @param int $minutes Общее время жизни этой записи в минутах.
+         * @return \App\Modules\Act\Models\Implement 
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function add($index, $to = 1, $minutes = 44640)
+        {
+                        /** @var \App\Modules\Act\Models\Implement $instance */
+                        return $instance->add($index, $to, $minutes);
+        }
+        
+        /**
+         * Очистка истории действий.
+         * 
+         * Позволяет удалить всю историю об этом действии, заодно обнулив весь результат.
+         *
+         * @param string $index Индекс действия.
+         * @return \App\Modules\Act\Models\Implement 
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function delete($index)
+        {
+                        /** @var \App\Modules\Act\Models\Implement $instance */
+                        return $instance->delete($index);
+        }
+         
+    }
+ 
+}
+
+namespace App\Modules\School\Facades { 
+
+    /**
+     * Фасад класса школы.
+     *
+     * @version 1.0
+     * @since 1.0
+     * @copyright Weborobot.
+     * @author Инчагов Тимофей Александрович.
+     */ 
+    class School {
+        
+        /**
+         * Установить текущую школу по ID.
+         *
+         * @param int $id ID Школы.
+         * @return \App\Modules\School\Models\Implement|bool Вернет текущий объект.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function setById($id)
+        {
+                        /** @var \App\Modules\School\Models\Implement $instance */
+                        return $instance->setById($id);
+        }
+        
+        /**
+         * Установить текущую школу по ее индексу.
+         *
+         * @param string $index Индекс школы.
+         * @return \App\Modules\School\Models\Implement|bool Вернет текущий объект.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function setByIndex($index)
+        {
+                        /** @var \App\Modules\School\Models\Implement $instance */
+                        return $instance->setByIndex($index);
+        }
+        
+        /**
+         * Получить данные текущей школы.
+         *
+         * @return array Вернет массив текущей школы.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function get()
+        {
+                        /** @var \App\Modules\School\Models\Implement $instance */
+                        return $instance->get();
+        }
+        
+        /**
+         * Получить ID текушей школы.
+         *
+         * @return int Вернет ID школы.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function getId()
+        {
+                        /** @var \App\Modules\School\Models\Implement $instance */
+                        return $instance->getId();
+        }
+        
+        /**
+         * Получить индекс текушей школы.
+         *
+         * @return string Вернет индекс школы.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function getIndex()
+        {
+                        /** @var \App\Modules\School\Models\Implement $instance */
+                        return $instance->getIndex();
+        }
+        
+        /**
+         * Сбить текущую школу.
+         *
+         * @return \App\Modules\School\Models\School Текущая школа.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function reset()
+        {
+                        /** @var \App\Modules\School\Models\Implement $instance */
+                        return $instance->reset();
+        }
+         
+    }
+ 
+}
+
+namespace App\Modules\Image\Facades { 
+
+    /**
+     * Фасад класса изображений.
+     *
+     * @version 1.0
+     * @since 1.0
+     * @copyright Weborobot.
+     * @author Инчагов Тимофей Александрович.
+     */ 
+    class Image {
+        
+        /**
+         * 
+         *
+         * @see \Illuminate\Support\Manager::getDefaultDriver
+         * @static 
+         */ 
+        public static function getDefaultDriver()
+        {
+                        /** @var \App\Modules\Image\Models\ImageManager $instance */
+                        return $instance->getDefaultDriver();
+        }
+        
+        /**
+         * Get a driver instance.
+         *
+         * @param string|null $driver
+         * @return mixed 
+         * @throws \InvalidArgumentException
+         * @static 
+         */ 
+        public static function driver($driver = null)
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+                        /** @var \App\Modules\Image\Models\ImageManager $instance */
+                        return $instance->driver($driver);
+        }
+        
+        /**
+         * Register a custom driver creator Closure.
+         *
+         * @param string $driver
+         * @param \Closure $callback
+         * @return \App\Modules\Image\Models\ImageManager 
+         * @static 
+         */ 
+        public static function extend($driver, $callback)
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+                        /** @var \App\Modules\Image\Models\ImageManager $instance */
+                        return $instance->extend($driver, $callback);
+        }
+        
+        /**
+         * Get all of the created "drivers".
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getDrivers()
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+                        /** @var \App\Modules\Image\Models\ImageManager $instance */
+                        return $instance->getDrivers();
+        }
+         
+    }
+ 
+}
+
+namespace App\Modules\Document\Facades { 
+
+    /**
+     * Фасад класса документов.
+     *
+     * @version 1.0
+     * @since 1.0
+     * @copyright Weborobot.
+     * @author Инчагов Тимофей Александрович.
+     */ 
+    class Document {
+        
+        /**
+         * 
+         *
+         * @see \Illuminate\Support\Manager::getDefaultDriver
+         * @static 
+         */ 
+        public static function getDefaultDriver()
+        {
+                        /** @var \App\Modules\Document\Models\DocumentManager $instance */
+                        return $instance->getDefaultDriver();
+        }
+        
+        /**
+         * Get a driver instance.
+         *
+         * @param string|null $driver
+         * @return mixed 
+         * @throws \InvalidArgumentException
+         * @static 
+         */ 
+        public static function driver($driver = null)
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+                        /** @var \App\Modules\Document\Models\DocumentManager $instance */
+                        return $instance->driver($driver);
+        }
+        
+        /**
+         * Register a custom driver creator Closure.
+         *
+         * @param string $driver
+         * @param \Closure $callback
+         * @return \App\Modules\Document\Models\DocumentManager 
+         * @static 
+         */ 
+        public static function extend($driver, $callback)
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+                        /** @var \App\Modules\Document\Models\DocumentManager $instance */
+                        return $instance->extend($driver, $callback);
+        }
+        
+        /**
+         * Get all of the created "drivers".
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getDrivers()
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+                        /** @var \App\Modules\Document\Models\DocumentManager $instance */
+                        return $instance->getDrivers();
+        }
+         
+    }
+ 
+}
+
+namespace App\Modules\Alert\Facades { 
+
+    /**
+     * Фасад класса предупреждений.
+     *
+     * @version 1.0
+     * @since 1.0
+     * @copyright Weborobot.
+     * @author Инчагов Тимофей Александрович.
+     */ 
+    class Alert {
+        
+        /**
+         * Добавить предупреждение.
+         *
+         * @param string $title Заголовок.
+         * @param bool $read Если поставить true то будет иметь статус прочитанного.
+         * @param string $description Описание.
+         * @param string $url Ссылка.
+         * @param string $icon Иконка.
+         * @param string $color Цвет иконки.
+         * @return int Вернет ID последней вставленной строки. Если ошибка, то вернет false.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function add($title, $read = false, $description = null, $url = null, $icon = null, $color = null)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->add($title, $read, $description, $url, $icon, $color);
+        }
+        
+        /**
+         * Изменить предупреждение.
+         *
+         * @param int $id ID предупреждения.
+         * @param string $title Заголовок.
+         * @param bool $read Если поставить true то будет иметь статус прочитанного.
+         * @param string $description Описание.
+         * @param string $url Ссылка.
+         * @param string $icon Иконка.
+         * @param string $color Цвет иконки.
+         * @return int Вернет ID вставленной строки. Если ошибка, то вернет false.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function edit($id, $title, $read = false, $description = null, $url = null, $icon = null, $color = null)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->edit($id, $title, $read, $description, $url, $icon, $color);
+        }
+        
+        /**
+         * Удалить предупреждение.
+         *
+         * @param int|array $ids ID предупреждения.
+         * @return bool Вернет булево значение успешности операции.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function remove($ids)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->remove($ids);
+        }
+        
+        /**
+         * Установить статус предупреждения как прочитанный.
+         *
+         * @param int $id ID предупреждения.
+         * @return bool Вернет успешность установки статуса.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function toRead($id)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->toRead($id);
+        }
+        
+        /**
+         * Установить статус предупреждения как не прочитанный.
+         *
+         * @param int $id ID предупреждения.
+         * @return bool Вернет успешность установки статуса.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function toUnread($id)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->toUnread($id);
+        }
+        
+        /**
+         * Получение предупреждения по его ID.
+         *
+         * @param int $id ID предупреждения.
+         * @return array Вернет данные предупреждения.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function get($id)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->get($id);
+        }
+        
+        /**
+         * Получить список предупреждений.
+         *
+         * @param int $offset Отступ вывода.
+         * @param int $limit Лимит вывода.
+         * @param bool $unread Получить только не прочтанные предупреждения.
+         * @param array $filters Массив фильтров.
+         * @param array $sort Массив сортировок.
+         * @return array|bool Вернет массив данных предупреждений.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function list($offset = null, $limit = null, $unread = null, $filters = null, $sort = null)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->list($offset, $limit, $unread, $filters, $sort);
+        }
+        
+        /**
+         * Очистить ошибку.
+         *
+         * @return \App\Models\Error 
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function cleanError()
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->cleanError();
+        }
+        
+        /**
+         * Проверка наличия ошибки.
+         *
+         * @return bool Вернет true если есть ошибка.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function hasError()
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->hasError();
+        }
+        
+        /**
+         * Выборс ошибки.
+         *
+         * @return $this|\Exception Вернет true если есть ошибка.
+         * @throws Exception
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function throwError()
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->throwError();
+        }
+        
+        /**
+         * Добавление ошибки.
+         *
+         * @param mixed $type Тип ошибки, это может быть краткий ее индификатор, или название. Это так же может быть массив, состоящий из:
+         * <pre>
+         * array
+         * (
+         * "type" => "Тип ошибки",
+         * "message" => "Сообщение об ошибки",
+         * "tag" => "Тэг ошибки, нужен для спец описания"
+         * )
+         * </pre>
+         * @param string $message Сообщение об ошибки.
+         * @param string $tag Тэг ошибки, нужен для спец описания.
+         * @return \App\Models\Error 
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function addError($type, $message = null, $tag = null)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->addError($type, $message, $tag);
+        }
+        
+        /**
+         * Получение ошибки по номеру.
+         *
+         * @param int $index Номер ошибки.
+         * @return array|bool Массив с описанием ошибки, где:
+         * <ul>
+         *    <li>type - тип ошибки</li>
+         *    <li>message - сообщение об ошибки</li>
+         *    <li>tag - тэг ошибки, нужен для спец описания.</li>
+         * </ul>
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function getError($index = 0)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->getError($index);
+        }
+        
+        /**
+         * Получение всех ошибок.
+         *
+         * @return array|bool Массив с описанием ошибки, где:
+         * <ul>
+         *    <li>type - тип ошибки</li>
+         *    <li>message - сообщение об ошибки</li>
+         *    <li>tag - тэг ошибки, нужен для спец описания.</li>
+         * </ul>
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function getErrors()
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->getErrors();
+        }
+        
+        /**
+         * Установка всех ошибок.
+         *
+         * @param array $errors Массив ошибок.
+         * @return \App\Models\Error 
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function setErrors($errors)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->setErrors($errors);
+        }
+        
+        /**
+         * Получение полного описания ошибки.
+         *
+         * @param int $index Номер ошибки.
+         * @return string|bool Строка с описанием ошибки.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function getErrorString($index = 0)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->getErrorString($index);
+        }
+        
+        /**
+         * Получение типа ошибки.
+         *
+         * @param int $index Номер ошибки.
+         * @return string|bool Тип ошибки, это может быть краткий ее индификатор.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function getErrorType($index = 0)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->getErrorType($index);
+        }
+        
+        /**
+         * Получение сообщения об ошибки.
+         *
+         * @param int $index Номер ошибки.
+         * @return string|bool Сообщение об ошибки.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function getErrorMessage($index = 0)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->getErrorMessage($index);
+        }
+        
+        /**
+         * Получение номера ошибки.
+         *
+         * @param int $index Номер ошибки.
+         * @return string|bool Номер ошибки.
+         * @since 1.0
+         * @version 1.0
+         * @static 
+         */ 
+        public static function getErrorNumber($index = 0)
+        {
+                        /** @var \App\Modules\Alert\Models\AlertImplement $instance */
+                        return $instance->getErrorNumber($index);
+        }
+         
+    }
+ 
+}
+
+namespace Intervention\Image\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Image {
+        
+        /**
+         * Overrides configuration settings
+         *
+         * @param array $config
+         * @return self 
+         * @static 
+         */ 
+        public static function configure($config = [])
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->configure($config);
+        }
+        
+        /**
+         * Initiates an Image instance from different input types
+         *
+         * @param mixed $data
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function make($data)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->make($data);
+        }
+        
+        /**
+         * Creates an empty image canvas
+         *
+         * @param int $width
+         * @param int $height
+         * @param mixed $background
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function canvas($width, $height, $background = null)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->canvas($width, $height, $background);
+        }
+        
+        /**
+         * Create new cached image and run callback
+         * (requires additional package intervention/imagecache)
+         *
+         * @param \Closure $callback
+         * @param int $lifetime
+         * @param boolean $returnObj
+         * @return \Image 
+         * @static 
+         */ 
+        public static function cache($callback, $lifetime = null, $returnObj = false)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->cache($callback, $lifetime, $returnObj);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     */ 
+    class Image {
+        
+        /**
+         * Overrides configuration settings
+         *
+         * @param array $config
+         * @return self 
+         * @static 
+         */ 
+        public static function configure($config = [])
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->configure($config);
+        }
+        
+        /**
+         * Initiates an Image instance from different input types
+         *
+         * @param mixed $data
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function make($data)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->make($data);
+        }
+        
+        /**
+         * Creates an empty image canvas
+         *
+         * @param int $width
+         * @param int $height
+         * @param mixed $background
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function canvas($width, $height, $background = null)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->canvas($width, $height, $background);
+        }
+        
+        /**
+         * Create new cached image and run callback
+         * (requires additional package intervention/imagecache)
+         *
+         * @param \Closure $callback
+         * @param int $lifetime
+         * @param boolean $returnObj
+         * @return \Image 
+         * @static 
+         */ 
+        public static function cache($callback, $lifetime = null, $returnObj = false)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->cache($callback, $lifetime, $returnObj);
+        }
+         
+    }
+ 
+}
+
+namespace App\Modules\OAuth\Facades { 
+
+    /**
+     * Фасад класса хранения токенов.
+     *
+     * @version 1.0
+     * @since 1.0
+     * @copyright Weborobot.
+     * @author Инчагов Тимофей Александрович.
+     */ 
+    class OAuth {
+        
+        /**
+         * 
+         *
+         * @see \Illuminate\Support\Manager::getDefaultDriver
+         * @static 
+         */ 
+        public static function getDefaultDriver()
+        {
+                        /** @var \App\Modules\OAuth\Models\OAuthDriverManager $instance */
+                        return $instance->getDefaultDriver();
+        }
+        
+        /**
+         * Get a driver instance.
+         *
+         * @param string|null $driver
+         * @return mixed 
+         * @throws \InvalidArgumentException
+         * @static 
+         */ 
+        public static function driver($driver = null)
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+                        /** @var \App\Modules\OAuth\Models\OAuthDriverManager $instance */
+                        return $instance->driver($driver);
+        }
+        
+        /**
+         * Register a custom driver creator Closure.
+         *
+         * @param string $driver
+         * @param \Closure $callback
+         * @return \App\Modules\OAuth\Models\OAuthDriverManager 
+         * @static 
+         */ 
+        public static function extend($driver, $callback)
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+                        /** @var \App\Modules\OAuth\Models\OAuthDriverManager $instance */
+                        return $instance->extend($driver, $callback);
+        }
+        
+        /**
+         * Get all of the created "drivers".
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getDrivers()
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+                        /** @var \App\Modules\OAuth\Models\OAuthDriverManager $instance */
+                        return $instance->getDrivers();
+        }
+         
+    }
+ 
+}
+
 namespace Facade\Ignition\Facades { 
 
     /**
@@ -17967,69 +18925,332 @@ namespace Facade\Ignition\Facades {
  
 }
 
-namespace Intervention\Image\Facades { 
+namespace Jackiedo\LogReader\Facades { 
 
     /**
-     * 
+     * The LogReader class.
      *
+     * @package Jackiedo\LogReader
+     * @author Jackie Do <anhvudo@gmail.com>
+     * @copyright 2017
+     * @access public
      */ 
-    class Image {
+    class LogReader {
         
         /**
-         * Overrides configuration settings
+         * Sets the path to directory storing the log files.
          *
-         * @param array $config
-         * @return self 
+         * @param string $path
+         * @return void 
          * @static 
          */ 
-        public static function configure($config = [])
+        public static function setLogPath($path)
         {
-                        /** @var \Intervention\Image\ImageManager $instance */
-                        return $instance->configure($config);
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        $instance->setLogPath($path);
         }
         
         /**
-         * Initiates an Image instance from different input types
+         * Setting the parser for structural analysis
          *
-         * @param mixed $data
-         * @return \Intervention\Image\Image 
+         * @param object $parser
+         * @return void 
          * @static 
          */ 
-        public static function make($data)
+        public static function setLogParser($parser)
         {
-                        /** @var \Intervention\Image\ImageManager $instance */
-                        return $instance->make($data);
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        $instance->setLogParser($parser);
         }
         
         /**
-         * Creates an empty image canvas
+         * Get instance of Levelable
          *
-         * @param int $width
-         * @param int $height
-         * @param mixed $background
-         * @return \Intervention\Image\Image 
+         * @return \Jackiedo\LogReader\Levelable 
          * @static 
          */ 
-        public static function canvas($width, $height, $background = null)
+        public static function getLevelable()
         {
-                        /** @var \Intervention\Image\ImageManager $instance */
-                        return $instance->canvas($width, $height, $background);
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getLevelable();
         }
         
         /**
-         * Create new cached image and run callback
-         * (requires additional package intervention/imagecache)
+         * Retrieves the orderByField property.
          *
-         * @param \Closure $callback
-         * @param int $lifetime
-         * @param boolean $returnObj
-         * @return \Image 
+         * @return string 
          * @static 
          */ 
-        public static function cache($callback, $lifetime = null, $returnObj = false)
+        public static function getOrderByField()
         {
-                        /** @var \Intervention\Image\ImageManager $instance */
-                        return $instance->cache($callback, $lifetime, $returnObj);
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getOrderByField();
+        }
+        
+        /**
+         * Retrieves the orderByDirection property.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getOrderByDirection()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getOrderByDirection();
+        }
+        
+        /**
+         * Retrieves the environment property.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getEnvironment()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getEnvironment();
+        }
+        
+        /**
+         * Retrieves the level property.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getLevel()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getLevel();
+        }
+        
+        /**
+         * Retrieves the currentLogPath property.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getCurrentLogPath()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getCurrentLogPath();
+        }
+        
+        /**
+         * Retrieves the path to directory storing the log files.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getLogPath()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getLogPath();
+        }
+        
+        /**
+         * Retrieves the log filename property.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getLogFilename()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getLogFilename();
+        }
+        
+        /**
+         * Sets the environment to sort the log entries by.
+         *
+         * @param string $environment
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function environment($environment)
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->environment($environment);
+        }
+        
+        /**
+         * Sets the level to sort the log entries by.
+         *
+         * @param mixed $level
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function level($level)
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->level($level);
+        }
+        
+        /**
+         * Sets the filename to get log entries.
+         *
+         * @param string $filename
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function filename($filename)
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->filename($filename);
+        }
+        
+        /**
+         * Includes read entries in the log results.
+         *
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function withRead()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->withRead();
+        }
+        
+        /**
+         * Alias of the withRead() method.
+         *
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function includeRead()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->includeRead();
+        }
+        
+        /**
+         * Sets the direction to return the log entries in.
+         *
+         * @param string $field
+         * @param string $direction
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function orderBy($field, $direction = 'asc')
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->orderBy($field, $direction);
+        }
+        
+        /**
+         * Returns a Laravel collection of log entries.
+         *
+         * @throws \Jackiedo\LogReader\Exceptions\UnableToRetrieveLogFilesException
+         * @return \Jackiedo\LogReader\Collection 
+         * @static 
+         */ 
+        public static function get()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->get();
+        }
+        
+        /**
+         * Returns total of log entries.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function count()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->count();
+        }
+        
+        /**
+         * Finds a logged error by it's ID.
+         *
+         * @param string $id
+         * @return mixed|null 
+         * @static 
+         */ 
+        public static function find($id = '')
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->find($id);
+        }
+        
+        /**
+         * Marks all retrieved log entries as read and
+         * returns the number of entries that have been marked.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function markAsRead()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->markAsRead();
+        }
+        
+        /**
+         * Alias of the markAsRead() method.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function markRead()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->markRead();
+        }
+        
+        /**
+         * Deletes all retrieved log entries and returns
+         * the number of entries that have been deleted.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function delete()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->delete();
+        }
+        
+        /**
+         * Deletes all retrieved log entries and returns
+         * the number of entries that have been deleted.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function removeLogFile()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->removeLogFile();
+        }
+        
+        /**
+         * Paginates the returned log entries.
+         *
+         * @param int $perPage
+         * @param int $currentPage
+         * @param array $options [path => '', query => [], fragment => '', pageName => '']
+         * @return mixed 
+         * @static 
+         */ 
+        public static function paginate($perPage = 25, $currentPage = null, $options = [])
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->paginate($perPage, $currentPage, $options);
+        }
+        
+        /**
+         * Returns an array of log filenames.
+         *
+         * @param null|string $filename
+         * @return array 
+         * @static 
+         */ 
+        public static function getLogFilenameList($filename = null)
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getLogFilenameList($filename);
         }
          
     }
@@ -20384,6 +21605,8 @@ namespace  {
             /**
              * Remove all existing orders and optionally add a new order.
              *
+             * @param string|null $column
+             * @param string $direction
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -20997,7 +22220,13 @@ namespace  {
 
     class Util extends \App\Models\Facades\Util {}
 
+    class Device extends \App\Models\Facades\Device {}
+
     class Bot extends \App\Models\Facades\Bot {}
+
+    class Act extends \App\Modules\Act\Facades\Act {}
+
+    class School extends \App\Modules\School\Facades\School {}
 
     class Currency extends \App\Models\Facades\Currency {}
 
@@ -21007,9 +22236,21 @@ namespace  {
 
     class Geocoder extends \App\Models\Facades\Geocoder {}
 
+    class ImageStore extends \App\Modules\Image\Facades\Image {}
+
+    class DocumentStore extends \App\Modules\Document\Facades\Document {}
+
+    class Alert extends \App\Modules\Alert\Facades\Alert {}
+
+    class Size extends \Intervention\Image\Facades\Image {}
+
+    class OAuth extends \App\Modules\OAuth\Facades\OAuth {}
+
     class Flare extends \Facade\Ignition\Facades\Flare {}
 
     class Image extends \Intervention\Image\Facades\Image {}
+
+    class LogReader extends \Jackiedo\LogReader\Facades\LogReader {}
  
 }
 

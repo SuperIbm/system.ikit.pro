@@ -157,18 +157,14 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function signIn(/*AccessSignInRequest $request*/)
+    public function signIn(AccessSignInRequest $request)
     {
         $action = app(AccessSignInAction::class);
 
         $data = $action->setParameters([
-            //"login" => $request->get("login"),
-            //"password" => $request->get("password"),
-            //"remember" => $request->get("remember")
-
-            "login" => "test@test.com",
-            "password" => "admin",
-            "remember" => true
+            "login" => $request->get("login"),
+            "password" => $request->get("password"),
+            "remember" => $request->get("remember")
         ])->run();
 
         if($data)

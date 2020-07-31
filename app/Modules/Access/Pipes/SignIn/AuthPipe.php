@@ -59,18 +59,21 @@ class AuthPipe implements Pipe
      */
     public function handle(array $content, Closure $next)
     {
-        $location = Geo::get();
+        if(!$content["gate"]["user"]["two_factor"])
+        {
+            $location = Geo::get();
 
-        $this->_userAuth->create([
-            'user_id' => $content["gate"]["user"]["id"],
-            'os' => Device::system()["os"],
-            'device' => Device::system()["device"],
-            'browser' => Device::browser(),
-            'agent' => Device::getAgent(),
-            'ip' => Request::ip(),
-            'latitude' => isset($location["lat"]) ? $location["lat"] : null,
-            'longitude' => isset($location["lng"]) ? $location["lng"] : null,
-        ]);
+            $this->_userAuth->create([
+                'user_id' => $content["gate"]["user"]["id"],
+                'os' => Device::system()["os"],
+                'device' => Device::system()["device"],
+                'browser' => Device::browser(),
+                'agent' => Device::getAgent(),
+                'ip' => Request::ip(),
+                'latitude' => isset($location["lat"]) ? $location["lat"] : null,
+                'longitude' => isset($location["lng"]) ? $location["lng"] : null,
+            ]);
+        }
 
         return $next($content);
     }
