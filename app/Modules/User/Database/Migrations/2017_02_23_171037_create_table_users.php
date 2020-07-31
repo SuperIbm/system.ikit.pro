@@ -34,6 +34,7 @@ class CreateTableUsers extends Migration
             $table->string('second_name', 150)->nullable();
             $table->string('email')->nullable();
             $table->string('telephone', 30)->nullable();
+            $table->boolean('two_factor')->default(0)->index('two_factor');
             $table->boolean('status')->default(0)->index('status');
             $table->json('flags')->nullable();
 

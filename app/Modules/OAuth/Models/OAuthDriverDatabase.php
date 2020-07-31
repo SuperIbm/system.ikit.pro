@@ -149,16 +149,14 @@ class OAuthDriverDatabase extends OAuthDriver
                         ]
                     ];
 
-                    $clients = $this->_oAuthClientEloquent->read($filter);
+                    $client = $this->_oAuthClientEloquent->get(null, $filter);
 
                     if(!$this->_oAuthClientEloquent->hasError())
                     {
-                        if($clients)
+                        if($client)
                         {
                             $expiresAtToken = Carbon::now()->addSeconds(Config::get("token.token_life"));
                             $expiresAtRefreshToken = Carbon::now()->addSeconds(Config::get("token.refresh_token_life"));
-
-                            $client = $clients[0];
 
                             $issue = $this->issue([
                                 "user" => $data["user"],
@@ -270,13 +268,13 @@ class OAuthDriverDatabase extends OAuthDriver
                                 ]
                             ];
 
-                            $records = $this->_oAuthRefreshTokenEloquent->read($filter, null, null, null, [
+                            $record = $this->_oAuthRefreshTokenEloquent->get(null, $filter, [
                                 "token.client"
                             ]);
 
                             if(!$this->_oAuthRefreshTokenEloquent->hasError())
                             {
-                                if($records && count($records))
+                                if($record)
                                 {
                                     $expiresAtToken = Carbon::now()->addSeconds(Config::get("token.token_life"));
                                     $expiresAtRefreshToken = Carbon::now()
@@ -287,11 +285,29 @@ class OAuthDriverDatabase extends OAuthDriver
                                         "client" => $client["id"]
                                     ], $expiresAtToken, $expiresAtRefreshToken);
 
-                                    $token = $this->_oAuthTokenEloquent->create([
-                                        'oauth_client_id' => $client["id"],
-                                        'token' => $issue["accessToken"],
-                                        'expires_at' => $expiresAtToken
+                                    $token = $this->_oAuthTokenEloquent->get(null, [
+                                        [
+                                            'table' => 'oauth_tokens',
+                                            'property' => 'token',
+                                            'value' => $issue["accessToken"]
+                                        ]
                                     ]);
+
+                                    if($token)
+                                    {
+                                        $token = $this->_oAuthTokenEloquent->update($token["id"], [
+                                            'oauth_client_id' => $client["id"],
+                                            'expires_at' => $expiresAtToken
+                                        ]);
+                                    }
+                                    else
+                                    {
+                                        $token = $this->_oAuthTokenEloquent->create([
+                                            'oauth_client_id' => $client["id"],
+                                            'token' => $issue["accessToken"],
+                                            'expires_at' => $expiresAtToken
+                                        ]);
+                                    }
 
                                     if(!$this->_oAuthTokenEloquent->hasError())
                                     {
@@ -406,13 +422,13 @@ class OAuthDriverDatabase extends OAuthDriver
                                 ]
                             ];
 
-                            $records = $this->_oAuthTokenEloquent->read($filter, null, null, null, [
+                            $record = $this->_oAuthTokenEloquent->get(null, $filter, [
                                 "client"
                             ]);
 
                             if(!$this->_oAuthTokenEloquent->hasError())
                             {
-                                if($records && count($records)) return true;
+                                if($record) return true;
                                 else return false;
                             }
                             else

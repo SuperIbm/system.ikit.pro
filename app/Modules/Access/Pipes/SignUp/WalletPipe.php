@@ -8,7 +8,7 @@
  * @since 1.0
  */
 
-namespace App\Modules\Order\Pipes\SignUp;
+namespace App\Modules\Access\Pipes\SignUp;
 
 use Config;
 use Closure;
@@ -81,10 +81,10 @@ class WalletPipe implements Pipe
             $this->_user->destroy($content["id"]);
 
             /**
-             * @var $entity \App\Models\Decorator
+             * @var $decorator \App\Models\Decorator
              */
-            $entity = $content["entity"];
-            $entity->setErrors($this->_userWallet->getErrors());
+            $decorator = $content["decorator"];
+            $decorator->setErrors($this->_userWallet->getErrors());
 
             return false;
         }

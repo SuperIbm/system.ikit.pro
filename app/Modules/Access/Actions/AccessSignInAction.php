@@ -11,19 +11,22 @@
 namespace App\Modules\Access\Actions;
 
 use App\Models\Action;
-use App\Modules\Access\Decorators\AccessVerifiedDecorator;
-use App\Modules\Access\Pipes\Verified\CheckPipe;
-use App\Modules\Access\Pipes\Gate\GetPipe;
+use App\Modules\Access\Decorators\AccessSignInDecorator;
+
+use App\Modules\Access\Pipes\SignIn\LoginPipe;
+use App\Modules\Access\Pipes\SignIn\GatePipe;
+use App\Modules\Access\Pipes\SignIn\AuthPipe;
+use App\Modules\Access\Pipes\SignIn\DataPipe;
 
 /**
- * Верификация пользователя.
+ * Регистрация нового пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessVerifiedAction extends Action
+class AccessSignInAction extends Action
 {
     /**
      * Метод запуска логики.
@@ -34,14 +37,17 @@ class AccessVerifiedAction extends Action
      */
     public function run()
     {
-        $decorator = app(AccessVerifiedDecorator::class);
+        $decorator = app(AccessSignInDecorator::class);
 
         $data = $decorator->setActions([
-            CheckPipe::class,
-            GetPipe::class
+            LoginPipe::class,
+            GatePipe::class,
+            AuthPipe::class,
+            DataPipe::class
         ])->setParameters([
-            "id" => $this->getParameter("id"),
-            "code" => $this->getParameter("code"),
+            "login" => $this->getParameter("login"),
+            "password" => $this->getParameter("password"),
+            "remember" => $this->getParameter("remember")
         ])->run();
 
         if(!$decorator->hasError()) return $data;

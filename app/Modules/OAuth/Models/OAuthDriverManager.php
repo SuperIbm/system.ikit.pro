@@ -28,6 +28,6 @@ class OAuthDriverManager extends Manager
      */
     public function getDefaultDriver()
     {
-        Config::get('oauth.storeDriver');
+        return Config::get('oauth.storeDriver');
     }
 }

@@ -10,5 +10,6 @@ return [
     'second_name' => 'Фамилия',
     'email' => 'E-mail',
     'telephone' => 'Телефон',
+    'two_factor' => 'Two-factor authentication',
     'status' => 'Статус'
 ];

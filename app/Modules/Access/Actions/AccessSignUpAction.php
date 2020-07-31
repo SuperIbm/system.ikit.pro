@@ -12,11 +12,11 @@ namespace App\Modules\Access\Actions;
 
 use App\Models\Action;
 use App\Modules\Access\Decorators\AccessSignUpDecorator;
-use App\Modules\Order\Pipes\SignUp\CreatePipe;
-use App\Modules\Order\Pipes\SignUp\ReferralPipe;
-use App\Modules\Order\Pipes\SignUp\WalletPipe;
-use App\Modules\Order\Pipes\SignUp\VerificationPipe;
-use App\Modules\Order\Pipes\Gate\GetPipe;
+use App\Modules\Access\Pipes\SignUp\CreatePipe;
+use App\Modules\Access\Pipes\SignUp\ReferralPipe;
+use App\Modules\Access\Pipes\SignUp\WalletPipe;
+use App\Modules\Access\Pipes\SignUp\VerificationPipe;
+use App\Modules\Access\Pipes\Gate\GetPipe;
 
 /**
  * Регистрация нового пользователя.

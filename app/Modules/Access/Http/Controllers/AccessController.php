@@ -20,16 +20,19 @@ use App\Modules\Access\Actions\AccessCheckResetPasswordAction;
 use App\Modules\Access\Actions\AccessForgetAction;
 use App\Modules\Access\Actions\AccessResetAction;
 use App\Modules\Access\Actions\AccessSendEmailVerificationAction;
+use App\Modules\Access\Actions\AccessSignInAction;
 use App\Modules\Access\Actions\AccessSignUpAction;
 use App\Modules\Access\Actions\AccessSocialAction;
 use App\Modules\Access\Actions\AccessUpdateAction;
 use App\Modules\Access\Actions\AccessVerifiedAction;
 use App\Modules\Access\Actions\AccessGateAction;
+use App\Modules\Access\Actions\AccessPasswordAction;
 
 use App\Modules\Access\Http\Requests\AccessForgetRequest;
 use App\Modules\Access\Http\Requests\AccessPasswordRequest;
 use App\Modules\Access\Http\Requests\AccessResetCheckRequest;
 use App\Modules\Access\Http\Requests\AccessResetRequest;
+use App\Modules\Access\Http\Requests\AccessSignInRequest;
 use App\Modules\Access\Http\Requests\AccessSignUpRequest;
 use App\Modules\Access\Http\Requests\AccessSocialRequest;
 use App\Modules\Access\Http\Requests\AccessVerifiedRequest;
@@ -146,6 +149,57 @@ class AccessController extends Controller
     }
 
     /**
+     * Авторизация пользователя.
+     *
+     * @param \App\Modules\Access\Http\Requests\AccessSignInRequest $request Запрос.
+     *
+     * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
+     * @since 1.0
+     * @version 1.0
+     */
+    public function signIn(/*AccessSignInRequest $request*/)
+    {
+        $action = app(AccessSignInAction::class);
+
+        $data = $action->setParameters([
+            //"login" => $request->get("login"),
+            //"password" => $request->get("password"),
+            //"remember" => $request->get("remember")
+
+            "login" => "test@test.com",
+            "password" => "admin",
+            "remember" => true
+        ])->run();
+
+        if($data)
+        {
+            Log::info('Success: User signed in.', [
+                'module' => "Access",
+                'type' => 'Sign in'
+            ]);
+
+            $data = [
+                'success' => true,
+                'data' => $data
+            ];
+        }
+        else
+        {
+            Log::warning('Fail: User signed in.', [
+                'module' => "Access",
+                'type' => 'Sign in'
+            ]);
+
+            $data = [
+                'success' => false,
+                'message' => $action->getErrorMessage()
+            ];
+        }
+
+        return response()->json($data)->setStatusCode($data["success"] == true ? 200 : 400);
+    }
+
+    /**
      * Регистрация пользователя.
      *
      * @param \App\Modules\Access\Http\Requests\AccessSignUpRequest $request Запрос.
@@ -156,9 +210,9 @@ class AccessController extends Controller
      */
     public function signUp(AccessSignUpRequest $request)
     {
-        $accessSignUpAction = app(AccessSignUpAction::class);
+        $action = app(AccessSignUpAction::class);
 
-        $data = $accessSignUpAction->setParameters([
+        $data = $action->setParameters([
             "login" => $request->get("login"),
             "password" => $request->get("password"),
             "first_name" => $request->get("first_name"),
@@ -190,7 +244,7 @@ class AccessController extends Controller
 
             $data = [
                 'success' => false,
-                'message' => $accessSignUpAction->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ];
         }
 
@@ -267,9 +321,9 @@ class AccessController extends Controller
 
         if($checked)
         {
-            $accessSendEmailVerificationAction = app(AccessSendEmailVerificationAction::class);
+            $action = app(AccessSendEmailVerificationAction::class);
 
-            $result = $accessSendEmailVerificationAction->setParameters([
+            $result = $action->setParameters([
                 "email" => $email
             ])->run();
 
@@ -293,7 +347,7 @@ class AccessController extends Controller
 
                 $data = [
                     'success' => false,
-                    'message' => $accessSendEmailVerificationAction->getErrorMessage()
+                    'message' => $action->getErrorMessage()
                 ];
             }
         }
@@ -318,9 +372,9 @@ class AccessController extends Controller
      */
     public function forget(AccessForgetRequest $request)
     {
-        $accessForgetAction = app(AccessForgetAction::class);
+        $action = app(AccessForgetAction::class);
 
-        $data = $accessForgetAction->setParameters([
+        $data = $action->setParameters([
             "login" => $request->get("login")
         ])->run();
 
@@ -345,7 +399,7 @@ class AccessController extends Controller
 
             $data = [
                 'success' => false,
-                'message' => $accessForgetAction->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ];
         }
 
@@ -364,15 +418,12 @@ class AccessController extends Controller
      */
     public function resetCheck(int $id, AccessResetCheckRequest $request)
     {
-        $accessCheckResetPasswordAction = app(AccessCheckResetPasswordAction::class);
+        $action = app(AccessCheckResetPasswordAction::class);
 
-        $status = $accessCheckResetPasswordAction->setParameters
-        (
-            [
-                "id" => $id,
-                "code" => $request->get("code")
-            ]
-        )->run();
+        $status = $action->setParameters([
+            "id" => $id,
+            "code" => $request->get("code")
+        ])->run();
 
         if($status)
         {
@@ -384,7 +435,7 @@ class AccessController extends Controller
         {
             $data = [
                 'success' => false,
-                'message' => $accessCheckResetPasswordAction->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ];
         }
 
@@ -403,16 +454,13 @@ class AccessController extends Controller
      */
     public function reset(int $id, AccessResetRequest $request)
     {
-        $accessResetAction= app(AccessResetAction::class);
+        $action = app(AccessResetAction::class);
 
-        $status = $accessResetAction->setParameters
-        (
-            [
-                "id" => $id,
-                "code" => $request->get("code"),
-                "password" => $request->get("password"),
-            ]
-        )->run();
+        $status = $action->setParameters([
+            "id" => $id,
+            "code" => $request->get("code"),
+            "password" => $request->get("password"),
+        ])->run();
 
         if($status)
         {
@@ -424,7 +472,7 @@ class AccessController extends Controller
         {
             $data = [
                 'success' => false,
-                'message' => $accessResetAction->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ];
         }
 
@@ -442,26 +490,23 @@ class AccessController extends Controller
      */
     public function update(Request $request)
     {
-        $accessUpdateAction= app(AccessUpdateAction::class);
+        $action = app(AccessUpdateAction::class);
 
-        $status = $accessUpdateAction->setParameters
-        (
-            [
-                "user" => Auth::user()->toArray(),
-                "data" => [
-                    "first_name" => $request->get("first_name"),
-                    "second_name" => $request->get("second_name"),
-                    "email" => $request->get("email"),
-                    "telephone" => $request->get("telephone"),
-                    "postal_code" => $request->get("postal_code"),
-                    "country" => $request->get("country"),
-                    "city" => $request->get("city"),
-                    "region" => $request->get("region"),
-                    "street_address" => $request->get("street_address"),
-                    "company_name" => $request->get("company_name")
-                ]
+        $status = $action->setParameters([
+            "user" => Auth::user()->toArray(),
+            "data" => [
+                "first_name" => $request->get("first_name"),
+                "second_name" => $request->get("second_name"),
+                "email" => $request->get("email"),
+                "telephone" => $request->get("telephone"),
+                "postal_code" => $request->get("postal_code"),
+                "country" => $request->get("country"),
+                "city" => $request->get("city"),
+                "region" => $request->get("region"),
+                "street_address" => $request->get("street_address"),
+                "company_name" => $request->get("company_name")
             ]
-        )->run();
+        ])->run();
 
         if($status)
         {
@@ -485,7 +530,7 @@ class AccessController extends Controller
 
             $data = [
                 'success' => false,
-                'message' => $accessUpdateAction->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ];
         }
 
@@ -503,16 +548,13 @@ class AccessController extends Controller
      */
     public function password(AccessPasswordRequest $request)
     {
-        $accessResetAction= app(AccessPasswordAction::class);
+        $accessResetAction = app(AccessPasswordAction::class);
 
-        $status = $accessResetAction->setParameters
-        (
-            [
-                "user" => Auth::user()->toArray(),
-                "password_current" => $request->get("password_current"),
-                "password" => $request->get("password"),
-            ]
-        )->run();
+        $status = $accessResetAction->setParameters([
+            "user" => Auth::user()->toArray(),
+            "password_current" => $request->get("password_current"),
+            "password" => $request->get("password"),
+        ])->run();
 
         if($status)
         {

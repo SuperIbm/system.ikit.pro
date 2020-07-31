@@ -39,7 +39,8 @@ use App\Models\Delete;
  * @property string $second_name Фамилия.
  * @property string $email E-mail
  * @property string $telephone Телефон.
- * @property string $status Значение статуса.
+ * @property bool $two_factor Двухфакторная аутентификация.
+ * @property bool $status Значение статуса.
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modules\User\Models\UserVerification $verification
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modules\User\Models\UserRecovery $recovery
@@ -81,6 +82,7 @@ class User extends Authenticatable
         'second_name',
         'email',
         'telephone',
+        'two_factor',
         'status',
         'flags'
     ];
@@ -102,6 +104,7 @@ class User extends Authenticatable
             'second_name' => 'nullable|max:150',
             'email' => 'nullable|email',
             'telephone' => 'nullable|max:30',
+            'two_factor' => 'nullable|boolean',
             'status' => 'required|min:0|max:2'
         ];
     }
@@ -124,6 +127,7 @@ class User extends Authenticatable
             'second_name' => trans('user::model.user.second_name'),
             'email' => trans('user::model.user.email'),
             'telephone' => trans('user::model.user.telephone'),
+            'two_factor' => trans('user::model.user.two_factor'),
             'status' => trans('user::model.user.status')
         ];
     }
@@ -350,5 +354,17 @@ class User extends Authenticatable
     public function referralInviting()
     {
         return $this->hasMany(UserReferral::class, "user_inviting_id", "id");
+    }
+
+    /**
+     * Получить аунтификации пользователя.
+     *
+     * @return \App\Modules\User\Models\UserAuth|\Illuminate\Database\Eloquent\Relations\HasMany Модель аунтификаций пользователя.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function auths()
+    {
+        return $this->hasMany(UserAuth::class);
     }
 }

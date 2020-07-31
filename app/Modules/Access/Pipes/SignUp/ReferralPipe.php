@@ -8,7 +8,7 @@
  * @since 1.0
  */
 
-namespace App\Modules\Order\Pipes\SignUp;
+namespace App\Modules\Access\Pipes\SignUp;
 
 use Closure;
 use App\Models\Contracts\Pipe;
@@ -103,10 +103,10 @@ class ReferralPipe implements Pipe
                     $this->_user->destroy($content["id"]);
 
                     /**
-                     * @var $entity \App\Models\Decorator
+                     * @var $decorator \App\Models\Decorator
                      */
-                    $entity = $content["entity"];
-                    $entity->setErrors($this->_user->getErrors());
+                    $decorator = $content["decorator"];
+                    $decorator->setErrors($this->_user->getErrors());
 
                     return false;
                 }

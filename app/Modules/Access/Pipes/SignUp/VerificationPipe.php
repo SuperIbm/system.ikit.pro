@@ -8,7 +8,7 @@
  * @since 1.0
  */
 
-namespace App\Modules\Order\Pipes\SignUp;
+namespace App\Modules\Access\Pipes\SignUp;
 
 use Closure;
 use Hash;
@@ -95,10 +95,10 @@ class VerificationPipe implements Pipe
             else
             {
                 /**
-                 * @var $entity \App\Models\Decorator
+                 * @var $decorator \App\Models\Decorator
                  */
-                $entity = $content["entity"];
-                $entity->setErrors($action->getErrors());
+                $decorator = $content["decorator"];
+                $decorator->setErrors($action->getErrors());
 
                 return false;
             }
@@ -106,12 +106,12 @@ class VerificationPipe implements Pipe
         else
         {
             /**
-             * @var $entity \App\Models\Decorator
+             * @var $decorator \App\Models\Decorator
              */
-            $entity = $content["entity"];
+            $decorator = $content["decorator"];
 
             $this->_user->destroy($content["id"]);
-            $entity->setErrors($this->_userVerification->getErrors());
+            $decorator->setErrors($this->_userVerification->getErrors());
 
             return false;
         }

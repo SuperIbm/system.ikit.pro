@@ -27,6 +27,9 @@ use App\Modules\User\Repositories\UserAddress as UserAddressRepository;
 use App\Modules\User\Models\UserSchool as UserSchoolModel;
 use App\Modules\User\Repositories\UserSchool as UserSchoolRepository;
 
+use App\Modules\User\Models\UserAuth as UserAuthModel;
+use App\Modules\User\Repositories\UserAuth as UserAuthRepository;
+
 use App\Modules\User\Models\UserSchoolRole as UserSchoolRoleModel;
 use App\Modules\User\Repositories\UserSchoolRole as UserSchoolRoleRepository;
 use App\Modules\User\Events\Listeners\UserSchoolListener;
@@ -132,6 +135,12 @@ class UserServiceProvider extends ServiceProvider
         });
 
         UserSchoolModel::observe(UserSchoolListener::class);
+
+        //
+
+        App::singleton(UserAuthRepository::class, function() {
+            return new UserAuthRepository(new UserAuthModel());
+        });
 
         //
 

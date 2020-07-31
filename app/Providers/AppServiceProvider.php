@@ -12,9 +12,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App;
 use DB;
-use Config;
 use App\Models\Util;
 use App\Models\Bot;
+use App\Models\Device;
 
 use Illuminate\Support\Facades\Schema;
 
@@ -54,6 +54,13 @@ class AppServiceProvider extends ServiceProvider
             function()
             {
                 return new Util();
+            }
+        );
+
+        App::bind('device',
+            function()
+            {
+                return new Device();
             }
         );
 

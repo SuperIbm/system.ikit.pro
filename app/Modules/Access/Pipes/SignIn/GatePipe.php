@@ -8,44 +8,26 @@
  * @since 1.0
  */
 
-namespace App\Modules\Access\Pipes\SignUp;
+namespace App\Modules\Access\Pipes\SignIn;
 
 use App\Models\Contracts\Pipe;
+use App\Modules\Access\Actions\AccessApiClientAction;
+use App\Modules\Access\Actions\AccessApiTokenAction;
+use App\Modules\Access\Actions\AccessGateAction;
 use App\Modules\User\Repositories\User;
+use App\Modules\User\Repositories\UserVerification;
 use Closure;
 
 /**
- * Регистрация нового пользователя: создание пользователя.
+ * Авторизация пользователя: Получение данных о пользовател.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class CreatePipe implements Pipe
+class GatePipe implements Pipe
 {
-    /**
-     * Репозитарий пользователей.
-     *
-     * @var \App\Modules\User\Repositories\User
-     * @version 1.0
-     * @since 1.0
-     */
-    private $_user;
-
-    /**
-     * Конструктор.
-     *
-     * @param \App\Modules\User\Repositories\User $user Репозитарий пользователей.
-     *
-     * @since 1.0
-     * @version 1.0
-     */
-    public function __construct(User $user)
-    {
-        $this->_user = $user;
-    }
-
     /**
      * Метод который будет вызван у pipeline.
      *
@@ -56,20 +38,15 @@ class CreatePipe implements Pipe
      */
     public function handle(array $content, Closure $next)
     {
-        $data = [
-            "login" => $content["user"]["login"],
-            "password" => bcrypt($content["user"]["password"]),
-            "first_name" => $content["user"]["first_name"],
-            "second_name" => $content["user"]["second_name"],
-            "telephone" => $content["user"]["telephone"],
-            "status" => true
-        ];
+        $action = app(AccessGateAction::class);
 
-        $id = $this->_user->create($data);
+        $gate = $action->setParameters([
+            "id" => $content["client"]["user"]["id"]
+        ])->run();
 
-        if($id)
+        if($gate)
         {
-            $content["id"] = $id;
+            $content["gate"] = $gate;
 
             return $next($content);
         }
@@ -79,7 +56,7 @@ class CreatePipe implements Pipe
              * @var $decorator \App\Models\Decorator
              */
             $decorator = $content["decorator"];
-            $decorator->setErrors($this->_user->getErrors());
+            $decorator->setErrors($action->getErrors());
 
             return false;
         }

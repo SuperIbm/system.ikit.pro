@@ -10,23 +10,24 @@
 
 namespace App\Modules\Access\Actions;
 
-use OAuth;
-use App\Models\Action;
 use Hash;
+use App\Models\Action;
 use App\Modules\User\Repositories\User;
+use App\Modules\Access\Emails\Reset;
+use Mail;
 
 /**
- * Класс действия для генерации клиента.
+ * Изменение пароля пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AccessApiClientAction extends Action
+class AccessPasswordAction extends Action
 {
     /**
-     * Репозитарий для выбранных групп пользователя.
+     * Репозитарий пользователей.
      *
      * @var \App\Modules\User\Repositories\User
      * @version 1.0
@@ -56,39 +57,44 @@ class AccessApiClientAction extends Action
      */
     public function run()
     {
-        $user = $this->_user->get(null, null, [
-            [
-                'property' => 'login',
-                'value' => $this->getParameter("login")
-            ]
-        ]);
+        $user = $this->getParameter("user");
 
         if($user)
         {
-            $check = false;
+            $user = $this->_user->get($user["id"], true);
 
-            if($this->getParameter("password")) $check = Hash::check($this->getParameter("password"), $user["password"]);
-            else if($this->getParameter("force")) $check = true;
-
-            if($check)
+            if($user)
             {
-                $secret = OAuth::secret($user["id"]);
+                $check = Hash::check($this->getParameter("password_current"), $user["password"]);
 
-                if(!OAuth::hasError())
+                if($check)
                 {
-                    unset($user["password"]);
+                    $status = $this->_user->update($user["id"], [
+                        "password" => bcrypt($this->getParameter("password"))
+                    ]);
 
-                    return [
-                        "user" => $user,
-                        "secret" => $secret
-                    ];
+                    if($status) return true;
+                    else
+                    {
+                        $this->setErrors($this->_user->getErrors());
+
+                        return false;
+                    }
                 }
-                else $this->setErrors(OAuth::getErrors());
+                else $this->addError("access", 'The password does not match for the user.');
             }
-            else $this->addError("access", 'The password does not match for the user.');
-        }
-        else $this->addError("user", 'The user has not been found.');
+            else
+            {
+                $this->addError("user", "The user doesn't exist or not find it.");
 
-        return false;
+                return false;
+            }
+        }
+        else
+        {
+            $this->addError("user", "The user doesn't exist or not find it.");
+
+            return false;
+        }
     }
 }

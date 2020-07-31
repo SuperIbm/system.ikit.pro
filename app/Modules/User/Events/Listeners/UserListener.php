@@ -45,6 +45,7 @@ class UserListener
         $user->deleteRelation($user->wallet(), $user->isForceDeleting());
         $user->deleteRelation($user->referralInvited(), $user->isForceDeleting());
         $user->deleteRelation($user->referralInviting(), $user->isForceDeleting());
+        $user->deleteRelation($user->auths(), $user->isForceDeleting());
 
         return true;
     }

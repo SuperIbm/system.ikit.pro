@@ -303,6 +303,7 @@ return [
 
         // Own classes
         'Util' => App\Models\Facades\Util::class,
+        'Device' => App\Models\Facades\Device::class,
         'Bot' => App\Models\Facades\Bot::class,
         'Act' => App\Modules\Act\Facades\Act::class,
         'School' => App\Modules\School\Facades\School::class,

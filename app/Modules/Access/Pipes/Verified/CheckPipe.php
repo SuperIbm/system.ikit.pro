@@ -8,7 +8,7 @@
  * @since 1.0
  */
 
-namespace App\Modules\Order\Pipes\Verified;
+namespace App\Modules\Access\Pipes\Verified;
 
 use App\Models\Contracts\Pipe;
 use App\Modules\User\Repositories\User;
@@ -94,10 +94,10 @@ class CheckPipe implements Pipe
                     else
                     {
                         /**
-                         * @var $entity \App\Models\Decorator
+                         * @var $decorator \App\Models\Decorator
                          */
-                        $entity = $content["entity"];
-                        $entity->addError("user", trans('access::pipes.verified.checkPipe.user_is_verified'));
+                        $decorator = $content["decorator"];
+                        $decorator->addError("user", trans('access::pipes.verified.checkPipe.user_is_verified'));
 
                         return false;
                     }
@@ -105,10 +105,10 @@ class CheckPipe implements Pipe
                 else
                 {
                     /**
-                     * @var $entity \App\Models\Decorator
+                     * @var $decorator \App\Models\Decorator
                      */
-                    $entity = $content["entity"];
-                    $entity->addError("user", trans('access::pipes.verified.checkPipe.not_correct_code'));
+                    $decorator = $content["decorator"];
+                    $decorator->addError("user", trans('access::pipes.verified.checkPipe.not_correct_code'));
 
                     return false;
                 }
@@ -116,10 +116,10 @@ class CheckPipe implements Pipe
             else
             {
                 /**
-                 * @var $entity \App\Models\Decorator
+                 * @var $decorator \App\Models\Decorator
                  */
-                $entity = $content["entity"];
-                $entity->addError("user", trans('access::pipes.verified.checkPipe.not_exist_code'));
+                $decorator = $content["decorator"];
+                $decorator->addError("user", trans('access::pipes.verified.checkPipe.not_exist_code'));
 
                 return false;
             }
@@ -127,10 +127,10 @@ class CheckPipe implements Pipe
         else
         {
             /**
-             * @var $entity \App\Models\Decorator
+             * @var $decorator \App\Models\Decorator
              */
-            $entity = $content["entity"];
-            $entity->addError("user", trans('access::pipes.verified.checkPipe.not_exist_user'));
+            $decorator = $content["decorator"];
+            $decorator->addError("user", trans('access::pipes.verified.checkPipe.not_exist_user'));
 
             return false;
         }

@@ -8,7 +8,7 @@
  * @since 1.0
  */
 
-namespace App\Modules\Order\Pipes\Gate;
+namespace App\Modules\Access\Pipes\Gate;
 
 use App\Models\Contracts\Pipe;
 use App\Modules\Access\Actions\AccessApiClientAction;
@@ -72,10 +72,10 @@ class GetPipe implements Pipe
                 else
                 {
                     /**
-                     * @var $entity \App\Models\Decorator
+                     * @var $decorator \App\Models\Decorator
                      */
-                    $entity = $content["entity"];
-                    $entity->setErrors($action->getErrors());
+                    $decorator = $content["decorator"];
+                    $decorator->setErrors($action->getErrors());
 
                     return false;
                 }
@@ -83,10 +83,10 @@ class GetPipe implements Pipe
             else
             {
                 /**
-                 * @var $entity \App\Models\Decorator
+                 * @var $decorator \App\Models\Decorator
                  */
-                $entity = $content["entity"];
-                $entity->setErrors($action->getErrors());
+                $decorator = $content["decorator"];
+                $decorator->setErrors($action->getErrors());
 
                 return false;
             }
@@ -94,10 +94,10 @@ class GetPipe implements Pipe
         else
         {
             /**
-             * @var $entity \App\Models\Decorator
+             * @var $decorator \App\Models\Decorator
              */
-            $entity = $content["entity"];
-            $entity->setErrors($action->getErrors());
+            $decorator = $content["decorator"];
+            $decorator->setErrors($action->getErrors());
 
             return false;
         }
