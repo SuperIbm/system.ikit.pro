@@ -59,6 +59,6 @@ class Recovery extends Mailable
      */
     public function build()
     {
-        return $this->subject('Recovery the password of the user')->view("access::site.recovery", $this->_data);
+        return $this->subject(trans('access::emails.recovery.title'))->view("access::recovery", $this->_data);
     }
 }

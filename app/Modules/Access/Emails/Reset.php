@@ -59,6 +59,6 @@ class Reset extends Mailable
      */
     public function build()
     {
-        return $this->subject('You reset your password')->view("access::site.reset", $this->_data);
+        return $this->subject(trans('access::emails.reset.title'))->view("access::reset", $this->_data);
     }
 }

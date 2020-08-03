@@ -59,6 +59,6 @@ class Verification extends Mailable
      */
     public function build()
     {
-        return $this->subject('Pleas verify your email address')->view("access::site.verification", $this->_data);
+        return $this->subject(trans('access::emails.verification.title'))->view("access::verification", $this->_data);
     }
 }
