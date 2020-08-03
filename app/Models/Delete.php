@@ -25,7 +25,7 @@ trait Delete
     /**
      * Специализированный метод, который удаляет все модели в связе и при этом вызывает их события.
      *
-     * @param \Illuminate\Database\Eloquent\Relations\Relation Отновшение модели.
+     * @param \Illuminate\Database\Eloquent\Relations\Relation Отношения модели.
      * @param bool $force Просим удалить записи полностью.
      *
      * @return object Вернет объект.

@@ -42,7 +42,7 @@ class CurrencyCbr extends Currency
 
         if($htmldom->Valute)
         {
-            $data = Array();
+            $data = [];
 
             foreach($htmldom->Valute as $item)
             {

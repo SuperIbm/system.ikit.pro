@@ -48,11 +48,11 @@ abstract class Geocoder
      * @param string $region Регион.
      * @param string $street Уличца.
      *
-     * @return string|boolean Вернет строку адреса.
+     * @return string Вернет строку адреса.
      * @since 1.0
      * @version 1.0
      */
-    protected function _getAddress(string $zipCode = null, string $country = null, string $city = null, string $region = null, string $street = null)
+    protected function _getAddress(string $zipCode = null, string $country = null, string $city = null, string $region = null, string $street = null): string
     {
         $address = '';
 
@@ -86,6 +86,6 @@ abstract class Geocoder
             $address .= $street;
         }
 
-        return $address ? $address : false;
+        return $address;
     }
 }

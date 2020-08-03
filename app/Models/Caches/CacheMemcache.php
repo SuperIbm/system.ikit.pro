@@ -32,7 +32,7 @@ class CacheMemcache extends TaggableStore implements Store
      * @since 1.0
      * @version 1.0
      */
-    private $_memcache;
+    private Memcache $_memcache;
 
     /**
      * Название индекса, который хранит кеш.
@@ -41,7 +41,7 @@ class CacheMemcache extends TaggableStore implements Store
      * @version 1.0
      * @since 1.0
      */
-    private $_indexCaches = "cache";
+    private string $_indexCaches = "cache";
 
     /**
      * Конструктор.

@@ -30,7 +30,7 @@ trait Error
      * @version 1.0
      * @since 1.0
      */
-    private $_errors = [];
+    private array $_errors = [];
 
     /**
      * Очистить ошибку.

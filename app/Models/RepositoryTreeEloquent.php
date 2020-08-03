@@ -37,7 +37,7 @@ trait RepositoryTreeEloquent
      * @param array $group Массив для группировки.
      * @param array|string $selects Выражения для выборки.
      *
-     * @return array Массив данных.
+     * @return array|bool Массив данных.
      * @since 1.0
      * @version 1.0
      */
@@ -58,7 +58,7 @@ trait RepositoryTreeEloquent
      * @since 1.0
      * @version 1.0
      */
-    protected function _parents(array $tags, int $id)
+    protected function _parents(array $tags, int $id): ?array
     {
         $cacheKey = Util::getKey($this->getModel()->getTable(), "tree", "parents", $id);
 
@@ -81,7 +81,7 @@ trait RepositoryTreeEloquent
      * @since 1.0
      * @version 1.0
      */
-    protected function _parent(array $tags, int $id)
+    protected function _parent(array $tags, int $id): ?array
     {
         $cacheKey = Util::getKey($this->getModel()->getTable(), "tree", "parent", $id);
 
@@ -104,7 +104,7 @@ trait RepositoryTreeEloquent
      * @since 1.0
      * @version 1.0
      */
-    protected function _children(array $tags, int $id)
+    protected function _children(array $tags, int $id): ?array
     {
         $cacheKey = Util::getKey($this->getModel()->getTable(), "tree", "children", $id);
 
@@ -127,7 +127,7 @@ trait RepositoryTreeEloquent
      * @since 1.0
      * @version 1.0
      */
-    protected function _descendants(array $tags, int $id)
+    protected function _descendants(array $tags, int $id): ?array
     {
         $cacheKey = Util::getKey($this->getModel()->getTable(), "tree", "descendants", $id);
 
@@ -153,7 +153,7 @@ trait RepositoryTreeEloquent
      * @since 1.0
      * @version 1.0
      */
-    protected function _ancestors(array $tags, int $id)
+    protected function _ancestors(array $tags, int $id): ?array
     {
         $cacheKey = Util::getKey($this->getModel()->getTable(), "tree", "ancestors", $id);
 

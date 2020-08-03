@@ -27,7 +27,7 @@ class Device
      * @version 1.0
      * @since 1.0
      */
-    private $_agent;
+    private string $_agent;
 
     /**
      * Конструктор.

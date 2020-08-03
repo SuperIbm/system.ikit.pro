@@ -95,6 +95,7 @@ class SmsCenter extends Sms
      * @since 1.0
      * @version 1.0
      * @see \App\Models\Contracts\Sms::check
+     * @throws
      */
     public function check(string $index, string $phone): bool
     {

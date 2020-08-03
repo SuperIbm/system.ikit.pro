@@ -28,16 +28,16 @@ class Sms
      * @since 1.0
      * @version 1.0
      */
-    public $level = 'info';
+    public string $level = 'info';
 
     /**
      * Отправитель сообщения.
      *
-     * @var string|null
+     * @var string
      * @since 1.0
      * @version 1.0
      */
-    public $sender;
+    public string $sender;
 
     /**
      * Сообщение для отправки.
@@ -46,7 +46,7 @@ class Sms
      * @since 1.0
      * @version 1.0
      */
-    public $message;
+    public string $message;
 
     /**
      * Булево значение, определяющее нужно ли транслировать текст.
@@ -55,7 +55,7 @@ class Sms
      * @since 1.0
      * @version 1.0
      */
-    public $translit = false;
+    public bool $translit = false;
 
     /**
      * Индикатор того, что сообщение было удачно отправлено.

@@ -29,7 +29,7 @@ trait Flags
      * @version 1.0
      * @since 1.0
      */
-    static function bootFlagsTrait()
+    static function bootFlagsTrait(): void
     {
         static::saving(function(Model $model)
         {

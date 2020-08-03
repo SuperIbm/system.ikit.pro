@@ -27,23 +27,11 @@ abstract class Geo
     /**
      * Абстрактный метод для получения геообъекта.
      *
-     * @param string $geoObject Название геообъекта для получения.
-     * Доступные значения:
-     * <ul>
-     *  <li>inetnum - IP подсети</li>
-     *  <li>country - страна</li>
-     *  <li>city - город</li>
-     *  <li>region - регион</li>
-     *  <li>district - округ</li>
-     *  <li>lat - долгота</li>
-     *  <li>lng - широта</li>
-     * <ul>
-     * Если не указать, то вернет массив со всеми данными.
      * @param string $ip IP пользователя. Если не указать, получить IP текущего пользователя.
      *
      * @return string|array|bool Вернет значения по указанным параметрам.
      * @since 1.0
      * @version 1.0
      */
-    abstract public function get(string $geoObject = null, string $ip = null);
+    abstract public function get(string $ip = null);
 }

@@ -31,7 +31,7 @@ class SessionMemcache implements SessionHandlerInterface
      * @version 1.0
      * @since 1.0
      */
-    private $_memcache;
+    private Memcache $_memcache;
 
     /**
      * Название индекса, который хранит сессии.
@@ -40,7 +40,7 @@ class SessionMemcache implements SessionHandlerInterface
      * @version 1.0
      * @since 1.0
      */
-    private $_indexSessions = "sessions";
+    private string $_indexSessions = "sessions";
 
     /**
      * Конструктор.

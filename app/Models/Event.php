@@ -28,7 +28,7 @@ trait Event
      * @version 1.0
      * @since 1.0
      */
-    private $_observable;
+    private Observable $_observable;
 
     /**
      * Инициализация объекта интерфейса определяющего методы для добавления, удаления и оповещения наблюдателей.

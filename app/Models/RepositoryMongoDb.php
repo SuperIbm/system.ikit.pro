@@ -37,7 +37,7 @@ trait RepositoryMongoDb
      * @param array $with Массив связанных моделей.
      * @param array|string $selects Выражения для выборки.
      *
-     * @return array Массив данных.
+     * @return array|bool Массив данных.
      * @since 1.0
      * @version 1.0
      */

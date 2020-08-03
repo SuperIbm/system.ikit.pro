@@ -31,7 +31,7 @@ abstract class Decorator
      * @version 1.0
      * @since 1.0
      */
-    private $_actions = [];
+    private array $_actions = [];
 
     /**
      * Массив данных который был сформирован при выполнении действия.
@@ -40,7 +40,7 @@ abstract class Decorator
      * @version 1.0
      * @since 1.0
      */
-    private $_content;
+    private array $_content;
 
     /**
      * Метод обработчик собития после выполнения всех действий декоратора.
@@ -78,7 +78,7 @@ abstract class Decorator
      */
     public function addAction(Pipe $action)
     {
-        $this->_actions = $action;
+        $this->_actions[] = $action;
 
         return $this;
     }

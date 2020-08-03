@@ -26,18 +26,6 @@ class GeoBase extends Geo
     /**
      * Метод для получения геообъекта.
      *
-     * @param string $geoObject Название геообъекта для получения.
-     * Доступные значения:
-     * <ul>
-     *  <li>inetnum - IP подсети</li>
-     *  <li>country - страна</li>
-     *  <li>city - город</li>
-     *  <li>region - регион</li>
-     *  <li>district - округ</li>
-     *  <li>lat - долгота</li>
-     *  <li>lng - широта</li>
-     * <ul>
-     * Если не указать, то вернет массив со всеми данными.
      * @param string $ip IP пользователя. Если не указать, получить IP текущего пользователя.
      *
      * @return string|array|bool Вернет значения по указанным параметрам.
@@ -45,12 +33,9 @@ class GeoBase extends Geo
      * @version 1.0
      * @see \App\Models\Contracts\Geo::get
      */
-    public function get(string $geoObject = null, string $ip = null)
+    public function get(string $ip = null)
     {
         $ip = isset($ip) ? $ip : Request::ip();
-        $keyArray = ['inetnum', 'country', 'city', 'region', 'district', 'lat', 'lng'];
-
-        if(!in_array($geoObject, $keyArray)) $geoObject = null;
 
         $ch = curl_init('http://ipgeobase.ru:7020/geo?ip=' . $ip);
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -68,8 +53,6 @@ class GeoBase extends Geo
         {
             if(preg_match('#<' . $param . '>(.*)</' . $param . '>#is', $string, $out)) $data[$param] = trim($out[1]);
         }
-
-        if($geoObject && isset($data[$geoObject])) return $data[$geoObject];
 
         return $data;
     }

@@ -28,7 +28,7 @@ trait Parameter
      * @version 1.0
      * @since 1.0
      */
-    private $_parameters = [];
+    private array $_parameters = [];
 
     /**
      * Добавление параметра.

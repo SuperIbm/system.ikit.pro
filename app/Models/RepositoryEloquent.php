@@ -39,7 +39,7 @@ trait RepositoryEloquent
      * @param array $with Массив связанных моделей.
      * @param array|string $selects Выражения для выборки.
      *
-     * @return array Массив данных.
+     * @return array|bool Массив данных.
      * @since 1.0
      * @version 1.0
      */
@@ -282,7 +282,7 @@ trait RepositoryEloquent
      * @param array $tags Массив тэгов для кеширования.
      * @param array $data Данные для добавления.
      *
-     * @return int Вернет ID последней вставленной строки. Если ошибка, то вернет false.
+     * @return int|bool Вернет ID последней вставленной строки. Если ошибка, то вернет false.
      * @since 1.0
      * @version 1.0
      */
@@ -315,7 +315,7 @@ trait RepositoryEloquent
      * @param int $id Id записи для обновления.
      * @param array $data Данные для обновления.
      *
-     * @return int Вернет ID вставленной строки. Если ошибка, то вернет false.
+     * @return int|bool Вернет ID вставленной строки. Если ошибка, то вернет false.
      * @since 1.0
      * @version 1.0
      */
@@ -410,7 +410,7 @@ trait RepositoryEloquent
      * @since 1.0
      * @version 1.0
      */
-    public function newInstance(array $data = array(), bool $exists = false): Eloquent
+    public function newInstance(array $data = [], bool $exists = false): Eloquent
     {
         $model = $this->getModel()->newInstance($data, $exists);
 

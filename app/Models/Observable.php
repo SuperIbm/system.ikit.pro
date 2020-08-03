@@ -28,7 +28,7 @@ class Observable
      * @version 1.0
      * @since 1.0
      */
-    protected $_observers = [];
+    protected array $_observers = [];
 
     /**
      * Добавление наблюдателя.

@@ -33,7 +33,7 @@ abstract class Repository
      * @version 1.0
      * @since 1.0
      */
-    private $_model;
+    private Eloquent $_model;
 
     /**
      * Количество минут на сколько должен сохранятся кешь.
@@ -42,7 +42,7 @@ abstract class Repository
      * @version 1.0
      * @since 1.0
      */
-    protected $_cacheMinutes = 60;
+    protected int $_cacheMinutes = 60;
 
     /**
      * Конструктор.
@@ -144,7 +144,7 @@ abstract class Repository
      * @param array $allows Массив допустимых параметров.
      * @param string $table Название таблицы для колонок фильтрации.
      *
-     * @return array|boolean Преобразованный массив фильтрации для репозитариев.
+     * @return array|bool Преобразованный массив фильтрации для репозитариев.
      * @since 1.0
      * @version 1.0
      */
