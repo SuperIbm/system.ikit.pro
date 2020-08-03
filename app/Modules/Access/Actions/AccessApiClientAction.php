@@ -56,7 +56,7 @@ class AccessApiClientAction extends Action
      */
     public function run()
     {
-        $user = $this->_user->get(null, null, [
+        $user = $this->_user->get(null, true, [
             [
                 'property' => 'login',
                 'value' => $this->getParameter("login")

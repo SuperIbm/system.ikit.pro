@@ -48,7 +48,7 @@ use App\Modules\Access\Http\Requests\AccessVerifiedRequest;
 class AccessController extends Controller
 {
     /**
-     * Авторизация.
+     * Получение данных авторизованного пользователя.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
@@ -124,9 +124,9 @@ class AccessController extends Controller
 
         if($data)
         {
-            Log::info('Success: Log in with social network.', [
+            Log::info(trans('access::http.controllers.social.log'), [
                 'module' => "Access",
-                'type' => 'create'
+                'type' => 'log in'
             ]);
 
             $data = [
@@ -136,9 +136,11 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning('Fail: Log in with social network.', [
+            Log::warning(trans('access::http.controllers.social.log'), [
                 'module' => "Access",
-                'type' => 'create'
+                'type' => 'log in',
+                'request' => $request->all(),
+                'error' => $action->getErrorMessage()
             ]);
 
             $data = [
@@ -171,9 +173,9 @@ class AccessController extends Controller
 
         if($data)
         {
-            Log::info('Success: User signed in.', [
+            Log::info(trans('access::http.controllers.signIn.log'), [
                 'module' => "Access",
-                'type' => 'Sign in'
+                'type' => 'sign in'
             ]);
 
             $data = [
@@ -183,9 +185,11 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning('Fail: User signed in.', [
+            Log::warning(trans('access::http.controllers.signIn.log'), [
                 'module' => "Access",
-                'type' => 'Sign in'
+                'type' => 'sign in',
+                'request' => $request->all(),
+                'error' => $action->getErrorMessage()
             ]);
 
             $data = [
@@ -223,7 +227,7 @@ class AccessController extends Controller
 
         if($data)
         {
-            Log::info('Success: A new user signed up.', [
+            Log::info(trans('access::http.controllers.signUp.log'), [
                 'module' => "Access",
                 'type' => 'create'
             ]);
@@ -235,9 +239,11 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning('Fail: A new user did not signed up.', [
+            Log::warning(trans('access::http.controllers.signUp.log'), [
                 'module' => "Access",
-                'type' => 'create'
+                'type' => 'create',
+                'request' => $request->all(),
+                'error' => $action->getErrorMessage()
             ]);
 
             $data = [
@@ -261,16 +267,16 @@ class AccessController extends Controller
      */
     public function verified(int $id, AccessVerifiedRequest $request)
     {
-        $accessVerifiedAction = app(AccessVerifiedAction::class);
+        $action = app(AccessVerifiedAction::class);
 
-        $data = $accessVerifiedAction->setParameters([
+        $data = $action->setParameters([
             "id" => $id,
             "code" => $request->get("code")
         ])->run();
 
         if($data)
         {
-            Log::info('Success: The user was verified.', [
+            Log::info(trans('access::http.controllers.verified.log'), [
                 'module' => "Access",
                 'type' => 'update'
             ]);
@@ -282,14 +288,16 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning('Fail: The user was not verified.', [
+            Log::warning(trans('access::http.controllers.verified.log'), [
                 'module' => "Access",
-                'type' => 'update'
+                'type' => 'update',
+                'request' => $request->all(),
+                'error' => $action->getErrorMessage()
             ]);
 
             $data = [
                 'success' => false,
-                'message' => $accessVerifiedAction->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ];
         }
 
@@ -324,7 +332,7 @@ class AccessController extends Controller
 
             if($result)
             {
-                Log::info('Success: The email for the user verification was sent.', [
+                Log::info(trans('access::http.controllers.verify.log'), [
                     'module' => "Access",
                     'type' => 'update'
                 ]);
@@ -335,9 +343,11 @@ class AccessController extends Controller
             }
             else
             {
-                Log::warning('Fail: The email for the user verification was not sent.', [
+                Log::warning(trans('access::http.controllers.verify.log'), [
                     'module' => "Access",
-                    'type' => 'update'
+                    'type' => 'update',
+                    'email' => $email,
+                    'error' => $action->getErrorMessage()
                 ]);
 
                 $data = [
@@ -375,9 +385,9 @@ class AccessController extends Controller
 
         if($data)
         {
-            Log::info('Success: The email for recovery the password was sent.', [
+            Log::info(trans('access::http.controllers.forget.log'), [
                 'module' => "Access",
-                'type' => 'update'
+                'type' => 'email'
             ]);
 
             $data = [
@@ -387,9 +397,11 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning('Fail: The email for recovery the password was not sent.', [
+            Log::warning(trans('access::http.controllers.forget.log'), [
                 'module' => "Access",
-                'type' => 'update'
+                'type' => 'email',
+                'request' => $request->all(),
+                'error' => $action->getErrorMessage()
             ]);
 
             $data = [
@@ -430,7 +442,9 @@ class AccessController extends Controller
         {
             $data = [
                 'success' => false,
-                'message' => $action->getErrorMessage()
+                'message' => $action->getErrorMessage(),
+                'request' => $request->all(),
+                'error' => $action->getErrorMessage()
             ];
         }
 
@@ -467,7 +481,9 @@ class AccessController extends Controller
         {
             $data = [
                 'success' => false,
-                'message' => $action->getErrorMessage()
+                'message' => $action->getErrorMessage(),
+                'request' => $request->all(),
+                'error' => $action->getErrorMessage()
             ];
         }
 
@@ -505,7 +521,7 @@ class AccessController extends Controller
 
         if($status)
         {
-            Log::info('Success: Update the user.', [
+            Log::info(trans('access::http.controllers.update.log'), [
                 'module' => "User",
                 'login' => Auth::user()->login,
                 'type' => 'update'
@@ -517,10 +533,12 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning('Fail: Update the user.', [
+            Log::warning(trans('access::http.controllers.update.log'), [
                 'module' => "User",
                 'login' => Auth::user()->login,
-                'type' => 'update'
+                'type' => 'update',
+                'request' => $request->all(),
+                'error' => $action->getErrorMessage()
             ]);
 
             $data = [
@@ -543,9 +561,9 @@ class AccessController extends Controller
      */
     public function password(AccessPasswordRequest $request)
     {
-        $accessResetAction = app(AccessPasswordAction::class);
+        $action = app(AccessPasswordAction::class);
 
-        $status = $accessResetAction->setParameters([
+        $status = $action->setParameters([
             "user" => Auth::user()->toArray(),
             "password_current" => $request->get("password_current"),
             "password" => $request->get("password"),
@@ -553,15 +571,29 @@ class AccessController extends Controller
 
         if($status)
         {
+            Log::info(trans('access::http.controllers.password.log'), [
+                'module' => "User",
+                'login' => Auth::user()->login,
+                'type' => 'update'
+            ]);
+
             $data = [
                 'success' => true
             ];
         }
         else
         {
+            Log::warning(trans('access::http.controllers.password.log'), [
+                'module' => "User",
+                'login' => Auth::user()->login,
+                'type' => 'update',
+                'request' => $request->all(),
+                'error' => $action->getErrorMessage()
+            ]);
+
             $data = [
                 'success' => false,
-                'message' => $accessResetAction->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ];
         }
 

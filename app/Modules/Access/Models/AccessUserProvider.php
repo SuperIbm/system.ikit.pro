@@ -10,7 +10,6 @@
 
 namespace App\Modules\Access\Models;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
@@ -45,7 +44,6 @@ class AccessUserProvider implements UserProvider
      * @since 1.0
      */
     private $_blockIp;
-
 
     /**
      * Конструктор.
@@ -91,7 +89,7 @@ class AccessUserProvider implements UserProvider
      */
     public function retrieveByToken($identifier, $token)
     {
-        $user = $this->_user->read([
+        $user = $this->_user->get(null, true, [
             [
                 'property' => $this->_user->getAuthIdentifierName(),
                 'value' => $identifier
@@ -100,9 +98,9 @@ class AccessUserProvider implements UserProvider
                 'property' => $this->_user->getRememberTokenName(),
                 'value' => $token
             ]
-        ], true);
+        ]);
 
-        if($user) return $this->_user->newInstance($user[0], true);
+        if($user) return $this->_user->newInstance($user, true);
         else return null;
     }
 
@@ -122,7 +120,6 @@ class AccessUserProvider implements UserProvider
         $user->save();
     }
 
-
     /**
      * Возвращение пользователя по заданным параметрам.
      *
@@ -136,25 +133,24 @@ class AccessUserProvider implements UserProvider
     {
         if(empty($credentials)) return null;
 
-        $where = [];
+        $filter = [];
 
         foreach($credentials as $key => $value)
         {
             if(!Str::contains($key, 'password'))
             {
-                $where[] = [
+                $filter[] = [
                     'property' => $key,
                     'value' => $value
                 ];
             }
         }
 
-        $user = $this->_user->read($where);
+        $user = $this->_user->get(null, true, $filter);
 
-        if($user) return $this->_user->newInstance($user[0], true);
+        if($user) return $this->_user->newInstance($user, true);
         else return null;
     }
-
 
     /**
      * Сравнение пользователя по заданным параметрам.
