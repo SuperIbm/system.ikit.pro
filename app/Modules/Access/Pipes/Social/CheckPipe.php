@@ -83,8 +83,6 @@ class CheckPipe implements Pipe
      */
     private function _check($id): bool
     {
-        return true;
-
         try
         {
             $this->_auth->verifyIdToken($id);

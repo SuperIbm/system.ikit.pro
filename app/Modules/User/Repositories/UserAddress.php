@@ -29,7 +29,6 @@ class UserAddress extends Repository
      * Получить по первичному ключу.
      *
      * @param int $id Первичный ключ.
-     * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
      * @param array $filters Фильтрация данных.
      * @param array $with Массив связанных моделей.
      * @param array|string $selects Выражения для выборки.
@@ -38,9 +37,9 @@ class UserAddress extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null, array $selects = null)
+    public function get(int $id = null, array $filters = null, array $with = null, array $selects = null)
     {
-        return $this->_get(['User', 'UserItem', 'UserAddress'], $id, $active, $filters, $with, $selects);
+        return $this->_get(['User', 'UserItem', 'UserAddress'], $id, null, $filters, $with, $selects);
     }
 
     /**

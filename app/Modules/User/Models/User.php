@@ -37,7 +37,6 @@ use App\Models\Delete;
  * @property string $remember_token Токен.
  * @property string $first_name Имя.
  * @property string $second_name Фамилия.
- * @property string $email E-mail
  * @property string $telephone Телефон.
  * @property bool $two_factor Двухфакторная аутентификация.
  * @property bool $status Значение статуса.
@@ -80,7 +79,6 @@ class User extends Authenticatable
         'remember_token',
         'first_name',
         'second_name',
-        'email',
         'telephone',
         'two_factor',
         'status',
@@ -98,11 +96,10 @@ class User extends Authenticatable
         return [
             'image_small_id' => 'integer|digits_between:0,20',
             'image_middle_id' => 'integer|digits_between:0,20',
-            'login' => 'required|between:1,191|unique_soft:users,login,' . $this->id . ',id',
+            'login' => 'required|email|between:1,191|unique_soft:users,login,' . $this->id . ',id',
             'password' => 'required',
             'first_name' => 'nullable|max:150',
             'second_name' => 'nullable|max:150',
-            'email' => 'nullable|email',
             'telephone' => 'nullable|max:30',
             'two_factor' => 'nullable|boolean',
             'status' => 'required|min:0|max:2'
@@ -125,7 +122,6 @@ class User extends Authenticatable
             'remember_token' => trans('user::model.user.remember_token'),
             'first_name' => trans('user::model.user.first_name'),
             'second_name' => trans('user::model.user.second_name'),
-            'email' => trans('user::model.user.email'),
             'telephone' => trans('user::model.user.telephone'),
             'two_factor' => trans('user::model.user.two_factor'),
             'status' => trans('user::model.user.status')
@@ -153,7 +149,7 @@ class User extends Authenticatable
      */
     public function routeNotificationForMail()
     {
-        return $this->email;
+        return $this->login;
     }
 
     /**

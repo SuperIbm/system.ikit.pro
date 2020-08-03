@@ -32,7 +32,6 @@ class CreateTableUsers extends Migration
             $table->string('remember_token', 100)->nullable()->index('remember_token');
             $table->string('first_name', 150)->nullable();
             $table->string('second_name', 150)->nullable();
-            $table->string('email')->nullable();
             $table->string('telephone', 30)->nullable();
             $table->boolean('two_factor')->default(0)->index('two_factor');
             $table->boolean('status')->default(0)->index('status');

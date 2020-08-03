@@ -8,7 +8,6 @@ return [
     'remember_token' => 'Токен',
     'first_name' => 'Имя',
     'second_name' => 'Фамилия',
-    'email' => 'E-mail',
     'telephone' => 'Телефон',
     'two_factor' => 'Two-factor authentication',
     'status' => 'Статус'

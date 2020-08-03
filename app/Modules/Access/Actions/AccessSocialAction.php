@@ -66,9 +66,6 @@ class AccessSocialAction extends Action
             "uid" => $this->getParameter("uid")
         ])->run();
 
-        print_r($data);
-        exit;
-
         if(!$decorator->hasError()) return $data;
         else
         {
