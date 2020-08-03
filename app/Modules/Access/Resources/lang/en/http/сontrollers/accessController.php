@@ -1,8 +1,7 @@
 <?php
 
 return [
-    'social' =>
-    [
+    'social' => [
         'log' => 'Log in with social network.'
     ],
     'signIn' => [

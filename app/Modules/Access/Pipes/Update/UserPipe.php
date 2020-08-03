@@ -88,7 +88,7 @@ class UserPipe implements Pipe
                  * @var $decorator \App\Models\Decorator
                  */
                 $decorator = $content["decorator"];
-                $decorator->addError("user", "The user doesn't exist.");
+                $decorator->addError("user", trans('access::pipes.update.userPipe.not_exist_user'));
 
                 return false;
             }
@@ -99,7 +99,7 @@ class UserPipe implements Pipe
              * @var $decorator \App\Models\Decorator
              */
             $decorator = $content["decorator"];
-            $decorator->addError("user", "The user doesn't exist.");
+            $decorator->addError("user", trans('access::pipes.update.userPipe.not_exist_user'));
 
             return false;
         }

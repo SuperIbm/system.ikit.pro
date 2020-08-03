@@ -63,11 +63,10 @@ class AccessSendEmailVerificationAction extends Action
             ]
         ];
 
-        $users = $this->_user->read($filters);
+        $user = $this->_user->get(null, true, $filters);
 
-        if($users)
+        if($user)
         {
-            $user = $users[0];
             $action = app(AccessSendEmailVerificationCodeAction::class);
 
             $result = $action->setParameters([
@@ -83,7 +82,7 @@ class AccessSendEmailVerificationAction extends Action
         }
         else
         {
-            $this->addError("user", "The user doesn't exist.");
+            $this->addError("user", trans('access::actions.accessSendEmailVerificationAction.not_exist_user'));
             return false;
         }
     }

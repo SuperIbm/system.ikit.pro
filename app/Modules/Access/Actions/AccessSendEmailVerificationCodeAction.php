@@ -73,7 +73,7 @@ class AccessSendEmailVerificationCodeAction extends Action
         }
         else
         {
-            $this->addError("user", "The user does not exist.");
+            $this->addError("user", trans('access::actions.accessSendEmailVerificationCodeAction.not_exist_user'));
 
             return false;
         }

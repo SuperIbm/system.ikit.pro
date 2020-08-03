@@ -108,7 +108,7 @@ class AccessResetAction extends Action
             }
             else
             {
-                $this->addError("user", "The user doesn't exist or not find it.");
+                $this->addError("user", trans('access::actions.accessResetAction.not_exist_user'));
 
                 return false;
             }

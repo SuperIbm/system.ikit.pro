@@ -37,7 +37,7 @@ class AddressPipe implements Pipe
     /**
      * Конструктор.
      *
-     * @param \App\Modules\User\Repositories\User $user Репозитарий адреса пользователя.
+     * @param \App\Modules\User\Repositories\UserAddress $userAddress Репозитарий адреса пользователя.
      *
      * @since 1.0
      * @version 1.0
@@ -107,7 +107,7 @@ class AddressPipe implements Pipe
              * @var $decorator \App\Models\Decorator
              */
             $decorator = $content["decorator"];
-            $decorator->addError("user", "The user doesn't exist.");
+            $decorator->addError("user", trans('access::pipes.update.userPipe.not_exist_user'));
 
             return false;
         }

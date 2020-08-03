@@ -81,18 +81,18 @@ class AccessPasswordAction extends Action
                         return false;
                     }
                 }
-                else $this->addError("access", 'The password does not match for the user.');
+                else $this->addError("access", trans('access::actions.accessPasswordAction.password_not_match'));
             }
             else
             {
-                $this->addError("user", "The user doesn't exist or not find it.");
+                $this->addError("user", trans('access::actions.accessPasswordAction.not_exist_user'));
 
                 return false;
             }
         }
         else
         {
-            $this->addError("user", "The user doesn't exist or not find it.");
+            $this->addError("user", trans('access::actions.accessPasswordAction.not_exist_user'));
 
             return false;
         }

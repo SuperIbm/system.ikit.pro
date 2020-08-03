@@ -113,7 +113,7 @@ class AccessForgetAction extends Action
         }
         else
         {
-            $this->addError("user", "The user doesn't exist or not find it.");
+            $this->addError("user", trans('access::actions.accessForgetAction.not_exist_user'));
             return false;
         }
     }

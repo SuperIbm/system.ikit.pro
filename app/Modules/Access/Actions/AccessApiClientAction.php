@@ -85,9 +85,9 @@ class AccessApiClientAction extends Action
                 }
                 else $this->setErrors(OAuth::getErrors());
             }
-            else $this->addError("access", 'The password does not match for the user.');
+            else $this->addError("access", trans('access::actions.accessApiClientAction.password_not_match'));
         }
-        else $this->addError("user", 'The user has not been found.');
+        else $this->addError("user", trans('access::actions.accessApiClientAction.not_exist_user'));
 
         return false;
     }

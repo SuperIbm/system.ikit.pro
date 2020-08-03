@@ -66,14 +66,14 @@ class AccessCheckCodeResetPasswordAction extends Action
             }
             else
             {
-                $this->addError("user", "The recovery code is not correct.");
+                $this->addError("user", trans('access::actions.accessCheckCodeResetPasswordAction.code_not_correct'));
 
                 return false;
             }
         }
         else
         {
-            $this->addError("user", "The user does not exist.");
+            $this->addError("user", trans('access::actions.accessCheckCodeResetPasswordAction.not_exist_user'));
 
             return false;
         }
