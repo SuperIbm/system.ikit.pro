@@ -33,7 +33,7 @@ class ReferralPipe implements Pipe
      * @version 1.0
      * @since 1.0
      */
-    private $_user;
+    private User $_user;
 
     /**
      * Репозитарий реферальных программ.
@@ -42,7 +42,7 @@ class ReferralPipe implements Pipe
      * @version 1.0
      * @since 1.0
      */
-    private $_referral;
+    private Referral $_referral;
 
     /**
      * Репозитарий пользовательских рефералов.
@@ -51,7 +51,7 @@ class ReferralPipe implements Pipe
      * @version 1.0
      * @since 1.0
      */
-    private $_userReferral;
+    private UserReferral $_userReferral;
 
     /**
      * Конструктор.

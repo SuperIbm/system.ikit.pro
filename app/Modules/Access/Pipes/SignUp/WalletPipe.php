@@ -33,7 +33,7 @@ class WalletPipe implements Pipe
      * @version 1.0
      * @since 1.0
      */
-    private $_user;
+    private User $_user;
 
     /**
      * Репозитарий кошельков пользователя.
@@ -42,7 +42,7 @@ class WalletPipe implements Pipe
      * @version 1.0
      * @since 1.0
      */
-    private $_userWallet;
+    private UserWallet $_userWallet;
 
     /**
      * Конструктор.

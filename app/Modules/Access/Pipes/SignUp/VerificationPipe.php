@@ -35,7 +35,7 @@ class VerificationPipe implements Pipe
      * @version 1.0
      * @since 1.0
      */
-    private $_user;
+    private User $_user;
 
     /**
      * Репозитарий верификации пользователя.
@@ -44,7 +44,7 @@ class VerificationPipe implements Pipe
      * @version 1.0
      * @since 1.0
      */
-    private $_userVerification;
+    private UserVerification $_userVerification;
 
     /**
      * Конструктор.

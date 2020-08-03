@@ -29,7 +29,7 @@ class AccessSignUpRequest extends FormRequest
      * @since 1.0
      * @version 1.0
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'login' => 'required|between:1,199',
@@ -48,7 +48,7 @@ class AccessSignUpRequest extends FormRequest
      * @version 1.0
      * @since 1.0
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'login' => 'Login',

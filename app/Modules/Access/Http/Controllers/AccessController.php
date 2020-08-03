@@ -15,6 +15,7 @@ use Log;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 use App\Modules\Access\Actions\AccessCheckResetPasswordAction;
 use App\Modules\Access\Actions\AccessForgetAction;
@@ -54,7 +55,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function gate()
+    public function gate(): JsonResponse
     {
         if(Auth::check())
         {
@@ -93,7 +94,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function logout()
+    public function logout(): JsonResponse
     {
         Auth::logout();
         return response()->json(['success' => true]);
@@ -108,7 +109,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function social(AccessSocialRequest $request)
+    public function social(AccessSocialRequest $request): JsonResponse
     {
         $action = app(AccessSocialAction::class);
         $parameters = $request->get("parameters");
@@ -161,7 +162,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function signIn(AccessSignInRequest $request)
+    public function signIn(AccessSignInRequest $request): JsonResponse
     {
         $action = app(AccessSignInAction::class);
 
@@ -210,7 +211,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function signUp(AccessSignUpRequest $request)
+    public function signUp(AccessSignUpRequest $request): JsonResponse
     {
         $action = app(AccessSignUpAction::class);
 
@@ -265,7 +266,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function verified(int $id, AccessVerifiedRequest $request)
+    public function verified(int $id, AccessVerifiedRequest $request): JsonResponse
     {
         $action = app(AccessVerifiedAction::class);
 
@@ -313,7 +314,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function verify($email = null)
+    public function verify($email = null): JsonResponse
     {
         if($email) $checked = true;
         else
@@ -375,7 +376,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function forget(AccessForgetRequest $request)
+    public function forget(AccessForgetRequest $request): JsonResponse
     {
         $action = app(AccessForgetAction::class);
 
@@ -423,7 +424,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function resetCheck(int $id, AccessResetCheckRequest $request)
+    public function resetCheck(int $id, AccessResetCheckRequest $request): JsonResponse
     {
         $action = app(AccessCheckResetPasswordAction::class);
 
@@ -461,7 +462,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function reset(int $id, AccessResetRequest $request)
+    public function reset(int $id, AccessResetRequest $request): JsonResponse
     {
         $action = app(AccessResetAction::class);
 
@@ -499,7 +500,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function update(Request $request)
+    public function update(Request $request): JsonResponse
     {
         $action = app(AccessUpdateAction::class);
 
@@ -559,7 +560,7 @@ class AccessController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function password(AccessPasswordRequest $request)
+    public function password(AccessPasswordRequest $request): JsonResponse
     {
         $action = app(AccessPasswordAction::class);
 

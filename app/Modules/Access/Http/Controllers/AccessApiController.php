@@ -17,6 +17,7 @@ use App\Modules\Access\Actions\AccessApiTokenAction;
 use App\Modules\Access\Actions\AccessApiRefreshAction;
 use App\Modules\Access\Http\Requests\AccessApiClientRequest;
 use App\Modules\Access\Actions\AccessApiClientAction;
+use Illuminate\Http\JsonResponse;
 
 /**
  * Класс контроллер для генерации ключей доступа к API.
@@ -37,7 +38,7 @@ class AccessApiController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function client(AccessApiClientRequest $request)
+    public function client(AccessApiClientRequest $request): JsonResponse
     {
         $accessApiClientAction = app(AccessApiClientAction::class);
 
@@ -71,7 +72,7 @@ class AccessApiController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function token(AccessApiTokenRequest $request)
+    public function token(AccessApiTokenRequest $request): JsonResponse
     {
         $accessApiTokenAction = app(AccessApiTokenAction::class);
 
@@ -104,7 +105,7 @@ class AccessApiController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function refresh(AccessApiRefreshRequest $request)
+    public function refresh(AccessApiRefreshRequest $request): JsonResponse
     {
         $accessApiRefreshAction = app(AccessApiRefreshAction::class);
 

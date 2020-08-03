@@ -31,7 +31,7 @@ class CreatePipe implements Pipe
      * @version 1.0
      * @since 1.0
      */
-    private $_user;
+    private User $_user;
 
     /**
      * Конструктор.

@@ -29,7 +29,7 @@ class AccessPasswordRequest extends FormRequest
      * @since 1.0
      * @version 1.0
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'password_current' => 'required|between:6,25',
@@ -44,7 +44,7 @@ class AccessPasswordRequest extends FormRequest
      * @version 1.0
      * @since 1.0
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'password_current' => 'Current password',

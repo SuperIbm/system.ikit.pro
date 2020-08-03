@@ -34,7 +34,7 @@ class Verification extends Mailable
      * @version 1.0
      * @since 1.0
      */
-    private $_data;
+    private array $_data;
 
     /**
      * Конструктор.

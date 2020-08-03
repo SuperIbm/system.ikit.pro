@@ -34,7 +34,7 @@ class CheckPipe implements Pipe
      * @version 1.0
      * @since 1.0
      */
-    private $_auth;
+    private Auth $_auth;
 
     /**
      * Конструктор.

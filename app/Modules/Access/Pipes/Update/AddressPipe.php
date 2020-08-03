@@ -32,7 +32,7 @@ class AddressPipe implements Pipe
      * @version 1.0
      * @since 1.0
      */
-    private $_userAddress;
+    private UserAddress $_userAddress;
 
     /**
      * Конструктор.
