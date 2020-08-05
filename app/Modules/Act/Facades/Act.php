@@ -29,7 +29,7 @@ class Act extends Facade
      * @version 1.0
      * @since 1.0
      */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return 'act';
     }

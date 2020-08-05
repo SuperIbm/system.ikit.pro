@@ -125,7 +125,7 @@ class AccessController extends Controller
 
         if($data)
         {
-            Log::info(trans('access::http.controllers.social.log'), [
+            Log::info(trans('access::http.controllers.accessController.social.log'), [
                 'module' => "Access",
                 'type' => 'log in'
             ]);
@@ -137,7 +137,7 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning(trans('access::http.controllers.social.log'), [
+            Log::warning(trans('access::http.controllers.accessController.social.log'), [
                 'module' => "Access",
                 'type' => 'log in',
                 'request' => $request->all(),
@@ -174,7 +174,7 @@ class AccessController extends Controller
 
         if($data)
         {
-            Log::info(trans('access::http.controllers.signIn.log'), [
+            Log::info(trans('access::http.controllers.accessController.signIn.log'), [
                 'module' => "Access",
                 'type' => 'sign in'
             ]);
@@ -186,7 +186,7 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning(trans('access::http.controllers.signIn.log'), [
+            Log::warning(trans('access::http.controllers.accessController.signIn.log'), [
                 'module' => "Access",
                 'type' => 'sign in',
                 'request' => $request->all(),
@@ -228,7 +228,7 @@ class AccessController extends Controller
 
         if($data)
         {
-            Log::info(trans('access::http.controllers.signUp.log'), [
+            Log::info(trans('access::http.controllers.accessController.signUp.log'), [
                 'module' => "Access",
                 'type' => 'create'
             ]);
@@ -240,7 +240,7 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning(trans('access::http.controllers.signUp.log'), [
+            Log::warning(trans('access::http.controllers.accessController.signUp.log'), [
                 'module' => "Access",
                 'type' => 'create',
                 'request' => $request->all(),
@@ -277,7 +277,7 @@ class AccessController extends Controller
 
         if($data)
         {
-            Log::info(trans('access::http.controllers.verified.log'), [
+            Log::info(trans('access::http.controllers.accessController.verified.log'), [
                 'module' => "Access",
                 'type' => 'update'
             ]);
@@ -289,7 +289,7 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning(trans('access::http.controllers.verified.log'), [
+            Log::warning(trans('access::http.controllers.accessController.verified.log'), [
                 'module' => "Access",
                 'type' => 'update',
                 'request' => $request->all(),
@@ -333,7 +333,7 @@ class AccessController extends Controller
 
             if($result)
             {
-                Log::info(trans('access::http.controllers.verify.log'), [
+                Log::info(trans('access::http.controllers.accessController.verify.log'), [
                     'module' => "Access",
                     'type' => 'update'
                 ]);
@@ -344,7 +344,7 @@ class AccessController extends Controller
             }
             else
             {
-                Log::warning(trans('access::http.controllers.verify.log'), [
+                Log::warning(trans('access::http.controllers.accessController.verify.log'), [
                     'module' => "Access",
                     'type' => 'update',
                     'email' => $email,
@@ -386,7 +386,7 @@ class AccessController extends Controller
 
         if($data)
         {
-            Log::info(trans('access::http.controllers.forget.log'), [
+            Log::info(trans('access::http.controllers.accessController.forget.log'), [
                 'module' => "Access",
                 'type' => 'email'
             ]);
@@ -398,7 +398,7 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning(trans('access::http.controllers.forget.log'), [
+            Log::warning(trans('access::http.controllers.accessController.forget.log'), [
                 'module' => "Access",
                 'type' => 'email',
                 'request' => $request->all(),
@@ -522,7 +522,7 @@ class AccessController extends Controller
 
         if($status)
         {
-            Log::info(trans('access::http.controllers.update.log'), [
+            Log::info(trans('access::http.controllers.accessController.update.log'), [
                 'module' => "User",
                 'login' => Auth::user()->login,
                 'type' => 'update'
@@ -534,7 +534,7 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning(trans('access::http.controllers.update.log'), [
+            Log::warning(trans('access::http.controllers.accessController.update.log'), [
                 'module' => "User",
                 'login' => Auth::user()->login,
                 'type' => 'update',
@@ -572,7 +572,7 @@ class AccessController extends Controller
 
         if($status)
         {
-            Log::info(trans('access::http.controllers.password.log'), [
+            Log::info(trans('access::http.controllers.accessController.password.log'), [
                 'module' => "User",
                 'login' => Auth::user()->login,
                 'type' => 'update'
@@ -584,7 +584,7 @@ class AccessController extends Controller
         }
         else
         {
-            Log::warning(trans('access::http.controllers.password.log'), [
+            Log::warning(trans('access::http.controllers.accessController.password.log'), [
                 'module' => "User",
                 'login' => Auth::user()->login,
                 'type' => 'update',

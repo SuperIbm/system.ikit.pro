@@ -57,7 +57,7 @@ class BlockIp extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read(array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null)
+    public function read(array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null): ?array
     {
         return $this->_read(['User', 'UserBlockIp'], false, $filters, $active, $sorts, $offset, $limit);
     }
@@ -72,7 +72,7 @@ class BlockIp extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count(array $filters = null, bool $active = null)
+    public function count(array $filters = null, bool $active = null): ?int
     {
         return $this->_read(['User', 'UserBlockIp'], true, $filters, $active);
     }

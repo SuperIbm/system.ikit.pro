@@ -39,11 +39,11 @@ trait RepositoryEloquent
      * @param array $with Массив связанных моделей.
      * @param array|string $selects Выражения для выборки.
      *
-     * @return array|bool Массив данных.
+     * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    protected function _get(array $tags, int $id = null, bool $active = null, array $filters = null, array $with = null, array $selects = null)
+    protected function _get(array $tags, int $id = null, bool $active = null, array $filters = null, array $with = null, array $selects = null): ?array
     {
         $filters = !$filters ? [] : $filters;
 

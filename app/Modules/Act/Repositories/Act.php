@@ -45,7 +45,7 @@ class Act extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id = null, bool $active = null, array $filters = null)
+    public function get(int $id = null, bool $active = null, array $filters = null): ?array
     {
         return $this->_get(['Act', 'ActItem'], $id, $active, $filters);
     }
@@ -62,7 +62,7 @@ class Act extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null)
+    public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null): ?array
     {
         return $this->_read(['Act', 'ActItem'], false, $filters, null, $sorts, $offset, $limit);
     }
@@ -76,7 +76,7 @@ class Act extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count(array $filters = null)
+    public function count(array $filters = null): ?int
     {
         return $this->_read(['Act', 'ActItem'], true, $filters);
     }

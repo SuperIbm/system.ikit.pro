@@ -56,7 +56,7 @@ class UserSchoolRole extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null)
+    public function read(array $filters = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null): ?array
     {
         return $this->_read(['User', 'UserItem', 'UserSchool', 'UserSchoolRole'], false, $filters, null, $sorts, $offset, $limit, $with);
     }
@@ -71,7 +71,7 @@ class UserSchoolRole extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count(array $filters = null, array $with = null)
+    public function count(array $filters = null, array $with = null): ?int
     {
         return $this->_read(['User', 'UserItem', 'UserSchool', 'UserSchoolRole'], true, $filters, null, null, null, null, $with);
     }

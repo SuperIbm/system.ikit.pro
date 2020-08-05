@@ -139,7 +139,7 @@ class Implement
      * @since 1.0
      * @version 1.0
      */
-    protected function _get(string $index, array $default = null)
+    protected function _get(string $index, array $default = null): ?array
     {
         $filters = [
             [

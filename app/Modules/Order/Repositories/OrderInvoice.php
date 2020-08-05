@@ -37,7 +37,7 @@ class OrderInvoice extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null)
+    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null): ?array
     {
         return $this->_get([
             'Order',
@@ -61,7 +61,7 @@ class OrderInvoice extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function read(array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null, array $groups = null)
+    public function read(array $filters = null, bool $active = null, array $sorts = null, int $offset = null, int $limit = null, array $with = null, array $groups = null): ?array
     {
         return $this->_read([
             'Order',
@@ -81,7 +81,7 @@ class OrderInvoice extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function count(array $filters = null, bool $active = null, array $with = null)
+    public function count(array $filters = null, bool $active = null, array $with = null): ?int
     {
         return $this->_read([
             'Order',

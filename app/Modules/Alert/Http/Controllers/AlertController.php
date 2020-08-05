@@ -118,7 +118,7 @@ class AlertController extends Controller
 
         if(!Alert::hasError())
         {
-            Log::info('Обновление предупреждения.', [
+            Log::info(trans('alert::http.controllers.alertController.toRead.log'), [
                 'module' => "Alert",
                 'login' => Auth::user()->login,
                 'type' => 'update'
@@ -130,7 +130,7 @@ class AlertController extends Controller
         }
         else
         {
-            Log::warning('Обновление предупреждения.', [
+            Log::warning(trans('alert::http.controllers.alertController.toRead.log'), [
                 'module' => "Alert",
                 'login' => Auth::user()->login,
                 'type' => 'update',
@@ -164,7 +164,7 @@ class AlertController extends Controller
 
         if($result)
         {
-            Log::info('Удаление предупреждения.', [
+            Log::info(trans('alert::http.controllers.alertController.toRead.destroy'), [
                 'module' => "Alert",
                 'login' => Auth::user()->login,
                 'type' => 'destroy'
@@ -177,7 +177,7 @@ class AlertController extends Controller
         }
         else
         {
-            Log::warning('Удаление предупреждения.', [
+            Log::warning(trans('alert::http.controllers.alertController.toRead.destroy'), [
                 'module' => "Alert",
                 'login' => Auth::user()->login,
                 'type' => 'destroy',

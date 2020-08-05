@@ -198,7 +198,7 @@ class AlertImplement
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id)
+    public function get(int $id): ?array
     {
         return $this->_alert->get($id);
     }
