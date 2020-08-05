@@ -173,7 +173,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function setImageSmallIdAttribute($value)
+    public function setImageSmallIdAttribute($value): void
     {
         if(!$value) $this->attributes['image_small_id'] = null;
         else if(is_array($value)) $this->attributes['image_small_id'] = $value['image_small_id'];
@@ -219,7 +219,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function setImageMiddleIdAttribute($value)
+    public function setImageMiddleIdAttribute($value): void
     {
         if(!$value) $this->attributes['image_middle_id'] = null;
         else if(is_array($value)) $this->attributes['image_middle_id'] = $value['image_middle_id'];

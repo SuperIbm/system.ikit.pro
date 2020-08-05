@@ -14,7 +14,6 @@ use Illuminate\Console\Command;
 use Document;
 use App;
 
-
 /**
  * Класс комманда миграции документов.
  * Позволяет мигрировать документам из одного драйвера хранения в другой.
@@ -51,7 +50,7 @@ class DocumentMigrateCommand extends Command
      * @since 1.0
      * @version 1.0
      */
-    public function handle()
+    public function handle(): void
     {
         $this->line('Migrating the documents of site...');
 

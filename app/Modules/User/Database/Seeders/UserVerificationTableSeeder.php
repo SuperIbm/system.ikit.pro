@@ -31,7 +31,7 @@ class UserVerificationTableSeeder extends Seeder
      * @version 1.0
      * @since 1.0
      */
-    public function run()
+    public function run(): void
     {
         \DB::table('user_verifications')->delete();
 

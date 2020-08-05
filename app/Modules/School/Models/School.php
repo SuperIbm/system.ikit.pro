@@ -111,7 +111,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function setImageSmallIdAttribute($value)
+    public function setImageSmallIdAttribute($value): void
     {
         if(!$value) $this->attributes['image_small_id'] = null;
         else if(is_array($value)) $this->attributes['image_small_id'] = $value['image_small_id'];
@@ -157,7 +157,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function setImageMiddleIdAttribute($value)
+    public function setImageMiddleIdAttribute($value): void
     {
         if(!$value) $this->attributes['image_middle_id'] = null;
         else if(is_array($value)) $this->attributes['image_middle_id'] = $value['image_middle_id'];
@@ -203,7 +203,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function setImageBigIdAttribute($value)
+    public function setImageBigIdAttribute($value): void
     {
         if(!$value) $this->attributes['image_big_id'] = null;
         else if(is_array($value)) $this->attributes['image_big_id'] = $value['image_big_id'];

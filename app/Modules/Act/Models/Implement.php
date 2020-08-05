@@ -32,7 +32,7 @@ class Implement
      * @version 1.0
      * @since 1.0
      */
-    private $_act;
+    private Act $_act;
 
     /**
      * Конструктор.

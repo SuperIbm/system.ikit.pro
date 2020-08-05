@@ -151,7 +151,7 @@ class DocumentMongoDb extends MongoDb
      * @since 1.0
      * @version 1.0
      */
-    public function setRawAttributes(array $attributes, $sync = false)
+    public function setRawAttributes(array $attributes, $sync = false): void
     {
         parent::setRawAttributes($attributes, $sync);
         $this->fireModelEvent('readed');

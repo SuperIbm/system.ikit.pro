@@ -110,7 +110,7 @@ class OrderPayment extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function setImageIdAttribute($value)
+    public function setImageIdAttribute($value): void
     {
         if(!$value) $this->attributes['image_id'] = null;
         else if(is_array($value)) $this->attributes['image_id'] = $value['image_id'];

@@ -10,7 +10,7 @@ class CreateTableOauthAccessTokens extends Migration {
 	 *
 	 * @return void
 	 */
-	public function up()
+	public function up(): void
 	{
 		Schema::create('oauth_tokens', function(Blueprint $table)
 		{
@@ -29,7 +29,7 @@ class CreateTableOauthAccessTokens extends Migration {
 	 *
 	 * @return void
 	 */
-	public function down()
+	public function down(): void
 	{
 		Schema::drop('oauth_tokens');
 	}

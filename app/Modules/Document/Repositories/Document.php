@@ -67,7 +67,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    protected static function _setById(int $id, array $document)
+    protected static function _setById(int $id, array $document): void
     {
         self::$_documents[$id] = $document;
     }

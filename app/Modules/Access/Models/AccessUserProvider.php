@@ -114,7 +114,7 @@ class AccessUserProvider implements UserProvider
      * @version 1.0
      * @since 1.0
      */
-    public function updateRememberToken(UserContract $user, $token)
+    public function updateRememberToken(UserContract $user, $token): void
     {
         $user->setRememberToken($token);
         $user->save();

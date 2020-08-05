@@ -20,7 +20,7 @@ class CreateTableSections extends Migration
      * @version 1.0
      * @since 1.0
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('sections', function(Blueprint $table) {
             $table->increments('id');
@@ -43,7 +43,7 @@ class CreateTableSections extends Migration
      * @version 1.0
      * @since 1.0
      */
-    public function down()
+    public function down(): void
     {
         Schema::drop('sections');
     }

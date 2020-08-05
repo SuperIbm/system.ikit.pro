@@ -19,7 +19,7 @@ class CreateTableActs extends Migration
      * @version 1.0
      * @since 1.0
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('acts', function(Blueprint $table)
         {
@@ -38,7 +38,7 @@ class CreateTableActs extends Migration
      * @version 1.0
      * @since 1.0
      */
-    public function down()
+    public function down(): void
     {
         Schema::drop('acts');
     }

@@ -50,7 +50,7 @@ class ImageMigrateCommand extends Command
      * @since 1.0
      * @version 1.0
      */
-    public function handle()
+    public function handle(): void
     {
         $this->line('Migrating the images of site...');
 

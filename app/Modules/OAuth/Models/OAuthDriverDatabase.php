@@ -481,7 +481,7 @@ class OAuthDriverDatabase extends OAuthDriver
      * @since 1.0
      * @version 1.0
      */
-    public function clean()
+    public function clean(): void
     {
         $filter = [
             [

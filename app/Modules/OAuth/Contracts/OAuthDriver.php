@@ -78,7 +78,7 @@ abstract class OAuthDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function clean();
+    abstract public function clean(): void;
 
     /**
      * Выдача токена.

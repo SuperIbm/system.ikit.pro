@@ -62,7 +62,7 @@ class DocumentServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerTranslations();
         $this->registerConfig();
@@ -76,76 +76,49 @@ class DocumentServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
 
-        $this->commands
-        (
-            [
-                DocumentMigrateCommand::class,
-            ]
-        );
+        $this->commands([
+            DocumentMigrateCommand::class,
+        ]);
 
-        App::singleton('document.store',
-            function($app)
-            {
-                return new DocumentManager($app);
-            }
-        );
+        App::singleton('document.store', function($app) {
+            return new DocumentManager($app);
+        });
 
-        DocumentStore::extend('database',
-            function($app)
-            {
-                return new DocumentEloquent(new DocumentEloquentModel());
-            }
-        );
+        DocumentStore::extend('database', function($app) {
+            return new DocumentEloquent(new DocumentEloquentModel());
+        });
 
         DocumentEloquentModel::observe(DocumentListener::class);
 
-        DocumentStore::extend('mongodb',
-            function()
-            {
-                return new DocumentMongoDb(new DocumentMongoDbModel());
-            }
-        );
+        DocumentStore::extend('mongodb', function() {
+            return new DocumentMongoDb(new DocumentMongoDbModel());
+        });
 
         DocumentMongoDbModel::observe(DocumentListener::class);
 
-        App::singleton('document.store.driver',
-            function($app)
-            {
-                return new DocumentDriverManager($app);
-            }
-        );
+        App::singleton('document.store.driver', function($app) {
+            return new DocumentDriverManager($app);
+        });
 
-        App::make('document.store.driver')->extend('base',
-            function()
-            {
-                return new DocumentDriverBase();
-            }
-        );
+        App::make('document.store.driver')->extend('base', function() {
+            return new DocumentDriverBase();
+        });
 
-        App::make('document.store.driver')->extend('ftp',
-            function()
-            {
-                return new DocumentDriverFtp();
-            }
-        );
+        App::make('document.store.driver')->extend('ftp', function() {
+            return new DocumentDriverFtp();
+        });
 
-        App::make('document.store.driver')->extend('local',
-            function()
-            {
-                return new DocumentDriverLocal();
-            }
-        );
+        App::make('document.store.driver')->extend('local', function() {
+            return new DocumentDriverLocal();
+        });
 
-        App::make('document.store.driver')->extend('http',
-            function()
-            {
-                return new DocumentDriverHttp();
-            }
-        );
+        App::make('document.store.driver')->extend('http', function() {
+            return new DocumentDriverHttp();
+        });
     }
 
     /**
@@ -153,7 +126,7 @@ class DocumentServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerConfig()
+    protected function registerConfig(): void
     {
         $this->publishes([
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
@@ -166,7 +139,7 @@ class DocumentServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerViews()
+    public function registerViews(): void
     {
         $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
@@ -184,7 +157,7 @@ class DocumentServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerTranslations()
+    public function registerTranslations(): void
     {
         $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
@@ -203,7 +176,7 @@ class DocumentServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerFactories()
+    public function registerFactories(): void
     {
         if(!app()->environment('production') && $this->app->runningInConsole())
         {

@@ -62,7 +62,7 @@ class ImageServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerTranslations();
         $this->registerConfig();
@@ -76,76 +76,49 @@ class ImageServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
 
-        $this->commands
-        (
-            [
-                ImageMigrateCommand::class,
-            ]
-        );
+        $this->commands([
+            ImageMigrateCommand::class,
+        ]);
 
-        App::singleton('image.store',
-            function($app)
-            {
-                return new ImageManager($app);
-            }
-        );
+        App::singleton('image.store', function($app) {
+            return new ImageManager($app);
+        });
 
-        ImageStore::extend('database',
-            function()
-            {
-                return new ImageEloquent(new ImageEloquentModel());
-            }
-        );
+        ImageStore::extend('database', function() {
+            return new ImageEloquent(new ImageEloquentModel());
+        });
 
         ImageEloquentModel::observe(ImageListener::class);
 
-        ImageStore::extend('mongodb',
-            function()
-            {
-                return new ImageMongoDb(new ImageMongoDbModel());
-            }
-        );
+        ImageStore::extend('mongodb', function() {
+            return new ImageMongoDb(new ImageMongoDbModel());
+        });
 
         ImageMongoDbModel::observe(ImageListener::class);
 
-        App::singleton('image.store.driver',
-            function($app)
-            {
-                return new ImageDriverManager($app);
-            }
-        );
+        App::singleton('image.store.driver', function($app) {
+            return new ImageDriverManager($app);
+        });
 
-        App::make('image.store.driver')->extend('base',
-            function()
-            {
-                return new ImageDriverBase();
-            }
-        );
+        App::make('image.store.driver')->extend('base', function() {
+            return new ImageDriverBase();
+        });
 
-        App::make('image.store.driver')->extend('ftp',
-            function()
-            {
-                return new ImageDriverFtp();
-            }
-        );
+        App::make('image.store.driver')->extend('ftp', function() {
+            return new ImageDriverFtp();
+        });
 
-        App::make('image.store.driver')->extend('local',
-            function()
-            {
-                return new ImageDriverLocal();
-            }
-        );
+        App::make('image.store.driver')->extend('local', function() {
+            return new ImageDriverLocal();
+        });
 
-        App::make('image.store.driver')->extend('http',
-            function()
-            {
-                return new ImageDriverHttp();
-            }
-        );
+        App::make('image.store.driver')->extend('http', function() {
+            return new ImageDriverHttp();
+        });
     }
 
     /**
@@ -153,7 +126,7 @@ class ImageServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerConfig()
+    protected function registerConfig(): void
     {
         $this->publishes([
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
@@ -166,7 +139,7 @@ class ImageServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerViews()
+    public function registerViews(): void
     {
         $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
@@ -184,7 +157,7 @@ class ImageServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerTranslations()
+    public function registerTranslations(): void
     {
         $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
@@ -203,7 +176,7 @@ class ImageServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerFactories()
+    public function registerFactories(): void
     {
         if(!app()->environment('production') && $this->app->runningInConsole())
         {
