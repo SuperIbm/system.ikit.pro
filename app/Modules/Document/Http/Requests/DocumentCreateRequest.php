@@ -29,7 +29,7 @@ class DocumentCreateRequest extends FormRequest
      * @version 1.0
      * @since 1.0
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'file' => 'required|document',
@@ -45,7 +45,7 @@ class DocumentCreateRequest extends FormRequest
      * @version 1.0
      * @since 1.0
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'file' => trans('document::http.requests.documentCreate.file'),

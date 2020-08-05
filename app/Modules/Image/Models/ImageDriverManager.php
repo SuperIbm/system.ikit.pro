@@ -26,7 +26,7 @@ class ImageDriverManager extends Manager
     /**
      * @see \Illuminate\Support\Manager::getDefaultDriver
      */
-    public function getDefaultDriver()
+    public function getDefaultDriver(): string
     {
         Config::get('image.storeDriver');
     }

@@ -33,7 +33,7 @@ class ImageListener
      * @version 1.0
      * @since 1.0
      */
-    public function created(Eloquent $image)
+    public function created(Eloquent $image): bool
     {
         return App::make('image.store.driver')->create($image->folder, $image->id, $image->format, $image->path);
     }
@@ -47,7 +47,7 @@ class ImageListener
      * @version 1.0
      * @since 1.0
      */
-    public function updated(Eloquent $image)
+    public function updated(Eloquent $image): bool
     {
         App::make('image.store.driver')->destroy($image->getOriginal()['folder'], $image->getOriginal()['id'], $image->getOriginal()['format']);
         return App::make('image.store.driver')->update($image->folder, $image->id, $image->format, $image->path);
@@ -62,7 +62,7 @@ class ImageListener
      * @version 1.0
      * @since 1.0
      */
-    public function readed(Eloquent $image)
+    public function readed(Eloquent $image): bool
     {
         $image->path = Config::get("app.url").App::make('image.store.driver')->path($image->folder, $image->id, $image->format);
         $image->pathCache = $image->path;
@@ -84,7 +84,7 @@ class ImageListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleted(Eloquent $image)
+    public function deleted(Eloquent $image): bool
     {
         if(!Config::get("image.store.softDeletes")) return App::make('image.store.driver')->destroy($image->folder, $image->id, $image->format);
         else return true;

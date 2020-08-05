@@ -36,7 +36,7 @@ class ImageDriverLocal extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(string $folder, int $id, string $format)
+    public function path(string $folder, int $id, string $format): ?string
     {
         return Config::get('image.store.local.path') . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
@@ -52,7 +52,7 @@ class ImageDriverLocal extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(string $folder, int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format): ?string
     {
         return Config::get('image.store.local.pathSource') . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
@@ -85,7 +85,7 @@ class ImageDriverLocal extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create(string $folder, int $id, string $format, string $path)
+    public function create(string $folder, int $id, string $format, string $path): bool
     {
         return File::copy($path, $this->pathSource($folder, $id, $format));
     }
@@ -102,7 +102,7 @@ class ImageDriverLocal extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update(string $folder, int $id, string $format, string $path)
+    public function update(string $folder, int $id, string $format, string $path): bool
     {
         return File::copy($path, $this->pathSource($folder, $id, $format));
     }
@@ -118,7 +118,7 @@ class ImageDriverLocal extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(string $folder, int $id, string $format)
+    public function destroy(string $folder, int $id, string $format): bool
     {
         return File::delete($this->pathSource($folder, $id, $format));
     }

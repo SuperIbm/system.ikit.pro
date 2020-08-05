@@ -36,7 +36,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(string $folder, int $id, string $format)
+    public function path(string $folder, int $id, string $format): ?string
     {
         return 'img/read/' . School::getId() . "/". $folder . "/" . $id . '.' . $format;
     }
@@ -52,7 +52,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(string $folder, int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format): ?string
     {
         return Config::get("app.url") . $this->path($folder, $id, $format);
     }
@@ -85,7 +85,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create(string $folder, int $id, string $format, string $path)
+    public function create(string $folder, int $id, string $format, string $path): bool
     {
         $pro = getImageSize($path);
         $imgResource = ImageRepository::getResourceByFormat($pro[2], $path);
@@ -106,7 +106,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update(string $folder, int $id, string $format, string $path)
+    public function update(string $folder, int $id, string $format, string $path): bool
     {
         $pro = getImageSize($path);
         $imgResource = ImageRepository::getResourceByFormat($pro[2], $path);
@@ -126,7 +126,7 @@ class ImageDriverBase extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(string $folder, int $id, string $format)
+    public function destroy(string $folder, int $id, string $format): bool
     {
         return true;
     }

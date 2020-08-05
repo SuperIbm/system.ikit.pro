@@ -35,7 +35,7 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function path(string $folder, int $id, string $format);
+    abstract public function path(string $folder, int $id, string $format): ?string;
 
     /**
      * Абстрактный метод получения физического пути к изображению.
@@ -48,7 +48,7 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function pathSource(string $folder, int $id, string $format);
+    abstract public function pathSource(string $folder, int $id, string $format): ?string;
 
     /**
      * Абстрактный метод чтения изображения.
@@ -75,7 +75,7 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function create(string $folder, int $id, string $format, string $path);
+    abstract public function create(string $folder, int $id, string $format, string $path): bool;
 
     /**
      * Абстрактный метод обновления изображения.
@@ -89,7 +89,7 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function update(string $folder, int $id, string $format, string $path);
+    abstract public function update(string $folder, int $id, string $format, string $path): bool;
 
     /**
      * Абстрактный метод удаления изображения.
@@ -102,5 +102,5 @@ abstract class ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function destroy(string $folder, int $id, string $format);
+    abstract public function destroy(string $folder, int $id, string $format): bool;
 }

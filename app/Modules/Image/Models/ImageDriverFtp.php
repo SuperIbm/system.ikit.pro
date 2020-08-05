@@ -87,7 +87,7 @@ class ImageDriverFtp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(string $folder, int $id, string $format)
+    public function path(string $folder, int $id, string $format): ?string
     {
         return 'img/read/' . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
@@ -103,7 +103,7 @@ class ImageDriverFtp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(string $folder, int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format): ?string
     {
         return Config::get("app.url") . $this->path($folder, $id, $format);
     }
@@ -147,7 +147,7 @@ class ImageDriverFtp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function create(string $folder, int $id, string $format, string $path)
+    public function create(string $folder, int $id, string $format, string $path): bool
     {
         if(self::$_connection && self::$_login) return ftp_put(self::$_connection, Config::get('image.store.ftp.path') . School::getId() . "/" . $folder . "/" . $id . "." . $format, $path, FTP_BINARY);
         else return false;
@@ -165,7 +165,7 @@ class ImageDriverFtp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function update(string $folder, int $id, string $format, string $path)
+    public function update(string $folder, int $id, string $format, string $path): bool
     {
         if(self::$_connection && self::$_login) return ftp_put(self::$_connection, Config::get('image.store.ftp.path') . School::getId() . "/" . $folder . "/" . $id . "." . $format, $path, FTP_BINARY);
         else return false;
@@ -182,7 +182,7 @@ class ImageDriverFtp extends ImageDriver
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(string $folder, int $id, string $format)
+    public function destroy(string $folder, int $id, string $format): bool
     {
         if(self::$_connection && self::$_login) return ftp_delete(self::$_connection, Config::get('image.store.ftp.path') . School::getId() . "/" . $folder . "/" . $id . '.' . $format);
 

@@ -29,7 +29,7 @@ class ImageDestroyRequest extends FormRequest
      * @version 1.0
      * @since 1.0
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'id' => 'required|integer|digits_between:1,20',
@@ -44,7 +44,7 @@ class ImageDestroyRequest extends FormRequest
      * @version 1.0
      * @since 1.0
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'id' => trans('image::http.requests.imageDestroy.id'),

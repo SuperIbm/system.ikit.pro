@@ -66,6 +66,6 @@ class DocumentMigrateCommand extends Command
         }
 
         $bar->finish();
-        $this->info('The migration of documents has been successfully completed.');
+        $this->info('\nThe migration of documents has been successfully completed.');
     }
 }

@@ -41,7 +41,7 @@ class DocumentDriverFtp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    protected static string $_login;
+    protected static $_login;
 
     /**
      * Конструктор.

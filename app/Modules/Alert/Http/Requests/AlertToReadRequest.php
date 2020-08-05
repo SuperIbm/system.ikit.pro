@@ -29,7 +29,7 @@ class AlertToReadRequest extends FormRequest
      * @since 1.0
      * @version 1.0
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'status' => 'required|bool',
@@ -43,7 +43,7 @@ class AlertToReadRequest extends FormRequest
      * @version 1.0
      * @since 1.0
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'status' => trans('alert::http.requests.alertToRead.status')

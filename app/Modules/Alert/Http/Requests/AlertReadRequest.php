@@ -29,7 +29,7 @@ class AlertReadRequest extends FormRequest
      * @since 1.0
      * @version 1.0
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'start' => 'nullable|integer|digits_between:0,20',
@@ -45,7 +45,7 @@ class AlertReadRequest extends FormRequest
      * @version 1.0
      * @since 1.0
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'start' => trans('alert::http.requests.alertRead.start'),
