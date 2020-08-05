@@ -116,7 +116,7 @@ class DocumentMongoDb extends MongoDb
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'format' => 'required|between:1,20',
@@ -131,7 +131,7 @@ class DocumentMongoDb extends MongoDb
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
             'byte' => trans('document::models.document.byte'),

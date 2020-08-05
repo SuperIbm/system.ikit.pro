@@ -12,8 +12,7 @@ namespace App\Modules\Document\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Util;
-use Document;
+use DocumentStore;
 use Storage;
 use School;
 
@@ -47,10 +46,10 @@ class DocumentController extends Controller
 
         $pathinfo = pathinfo($name);
 
-        $id = substr($pathinfo["basename"], 0, Util::strlen($pathinfo["basename"]) - Util::strlen($pathinfo["extension"]) - 1);
+        $id = substr($pathinfo["basename"], 0, strlen($pathinfo["basename"]) - strlen($pathinfo["extension"]) - 1);
         $format = strtolower($pathinfo["extension"]);
 
-        $document = Document::get($id);
+        $document = DocumentStore::get($id);
 
         if($document['format'] == $format)
         {
@@ -59,7 +58,7 @@ class DocumentController extends Controller
             else if($format == "gif") $format = 'document/gif';
             else if($format == "swf") $format = 'document/application/x-shockwave-flash';
 
-            return (new Response(Document::getByte($id)))
+            return (new Response(DocumentStore::getByte($id)))
                 ->header('Cache-Control', 'max-age=2592000')
                 ->header('Content-type', $format);
         }

@@ -31,7 +31,7 @@ abstract class Document extends Repository
      * @version 1.0
      * @since 1.0
      */
-    private static $_documents = [];
+    private static array $_documents = [];
 
     /**
      * Папка для хранения.
@@ -79,7 +79,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function all();
+    abstract public function all(): ?array;
 
     /**
      * Создание.
@@ -114,7 +114,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function updateByte(int $id, string $byte);
+    abstract public function updateByte(int $id, string $byte): bool;
 
     /**
      * Удаление.
@@ -125,7 +125,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function destroy($id);
+    abstract public function destroy($id): bool;
 
     /**
      * Проверяет вес документа в байтах.
@@ -204,7 +204,7 @@ abstract class Document extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function setFolder(string $folder)
+    public function setFolder(string $folder): Document
     {
         $this->_folder = $folder;
 

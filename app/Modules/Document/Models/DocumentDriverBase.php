@@ -11,7 +11,7 @@
 namespace App\Modules\Document\Models;
 
 use App\Modules\Document\Contracts\DocumentDriver;
-use Document as DocumentRepository;
+use DocumentStore as DocumentRepository;
 use File;
 use Config;
 use School;
@@ -37,7 +37,7 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(string $folder, int $id, string $format)
+    public function path(string $folder, int $id, string $format): ?string
     {
         return 'doc/read/' . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
@@ -53,7 +53,7 @@ class DocumentDriverBase extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(string $folder, int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format): ?string
     {
         return Config::get("app.url") . $this->path($folder, $id, $format);
     }

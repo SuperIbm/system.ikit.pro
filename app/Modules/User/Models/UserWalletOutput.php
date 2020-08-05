@@ -50,7 +50,7 @@ class UserWalletOutput extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'user_wallet_id' => 'required|integer|digits_between:1,20',
@@ -65,7 +65,7 @@ class UserWalletOutput extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
             'user_wallet_id' => trans('user::model.userWalletOutput.user_wallet_id'),

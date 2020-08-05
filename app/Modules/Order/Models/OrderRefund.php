@@ -50,7 +50,7 @@ class OrderRefund extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             "order_charge_id" => 'required|integer|digits_between:1,20',
@@ -65,7 +65,7 @@ class OrderRefund extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
             "order_charge_id" => trans('order::model.orderRefund.order_charge_id'),

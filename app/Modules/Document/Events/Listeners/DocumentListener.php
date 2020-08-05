@@ -33,7 +33,7 @@ class DocumentListener
      * @version 1.0
      * @since 1.0
      */
-    public function created(Eloquent $document)
+    public function created(Eloquent $document): bool
     {
         return App::make('document.store.driver')->create($document->folder, $document->id, $document->format, $document->path);
     }
@@ -47,7 +47,7 @@ class DocumentListener
      * @version 1.0
      * @since 1.0
      */
-    public function updated(Eloquent $document)
+    public function updated(Eloquent $document): bool
     {
         App::make('document.store.driver')->destroy($document->getOriginal()['folder'], $document->getOriginal()['id'], $document->getOriginal()['format']);
         return App::make('document.store.driver')->update($document->getOriginal()['folder'], $document->id, $document->format, $document->path);
@@ -62,7 +62,7 @@ class DocumentListener
      * @version 1.0
      * @since 1.0
      */
-    public function readed(Eloquent $document)
+    public function readed(Eloquent $document): bool
     {
         $document->path = App::make('document.store.driver')->path($document->folder, $document->id, $document->format);
         $document->pathCache = $document->path;
@@ -84,7 +84,7 @@ class DocumentListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleted(Eloquent $document)
+    public function deleted(Eloquent $document): bool
     {
         if(!Config::get("document.softDeletes")) return App::make('document.store.driver')->destroy($document->folder, $document->id, $document->format);
         else return true;

@@ -95,7 +95,7 @@ class DocumentEloquent extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function updateByte(int $id, string $byte)
+    public function updateByte(int $id, string $byte): bool
     {
         $status = DB::table($this->newInstance()->getTable())->where('id', $id)->update(['byte' => $byte]);
 
@@ -113,7 +113,7 @@ class DocumentEloquent extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id)
+    public function get(int $id): ?array
     {
         $document = $this->_getById($id);
 
@@ -158,7 +158,7 @@ class DocumentEloquent extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function getByte(int $id)
+    public function getByte(int $id): ?string
     {
         $document = $this->_getById($id);
 
@@ -168,7 +168,7 @@ class DocumentEloquent extends Document
             $document = DB::table($this->newInstance()->getTable())->where('id', $id)->first();
 
             if($document) return $document['byte'];
-            else return false;
+            else return null;
         }
     }
 
@@ -179,7 +179,7 @@ class DocumentEloquent extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function all()
+    public function all(): ?array
     {
         return $this->newInstance()->all();
     }
@@ -193,7 +193,7 @@ class DocumentEloquent extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id)
+    public function destroy($id): bool
     {
         $model = $this->newInstance();
 

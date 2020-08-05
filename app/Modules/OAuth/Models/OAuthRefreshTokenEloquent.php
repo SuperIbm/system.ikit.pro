@@ -81,7 +81,7 @@ class OAuthRefreshTokenEloquent extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'oauth_token_id' => 'required|integer|digits_between:1,20',
@@ -96,7 +96,7 @@ class OAuthRefreshTokenEloquent extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
             'oauth_token_id' => trans('oauth::models.OAuthRefreshToken.oauth_token_id'),

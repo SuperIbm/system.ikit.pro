@@ -52,7 +52,7 @@ class UserRole extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'name' => 'required|between:1,191|unique_soft:user_roles,name,' . $this->id . ',id',
@@ -67,7 +67,7 @@ class UserRole extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
             'name' => trans('user::model.userRole.name'),

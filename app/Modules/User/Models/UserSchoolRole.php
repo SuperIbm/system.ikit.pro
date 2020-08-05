@@ -49,7 +49,7 @@ class UserSchoolRole extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'user_id' => 'required|integer|digits_between:1,20',
@@ -63,7 +63,7 @@ class UserSchoolRole extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
             'user_id' => trans('user::model.userSchoolRole.user_id'),

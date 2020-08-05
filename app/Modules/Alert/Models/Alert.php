@@ -74,7 +74,7 @@ class Alert extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'title' => 'required|between:1,191',
@@ -92,7 +92,7 @@ class Alert extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
             'pattern' => trans('alert::models.alert.pattern'),

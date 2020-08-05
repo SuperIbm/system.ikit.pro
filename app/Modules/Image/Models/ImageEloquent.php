@@ -112,7 +112,7 @@ class ImageEloquent extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'format' => 'required|between:1,20',
@@ -129,7 +129,7 @@ class ImageEloquent extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
             'byte' => trans('image::model.image.byte'),

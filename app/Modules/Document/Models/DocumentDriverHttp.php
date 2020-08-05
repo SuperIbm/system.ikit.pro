@@ -37,7 +37,7 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(string $folder, int $id, string $format)
+    public function path(string $folder, int $id, string $format): ?string
     {
         return Config::get('document.store.http.read') . School::getId() . $folder. "/" . "/" . $id . '.' . $format;
     }
@@ -53,7 +53,7 @@ class DocumentDriverHttp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(string $folder, int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format): ?string
     {
         return $this->path($folder, $id, $format);
     }

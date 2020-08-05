@@ -36,7 +36,7 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(string $folder, int $id, string $format)
+    public function path(string $folder, int $id, string $format): ?string
     {
         return Config::get('document.store.local.path') . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
@@ -52,7 +52,7 @@ class DocumentDriverLocal extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(string $folder, int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format): ?string
     {
         return Config::get('document.store.local.pathSource') . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }

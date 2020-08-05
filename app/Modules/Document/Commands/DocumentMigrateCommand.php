@@ -11,7 +11,7 @@
 namespace App\Modules\Document\Commands;
 
 use Illuminate\Console\Command;
-use Document;
+use DocumentStore;
 use App;
 
 /**
@@ -54,7 +54,7 @@ class DocumentMigrateCommand extends Command
     {
         $this->line('Migrating the documents of site...');
 
-        $documents = Document::all();
+        $documents = DocumentStore::all();
         $count = count($documents);
         $bar = $this->output->createProgressBar($count);
 

@@ -41,7 +41,7 @@ class DocumentDriverFtp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    protected static $_login;
+    protected static string $_login;
 
     /**
      * Конструктор.
@@ -87,7 +87,7 @@ class DocumentDriverFtp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function path(string $folder, int $id, string $format)
+    public function path(string $folder, int $id, string $format): ?string
     {
         return 'doc/read/' . School::getId() . "/" . $folder . "/" . $id . '.' . $format;
     }
@@ -103,7 +103,7 @@ class DocumentDriverFtp extends DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    public function pathSource(string $folder, int $id, string $format)
+    public function pathSource(string $folder, int $id, string $format): ?string
     {
         return Config::get("app.url") . $this->path($folder, $id, $format);
     }

@@ -35,7 +35,7 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function path(string $folder, int $id, string $format);
+    abstract public function path(string $folder, int $id, string $format): ?string;
 
     /**
      * Абстрактный метод получения физического пути к документу.
@@ -48,7 +48,7 @@ abstract class DocumentDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function pathSource(string $folder, int $id, string $format);
+    abstract public function pathSource(string $folder, int $id, string $format): ?string;
 
     /**
      * Абстрактный метод чтения документа.

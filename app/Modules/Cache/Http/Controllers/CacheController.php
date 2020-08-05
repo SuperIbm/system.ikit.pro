@@ -10,12 +10,12 @@
 
 namespace App\Modules\Cache\Http\Controllers;
 
-use Illuminate\Routing\Controller;
 use Cache;
 use Log;
 use Auth;
 use Artisan;
-use Storage;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 
 /**
  * Класс контроллер для ядра административной системы.
@@ -34,7 +34,7 @@ class CacheController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function clean()
+    public function clean(): JsonResponse
     {
         Cache::flush();
 

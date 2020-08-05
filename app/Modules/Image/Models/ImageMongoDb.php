@@ -129,7 +129,7 @@ class ImageMongoDb extends MongoDb
      * @version 1.0
      * @since 1.0
      */
-    protected function getRules()
+    protected function getRules(): array
     {
         return [
             'folder' => 'required|between:1,191',
@@ -146,7 +146,7 @@ class ImageMongoDb extends MongoDb
      * @version 1.0
      * @since 1.0
      */
-    protected function getNames()
+    protected function getNames(): array
     {
         return [
             'byte' => trans('image::model.image.byte'),

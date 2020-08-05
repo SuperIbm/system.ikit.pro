@@ -96,7 +96,7 @@ class DocumentMongoDb extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function updateByte(int $id, string $byte)
+    public function updateByte(int $id, string $byte): bool
     {
         $status = DB::connection('mongodb')
             ->collection($this->newInstance()->getTable())
@@ -117,7 +117,7 @@ class DocumentMongoDb extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id)
+    public function get(int $id): ?array
     {
         $document = $this->_getById($id);
 
@@ -162,7 +162,7 @@ class DocumentMongoDb extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function getByte(int $id)
+    public function getByte(int $id): ?string
     {
         $document = $this->_getById($id);
 
@@ -175,7 +175,7 @@ class DocumentMongoDb extends Document
                 ->first();
 
             if($document) return $document['byte'];
-            else return false;
+            else return null;
         }
     }
 
@@ -186,7 +186,7 @@ class DocumentMongoDb extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function all()
+    public function all(): ?array
     {
         return $this->newInstance()->all();
     }
@@ -200,7 +200,7 @@ class DocumentMongoDb extends Document
      * @since 1.0
      * @version 1.0
      */
-    public function destroy($id)
+    public function destroy($id): bool
     {
         $model = $this->newInstance();
 
