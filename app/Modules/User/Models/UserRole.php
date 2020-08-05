@@ -17,6 +17,7 @@ use App\Models\Status;
 use App\Models\Delete;
 use App\Modules\School\Models\SchoolRole;
 use App\Modules\Plan\Models\PlanRole;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Класс модель для таблицы ролей пользователей на основе Eloquent.
@@ -85,7 +86,7 @@ class UserRole extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function schoolRoles()
+    public function schoolRoles(): HasMany
     {
         return $this->hasMany(SchoolRole::class);
     }
@@ -97,7 +98,7 @@ class UserRole extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function planRole()
+    public function planRoles(): HasMany
     {
         return $this->hasMany(PlanRole::class);
     }

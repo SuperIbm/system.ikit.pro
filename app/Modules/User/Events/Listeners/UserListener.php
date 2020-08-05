@@ -32,7 +32,7 @@ class UserListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(User $user)
+    public function deleting(User $user): bool
     {
         if($user->image_small_id) ImageStore::destroy("user", $user->image_small_id["id"]);
         if($user->image_middle_id) ImageStore::destroy("user", $user->image_middle_id["id"]);

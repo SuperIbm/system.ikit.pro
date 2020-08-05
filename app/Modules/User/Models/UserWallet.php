@@ -14,6 +14,8 @@ use Eloquent;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Класс модель для таблицы кошелька пользователя на основе Eloquent.
@@ -82,7 +84,7 @@ class UserWallet extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -94,7 +96,7 @@ class UserWallet extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function outputs()
+    public function outputs(): HasMany
     {
         return $this->hasMany(UserWalletOutput::class);
     }
@@ -106,7 +108,7 @@ class UserWallet extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function inputs()
+    public function inputs(): HasMany
     {
         return $this->hasMany(UserWalletInput::class);
     }

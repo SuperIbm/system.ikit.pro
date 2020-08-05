@@ -14,6 +14,7 @@ use Illuminate\Routing\Controller;
 
 use Illuminate\Http\Request;
 use EMT\EMTypograph;
+use Illuminate\Http\JsonResponse;
 
 /**
  * Класс контроллер для работы с типографом в административной части.
@@ -34,7 +35,7 @@ class TypographAdminController extends Controller
      * @since 1.0
      * @version 1.0
      */
-    public function get(Request $request)
+    public function get(Request $request): JsonResponse
     {
         $text = str_replace("\t", '', $request->input('text'));
         $text = str_replace("\n\r", '', $text);

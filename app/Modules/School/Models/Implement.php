@@ -109,7 +109,7 @@ class Implement
      * @since 1.0
      * @version 1.0
      */
-    public function get()
+    public function get(): ?array
     {
         return ($this->_data && count($this->_data)) ? $this->_data : null;
     }
@@ -121,7 +121,7 @@ class Implement
      * @since 1.0
      * @version 1.0
      */
-    public function getId()
+    public function getId(): ?int
     {
         return ($this->_data && count($this->_data)) ? $this->_data["id"] : null;
     }
@@ -133,7 +133,7 @@ class Implement
      * @since 1.0
      * @version 1.0
      */
-    public function getIndex()
+    public function getIndex(): ?string
     {
         return ($this->_data && count($this->_data)) ? $this->_data["index"] : null;
     }
@@ -141,7 +141,7 @@ class Implement
     /**
      * Сбить текущую школу.
      *
-     * @return \App\Modules\School\Models\School Текущая школа.
+     * @return \App\Modules\School\Models\Implement Текущая школа.
      * @since 1.0
      * @version 1.0
      */

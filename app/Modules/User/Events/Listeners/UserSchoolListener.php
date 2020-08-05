@@ -31,7 +31,7 @@ class UserSchoolListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(UserSchool $userSchool)
+    public function deleting(UserSchool $userSchool): bool
     {
         $userSchool->deleteRelation($userSchool->roles(), $userSchool->isForceDeleting());
 

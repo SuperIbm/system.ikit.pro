@@ -12,8 +12,7 @@ namespace App\Modules\User\Models;
 
 use App\Models\Validate;
 use Eloquent;
-use Size;
-use ImageStore;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Status;
 
 /**
@@ -97,7 +96,7 @@ class UserVerification extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

@@ -16,6 +16,7 @@ use App\Models\Status;
 use App\Models\Delete;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\Plan\Models\PlanLimit;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Класс модель для таблицы лимитов школы на основе Eloquent.
@@ -85,7 +86,7 @@ class SchoolLimit extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function school()
+    public function school(): BelongsTo
     {
         return $this->belongsTo(School::class);
     }
@@ -97,7 +98,7 @@ class SchoolLimit extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function planLimit()
+    public function planLimit(): BelongsTo
     {
         return $this->belongsTo(PlanLimit::class);
     }

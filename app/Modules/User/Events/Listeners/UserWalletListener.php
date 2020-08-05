@@ -31,7 +31,7 @@ class UserWalletListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(UserWallet $userWaller)
+    public function deleting(UserWallet $userWaller): bool
     {
         $userWaller->deleteRelation($userWaller->inputs(), $userWaller->isForceDeleting());
         $userWaller->deleteRelation($userWaller->outputs(), $userWaller->isForceDeleting());

@@ -37,7 +37,7 @@ class UserRecovery extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id = null, bool $active = null, array $filters = null, array $selects = null)
+    public function get(int $id = null, bool $active = null, array $filters = null, array $selects = null): ?array
     {
         return $this->_get(['User', 'UserRecovery'], $id, $active, $filters, null, $selects);
     }

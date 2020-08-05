@@ -15,6 +15,7 @@ use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
 use App\Modules\Referral\Models\Referral;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Класс модель для таблицы рефералов на основе Eloquent.
@@ -83,7 +84,7 @@ class UserReferral extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function referral()
+    public function referral(): BelongsTo
     {
         return $this->belongsTo(Referral::class);
     }
@@ -95,7 +96,7 @@ class UserReferral extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function invited()
+    public function invited(): BelongsTo
     {
         return $this->belongsTo(User::class, "user_invited_id", "id");
     }
@@ -107,7 +108,7 @@ class UserReferral extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function inviting()
+    public function inviting(): BelongsTo
     {
         return $this->belongsTo(User::class, "user_inviting_id", "id");
     }

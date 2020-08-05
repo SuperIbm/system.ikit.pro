@@ -144,7 +144,7 @@ class OrderPayment extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function getImageIdAttribute($value): array
+    public function getImageIdAttribute($value): ?array
     {
         if(is_numeric($value)) return ImageStore::get($value);
         else return $value;

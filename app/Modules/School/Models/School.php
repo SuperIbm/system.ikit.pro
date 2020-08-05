@@ -10,7 +10,6 @@
 
 namespace App\Modules\School\Models;
 
-use DB;
 use Eloquent;
 use App\Models\Validate;
 use Size;
@@ -24,6 +23,8 @@ use App\Modules\User\Models\UserSchool;
 use App\Modules\Order\Models\Order;
 use App\Modules\Plan\Models\Plan;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Класс модель для таблицы школ на основе Eloquent.
@@ -144,7 +145,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function getImageSmallIdAttribute($value)
+    public function getImageSmallIdAttribute($value): ?array
     {
         if(is_numeric($value)) return ImageStore::get($value);
         else return $value;
@@ -190,7 +191,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function getImageMiddleIdAttribute($value)
+    public function getImageMiddleIdAttribute($value): ?array
     {
         if(is_numeric($value)) return ImageStore::get($value);
         else return $value;
@@ -236,7 +237,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function getImageBigIdAttribute($value)
+    public function getImageBigIdAttribute($value): ?array
     {
         if(is_numeric($value)) return ImageStore::get($value);
         else return $value;
@@ -249,7 +250,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function roles()
+    public function roles(): HasMany
     {
         return $this->hasMany(SchoolRole::class);
     }
@@ -261,7 +262,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -273,7 +274,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function userSchools()
+    public function userSchools(): BelongsTo
     {
         return $this->belongsTo(UserSchool::class);
     }
@@ -285,7 +286,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function limits()
+    public function limits(): HasMany
     {
         return $this->hasMany(SchoolLimit::class);
     }
@@ -297,7 +298,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function orders()
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
@@ -309,7 +310,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function activeOrders()
+    public function activeOrders(): HasMany
     {
         return $this->hasMany(Order::class)
             ->where("from", '<=', Carbon::now())
@@ -333,7 +334,7 @@ class School extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function plan()
+    public function plan(): BelongsTo
     {
         return $this->belongsTo(Plan::class);
     }

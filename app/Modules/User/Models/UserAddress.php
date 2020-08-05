@@ -15,6 +15,7 @@ use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Status;
 use App\Models\Delete;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Класс модель для таблицы адресов пользователей на основе Eloquent.
@@ -98,7 +99,7 @@ class UserAddress extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function user()
+    public function user(): HasOne
     {
         return $this->hasOne(User::class);
     }

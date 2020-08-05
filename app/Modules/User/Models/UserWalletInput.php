@@ -14,6 +14,7 @@ use Eloquent;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Класс модель для таблицы приходов в кошелек на основе Eloquent.
@@ -79,7 +80,7 @@ class UserWalletInput extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function wallet()
+    public function wallet(): BelongsTo
     {
         return $this->belongsTo(UserWallet::class);
     }

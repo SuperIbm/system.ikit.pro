@@ -15,6 +15,7 @@ use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
 use App\Modules\School\Models\SchoolRole;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Класс модель для таблицы соотношений пользователя с ролями школы на основе Eloquent.
@@ -80,7 +81,7 @@ class UserSchoolRole extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -92,7 +93,7 @@ class UserSchoolRole extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function role()
+    public function role(): BelongsTo
     {
         return $this->belongsTo(SchoolRole::class, 'school_role_id', 'id');
     }

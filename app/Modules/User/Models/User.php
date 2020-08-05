@@ -20,6 +20,8 @@ use Illuminate\Http\UploadedFile;
 use App\Models\Status;
 use App\Models\Flags;
 use App\Models\Delete;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Класс модель для таблицы пользователей на основе Eloquent.
@@ -137,7 +139,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function routeNotificationForPhone()
+    public function routeNotificationForPhone(): ?string
     {
         return $this->telephone;
     }
@@ -149,7 +151,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function routeNotificationForMail()
+    public function routeNotificationForMail(): ?string
     {
         return $this->login;
     }
@@ -161,7 +163,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function routeNotificationForNexmo()
+    public function routeNotificationForNexmo(): ?string
     {
         return $this->telephone;
     }
@@ -206,7 +208,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function getImageSmallIdAttribute($value)
+    public function getImageSmallIdAttribute($value): ?array
     {
         if(is_numeric($value)) return ImageStore::get($value);
         else return $value;
@@ -252,7 +254,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function getImageMiddleIdAttribute($value)
+    public function getImageMiddleIdAttribute($value): ?array
     {
         if(is_numeric($value)) return ImageStore::get($value);
         else return $value;
@@ -265,7 +267,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function userAddress()
+    public function userAddress(): HasOne
     {
         return $this->hasOne(UserAddress::class);
     }
@@ -277,7 +279,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function verification()
+    public function verification(): HasOne
     {
         return $this->hasOne(UserVerification::class);
     }
@@ -289,7 +291,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function recovery()
+    public function recovery(): HasOne
     {
         return $this->hasOne(UserRecovery::class);
     }
@@ -301,7 +303,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function schools()
+    public function schools(): HasMany
     {
         return $this->hasMany(UserSchool::class);
     }
@@ -313,7 +315,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function schoolRoles()
+    public function schoolRoles(): HasMany
     {
         return $this->hasMany(UserSchoolRole::class);
     }
@@ -325,7 +327,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function wallet()
+    public function wallet(): HasOne
     {
         return $this->hasOne(UserWallet::class);
     }
@@ -337,7 +339,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function referralInvited()
+    public function referralInvited(): HasMany
     {
         return $this->hasMany(UserReferral::class, "user_invited_id", "id");
     }
@@ -349,7 +351,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function referralInviting()
+    public function referralInviting(): HasMany
     {
         return $this->hasMany(UserReferral::class, "user_inviting_id", "id");
     }
@@ -361,7 +363,7 @@ class User extends Authenticatable
      * @version 1.0
      * @since 1.0
      */
-    public function auths()
+    public function auths(): HasMany
     {
         return $this->hasMany(UserAuth::class);
     }

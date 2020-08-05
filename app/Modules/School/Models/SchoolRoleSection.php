@@ -16,6 +16,7 @@ use App\Models\Status;
 use App\Models\Delete;
 use App\Modules\Section\Models\Section;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Класс модель для таблицы разделов ролей школы на основе Eloquent.
@@ -91,7 +92,7 @@ class SchoolRoleSection extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function role()
+    public function role(): BelongsTo
     {
         return $this->belongsTo(SchoolRole::class);
     }
@@ -103,7 +104,7 @@ class SchoolRoleSection extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function section()
+    public function section(): BelongsTo
     {
         return $this->belongsTo(Section::class);
     }

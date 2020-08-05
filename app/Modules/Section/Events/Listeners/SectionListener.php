@@ -31,7 +31,7 @@ class SectionListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(Section $section)
+    public function deleting(Section $section): bool
     {
         $section->deleteRelation($section->planRoleSections(), $section->isForceDeleting());
         $section->deleteRelation($section->schoolRoleSections(), $section->isForceDeleting());

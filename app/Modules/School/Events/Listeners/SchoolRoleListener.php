@@ -31,7 +31,7 @@ class SchoolRoleListener
      * @version 1.0
      * @since 1.0
      */
-    public function creating(SchoolRole $schoolRole)
+    public function creating(SchoolRole $schoolRole): bool
     {
         $result = $schoolRole->newQuery()
             ->where("school_id", $schoolRole->school_id)
@@ -58,7 +58,7 @@ class SchoolRoleListener
      * @version 1.0
      * @since 1.0
      */
-    public function updating(SchoolRole $schoolRole)
+    public function updating(SchoolRole $schoolRole): bool
     {
         $result = $schoolRole->newQuery()
             ->where("id", "!=", $schoolRole->id)
@@ -85,7 +85,7 @@ class SchoolRoleListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(SchoolRole $schoolRole)
+    public function deleting(SchoolRole $schoolRole): bool
     {
         $schoolRole->deleteRelation($schoolRole->sections(), $schoolRole->isForceDeleting());
 

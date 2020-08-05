@@ -18,6 +18,7 @@ use Kalnoy\Nestedset\NodeTrait;
 use App\Models\Status;
 use App\Models\Delete;
 use App\Modules\School\Models\SchoolRoleSection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Класс модель для таблицы разделов системы на основе Eloquent.
@@ -108,7 +109,7 @@ class Section extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function planRoleSections()
+    public function planRoleSections(): HasMany
     {
         return $this->hasMany(PlanRoleSection::class);
     }
@@ -120,7 +121,7 @@ class Section extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function schoolRoleSections()
+    public function schoolRoleSections(): HasMany
     {
         return $this->hasMany(SchoolRoleSection::class);
     }

@@ -14,7 +14,7 @@ use Eloquent;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
-use App\Modules\School\Models\SchoolRole;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Класс модель для таблицы хранения данных о аунтификации пользователей на основе Eloquent.
@@ -98,7 +98,7 @@ class UserAuth extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

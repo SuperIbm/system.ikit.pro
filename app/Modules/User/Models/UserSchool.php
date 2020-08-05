@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
 use App\Modules\School\Models\School;
 use App\Models\Status;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Класс модель для таблицы соотношений пользователя со школами на основе Eloquent.
@@ -84,7 +86,7 @@ class UserSchool extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -96,7 +98,7 @@ class UserSchool extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function roles()
+    public function roles(): HasMany
     {
         return $this->hasMany(UserSchoolRole::class, 'user_id', 'user_id');
     }
@@ -108,7 +110,7 @@ class UserSchool extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function school()
+    public function school(): BelongsTo
     {
         return $this->belongsTo(School::class);
     }

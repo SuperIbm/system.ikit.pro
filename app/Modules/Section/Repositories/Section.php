@@ -37,7 +37,7 @@ class Section extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null)
+    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null): ?array
     {
         return $this->_get(['Section', 'SectionItem'], $id, $active, $filters, $with);
     }
@@ -76,7 +76,7 @@ class Section extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function tree(array $filters = null, $active = null, array $with = null)
+    public function tree(array $filters = null, $active = null, array $with = null): ?array
     {
         $tree = $this->_tree(['Section', 'SectionItem'], $filters, $active, null, $with);
 
@@ -92,7 +92,7 @@ class Section extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function parents(int $id)
+    public function parents(int $id): ?array
     {
         return $this->_parents(['Section', 'SectionItem'], $id);
     }
@@ -106,7 +106,7 @@ class Section extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function children(int $id)
+    public function children(int $id): ?array
     {
         return $this->_children(['Section', 'SectionItem'], $id);
     }

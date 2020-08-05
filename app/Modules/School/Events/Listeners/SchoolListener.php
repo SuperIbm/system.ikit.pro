@@ -31,7 +31,7 @@ class SchoolListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(School $school)
+    public function deleting(School $school): bool
     {
         if($school->image_small_id) ImageStore::destroy("school", $school->image_small_id["id"]);
         if($school->image_middle_id) ImageStore::destroy("school", $school->image_middle_id["id"]);

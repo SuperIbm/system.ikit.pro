@@ -37,7 +37,7 @@ class UserRole extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null)
+    public function get(int $id = null, bool $active = null, array $filters = null, array $with = null): ?array
     {
         return $this->_get(['User', 'UserItem', 'UserRole'], $id, $active, $filters, $with);
     }
