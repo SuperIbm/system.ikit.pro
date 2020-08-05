@@ -116,7 +116,7 @@ class BlockIp extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id = null, array $filters = null)
+    public function destroy(int $id = null, array $filters = null): bool
     {
         return $this->_destroy(['UserBlockIp'], $id, $filters);
     }

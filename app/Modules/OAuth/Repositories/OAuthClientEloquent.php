@@ -113,8 +113,8 @@ class OAuthClientEloquent extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id, $force = false)
+    public function destroy(int $id, $force = false): bool
     {
-        return $this->_destroy(['OAuthClient'], $id, $force);
+        return $this->_destroy(['OAuthClient'], $id, null, $force);
     }
 }

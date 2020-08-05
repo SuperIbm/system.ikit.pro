@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Status;
 use App\Models\Delete;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Класс модель для таблицы систем заказов на основе Eloquent.
@@ -54,6 +55,7 @@ class OrderPayment extends Eloquent
     /**
      * Метод, который должен вернуть все правила валидации.
      *
+     * @return array Массив правил валидации для этой модели.
      * @version 1.0
      * @since 1.0
      */
@@ -73,6 +75,7 @@ class OrderPayment extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */
@@ -96,7 +99,7 @@ class OrderPayment extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function invoices()
+    public function invoices(): HasMany
     {
         return $this->hasMany(OrderInvoice::class);
     }
@@ -141,7 +144,7 @@ class OrderPayment extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function getImageIdAttribute($value)
+    public function getImageIdAttribute($value): array
     {
         if(is_numeric($value)) return ImageStore::get($value);
         else return $value;

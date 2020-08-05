@@ -16,6 +16,7 @@ use App\Models\Status;
 use App\Models\Delete;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\School\Models\SchoolLimit;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Класс модель для таблицы лимитов тарифов на основе Eloquent.
@@ -55,6 +56,7 @@ class PlanLimit extends Eloquent
     /**
      * Метод, который должен вернуть все правила валидации.
      *
+     * @return array Массив правил валидации для этой модели.
      * @version 1.0
      * @since 1.0
      */
@@ -79,6 +81,7 @@ class PlanLimit extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */
@@ -107,7 +110,7 @@ class PlanLimit extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function schoolLimits()
+    public function schoolLimits(): HasMany
     {
         return $this->hasMany(SchoolLimit::class);
     }

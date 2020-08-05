@@ -31,7 +31,7 @@ class OAuthClientEloquentListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(OAuthClientEloquent $oAuthClientEloquent)
+    public function deleting(OAuthClientEloquent $oAuthClientEloquent): bool
     {
         $oAuthClientEloquent->deleteRelation($oAuthClientEloquent->tokens());
 

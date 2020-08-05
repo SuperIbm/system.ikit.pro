@@ -31,7 +31,7 @@ class OAuthTokenEloquentListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(OAuthTokenEloquent $oAuthTokenEloquent)
+    public function deleting(OAuthTokenEloquent $oAuthTokenEloquent): bool
     {
         $oAuthTokenEloquent->deleteRelation($oAuthTokenEloquent->refreshToken());
 

@@ -125,7 +125,7 @@ class ImageEloquent extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function updateByte(int $id, string $byte)
+    public function updateByte(int $id, string $byte): bool
     {
         $status = DB::table($this->newInstance()->getTable())
             ->where('id', $id)
@@ -145,7 +145,7 @@ class ImageEloquent extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id)
+    public function get(int $id): ?array
     {
         $image = $this->_getById($id);
 
@@ -191,7 +191,7 @@ class ImageEloquent extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function getByte(int $id)
+    public function getByte(int $id): ?string
     {
         $image = $this->_getById($id);
 
@@ -203,7 +203,7 @@ class ImageEloquent extends Image
                 ->first();
 
             if($image) return $image['byte'];
-            else return false;
+            else return null;
         }
     }
 
@@ -214,7 +214,7 @@ class ImageEloquent extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function all()
+    public function all(): ?array
     {
         return $this->newInstance()->all();
     }
@@ -228,7 +228,7 @@ class ImageEloquent extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id)
+    public function destroy(int $id): bool
     {
         $model = $this->newInstance();
         $status = $model->destroy($id);

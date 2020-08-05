@@ -31,7 +31,7 @@ class OrderInvoiceListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(OrderInvoice $orderInvoice)
+    public function deleting(OrderInvoice $orderInvoice): bool
     {
         $orderInvoice->deleteRelation($orderInvoice->charge(), $orderInvoice->isForceDeleting());
 

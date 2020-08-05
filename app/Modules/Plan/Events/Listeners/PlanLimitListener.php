@@ -31,7 +31,7 @@ class PlanLimitListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(PlanLimit $planLimit)
+    public function deleting(PlanLimit $planLimit): bool
     {
         $planLimit->deleteRelation($planLimit->schoolLimits(), $planLimit->isForceDeleting());
 

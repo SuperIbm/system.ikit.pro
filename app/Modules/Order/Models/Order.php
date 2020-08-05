@@ -15,6 +15,9 @@ use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
 use App\Modules\School\Models\School;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * Класс модель для таблицы заказов на основе Eloquent.
@@ -52,6 +55,7 @@ class Order extends Eloquent
     /**
      * Метод, который должен вернуть все правила валидации.
      *
+     * @return array Массив правил валидации для этой модели.
      * @version 1.0
      * @since 1.0
      */
@@ -72,6 +76,7 @@ class Order extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */
@@ -96,7 +101,7 @@ class Order extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function school()
+    public function school(): BelongsTo
     {
         return $this->belongsTo(School::class);
     }
@@ -108,7 +113,7 @@ class Order extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function invoices()
+    public function invoices(): HasMany
     {
         return $this->hasMany(OrderInvoice::class);
     }
@@ -120,7 +125,7 @@ class Order extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function orderable()
+    public function orderable(): MorphTo
     {
         return $this->morphTo("orderable");
     }

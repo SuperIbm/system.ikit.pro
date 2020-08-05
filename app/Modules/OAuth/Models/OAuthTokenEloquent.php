@@ -13,6 +13,8 @@ namespace App\Modules\OAuth\Models;
 use Eloquent;
 use App\Models\Validate;
 use App\Models\Delete;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Класс модель для аунтификации через API для хранения токенов на основе Eloquent.
@@ -79,6 +81,7 @@ class OAuthTokenEloquent extends Eloquent
     /**
      * Метод, который должен вернуть все правила валидации.
      *
+     * @return array Массив правил валидации для этой модели.
      * @version 1.0
      * @since 1.0
      */
@@ -94,6 +97,7 @@ class OAuthTokenEloquent extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */
@@ -109,11 +113,11 @@ class OAuthTokenEloquent extends Eloquent
     /**
      * Получить клиента.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne Модель пользователя.
+     * @return \App\Modules\OAuth\Models\OAuthClientEloquent|\Illuminate\Database\Eloquent\Relations\HasOne Модель пользователя.
      * @version 1.0
      * @since 1.0
      */
-    public function client()
+    public function client(): HasOne
     {
         return $this->hasOne(OAuthClientEloquent::class, "id", "oauth_client_id");
     }
@@ -121,11 +125,11 @@ class OAuthTokenEloquent extends Eloquent
     /**
      * Получить клиента.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo Модель пользователя.
+     * @return \App\Modules\OAuth\Models\OAuthRefreshTokenEloquent|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель пользователя.
      * @version 1.0
      * @since 1.0
      */
-    public function refreshToken()
+    public function refreshToken(): BelongsTo
     {
         return $this->belongsTo(OAuthRefreshTokenEloquent::class);
     }

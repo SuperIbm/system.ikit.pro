@@ -31,7 +31,7 @@ class PlanListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(Plan $plan)
+    public function deleting(Plan $plan): bool
     {
         $plan->deleteRelation($plan->roles(), $plan->isForceDeleting());
 

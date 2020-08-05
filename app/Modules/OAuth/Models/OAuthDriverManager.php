@@ -26,7 +26,7 @@ class OAuthDriverManager extends Manager
     /**
      * @see \Illuminate\Support\Manager::getDefaultDriver
      */
-    public function getDefaultDriver()
+    public function getDefaultDriver(): string
     {
         return Config::get('oauth.storeDriver');
     }

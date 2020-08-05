@@ -13,6 +13,7 @@ namespace App\Modules\OAuth\Models;
 use Eloquent;
 use App\Models\Validate;
 use App\Models\Delete;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Класс модель для аунтификации через API для хранения токенов обновления на основе Eloquent.
@@ -48,7 +49,7 @@ class OAuthRefreshTokenEloquent extends Eloquent
      * @since 1.0
      * @version 1.0
      */
-    protected string $table = "oauth_refresh_tokens";
+    protected $table = "oauth_refresh_tokens";
 
     /**
      * Атрибуты, для которых разрешено массовое назначение.
@@ -78,6 +79,7 @@ class OAuthRefreshTokenEloquent extends Eloquent
     /**
      * Метод, который должен вернуть все правила валидации.
      *
+     * @return array Массив правил валидации для этой модели.
      * @version 1.0
      * @since 1.0
      */
@@ -93,6 +95,7 @@ class OAuthRefreshTokenEloquent extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */
@@ -108,11 +111,11 @@ class OAuthRefreshTokenEloquent extends Eloquent
     /**
      * Получить токен.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne Модель токенов.
+     * @return \App\Modules\OAuth\Models\OAuthTokenEloquent|\Illuminate\Database\Eloquent\Relations\HasOne Модель токенов.
      * @version 1.0
      * @since 1.0
      */
-    public function token()
+    public function token(): HasOne
     {
         return $this->hasOne(OAuthTokenEloquent::class, "id", "oauth_token_id");
     }

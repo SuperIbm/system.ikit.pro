@@ -38,7 +38,7 @@ class OAuthTokenEloquent extends Repository
      */
     public function get(int $id = null, array $filters = null, $with = null): ?array
     {
-        return $this->_get(['OAuth', 'OAuthClient', 'OAuthToken'], $id, null, $with);
+        return $this->_get(['OAuth', 'OAuthClient', 'OAuthToken'], $id, null, $filters, $with);
     }
 
     /**
@@ -113,8 +113,8 @@ class OAuthTokenEloquent extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id, $force = false)
+    public function destroy(int $id, $force = false): bool
     {
-        return $this->_destroy(['OAuthToken'], $id, $force);
+        return $this->_destroy(['OAuthToken'], $id, null, $force);
     }
 }

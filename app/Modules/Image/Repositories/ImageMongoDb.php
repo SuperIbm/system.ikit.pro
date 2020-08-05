@@ -125,7 +125,7 @@ class ImageMongoDb extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function updateByte(int $id, string $byte)
+    public function updateByte(int $id, string $byte): bool
     {
         $status = DB::connection('mongodb')
             ->collection($this->newInstance()->getTable())
@@ -146,7 +146,7 @@ class ImageMongoDb extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id)
+    public function get(int $id): ?array
     {
         $image = $this->_getById($id);
 
@@ -189,7 +189,7 @@ class ImageMongoDb extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function getByte(int $id)
+    public function getByte(int $id): ?string
     {
         $image = $this->_getById($id);
 
@@ -199,7 +199,7 @@ class ImageMongoDb extends Image
             $image = DB::connection('mongodb')->collection($this->newInstance()->getTable())->where('id', $id)->first();
 
             if($image) return $image['byte'];
-            else return false;
+            else return null;
         }
     }
 
@@ -210,7 +210,7 @@ class ImageMongoDb extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function all()
+    public function all(): ?array
     {
         return $this->newInstance()->all();
     }
@@ -224,7 +224,7 @@ class ImageMongoDb extends Image
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(int $id)
+    public function destroy(int $id): bool
     {
         $model = $this->newInstance();
         $status = $model->destroy($id);

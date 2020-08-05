@@ -17,6 +17,8 @@ use App\Models\Delete;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\School\Models\School;
 use App\Modules\Order\Models\Order;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * Класс модель для таблицы тарифов на основе Eloquent.
@@ -49,6 +51,7 @@ class Plan extends Eloquent
     /**
      * Метод, который должен вернуть все правила валидации.
      *
+     * @return array Массив правил валидации для этой модели.
      * @version 1.0
      * @since 1.0
      */
@@ -66,6 +69,7 @@ class Plan extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */
@@ -87,7 +91,7 @@ class Plan extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function roles()
+    public function roles(): HasMany
     {
         return $this->hasMany(PlanRole::class);
     }
@@ -99,7 +103,7 @@ class Plan extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function schools()
+    public function schools(): HasMany
     {
         return $this->hasMany(School::class);
     }
@@ -111,7 +115,7 @@ class Plan extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function orders()
+    public function orders(): MorphToMany
     {
         return $this->morphToMany(Order::class, 'plan');
     }

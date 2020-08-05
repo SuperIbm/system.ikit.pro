@@ -16,6 +16,7 @@ use App\Models\Status;
 use App\Models\Delete;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\Section\Models\Section;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Класс модель для таблицы разделов ролей тарифов на основе Eloquent.
@@ -49,6 +50,7 @@ class PlanRoleSection extends Eloquent
     /**
      * Метод, который должен вернуть все правила валидации.
      *
+     * @return array Массив правил валидации для этой модели.
      * @version 1.0
      * @since 1.0
      */
@@ -67,6 +69,7 @@ class PlanRoleSection extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */
@@ -89,7 +92,7 @@ class PlanRoleSection extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function role()
+    public function role(): BelongsTo
     {
         return $this->belongsTo(PlanRole::class);
     }
@@ -101,7 +104,7 @@ class PlanRoleSection extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function section()
+    public function section(): BelongsTo
     {
         return $this->belongsTo(Section::class);
     }

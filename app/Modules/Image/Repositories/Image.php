@@ -31,7 +31,7 @@ abstract class Image extends Repository
      * @version 1.0
      * @since 1.0
      */
-    private static $_images = [];
+    private static array $_images = [];
 
     /**
      * Папка для хранения.
@@ -63,10 +63,11 @@ abstract class Image extends Repository
      * @param int $id ID изображения.
      * @param array $image Данные изображения.
      *
+     * @return void
      * @since 1.0
      * @version 1.0
      */
-    protected static function _setById(int $id, string $image)
+    protected static function _setById(int $id, array $image): void
     {
         self::$_images[$id] = $image;
     }
@@ -78,7 +79,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function all();
+    abstract public function all(): ?array;
 
     /**
      * Создание.
@@ -113,7 +114,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function updateByte(int $id, string $byte);
+    abstract public function updateByte(int $id, string $byte): bool;
 
     /**
      * Удаление.
@@ -124,7 +125,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    abstract public function destroy(int $id);
+    abstract public function destroy(int $id): bool;
 
     /**
      * Создание копии изображения.
@@ -344,7 +345,7 @@ abstract class Image extends Repository
      * @since 1.0
      * @version 1.0
      */
-    public function setFolder(string $folder)
+    public function setFolder(string $folder): Image
     {
         $this->_folder = $folder;
 

@@ -32,7 +32,7 @@ class OrderPaymentListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(OrderPayment $orderPayment)
+    public function deleting(OrderPayment $orderPayment): bool
     {
         if($orderPayment->image_id) ImageStore::destroy("order_payment", $orderPayment->image_id["id"]);
 

@@ -15,6 +15,7 @@ use Eloquent;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Класс модель для таблицы возврата денег на основе Eloquent.
@@ -47,6 +48,7 @@ class OrderRefund extends Eloquent
     /**
      * Метод, который должен вернуть все правила валидации.
      *
+     * @return array Массив правил валидации для этой модели.
      * @version 1.0
      * @since 1.0
      */
@@ -62,6 +64,7 @@ class OrderRefund extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */
@@ -81,7 +84,7 @@ class OrderRefund extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function charge()
+    public function charge(): BelongsTo
     {
         return $this->belongsTo(OrderCharge::class);
     }

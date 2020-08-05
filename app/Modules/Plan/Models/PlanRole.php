@@ -16,6 +16,8 @@ use App\Models\Validate;
 use App\Models\Status;
 use App\Models\Delete;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Класс модель для таблицы ролей тарифов на основе Eloquent.
@@ -45,6 +47,7 @@ class PlanRole extends Eloquent
     /**
      * Метод, который должен вернуть все правила валидации.
      *
+     * @return array Массив правил валидации для этой модели.
      * @version 1.0
      * @since 1.0
      */
@@ -59,6 +62,7 @@ class PlanRole extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */
@@ -77,7 +81,7 @@ class PlanRole extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function userRole()
+    public function userRole(): BelongsTo
     {
         return $this->belongsTo(UserRole::class);
     }
@@ -89,7 +93,7 @@ class PlanRole extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function sections()
+    public function sections(): HasMany
     {
         return $this->hasMany(PlanRoleSection::class);
     }

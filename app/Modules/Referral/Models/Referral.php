@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Delete;
 use App\Models\Status;
 use App\Modules\User\Models\UserReferral;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Класс модель для таблицы реферальных программ на основе Eloquent.
@@ -49,6 +50,7 @@ class Referral extends Eloquent
     /**
      * Метод, который должен вернуть все правила валидации.
      *
+     * @return array Массив правил валидации для этой модели.
      * @version 1.0
      * @since 1.0
      */
@@ -65,6 +67,7 @@ class Referral extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */
@@ -85,7 +88,7 @@ class Referral extends Eloquent
      * @version 1.0
      * @since 1.0
      */
-    public function users()
+    public function users(): HasMany
     {
         return $this->hasMany(UserReferral::class);
     }

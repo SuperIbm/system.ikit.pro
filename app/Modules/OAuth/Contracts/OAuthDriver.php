@@ -69,7 +69,7 @@ abstract class OAuthDriver
      * @since 1.0
      * @version 1.0
      */
-    abstract public function check(string $token);
+    abstract public function check(string $token): bool;
 
     /**
      * Очитска системы от старых токенов.

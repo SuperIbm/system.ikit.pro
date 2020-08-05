@@ -14,6 +14,8 @@ use Eloquent;
 use App\Models\Validate;
 use App\Modules\User\Models\User;
 use App\Models\Delete;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Класс модель для аунтификации через API для хранения клиентов на основе Eloquent.
@@ -80,6 +82,7 @@ class OAuthClientEloquent extends Eloquent
     /**
      * Метод, который должен вернуть все правила валидации.
      *
+     * @return array Массив правил валидации для этой модели.
      * @version 1.0
      * @since 1.0
      */
@@ -95,6 +98,7 @@ class OAuthClientEloquent extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */
@@ -110,11 +114,11 @@ class OAuthClientEloquent extends Eloquent
     /**
      * Получить пользователя.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne Модель пользователя.
+     * @return \App\Modules\User\Models\User|\Illuminate\Database\Eloquent\Relations\HasOne Модель пользователя.
      * @version 1.0
      * @since 1.0
      */
-    public function user()
+    public function user(): HasOne
     {
         return $this->hasOne(User::class);
     }
@@ -122,11 +126,11 @@ class OAuthClientEloquent extends Eloquent
     /**
      * Получить токены.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany Модель токена.
+     * @return \App\Modules\OAuth\Models\OAuthTokenEloquent|\Illuminate\Database\Eloquent\Relations\HasMany Модель токена.
      * @version 1.0
      * @since 1.0
      */
-    public function tokens()
+    public function tokens(): HasMany
     {
         return $this->hasMany(OAuthTokenEloquent::class, "id", "oauth_client_id");
     }

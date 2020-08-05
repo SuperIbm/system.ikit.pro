@@ -56,7 +56,6 @@ class BlockIp extends Eloquent
      * Метод, который должен вернуть все правила валидации.
      *
      * @return array Вернет массив правил.
-     * @see \App\Models\Validate::getRules
      * @version 1.0
      * @since 1.0
      */
@@ -71,7 +70,7 @@ class BlockIp extends Eloquent
     /**
      * Метод, который должен вернуть все названия атрибутов.
      *
-     * @see \App\Models\Validate::getNames
+     * @return array Массив возможных ошибок валидации.
      * @version 1.0
      * @since 1.0
      */

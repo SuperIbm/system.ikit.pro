@@ -31,7 +31,7 @@ class OrderListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(Order $order)
+    public function deleting(Order $order): bool
     {
         $order->deleteRelation($order->invoices(), $order->isForceDeleting());
 

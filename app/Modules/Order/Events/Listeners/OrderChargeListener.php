@@ -31,7 +31,7 @@ class OrderChargeListener
      * @version 1.0
      * @since 1.0
      */
-    public function deleting(OrderCharge $orderCharge)
+    public function deleting(OrderCharge $orderCharge): bool
     {
         $orderCharge->deleteRelation($orderCharge->refund(), $orderCharge->isForceDeleting());
 
