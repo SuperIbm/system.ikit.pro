@@ -35,7 +35,7 @@ class OAuthDriverDatabase extends OAuthDriver
      * @version 1.0
      * @since 1.0
      */
-    protected $_user;
+    protected User $_user;
 
     /**
      * Репозитарий клиентов.
@@ -44,7 +44,7 @@ class OAuthDriverDatabase extends OAuthDriver
      * @version 1.0
      * @since 1.0
      */
-    protected $_oAuthClientEloquent;
+    protected OAuthClientEloquent $_oAuthClientEloquent;
 
     /**
      * Репозитарий токентов.
@@ -53,7 +53,7 @@ class OAuthDriverDatabase extends OAuthDriver
      * @version 1.0
      * @since 1.0
      */
-    protected $_oAuthTokenEloquent;
+    protected OAuthTokenEloquent $_oAuthTokenEloquent;
 
     /**
      * Репозитарий токентов обновления.
@@ -62,7 +62,7 @@ class OAuthDriverDatabase extends OAuthDriver
      * @version 1.0
      * @since 1.0
      */
-    protected $_oAuthRefreshTokenEloquent;
+    protected OAuthRefreshTokenEloquent $_oAuthRefreshTokenEloquent;
 
     /**
      * Конструктор.

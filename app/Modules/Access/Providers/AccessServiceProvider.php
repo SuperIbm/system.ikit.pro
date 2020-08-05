@@ -28,14 +28,14 @@ class AccessServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Access';
+    protected string $moduleName = 'Access';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'access';
+    protected string $moduleNameLower = 'access';
 
     /**
      * Обработчик события загрузки приложения.

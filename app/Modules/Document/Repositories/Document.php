@@ -40,7 +40,7 @@ abstract class Document extends Repository
      * @version 1.0
      * @since 1.0
      */
-    private $_folder;
+    private string $_folder;
 
     /**
      * Получение документа по его ID из базы ранее полученных документов.

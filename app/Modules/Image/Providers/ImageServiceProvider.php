@@ -48,14 +48,14 @@ class ImageServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Image';
+    protected string $moduleName = 'Image';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'image';
+    protected string $moduleNameLower = 'image';
 
     /**
      * Регистрация сервис провайдеров.

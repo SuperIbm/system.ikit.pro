@@ -32,14 +32,14 @@ class ReferralServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Referral';
+    protected string $moduleName = 'Referral';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'referral';
+    protected string $moduleNameLower = 'referral';
 
     /**
      * Обработчик события загрузки приложения.

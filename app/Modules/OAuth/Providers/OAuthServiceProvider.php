@@ -45,14 +45,14 @@ class OAuthServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'OAuth';
+    protected string $moduleName = 'OAuth';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'oauth';
+    protected string $moduleNameLower = 'oauth';
 
     /**
      * Обработчик события загрузки приложения.

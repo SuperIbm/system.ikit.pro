@@ -32,7 +32,7 @@ class AlertImplement
      * @version 1.0
      * @since 1.0
      */
-    protected $_alert;
+    protected Alert $_alert;
 
     /**
      * Конструктор.

@@ -34,14 +34,14 @@ class SectionServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Section';
+    protected string $moduleName = 'Section';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'section';
+    protected string $moduleNameLower = 'section';
 
     /**
      * Обработчик события загрузки приложения.

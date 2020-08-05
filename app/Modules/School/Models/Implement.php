@@ -29,7 +29,7 @@ class Implement
      * @version 1.0
      * @since 1.0
      */
-    private $_school;
+    private School $_school;
 
     /**
      * Данные текущей школы.
@@ -38,7 +38,7 @@ class Implement
      * @version 1.0
      * @since 1.0
      */
-    private $_data = [];
+    private array $_data = [];
 
     /**
      * Конструктор.

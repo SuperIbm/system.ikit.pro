@@ -48,14 +48,14 @@ class DocumentServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Document';
+    protected string $moduleName = 'Document';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'document';
+    protected string $moduleNameLower = 'document';
 
     /**
      * Регистрация сервис провайдеров.

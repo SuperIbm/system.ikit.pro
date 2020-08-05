@@ -74,14 +74,14 @@ class UserServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'User';
+    protected string $moduleName = 'User';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'user';
+    protected string $moduleNameLower = 'user';
 
     /**
      * Обработчик события загрузки приложения.

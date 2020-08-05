@@ -29,14 +29,14 @@ class CoreServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Core';
+    protected string $moduleName = 'Core';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'core';
+    protected string $moduleNameLower = 'core';
 
     /**
      * Обработчик события загрузки приложения.

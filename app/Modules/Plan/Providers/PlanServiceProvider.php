@@ -45,14 +45,14 @@ class PlanServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Plan';
+    protected string $moduleName = 'Plan';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'plan';
+    protected string $moduleNameLower = 'plan';
 
     /**
      * Обработчик события загрузки приложения.

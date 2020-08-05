@@ -48,7 +48,7 @@ class OAuthRefreshTokenEloquent extends Eloquent
      * @since 1.0
      * @version 1.0
      */
-    protected $table = "oauth_refresh_tokens";
+    protected string $table = "oauth_refresh_tokens";
 
     /**
      * Атрибуты, для которых разрешено массовое назначение.

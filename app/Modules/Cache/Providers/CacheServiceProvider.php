@@ -28,14 +28,14 @@ class CacheServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Cache';
+    protected string $moduleName = 'Cache';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'cache';
+    protected string $moduleNameLower = 'cache';
 
     /**
      * Обработчик события загрузки приложения.

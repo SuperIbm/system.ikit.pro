@@ -49,14 +49,14 @@ class OrderServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Order';
+    protected string $moduleName = 'Order';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'order';
+    protected string $moduleNameLower = 'order';
 
     /**
      * Обработчик события загрузки приложения.

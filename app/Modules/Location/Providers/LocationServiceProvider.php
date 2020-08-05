@@ -32,14 +32,14 @@ class LocationServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Location';
+    protected string $moduleName = 'Location';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'location';
+    protected string $moduleNameLower = 'location';
 
     /**
      * Обработчик события загрузки приложения.

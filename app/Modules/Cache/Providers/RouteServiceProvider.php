@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $moduleNamespace = 'App\Modules\Cache\Http\Controllers';
+    protected string $moduleNamespace = 'App\Modules\Cache\Http\Controllers';
 
     /**
      * Вызвать до того как пути будут зарегистрированы.

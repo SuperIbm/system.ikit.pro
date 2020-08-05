@@ -40,7 +40,7 @@ abstract class Image extends Repository
      * @version 1.0
      * @since 1.0
      */
-    private $_folder;
+    private string $_folder;
 
     /**
      * Получение изображения по ее ID из базы ранее полученных изображений.

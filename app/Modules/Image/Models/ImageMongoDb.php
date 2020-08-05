@@ -59,7 +59,7 @@ class ImageMongoDb extends MongoDb
      * @since 1.0
      * @version 1.0
      */
-    public $path;
+    public string $path;
 
     /**
      * Параметр для хранения пути к файлу без кешь придикаты.
@@ -68,7 +68,7 @@ class ImageMongoDb extends MongoDb
      * @since 1.0
      * @version 1.0
      */
-    public $pathCache;
+    public string $pathCache;
 
     /**
      * Параметр для хранения физического пути к файлу.
@@ -77,7 +77,7 @@ class ImageMongoDb extends MongoDb
      * @since 1.0
      * @version 1.0
      */
-    public $pathSource;
+    public string $pathSource;
 
     /**
      * Связанная с моделью таблица.

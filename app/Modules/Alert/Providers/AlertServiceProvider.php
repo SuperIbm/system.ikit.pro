@@ -31,14 +31,14 @@ class AlertServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Alert';
+    protected string $moduleName = 'Alert';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'alert';
+    protected string $moduleNameLower = 'alert';
 
     /**
      * Обработчик события загрузки приложения.

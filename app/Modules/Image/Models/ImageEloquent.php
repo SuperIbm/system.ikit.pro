@@ -60,7 +60,7 @@ class ImageEloquent extends Eloquent
      * @since 1.0
      * @version 1.0
      */
-    public $path;
+    public string $path;
 
     /**
      * Параметр для хранения пути к файлу без кешь придикаты.
@@ -69,7 +69,7 @@ class ImageEloquent extends Eloquent
      * @since 1.0
      * @version 1.0
      */
-    public $pathCache;
+    public string $pathCache;
 
     /**
      * Параметр для хранения физического пути к файлу.
@@ -78,7 +78,7 @@ class ImageEloquent extends Eloquent
      * @since 1.0
      * @version 1.0
      */
-    public $pathSource;
+    public string $pathSource;
 
     /**
      * Расширенные пользователькие события.

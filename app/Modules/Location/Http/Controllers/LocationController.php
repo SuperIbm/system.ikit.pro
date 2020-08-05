@@ -32,7 +32,7 @@ class LocationController extends Controller
      * @version 1.0
      * @since 1.0
      */
-    private $_location;
+    private Location $_location;
 
     /**
      * Конструктор.

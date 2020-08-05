@@ -28,14 +28,14 @@ class TypographServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'Typograph';
+    protected string $moduleName = 'Typograph';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'typograph';
+    protected string $moduleNameLower = 'typograph';
 
     /**
      * Обработчик события загрузки приложения.

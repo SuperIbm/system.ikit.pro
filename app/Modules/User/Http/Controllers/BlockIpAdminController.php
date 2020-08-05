@@ -39,7 +39,7 @@ class BlockIpAdminController extends Controller
      * @version 1.0
      * @since 1.0
      */
-    private $_blockIp;
+    private BlockIp $_blockIp;
 
     /**
      * Конструктор.

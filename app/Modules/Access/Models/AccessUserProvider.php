@@ -34,7 +34,7 @@ class AccessUserProvider implements UserProvider
      * @version 1.0
      * @since 1.0
      */
-    private $_user;
+    private UserRepository $_user;
 
     /**
      * Репозитарий заблокированных IP адресов.
@@ -43,7 +43,7 @@ class AccessUserProvider implements UserProvider
      * @version 1.0
      * @since 1.0
      */
-    private $_blockIp;
+    private BlockIpRepository $_blockIp;
 
     /**
      * Конструктор.

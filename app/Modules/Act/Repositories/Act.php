@@ -32,7 +32,7 @@ class Act extends Repository
      * @version 1.0
      * @since 1.0
      */
-    protected $_cacheMinutes = 1;
+    protected int $_cacheMinutes = 1;
 
     /**
      * Получить по первичному ключу.

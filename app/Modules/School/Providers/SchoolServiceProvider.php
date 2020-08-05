@@ -45,14 +45,14 @@ class SchoolServiceProvider extends ServiceProvider
      *
      * @var string $moduleName
      */
-    protected $moduleName = 'School';
+    protected string $moduleName = 'School';
 
     /**
      * Название модуля в нижнем регисте.
      *
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'school';
+    protected string $moduleNameLower = 'school';
 
     /**
      * Обработчик события загрузки приложения.
