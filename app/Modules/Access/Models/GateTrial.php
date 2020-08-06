@@ -11,8 +11,8 @@
 namespace App\Modules\Access\Models;
 
 use School;
-use Util;
 use App\Modules\Access\Actions\AccessGateAction;
+use App\Modules\User\Models\User;
 
 /**
  * Класс для определения находиться ли система в пробной версии.
@@ -27,7 +27,7 @@ class GateTrial
     /**
      * Метод для определения доступа.
      *
-     * @param array $user Данные пользователя.
+     * @param \App\Modules\User\Models\User $user Данные пользователя.
      * @param int $school ID школы.
      * @param bool $trial Если указать true, то проверить что это пробная версия, если false, то не пробная.
      *
@@ -35,11 +35,11 @@ class GateTrial
      * @version 1.0
      * @since 1.0
      */
-    public function check($user, bool $trial = true, int $school = null): bool
+    public function check(User $user, bool $trial = true, int $school = null): bool
     {
         $school = School::getId() ? School::getId() : $school;
         $accessGateAction = app(AccessGateAction::class);
-        $gate = $accessGateAction->addParameter("id", $user["id"])->run();
+        $gate = $accessGateAction->addParameter("id", $user->id)->run();
 
         if($gate)
         {

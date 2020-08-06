@@ -25,6 +25,13 @@ Route::group([
     Route::put('password', 'AccessController@password')
         ->middleware('auth.api')
         ->name('password');
+
+    Route::get('test/',
+        function()
+        {
+            echo "HERE";
+        }
+    )->middleware('auth.api', 'auth.user', 'auth.role:Учитель')->name('gate');
 });
 
 Route::group([], function()

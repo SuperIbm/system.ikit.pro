@@ -64,10 +64,11 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth.user' => \App\Modules\Access\Http\Middleware\AllowUser::class,
         'auth.api' => \App\Modules\Access\Http\Middleware\AllowOAuth::class,
-        //'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'auth.user' => \App\Modules\Access\Http\Middleware\AllowUser::class,
+        'auth.guest' => \App\Modules\Access\Http\Middleware\AllowGuest::class,
+        'auth.verified' => \App\Modules\Access\Http\Middleware\AllowVerified::class,
+        'auth.role' => \App\Modules\Access\Http\Middleware\AllowRole::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
 }

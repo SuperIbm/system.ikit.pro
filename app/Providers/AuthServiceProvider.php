@@ -53,5 +53,6 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('limit', 'App\Modules\Access\Models\GateLimit@check');
         $gate->define('paid', 'App\Modules\Access\Models\GatePaid@check');
         $gate->define('trial', 'App\Modules\Access\Models\GateTrial@check');
+        $gate->define('verified', 'App\Modules\Access\Models\GateVerified@check');
     }
 }

@@ -10,24 +10,24 @@
 
 namespace App\Modules\Access\Http\Middleware;
 
+use Config;
 use Closure;
 use Illuminate\Http\Request;
-use OAuth;
-use Auth;
-use App\Modules\User\Models\User;
+use Gate;
+
 
 /**
- * Класс посредник для проверки аунтификации через API.
+ * Класс посредник для проверки пользователя, что он являеться гостем.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AllowOAuth
+class AllowGuest
 {
     /**
-     * Проверка пользователя, что он авторизован через API.
+     * Проверка пользователя, что он является не авторизовался.
      *
      * @param \Illuminate\Http\Request $request Запрос.
      * @param \Closure $next Функция последющего действия.
@@ -36,27 +36,18 @@ class AllowOAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        Auth::loginUsingId(1);
-        return $next($request);
-
-        //
-
-        $header = $request->header('Authorization');
-
-        if($header)
+        if(!Gate::allows('user')) return $next($request);
+        else
         {
-            $token = str_replace("Bearer ", "", $header);
-            OAuth::check($token);
-
-            if(!OAuth::hasError())
+            if($request->ajax())
             {
-                $data = OAuth::decode($token, "accessToken");
-                Auth::loginUsingId($data["user"]);
-
-                return $next($request);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Access to this part of the application forbidden, you have to log out!'
+                ]);
             }
-            else  return abort(401, "Unauthorized: ".OAuth::getErrorMessage());
+            else if(Config::get('auth.redirections.unregister')) return redirect(Config::get('auth.redirections.unregister'));
+            else return response('Authorized!', 401);
         }
-        else return abort(401, "Unauthorized: No header");
     }
 }

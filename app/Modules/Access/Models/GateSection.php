@@ -12,6 +12,7 @@ namespace App\Modules\Access\Models;
 
 use App\Modules\Access\Actions\AccessGateAction;
 use School;
+use App\Modules\User\Models\User;
 
 /**
  * Класс для определения доступа к разделам системы.
@@ -26,7 +27,7 @@ class GateSection
     /**
      * Метод для определения доступа.
      *
-     * @param array $user Данные пользователя.
+     * @param \App\Modules\User\Models\User $user Данные пользователя.
      * @param string $section Название секции системы.
      * @param string $type Тип доступа: read, create, update, destroy.
      * @param int $school ID школы.
@@ -35,13 +36,13 @@ class GateSection
      * @version 1.0
      * @since 1.0
      */
-    public function check(array $user, string $section, string $type, int $school = null): bool
+    public function check(User $user, string $section, string $type, int $school = null): bool
     {
         $school = School::getId() ? School::getId() : $school;
         $sections = explode(":", $section);
 
         $accessGateAction = app(AccessGateAction::class);
-        $gate = $accessGateAction->addParameter("id", $user["id"])->run();
+        $gate = $accessGateAction->addParameter("id", $user->id)->run();
 
         if($gate)
         {

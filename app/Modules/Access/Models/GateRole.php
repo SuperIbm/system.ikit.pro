@@ -11,8 +11,8 @@
 namespace App\Modules\Access\Models;
 
 use School;
-use Util;
 use App\Modules\Access\Actions\AccessGateAction;
+use App\Modules\User\Models\User;
 
 /**
  * Класс для определения доступа к страницам сайта через роль.
@@ -27,21 +27,22 @@ class GateRole
     /**
      * Метод для определения доступа.
      *
-     * @param array $user Данные пользователя.
-     * @param string $nameRole Название роли.
+     * @param \App\Modules\User\Models\User $user Данные пользователя.
+     * @param array|string Название ролей.
      * @param int $school ID школы.
      *
      * @return bool Вернет результат проверки.
      * @version 1.0
      * @since 1.0
      */
-    public function check(array $user, string $nameRole, int $school = null): bool
+    public function check(User $user, $nameRoles, int $school = null): bool
     {
+        if(is_string($nameRoles)) $nameRoles = explode(":", $nameRoles);
+
         $school = School::getId() ? School::getId() : $school;
-        $nameRoles = explode(":", $nameRole);
 
         $accessGateAction = app(AccessGateAction::class);
-        $gate = $accessGateAction->addParameter("id", $user["id"])->run();
+        $gate = $accessGateAction->addParameter("id", $user->id)->run();
 
         if($gate)
         {

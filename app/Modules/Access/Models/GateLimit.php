@@ -12,6 +12,7 @@ namespace App\Modules\Access\Models;
 
 use School;
 use App\Modules\Access\Actions\AccessGateAction;
+use App\Modules\User\Models\User;
 
 /**
  * Класс для определения лимитов.
@@ -26,7 +27,7 @@ class GateLimit
     /**
      * Метод для определения доступа.
      *
-     * @param array $user Данные пользователя.
+     * @param \App\Modules\User\Models\User $user Данные пользователя.
      * @param string $name Название лимита.
      * @param int $value Значение для проверки.
      * @param int $school ID школы.
@@ -35,11 +36,11 @@ class GateLimit
      * @version 1.0
      * @since 1.0
      */
-    public function check($user, string $name, int $value, int $school = null): bool
+    public function check(User $user, string $name, int $value, int $school = null): bool
     {
         $school = School::getId() ? School::getId() : $school;
         $accessGateAction = app(AccessGateAction::class);
-        $gate = $accessGateAction->addParameter("id", $user["id"])->run();
+        $gate = $accessGateAction->addParameter("id", $user->id)->run();
 
         if($gate)
         {

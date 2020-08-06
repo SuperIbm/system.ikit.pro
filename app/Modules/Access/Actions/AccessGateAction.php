@@ -302,7 +302,7 @@ class AccessGateAction extends Action
      */
     private function _isRoleStatus(array $role): bool
     {
-        return $role && $role["status"] && (!$role["status"]["user_role"] || ($role["status"]["user_role"] && $role["status"]["user_role"]["status"]));
+        return $role && $role["status"] && (!$role["user_role"] || ($role["user_role"] && $role["user_role"]["status"]));
     }
 
     /**

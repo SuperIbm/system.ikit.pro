@@ -96,6 +96,9 @@ return [
         [
             'login' => env('AUTH_REDIRECTION_LOGIN'),
             'register' => env('AUTH_REDIRECTION_REGISTER'),
+            'unregister' => env('AUTH_REDIRECTION_UNREGISTER'),
+            'verify' => env('AUTH_REDIRECTION_VERIFY'),
+            'unverified' => env('AUTH_REDIRECTION_UNVERIFIED'),
         ],
 
     'passwords' => [
