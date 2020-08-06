@@ -27,10 +27,7 @@ class AuthServiceProvider extends ServiceProvider
      * Список политки.
      * @var array
      */
-    protected $policies =
-        [
-            //'App\Model' => 'App\Policies\ModelPolicy',
-        ];
+    protected $policies = [];
 
     /**
      * Обработчик события загрузки приложения.
@@ -50,11 +47,11 @@ class AuthServiceProvider extends ServiceProvider
         );
 
         $gate->define('section', 'App\Modules\Access\Models\GateSection@check');
-        $gate->define('page', 'App\Modules\Access\Models\GatePage@check');
-        $gate->define('pageUpdate', 'App\Modules\Access\Models\GatePageUpdate@check');
         $gate->define('role', 'App\Modules\Access\Models\GateRole@check');
-        $gate->define('group', 'App\Modules\Access\Models\GateGroup@check');
-        $gate->define('admin', 'App\Modules\Access\Models\GateAdmin@check');
         $gate->define('user', 'App\Modules\Access\Models\GateUser@check');
+        $gate->define('school', 'App\Modules\Access\Models\GateSchool@check');
+        $gate->define('limit', 'App\Modules\Access\Models\GateLimit@check');
+        $gate->define('paid', 'App\Modules\Access\Models\GatePaid@check');
+        $gate->define('trial', 'App\Modules\Access\Models\GateTrial@check');
     }
 }

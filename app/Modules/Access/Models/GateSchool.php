@@ -10,44 +10,45 @@
 
 namespace App\Modules\Access\Models;
 
+use School;
 use Util;
 use App\Modules\Access\Actions\AccessGateAction;
 
 /**
- * Класс для определения доступа к страницам сайта через группу.
+ * Класс для определения доступа к школе.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class GateGroup
+class GateSchool
 {
     /**
      * Метод для определения доступа.
      *
      * @param array $user Данные пользователя.
-     * @param string $nameGroup Название группы.
+     * @param int $school ID школы.
      *
-     * @return bool Вернет true, если есть доступ.
+     * @return bool Вернет результат проверки.
      * @version 1.0
      * @since 1.0
      */
-    public function check($user, $nameGroup)
+    public function check($user, int $school = null): bool
     {
-        $nameGroups = explode(":", $nameGroup);
-
+        $school = School::getId() ? School::getId() : $school;
         $accessGateAction = app(AccessGateAction::class);
-        $gates = $accessGateAction->addParameter("id", $user["id"])->run();
+        $gate = $accessGateAction->addParameter("id", $user["id"])->run();
 
-        for($i = 0; $i < count($gates["groups"]); $i++)
+        if($gate)
         {
-            for($y = 0; $y < count($nameGroups); $y++)
+            for($i = 0; $i < count($gate["schools"]); $i++)
             {
-                if($gates["groups"][$i]["name_group"] == $nameGroups[$y]) return true;
+                if($gate["schools"][$i]["id"] == $school) return true;
             }
-        }
 
-        return false;
+            return false;
+        }
+        else return false;
     }
 }

@@ -64,7 +64,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \App\Modules\Access\Http\Middleware\Allow::class,
+        'auth.user' => \App\Modules\Access\Http\Middleware\AllowUser::class,
         'auth.api' => \App\Modules\Access\Http\Middleware\AllowOAuth::class,
         //'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,

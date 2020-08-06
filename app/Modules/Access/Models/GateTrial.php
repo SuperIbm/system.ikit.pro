@@ -15,31 +15,29 @@ use Util;
 use App\Modules\Access\Actions\AccessGateAction;
 
 /**
- * Класс для определения доступа к страницам сайта через роль.
+ * Класс для определения находиться ли система в пробной версии.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class GateRole
+class GateTrial
 {
     /**
      * Метод для определения доступа.
      *
      * @param array $user Данные пользователя.
-     * @param string $nameRole Название роли.
      * @param int $school ID школы.
+     * @param bool $trial Если указать true, то проверить что это пробная версия, если false, то не пробная.
      *
      * @return bool Вернет результат проверки.
      * @version 1.0
      * @since 1.0
      */
-    public function check(array $user, string $nameRole, int $school = null): bool
+    public function check($user, bool $trial = true, int $school = null): bool
     {
         $school = School::getId() ? School::getId() : $school;
-        $nameRoles = explode(":", $nameRole);
-
         $accessGateAction = app(AccessGateAction::class);
         $gate = $accessGateAction->addParameter("id", $user["id"])->run();
 
@@ -47,16 +45,7 @@ class GateRole
         {
             for($i = 0; $i < count($gate["schools"]); $i++)
             {
-                if($gate["schools"][$i]["id"] == $school)
-                {
-                    for($z = 0; $z < count($gate["schools"][$i]["roles"]); $z++)
-                    {
-                        for($y = 0; $y < count($nameRoles); $y++)
-                        {
-                            if($gate["schools"][$i]["roles"][$z]["name"] == $nameRoles[$y]) return true;
-                        }
-                    }
-                }
+                if($gate["schools"][$i]["id"] == $school && $gate["schools"][$i]["paid"]) return ($gate["schools"][$i]["paid"]["trial"] == $trial);
             }
 
             return false;

@@ -13,7 +13,7 @@ namespace App\Modules\Access\Models;
 use App\Modules\Access\Actions\AccessGateAction;
 
 /**
- * Класс для определения доступа к страницам сайта через проверку является ли этот пользователь "Пользователи".
+ * Класс для определения доступа к страницам сайта.
  *
  * @version 1.0
  * @since 1.0
@@ -26,18 +26,17 @@ class GateUser
      * Метод для определения доступа.
      *
      * @param array $user Данные пользователя.
-     * @param bool $status Если указать true, то значит нужно проверить истенность, что это "Пользователи", если false, то значит ложность.
      *
-     * @return bool Вернет true, если есть доступ.
+     * @return bool Вернет результат проверки.
      * @version 1.0
      * @since 1.0
      */
-    public function check($user, $status = true)
+    public function check(array $user): bool
     {
         $accessGateAction = app(AccessGateAction::class);
         $gates = $accessGateAction->addParameter("id", $user["id"])->run();
 
-        if((count($gates["groups"]) && $status == true) || (count($gates["groups"]) == 0 && $status == false)) return true;
+        if($gates) return true;
         else return false;
     }
 }

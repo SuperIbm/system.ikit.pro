@@ -186,7 +186,7 @@ class AccessGateAction extends Action
                 $lng = count($result);
                 $result[$lng] = $schools[$i]["school"];
                 $result[$lng]["roles"] = $this->_getRoles($schools[$i]["roles"]);
-                $result[$lng]["sections"] = $this->_getSections($schools[$i]["roles"]);;
+                $result[$lng]["sections"] = $this->_getSections($schools[$i]["roles"]);
                 $result[$lng]["paid"] = $this->_getPaid($schools[$i]["school"]["active_orders"]);
                 $result[$lng]["limits"] = $this->_getLimits($schools[$i]["school"]["limits"], $schools[$i]["school"]["active_orders"]);
 

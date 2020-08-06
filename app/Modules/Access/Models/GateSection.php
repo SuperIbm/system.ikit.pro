@@ -11,9 +11,10 @@
 namespace App\Modules\Access\Models;
 
 use App\Modules\Access\Actions\AccessGateAction;
+use School;
 
 /**
- * Класс для определения доступа к разделам административной системы.
+ * Класс для определения доступа к разделам системы.
  *
  * @version 1.0
  * @since 1.0
@@ -26,25 +27,37 @@ class GateSection
      * Метод для определения доступа.
      *
      * @param array $user Данные пользователя.
-     * @param string $section Название секции админстративной системы.
+     * @param string $section Название секции системы.
      * @param string $type Тип доступа: read, create, update, destroy.
+     * @param int $school ID школы.
      *
-     * @return bool Вернет true, если есть доступ.
+     * @return bool Вернет результат проверки.
      * @version 1.0
      * @since 1.0
      */
-    public function check($user, $section, $type)
+    public function check(array $user, string $section, string $type, int $school = null): bool
     {
+        $school = School::getId() ? School::getId() : $school;
         $sections = explode(":", $section);
 
         $accessGateAction = app(AccessGateAction::class);
-        $gates = $accessGateAction->addParameter("id", $user["id"])->run();
+        $gate = $accessGateAction->addParameter("id", $user["id"])->run();
 
-        for($i = 0; $i < count($sections); $i++)
+        if($gate)
         {
-            if(isset($gates["sections"][$sections[$i]][$type]) && $gates["sections"][$sections[$i]][$type] == true) return true;
-        }
+            for($i = 0; $i < count($gate["schools"]); $i++)
+            {
+                if($gate["schools"][$i]["id"] == $school)
+                {
+                    for($z = 0; $z < count($sections); $z++)
+                    {
+                        if(isset($gate["schools"][$i]["sections"][$sections[$z]][$type]) && $gate["schools"][$i]["sections"][$sections[$z]][$type] == true) return true;
+                    }
+                }
+            }
 
-        return false;
+            return false;
+        }
+        else return false;
     }
 }

@@ -24,10 +24,10 @@ use Gate;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class Allow
+class AllowUser
 {
     /**
-     * Проверка пользователя, что он является "Пользователи".
+     * Проверка пользователя, что он является авторизовался.
      *
      * @param \Illuminate\Http\Request $request Запрос.
      * @param \Closure $next Функция последющего действия.

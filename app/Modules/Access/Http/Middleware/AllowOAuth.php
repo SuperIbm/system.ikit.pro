@@ -50,10 +50,7 @@ class AllowOAuth
 
                 return $next($request);
             }
-            else
-            {
-                return abort(401, "Unauthorized: ".OAuth::getErrorMessage());
-            }
+            else  return abort(401, "Unauthorized: ".OAuth::getErrorMessage());
         }
         else return abort(401, "Unauthorized: No header");
     }
