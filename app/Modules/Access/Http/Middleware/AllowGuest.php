@@ -15,7 +15,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Gate;
 
-
 /**
  * Класс посредник для проверки пользователя, что он являеться гостем.
  *
@@ -43,11 +42,11 @@ class AllowGuest
             {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Access to this part of the application forbidden, you have to log out!'
+                    'message' => trans('access::http.middleware.allowGuest.error.text'),
                 ]);
             }
             else if(Config::get('auth.redirections.unregister')) return redirect(Config::get('auth.redirections.unregister'));
-            else return response('Authorized!', 401);
+            else return response(trans('access::http.middleware.allowGuest.error.label'), 401);
         }
     }
 }

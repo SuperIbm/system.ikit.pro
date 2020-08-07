@@ -87,7 +87,7 @@ class OAuthRefreshTokenEloquent extends Eloquent
     {
         return [
             'oauth_token_id' => 'required|integer|digits_between:1,20',
-            'refresh_token' => 'required|between:1,500',
+            'refresh_token' => 'required|between:1,500|unique:oauth_refresh_tokens,refresh_token,' . $this->id . ',id',
             'expires_at' => 'required|date'
         ];
     }

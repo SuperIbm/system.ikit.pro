@@ -57,11 +57,11 @@ class AllowRole
         {
             return response()->json([
                 'success' => false,
-                'message' => 'Access to this part of the application has been ended, please log in again!'
+                'message' => trans('access::http.middleware.AllowRole.message')
             ]);
         }
         else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
         else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));
-        else return response('Unauthorized!', 401);
+        else return response(trans('access::http.middleware.AllowRole.label'), 401);
     }
 }

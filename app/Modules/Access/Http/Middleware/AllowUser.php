@@ -15,7 +15,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Gate;
 
-
 /**
  * Класс посредник для проверки пользователя, что он авторизовался.
  *

@@ -90,7 +90,7 @@ class OAuthClientEloquent extends Eloquent
     {
         return [
             'user_id' => 'required|integer|digits_between:1,20',
-            'secret' => 'required|between:1,500',
+            'secret' => 'required|between:1,500|unique:oauth_clients,secret,' . $this->id . ',id',
             'expires_at' => 'required|date'
         ];
     }

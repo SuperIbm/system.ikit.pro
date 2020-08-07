@@ -89,7 +89,7 @@ class OAuthTokenEloquent extends Eloquent
     {
         return [
             'oauth_client_id' => 'required|integer|digits_between:1,20',
-            'token' => 'required|between:1,500',
+            'token' => 'required|between:1,500|unique:oauth_tokens,token,' . $this->id . ',id',
             'expires_at' => 'required|date'
         ];
     }

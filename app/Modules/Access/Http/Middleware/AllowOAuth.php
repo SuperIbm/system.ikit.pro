@@ -14,7 +14,6 @@ use Closure;
 use Illuminate\Http\Request;
 use OAuth;
 use Auth;
-use App\Modules\User\Models\User;
 
 /**
  * Класс посредник для проверки аунтификации через API.
@@ -50,8 +49,8 @@ class AllowOAuth
 
                 return $next($request);
             }
-            else  return abort(401, "Unauthorized: ".OAuth::getErrorMessage());
+            else  return abort(401, trans('access::http.middleware.allowOAuth.label') . ": " . OAuth::getErrorMessage());
         }
-        else return abort(401, "Unauthorized: No header");
+        else return abort(401, trans('access::http.middleware.allowOAuth.no_header'));
     }
 }

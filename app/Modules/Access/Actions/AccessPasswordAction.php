@@ -81,7 +81,12 @@ class AccessPasswordAction extends Action
                         return false;
                     }
                 }
-                else $this->addError("access", trans('access::actions.accessPasswordAction.password_not_match'));
+                else
+                {
+                    $this->addError("access", trans('access::actions.accessPasswordAction.password_not_match'));
+
+                    return false;
+                }
             }
             else
             {

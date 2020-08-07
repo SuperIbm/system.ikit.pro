@@ -40,9 +40,9 @@ class AccessApiController extends Controller
      */
     public function client(AccessApiClientRequest $request): JsonResponse
     {
-        $accessApiClientAction = app(AccessApiClientAction::class);
+        $action = app(AccessApiClientAction::class);
 
-        $data = $accessApiClientAction->setParameters([
+        $data = $action->setParameters([
             "login" => $request->get('login'),
             "password" => $request->get('password')
         ])->run();
@@ -58,7 +58,7 @@ class AccessApiController extends Controller
         {
             return response()->json([
                 'success' => false,
-                'message' => $accessApiClientAction->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ])->setStatusCode(400);
         }
     }
@@ -74,9 +74,9 @@ class AccessApiController extends Controller
      */
     public function token(AccessApiTokenRequest $request): JsonResponse
     {
-        $accessApiTokenAction = app(AccessApiTokenAction::class);
+        $action = app(AccessApiTokenAction::class);
 
-        $data = $accessApiTokenAction->setParameters([
+        $data = $action->setParameters([
             "secret" => $request->get('secret')
         ])->run();
 
@@ -91,7 +91,7 @@ class AccessApiController extends Controller
         {
             return response()->json([
                 'success' => false,
-                'message' => $accessApiTokenAction->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ])->setStatusCode(400);
         }
     }
@@ -107,9 +107,9 @@ class AccessApiController extends Controller
      */
     public function refresh(AccessApiRefreshRequest $request): JsonResponse
     {
-        $accessApiRefreshAction = app(AccessApiRefreshAction::class);
+        $action = app(AccessApiRefreshAction::class);
 
-        $data = $accessApiRefreshAction->setParameters([
+        $data = $action->setParameters([
             "refreshToken" => $request->get('refreshToken'),
         ])->run();
 
@@ -124,7 +124,7 @@ class AccessApiController extends Controller
         {
             return response()->json([
                 'success' => false,
-                'message' => $accessApiRefreshAction->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ])->setStatusCode(400);
         }
     }

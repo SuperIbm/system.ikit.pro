@@ -58,11 +58,11 @@ class AllowPaid
         {
             return response()->json([
                 'success' => false,
-                'message' => $status ? 'Access to this part of the application is not allowed because of the unpaid plan!' : 'Access to this part of the application is not allowed because of the paid plan!'
+                'message' => $status ? trans('access::http.middleware.allowPaid.message.true') : trans('access::http.middleware.allowPaid.message.false')
             ]);
         }
         else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
         else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));
-        else return response($status ? 'Unpaid!' : 'Paid!', 401);
+        else return response($status ? trans('access::http.middleware.allowPaid.label.true') : trans('access::http.middleware.allowPaid.label.false'), 401);
     }
 }
