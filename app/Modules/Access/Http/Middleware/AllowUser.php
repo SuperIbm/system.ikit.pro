@@ -37,42 +37,39 @@ class AllowUser
      */
     public function handle(Request $request, Closure $next, ...$params)
     {
-        if(!Gate::allows('user'))
+        if(!empty($params))
         {
-            if($request->ajax())
-            {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Access to this part of the application has been ended, please log in again!'
-                ]);
-            }
-            else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
-            else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));
-            else response('Unauthorized!', 401);
+            $name = $params[0];
+            array_shift($params);
+
+            if(Gate::allows($name, $params)) return $next($request);
+            else return $this->_getError($request->ajax());
         }
         else
         {
-            if(!empty($params))
-            {
-                $name = $params[0];
-                array_shift($params);
-
-                if(!Gate::allows($name, $params))
-                {
-                    if($request->ajax())
-                    {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Access to this part of the application has been ended, please log in again!'
-                        ]);
-                    }
-                    else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
-                    else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));
-                    else return response('Unauthorized!', 401);
-                }
-            }
+            if(Gate::allows('user')) return $next($request);
+            else return $this->_getError($request->ajax());
         }
+    }
 
-        return $next($request);
+    /**
+     * Получить ошибку.
+     *
+     * @param bool $ajax Определяет являеться ли данный запрос AJAX запросом.
+     *
+     * @return mixed Вернет ошибку.
+     */
+    private function _getError($ajax)
+    {
+        if($ajax)
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'Access to this part of the application has been ended, please log in again!'
+            ]);
+        }
+        else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
+        else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));
+        else return response('Unauthorized!', 401);
     }
 }

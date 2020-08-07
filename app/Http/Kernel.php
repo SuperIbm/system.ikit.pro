@@ -69,6 +69,11 @@ class Kernel extends HttpKernel
         'auth.guest' => \App\Modules\Access\Http\Middleware\AllowGuest::class,
         'auth.verified' => \App\Modules\Access\Http\Middleware\AllowVerified::class,
         'auth.role' => \App\Modules\Access\Http\Middleware\AllowRole::class,
+        'auth.school' => \App\Modules\Access\Http\Middleware\AllowSchool::class,
+        'auth.section' => \App\Modules\Access\Http\Middleware\AllowSection::class,
+        'auth.limit' => \App\Modules\Access\Http\Middleware\AllowLimit::class,
+        'auth.paid' => \App\Modules\Access\Http\Middleware\AllowPaid::class,
+        'auth.trial' => \App\Modules\Access\Http\Middleware\AllowTrial::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

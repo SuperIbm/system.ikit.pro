@@ -36,11 +36,6 @@ class AllowOAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        Auth::loginUsingId(1);
-        return $next($request);
-
-        //
-
         $header = $request->header('Authorization');
 
         if($header)

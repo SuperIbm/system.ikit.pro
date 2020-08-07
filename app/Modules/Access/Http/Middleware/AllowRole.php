@@ -36,7 +36,7 @@ class AllowRole
      */
     public function handle(Request $request, Closure $next, ...$params)
     {
-        if(Gate::allows('user') && !empty($params))
+        if(!empty($params))
         {
             if(Gate::allows("role", implode(":", $params))) return $next($request);
             else return $this->_getError($request->ajax());

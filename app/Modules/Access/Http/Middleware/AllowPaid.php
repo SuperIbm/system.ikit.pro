@@ -15,16 +15,15 @@ use Closure;
 use Illuminate\Http\Request;
 use Gate;
 
-
 /**
- * Класс посредник для проверки пользователя, что он верифицирован или не верефицирован.
+ * Класс посредник для проверки пользователя, что система оплачена.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class AllowVerified
+class AllowPaid
 {
     /**
      * Проверка пользователя.
@@ -37,31 +36,33 @@ class AllowVerified
      */
     public function handle(Request $request, Closure $next, ...$params)
     {
-        $status = isset($params[0]) ? $params[0] : true;
-
-        if(Gate::allows('verified', $status)) return $next($request);
-        else return $this->_getError($request->ajax(), $status);
+        if(Gate::allows("paid", $params)) return $next($request);
+        else
+        {
+            $status = isset($params[0]) ? $params[0] : true;
+            return $this->_getError($request->ajax(), $status);
+        }
     }
 
     /**
      * Получить ошибку.
      *
-     * @param bool $ajax Определяет являеться ли данный запрос AJAX запросом.
-     * @param bool $status Если указан true, то проверить что пользователь верифицирован, если false, то не верефицирован.
+     * @param bool $ajax Определяет является ли данный запрос AJAX запросом.
+     * @param bool $status Если указать true, то проверить оплаченность, если false, то неоплаченность.
      *
      * @return mixed Вернет ошибку.
      */
-    private function _getError($ajax, $status = true)
+    private function _getError($ajax, $status)
     {
         if($ajax)
         {
             return response()->json([
                 'success' => false,
-                'message' => $status ? 'Access to this part of the application only for a verified user!' : 'Access to this part of the application only for an unverified user!'
+                'message' => $status ? 'Access to this part of the application is not allowed because of the unpaid plan!' : 'Access to this part of the application is not allowed because of the paid plan!'
             ]);
         }
-        else if(Config::get('auth.redirections.verify') && $status) return redirect(Config::get('auth.redirections.verify'));
-        else if(Config::get('auth.redirections.unverify') && !$status) return redirect(Config::get('auth.redirections.unverified'));
-        else return response($status ? 'Unverified!' : 'Verified!', 401);
+        else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
+        else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));
+        else return response($status ? 'Unpaid!' : 'Paid!', 401);
     }
 }
