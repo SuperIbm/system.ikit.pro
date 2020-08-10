@@ -34,8 +34,8 @@ class GateUser
      */
     public function check(User $user): bool
     {
-        $accessGateAction = app(AccessGateAction::class);
-        $gates = $accessGateAction->addParameter("id", $user->id)->run();
+        $action = app(AccessGateAction::class);
+        $gates = $action->addParameter("id", $user->id)->run();
 
         if($gates) return true;
         else return false;

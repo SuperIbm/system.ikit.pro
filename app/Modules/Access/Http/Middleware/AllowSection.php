@@ -53,7 +53,7 @@ class AllowSection
         {
             return response()->json([
                 'success' => false,
-                'message' => 'Access to this part of the application is not allowed!'
+                'message' => trans('access::http.middleware.allowSection.message')
             ]);
         }
         else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));

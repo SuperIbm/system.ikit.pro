@@ -37,8 +37,8 @@ class GateSchool
     public function check(User $user, int $school = null): bool
     {
         $school = School::getId() ? School::getId() : $school;
-        $accessGateAction = app(AccessGateAction::class);
-        $gate = $accessGateAction->addParameter("id", $user->id)->run();
+        $action = app(AccessGateAction::class);
+        $gate = $action->addParameter("id", $user->id)->run();
 
         if($gate)
         {

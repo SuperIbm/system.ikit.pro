@@ -58,11 +58,11 @@ class AllowTrial
         {
             return response()->json([
                 'success' => false,
-                'message' => $status ? 'Access to this part of the application only for the trial version!' : 'Access to this part of the application is not allowed for the trial version!'
+                'message' => $status ? trans('access::http.middleware.allowTrial.message.true') : trans('access::http.middleware.allowTrial.message.false')
             ]);
         }
         else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
         else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));
-        else return response($status ? 'Paid!' : 'Trial!', 401);
+        else return response($status ? trans('access::http.middleware.allowTrial.label.true') : trans('access::http.middleware.allowTrial.label.false'), 401);
     }
 }

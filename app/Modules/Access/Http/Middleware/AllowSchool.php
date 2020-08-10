@@ -53,11 +53,11 @@ class AllowSchool
         {
             return response()->json([
                 'success' => false,
-                'message' => 'Access to this part of the application is not allowed!'
+                'message' => trans('access::http.middleware.allowSchool.message')
             ]);
         }
         else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
         else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));
-        else return response('Restricted!', 401);
+        else return response(trans('access::http.middleware.allowSchool.label'), 401);
     }
 }

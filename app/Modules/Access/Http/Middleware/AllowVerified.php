@@ -56,11 +56,11 @@ class AllowVerified
         {
             return response()->json([
                 'success' => false,
-                'message' => $status ? 'Access to this part of the application only for a verified user!' : 'Access to this part of the application only for an unverified user!'
+                'message' => $status ? trans('access::http.middleware.allowVerified.message.true') : trans('access::http.middleware.allowVerified.message.false')
             ]);
         }
         else if(Config::get('auth.redirections.verify') && $status) return redirect(Config::get('auth.redirections.verify'));
         else if(Config::get('auth.redirections.unverify') && !$status) return redirect(Config::get('auth.redirections.unverified'));
-        else return response($status ? 'Unverified!' : 'Verified!', 401);
+        else return response($status ? trans('access::http.middleware.allowVerified.label.true') : trans('access::http.middleware.allowVerified.label.false'), 401);
     }
 }

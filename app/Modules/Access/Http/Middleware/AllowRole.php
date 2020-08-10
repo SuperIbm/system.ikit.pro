@@ -57,11 +57,11 @@ class AllowRole
         {
             return response()->json([
                 'success' => false,
-                'message' => trans('access::http.middleware.AllowRole.message')
+                'message' => trans('access::http.middleware.allowRole.message')
             ]);
         }
         else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
         else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));
-        else return response(trans('access::http.middleware.AllowRole.label'), 401);
+        else return response(trans('access::http.middleware.allowRole.label'), 401);
     }
 }

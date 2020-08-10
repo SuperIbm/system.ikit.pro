@@ -35,8 +35,8 @@ class GateVerified
      */
     public function check(User $user, bool $verified = true): bool
     {
-        $accessGateAction = app(AccessGateAction::class);
-        $gate = $accessGateAction->addParameter("id", $user->id)->run();
+        $action = app(AccessGateAction::class);
+        $gate = $action->addParameter("id", $user->id)->run();
 
         if($gate)
         {
