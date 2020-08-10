@@ -1,15 +1,15 @@
 @extends('tpl.mail.index')
 
 @section('header')
-    Recovery the password of the user
+    {{ trans('views.recovery.header') }}
 @endsection
 
 @section('content')
-    Please click the button below to recovery your password.
+    {{ trans('views.recovery.content') }}
 @endsection
 
 @section('button')
     <a class="button" href="{{ $site }}forget/reset/{{ $id }}?code={{ $code }}">
-        Reset the password
+        {{ trans('views.recovery.button') }}
     </a>
 @endsection

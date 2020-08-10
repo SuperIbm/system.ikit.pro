@@ -1,15 +1,24 @@
 @extends('tpl.mail.index')
 
 @section('header')
-    That was you, wasn't it, {{ $name }}?
+    {{ trans('views.reset.header',
+        [
+        'name' => $name
+        ]
+    ) }}
 @endsection
 
 @section('content')
-    Hi {{ $name }}. When your password is changed, we'll let you know. If you didn't make this change, you should <a href="{{ $site }}contact-us">contact customer</a> service or <a href="{{ $site }}forget">reset your password</a>.
+    {{ trans('views.reset.content',
+        [
+        'name' => $name,
+        'url' => $site.'contact-us'
+        ]
+    ) }}
 @endsection
 
 @section('button')
     <a class="button" href="{{ $site }}">
-        Go to the site
+        {{ trans('views.reset.button') }}
     </a>
 @endsection
