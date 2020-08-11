@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'middleware' => ['ajax'],
+    'middleware' => ['locale', 'ajax'],
     'prefix' => 'inside/access/access/',
     "as" => "inside.access.access"
 ], function()
