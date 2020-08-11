@@ -274,7 +274,7 @@ class AlertImplement
             ]
         ];
 
-        return $this->_alert->get(null, true, $filter);
+        return $this->_alert->get(null, null, $filter);
     }
 
     /**

@@ -194,7 +194,7 @@ class OAuthDriverDatabase extends OAuthDriver
                         }
                         else
                         {
-                            $this->addError("client", "The client doesn't find.");
+                            $this->addError("client", trans('oauth::models.oAuthDriverDatabase.no_client'));
 
                             return false;
                         }
@@ -208,7 +208,7 @@ class OAuthDriverDatabase extends OAuthDriver
                 }
                 else
                 {
-                    $this->addError("user", "The user doesn't exist");
+                    $this->addError("user", trans('oauth::models.oAuthDriverDatabase.no_user'));
 
                     return false;
                 }
@@ -222,7 +222,7 @@ class OAuthDriverDatabase extends OAuthDriver
         }
         else
         {
-            $this->addError("secret", "The secret code is not valid.");
+            $this->addError("secret", trans('oauth::models.oAuthDriverDatabase.no_valid_secret_code'));
 
             return false;
         }
@@ -334,7 +334,7 @@ class OAuthDriverDatabase extends OAuthDriver
                                 }
                                 else
                                 {
-                                    $this->addError("refreshToke", "The refresh token doesn't exist");
+                                    $this->addError("refreshToke", trans('oauth::models.oAuthDriverDatabase.no_refresh_code'));
 
                                     return false;
                                 }
@@ -348,7 +348,7 @@ class OAuthDriverDatabase extends OAuthDriver
                         }
                         else
                         {
-                            $this->addError("client", "The client doesn't exist.");
+                            $this->addError("client", trans('oauth::models.oAuthDriverDatabase.no_client'));
 
                             return false;
                         }
@@ -362,7 +362,7 @@ class OAuthDriverDatabase extends OAuthDriver
                 }
                 else
                 {
-                    $this->addError("user", "The user doesn't exist.");
+                    $this->addError("user", trans('oauth::models.oAuthDriverDatabase.no_user'));
 
                     return false;
                 }
@@ -376,7 +376,7 @@ class OAuthDriverDatabase extends OAuthDriver
         }
         else
         {
-            $this->addError("secret", "The token is not valid.");
+            $this->addError("token", trans('oauth::models.oAuthDriverDatabase.no_valid_token'));
 
             return false;
         }
@@ -440,7 +440,7 @@ class OAuthDriverDatabase extends OAuthDriver
                         }
                         else
                         {
-                            $this->addError("client", "The client doesn't exist.");
+                            $this->addError("client", trans('oauth::models.oAuthDriverDatabase.no_client'));
 
                             return false;
                         }
@@ -454,7 +454,7 @@ class OAuthDriverDatabase extends OAuthDriver
                 }
                 else
                 {
-                    $this->addError("user", "The user doesn't exist.");
+                    $this->addError("user", trans('oauth::models.oAuthDriverDatabase.no_user'));
 
                     return false;
                 }
@@ -468,7 +468,7 @@ class OAuthDriverDatabase extends OAuthDriver
         }
         else
         {
-            $this->addError("secret", "The token is not valid.");
+            $this->addError("token", trans('oauth::models.oAuthDriverDatabase.no_valid_token'));
 
             return false;
         }

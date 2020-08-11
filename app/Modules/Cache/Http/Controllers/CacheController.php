@@ -41,7 +41,7 @@ class CacheController extends Controller
         Artisan::call("view:clear");
         Artisan::call("config:cache");
 
-        Log::info('Кешь удален.', [
+        Log::info(trans('cache::http.controllers.cache.clean.log'), [
             "login" => Auth::user()->login,
             "module" => "Cache",
             'type' => 'destroy'
