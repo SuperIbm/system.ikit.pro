@@ -12,6 +12,7 @@ namespace App\Modules\Alert\Models;
 
 use App\Modules\Alert\Repositories\Alert;
 use App\Models\Error;
+use School;
 
 /**
  * Класс для работы с предупреждениями.
@@ -56,13 +57,16 @@ class AlertImplement
      * @param string $url Ссылка.
      * @param string $icon Иконка.
      * @param string $color Цвет иконки.
+     * @param int $school ID школы.
      *
      * @return int Вернет ID последней вставленной строки. Если ошибка, то вернет false.
      * @since 1.0
      * @version 1.0
      */
-    public function add(string $title, bool $read = false, string $description = null, string $url = null, string $icon = null, string $color = null)
+    public function add(string $title, bool $read = false, string $description = null, string $url = null, string $icon = null, string $color = null, int $school = null)
     {
+        $school = School::getId() ? School::getId() : $school;
+
         $data = $this->_alert->create([
             "title" => $title,
             "read" => !$read,
@@ -70,6 +74,7 @@ class AlertImplement
             "url" => $url,
             "icon" => $icon,
             "color" => $color,
+            'school_id' => $school
         ]);
 
         if($data) return $data;
@@ -90,21 +95,25 @@ class AlertImplement
      * @param string $url Ссылка.
      * @param string $icon Иконка.
      * @param string $color Цвет иконки.
+     * @param int $school ID школы.
      *
      * @return int Вернет ID вставленной строки. Если ошибка, то вернет false.
      * @since 1.0
      * @version 1.0
      */
-    public function edit(int $id, string $title, bool $read = false, string $description = null, string $url = null, string $icon = null, string $color = null)
+    public function edit(int $id, string $title, bool $read = false, string $description = null, string $url = null, string $icon = null, string $color = null, int $school = null)
     {
-        $data = $this->_alert->update($id, [
-            "title" => $title,
-            "status" => $read,
-            "description" => $description,
-            "url" => $url,
-            "icon" => $icon,
-            "color" => $color,
-        ]);
+        $data = [];
+
+        if(isset($title)) $data["title"] = $title;
+        if(isset($read)) $data["status"] = $read;
+        if(isset($description)) $data["description"] = $description;
+        if(isset($url)) $data["url"] = $url;
+        if(isset($icon)) $data["icon"] = $icon;
+        if(isset($color)) $data["color"] = $color;
+        if(isset($school)) $data["school"] = $school;
+
+        $data = $this->_alert->update($id, $data);
 
         if($data) return $data;
         else
@@ -118,14 +127,31 @@ class AlertImplement
      * Удалить предупреждение.
      *
      * @param int|array $ids ID предупреждения.
+     * @param int $school ID школы.
      *
      * @return bool Вернет булево значение успешности операции.
      * @since 1.0
      * @version 1.0
      */
-    public function remove($ids): bool
+    public function remove($ids, int $school = null): bool
     {
-        $data = $this->_alert->destroy($ids);
+        $school = School::getId() ? School::getId() : $school;
+
+        $filter = [
+            [
+                'table' => 'alerts',
+                'property' => 'id',
+                'operator' => 'IN',
+                'value' => $ids
+            ],
+            [
+                'table' => 'alerts',
+                'property' => 'school_id',
+                'value' => $school
+            ]
+        ];
+
+        $data = $this->_alert->destroy(null, $filter);
 
         if($data) return $data;
         else
@@ -139,18 +165,34 @@ class AlertImplement
      * Установить статус предупреждения как прочитанный.
      *
      * @param int $id ID предупреждения.
+     * @param int $school ID школы.
      *
      * @return bool Вернет успешность установки статуса.
      * @since 1.0
      * @version 1.0
      */
-    public function toRead(int $id): bool
+    public function toRead(int $id, int $school = null): bool
     {
-        $data = $this->_alert->get($id);
+        $school = School::getId() ? School::getId() : $school;
 
-        if($data)
+        $filter = [
+            [
+                'table' => 'alerts',
+                'property' => 'id',
+                'value' => $id
+            ],
+            [
+                'table' => 'alerts',
+                'property' => 'school_id',
+                'value' => $school
+            ]
+        ];
+
+        $alert = $this->_alert->get(null, null, $filter);
+
+        if($alert)
         {
-            $this->edit($id, $data["title"], false, $data["description"], $data["url"], $data["icon"], $data["color"]);
+            $this->edit($id, null, false);
 
             if($this->hasError())
             {
@@ -166,18 +208,34 @@ class AlertImplement
      * Установить статус предупреждения как не прочитанный.
      *
      * @param int $id ID предупреждения.
+     * @param int $school ID школы.
      *
      * @return bool Вернет успешность установки статуса.
      * @since 1.0
      * @version 1.0
      */
-    public function toUnread(int $id): bool
+    public function toUnread(int $id, int $school = null): bool
     {
-        $data = $this->_alert->get($id);
+        $school = School::getId() ? School::getId() : $school;
 
-        if($data)
+        $filter = [
+            [
+                'table' => 'alerts',
+                'property' => 'id',
+                'value' => $id
+            ],
+            [
+                'table' => 'alerts',
+                'property' => 'school_id',
+                'value' => $school
+            ]
+        ];
+
+        $alert = $this->_alert->get(null, null, $filter);
+
+        if($alert)
         {
-            $this->edit($id, $data["title"], true, $data["description"], $data["url"], $data["icon"], $data["color"]);
+            $this->edit($id, null, true);
 
             if($this->hasError())
             {
@@ -193,14 +251,30 @@ class AlertImplement
      * Получение предупреждения по его ID.
      *
      * @param int $id ID предупреждения.
+     * @param int $school ID школы.
      *
      * @return array Вернет данные предупреждения.
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id): ?array
+    public function get(int $id, int $school = null): ?array
     {
-        return $this->_alert->get($id);
+        $school = School::getId() ? School::getId() : $school;
+
+        $filter = [
+            [
+                'table' => 'alerts',
+                'property' => 'id',
+                'value' => $id
+            ],
+            [
+                'table' => 'alerts',
+                'property' => 'school_id',
+                'value' => $school
+            ]
+        ];
+
+        return $this->_alert->get(null, true, $filter);
     }
 
     /**
@@ -211,18 +285,25 @@ class AlertImplement
      * @param bool $unread Получить только не прочтанные предупреждения.
      * @param array $filters Массив фильтров.
      * @param array $sort Массив сортировок.
+     * @param int $school ID школы.
      *
      * @return array|bool Вернет массив данных предупреждений.
      * @since 1.0
      * @version 1.0
      */
-    public function list(int $offset = null, $limit = null, $unread = null, $filters = null, $sort = null)
+    public function list(int $offset = null, $limit = null, $unread = null, $filters = null, $sort = null, int $school = null)
     {
         $sort = $sort ? $sort : [
             [
                 "property" => "created_at",
                 "direction" => "DESC"
             ]
+        ];
+
+        $filter[] = [
+            'table' => 'alerts',
+            'property' => 'school_id',
+            'value' => $school
         ];
 
         $data = $this->_alert->read($filters, $unread, $sort, $offset, $limit);

@@ -15,6 +15,8 @@ use App\Models\Delete;
 use App\Models\Validate;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Status;
+use App\Modules\School\Models\School;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Класс модель для таблицы псевдонимов на основе Eloquent.
@@ -60,6 +62,7 @@ class Alert extends Eloquent
      */
     protected $fillable = [
         'id',
+        'school_id',
         'title',
         'description',
         'url',
@@ -78,6 +81,7 @@ class Alert extends Eloquent
     protected function getRules(): array
     {
         return [
+            'school_id' => 'required|integer|digits_between:1,20',
             'title' => 'required|between:1,191',
             'description' => 'nullable|max:1000',
             'url' => 'nullable|max:191',
@@ -97,6 +101,7 @@ class Alert extends Eloquent
     protected function getNames(): array
     {
         return [
+            'school_id' => trans('user::model.alert.school_id'),
             'pattern' => trans('alert::models.alert.pattern'),
             'description' => trans('alert::models.alert.description'),
             'url' => trans('alert::models.alert.url'),
@@ -104,5 +109,17 @@ class Alert extends Eloquent
             'color' => trans('alert::models.alert.color'),
             'status' => trans('alert::models.alert.status')
         ];
+    }
+
+    /**
+     * Получить школу.
+     *
+     * @return \App\Modules\School\Models\School|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель школы.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function school(): BelongsTo
+    {
+        return $this->belongsTo(School::class);
     }
 }

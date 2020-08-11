@@ -97,31 +97,37 @@ trait RepositoryEloquent
      */
     protected static function _queryFilter(Builder $query, array $filter): Builder
     {
-        if(isset($filter["with"]))
-        {
-            $query->whereHas($filter["with"], function($query) use ($filter) {
-                if(isset($filter['value']))
-                {
-                    $logic = isset($filter['logic']) ? $filter['logic'] : "AND";
+        $logic = isset($filter['logic']) ? $filter['logic'] : "AND";
+        $operator = !isset($filter['operator']) ? "=" : $filter['operator'];
 
-                    if(strtoupper($logic) == "AND") $query->where($filter['property'], !isset($filter['operator']) ? "=" : $filter['operator'], $filter['value']);
-                    else $query->orWhere($filter['property'], !isset($filter['operator']) ? "=" : $filter['operator'], $filter['value']);
-                }
-            });
-        }
-        else
+        function toWhere(Builder $query, string $logic, string $operator, string $property, $value): Builder
         {
-            $logic = isset($filter['logic']) ? $filter['logic'] : "AND";
-
             if(strtoupper($logic) == "AND")
             {
-                $query->where($filter['property'], !isset($filter['operator']) ? "=" : $filter['operator'], $filter['value']);
+                if(strtoupper($operator) != "IN") $query->where($property, $operator, $value);
+                else $query->whereIn($property, $value);
             }
             else
             {
-                $query->orWhere($filter['property'], !isset($filter['operator']) ? "=" : $filter['operator'], $filter['value']);
+                if(strtoupper($operator) != "IN") $query->orWhere($property, $operator, $value);
+                else $query->orWhereIn($property, $value);
             }
+
+            return $query;
         }
+
+        if(isset($filter["with"]))
+        {
+            $query->whereHas($filter["with"], function($query) use ($filter, $logic, $operator) {
+                if(isset($filter['value']))
+                {
+                    $query = toWhere($query, $logic, $operator, $filter['property'], $filter['value']);
+                }
+
+                return $query;
+            });
+        }
+        else $query = toWhere($query, $logic, $operator, $filter['property'], $filter['value']);
 
         return $query;
     }

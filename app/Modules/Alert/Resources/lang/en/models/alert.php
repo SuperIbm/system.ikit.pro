@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'school_id' => 'ID school',
     'pattern' => 'Pattern',
     'description' => 'Description',
     'url' => 'URL',

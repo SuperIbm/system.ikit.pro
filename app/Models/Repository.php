@@ -156,7 +156,6 @@ abstract class Repository
             if($filter['operator'] == "lt") $filter["operator"] = ">";
             if($filter['operator'] == "gt") $filter["operator"] = "<";
             if($filter['operator'] == "eq") $filter["operator"] = "=";
-            if($filter['operator'] == "in") $filter["operator"] = "=";
             if(strtolower($filter['operator']) == "like" && $filter["value"]) $filter["value"] = "%" . $filter["value"] . "%";
         }
 
