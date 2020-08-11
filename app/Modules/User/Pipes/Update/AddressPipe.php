@@ -8,21 +8,22 @@
  * @version 1.0
  */
 
-namespace App\Modules\User\Pipes\Create;
+namespace App\Modules\User\Pipes\Update;
 
 use App\Models\Contracts\Pipe;
 use App\Modules\User\Repositories\User;
+use App\Modules\User\Repositories\UserAddress;
 use Closure;
 
 /**
- * Создание пользователя: добавление изображения пользователя.
+ * Обновление пользователя: добавление адреса пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class ImagePipe implements Pipe
+class AddressPipe implements Pipe
 {
     /**
      * Репозитарий пользователей.
@@ -34,16 +35,27 @@ class ImagePipe implements Pipe
     private User $_user;
 
     /**
+     * Репозитарий адреса пользователя.
+     *
+     * @var \App\Modules\User\Repositories\UserAddress
+     * @version 1.0
+     * @since 1.0
+     */
+    private UserAddress $_userAddress;
+
+    /**
      * Конструктор.
      *
      * @param \App\Modules\User\Repositories\User $user Репозитарий пользователей.
+     * @param \App\Modules\User\Repositories\UserAddress $userAddress Репозитарий адреса пользователя.
      *
      * @since 1.0
      * @version 1.0
      */
-    public function __construct(User $user)
+    public function __construct(User $user, UserAddress $userAddress)
     {
         $this->_user = $user;
+        $this->_userAddress = $userAddress;
     }
 
     /**
@@ -56,21 +68,29 @@ class ImagePipe implements Pipe
      */
     public function handle(array $content, Closure $next)
     {
-        if($content["image"])
+        if($content["address"])
         {
-            $this->_user->update($content["id"], [
-                "image_small_id" => $content["image"],
-                "image_middle_id" => $content["image"]
-            ]);
+            $address = [
+                'user_id' => $content["id"],
+                'postal_code' => $content["address"]["postal_code"],
+                'country' => $content["address"]["country"],
+                'region' => $content["address"]["region"],
+                'city' => $content["address"]["city"],
+                'street_address' => $content["address"]["street_address"],
+                'latitude' => $content["address"]["latitude"],
+                'longitude' => $content["address"]["longitude"],
+            ];
 
-            if(!$this->_user->hasError()) return $next($content);
+            $this->_userAddress->update($content["id"], $address);
+
+            if(!$this->_userAddress->hasError()) return $next($content);
             else
             {
                 /**
                  * @var $decorator \App\Models\Decorator
                  */
                 $decorator = $content["decorator"];
-                $decorator->setErrors($this->_user->getErrors());
+                $decorator->setErrors($this->_userAddress->getErrors());
 
                 $this->_user->destroy($content["id"]);
 

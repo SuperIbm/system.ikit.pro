@@ -2,6 +2,15 @@
 
 return [
     'get' => [
-        'log' => 'Fail: Read a user.'
+        'log' => 'Fail: Get the user.'
+    ],
+    'read' => [
+        'log' => 'Fail: Read users.'
+    ],
+    'create' => [
+        'log' => 'Fail: Create a user.'
+    ],
+    'update' => [
+        'log' => 'Fail: Update the user.'
     ]
 ];

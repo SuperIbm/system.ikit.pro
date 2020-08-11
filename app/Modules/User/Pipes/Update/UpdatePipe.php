@@ -8,22 +8,21 @@
  * @version 1.0
  */
 
-namespace App\Modules\User\Pipes\Create;
+namespace App\Modules\User\Pipes\Update;
 
 use App\Models\Contracts\Pipe;
 use App\Modules\User\Repositories\User;
-use App\Modules\User\Repositories\UserSchool;
 use Closure;
 
 /**
- * Создание пользователя: добавление пользователя к школе.
+ * Обновление пользователя: обновление пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class SchoolPipe implements Pipe
+class UpdatePipe implements Pipe
 {
     /**
      * Репозитарий пользователей.
@@ -35,27 +34,16 @@ class SchoolPipe implements Pipe
     private User $_user;
 
     /**
-     * Репозитарий школы пользователя.
-     *
-     * @var \App\Modules\User\Repositories\UserSchool
-     * @version 1.0
-     * @since 1.0
-     */
-    private UserSchool $_userSchool;
-
-    /**
      * Конструктор.
      *
      * @param \App\Modules\User\Repositories\User $user Репозитарий пользователей.
-     * @param \App\Modules\User\Repositories\UserSchool $userSchool Репозитарий школы пользователя.
      *
      * @since 1.0
      * @version 1.0
      */
-    public function __construct(User $user, UserSchool $userSchool)
+    public function __construct(User $user)
     {
         $this->_user = $user;
-        $this->_userSchool = $userSchool;
     }
 
     /**
@@ -68,22 +56,31 @@ class SchoolPipe implements Pipe
      */
     public function handle(array $content, Closure $next)
     {
-        $this->_userSchool->create([
-            "user_id" => $content["id"],
-            "school_id" => $content["school"],
-            "status" => true
-        ]);
+        $user = $this->_user->get($content["id"]);
 
-        if(!$this->_userSchool->hasError()) return $next($content);
+        if($user)
+        {
+            $this->_user->update($content["id"], $content["user"]);
+
+            if(!$this->_user->hasError()) return $next($content);
+            else
+            {
+                /**
+                 * @var $decorator \App\Models\Decorator
+                 */
+                $decorator = $content["decorator"];
+                $decorator->setErrors($this->_user->getErrors());
+
+                return false;
+            }
+        }
         else
         {
             /**
              * @var $decorator \App\Models\Decorator
              */
             $decorator = $content["decorator"];
-            $decorator->setErrors($this->_userSchool->getErrors());
-
-            $this->_user->destroy($content["id"]);
+            $decorator->addError("user", "The user does not exist.");
 
             return false;
         }

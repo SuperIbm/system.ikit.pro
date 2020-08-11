@@ -8,7 +8,7 @@
  * @version 1.0
  */
 
-namespace App\Modules\User\Pipes\Create;
+namespace App\Modules\User\Pipes\Update;
 
 use App\Models\Contracts\Pipe;
 use App\Modules\User\Repositories\User;
@@ -16,7 +16,7 @@ use Closure;
 use App\Modules\User\Repositories\UserSchoolRole;
 
 /**
- * Создание пользователя: добавление ролей к пользователю.
+ * Обновление пользователя: добавление ролей к пользователю.
  *
  * @version 1.0
  * @since 1.0
@@ -70,28 +70,64 @@ class RolePipe implements Pipe
     {
         if($content["roles"])
         {
-            for($i = 0; $i < count($content["roles"]); $i++)
+            $filters = [
+                [
+                    "property" => "id",
+                    "operator" => "=",
+                    "value" => $content["id"],
+                    "logic" => "and"
+                ],
+                [
+                    "table" => "user_schools",
+                    "property" => "school_id",
+                    "operator" => "=",
+                    "value" => $content["school"],
+                    "logic" => "and"
+                ]
+            ];
+
+            $user = $this->_user->get(null, null, $filters, [
+                "schools.roles"
+            ]);
+
+            if(!$this->_user->getError())
             {
-                $this->_userSchoolRole->create([
-                    "user_id" => $content["id"],
-                    "school_role_id" => $content["roles"][$i]
-                ]);
-
-                if($this->_userSchoolRole->hasError())
+                if($user)
                 {
-                    /**
-                     * @var $decorator \App\Models\Decorator
-                     */
-                    $decorator = $content["decorator"];
-                    $decorator->setErrors($this->_userSchoolRole->getErrors());
 
-                    $this->_user->destroy($content["id"]);
-
-                    return false;
                 }
+
+                exit;
+
+                $this->_userSchoolRole->destroy(null, );
+
+                for($i = 0; $i < count($content["roles"]); $i++)
+                {
+                    $this->_userSchoolRole->create([
+                        "user_id" => $content["id"],
+                        "school_role_id" => $content["roles"][$i]
+                    ]);
+
+                    if($this->_userSchoolRole->hasError())
+                    {
+                        /**
+                         * @var $decorator \App\Models\Decorator
+                         */
+                        $decorator = $content["decorator"];
+                        $decorator->setErrors($this->_userSchoolRole->getErrors());
+
+                        $this->_user->destroy($content["id"]);
+
+                        return false;
+                    }
+                }
+
+                return $next($content);
             }
 
-            return $next($content);
+
+
+
         }
         else return $next($content);
     }

@@ -11,10 +11,8 @@
 namespace App\Modules\User\Http\Controllers;
 
 use School;
-use Hash;
 use Log;
 use Auth;
-use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -22,6 +20,7 @@ use Illuminate\Routing\Controller;
 use App\Modules\User\Actions\UserGetAction;
 use App\Modules\User\Actions\UserReadAction;
 use App\Modules\User\Actions\UserCreateAction;
+use App\Modules\User\Actions\UserUpdateAction;
 
 use App\Modules\User\Http\Requests\UserAdminReadRequest;
 use App\Modules\User\Http\Requests\UserAdminDestroyRequest;
@@ -94,7 +93,6 @@ class UserController extends Controller
         return response()->json($data)->setStatusCode($data["success"] == true ? 200 : 400);
     }
 
-
     /**
      * Чтение данных.
      *
@@ -145,7 +143,6 @@ class UserController extends Controller
         return response()->json($data)->setStatusCode($data["success"] == true ? 200 : 400);
     }
 
-
     /**
      * Добавление данных.
      *
@@ -195,7 +192,6 @@ class UserController extends Controller
         return response()->json($data)->setStatusCode($data["success"] == true ? 200 : 400);
     }
 
-
     /**
      * Обновление данных.
      *
@@ -208,171 +204,47 @@ class UserController extends Controller
      */
     public function update(int $id, Request $request)
     {
-        $data = $request->all();
-        $data["status"] = ($data["status"] == "on" || $id == 1) ? true : false;
+        $action = app(UserUpdateAction::class);
 
-        if($request->hasFile('image') && $request->file('image')->isValid())
+        $action->setParameters([
+            "id" => $id,
+            "school" => School::getId(),
+            "user" => $request->input('user'),
+            "image" => ($request->hasFile('image') && $request->file('image')->isValid()) ? $request->file('image') : null,
+            'roles' => $request->input('roles'),
+            'address' => $request->input('address')
+        ])->run();
+
+        if(!$action->hasError())
         {
-            $data['image_small_id'] = $request->file('image');
-            $data['image_middle_id'] = $request->file('image');
-        }
-
-        $status = $this->_user->update($id, $data);
-
-        if($status)
-        {
-            if($id != 1)
-            {
-                if(!$request->get("no_set_groups", false))
-                {
-                    $userGroupUsers = $this->_userGroupUser->read([
-                        [
-                            'property' => 'user_id',
-                            'value' => $id
-                        ]
-                    ]);
-
-                    if($userGroupUsers)
-                    {
-                        for($i = 0; $i < count($userGroupUsers); $i++)
-                        {
-                            $this->_userGroupUser->destroy($userGroupUsers[$i]['id']);
-                        }
-                    }
-
-                    if($request->input('groups'))
-                    {
-                        $groups = $request->input('groups');
-
-                        for($i = 0; $i < count($groups); $i++)
-                        {
-                            $this->_userGroupUser->create([
-                                'user_id' => $id,
-                                'user_group_id' => $groups[$i]
-                            ]);
-                        }
-                    }
-                }
-
-                if(!$request->get("no_set_verification", false))
-                {
-                    $userVerifications = $this->_userVerification->read([
-                        [
-                            'property' => 'user_id',
-                            'value' => $id
-                        ]
-                    ]);
-
-                    if($userVerifications)
-                    {
-                        $userVerification = $userVerifications[0];
-
-                        $this->_userVerification->update($userVerification["id"], [
-                            'status' => $data["verified"]
-                        ]);
-                    }
-                    else
-                    {
-                        $this->_userVerification->create([
-                            'user_id' => $id,
-                            'code' => $id . Hash::make(intval(Carbon::now()->format("U")) + rand(1000000, 100000000)),
-                            'status' => $data["verified"]
-                        ]);
-                    }
-                }
-            }
-
-            //
-
-            $filters = [
-                [
-                    "table" => "user_companies",
-                    "property" => "user_id",
-                    "operator" => "=",
-                    "value" => $id,
-                    "logic" => "and"
-                ]
-            ];
-
-            $companies = $this->_userCompany->read($filters);
-
-            if($companies)
-            {
-                $company = $companies[0];
-                $company["company_name"] = $data["company_name"];
-
-                $this->_userCompany->update($company["id"], $company);
-            }
-            else
-            {
-                $this->_userCompany->create([
-                    'user_id' => $id,
-                    'company_name' => $data["company_name"]
-                ]);
-            }
-
-            //
-
-            $filters = [
-                [
-                    "table" => "user_addresses",
-                    "property" => "user_id",
-                    "operator" => "=",
-                    "value" => $id,
-                    "logic" => "and"
-                ]
-            ];
-
-            $address = [
-                'user_id' => $id,
-                'postal_code' => $request->get("postal_code"),
-                'country' => $request->get("country"),
-                'region' => $request->get("region"),
-                'city' => $request->get("city"),
-                'street_address' => $request->get("street_address"),
-                'latitude' => $request->get("latitude"),
-                'longitude' => $request->get("longitude"),
-            ];
-
-            $records = $this->_userAddress->read($filters);
-
-            if($records) $this->_userAddress->update($records[0]["id"], $address);
-            else $this->_userAddress->create($address);
-
-            //
-
-            Log::info('Success: Update the user.', [
-                'module' => "User",
-                'login' => Auth::user()->login,
-                'type' => 'update'
-            ]);
-
-            $user = $this->_user->get($id);
-
             $data = [
-                'success' => true,
-                'data' => [
-                    'image' => $user["image_small_id"] ? true : false
-                ]
+                'success' => true
             ];
         }
         else
         {
-            Log::warning('Fail: Update the user.', [
+            Log::warning(trans('access::http.controllers.userController.update.log'), [
                 'module' => "User",
-                'login' => Auth::user()->login,
-                'type' => 'update'
+                'type' => 'create',
+                'request' => $request->all(),
+                'parameters' => [
+                    'id' => $id
+                ],
+                'school' => [
+                    'id' => School::getId(),
+                    'index' => School::getIndex()
+                ],
+                'error' => $action->getErrorMessage()
             ]);
 
             $data = [
                 'success' => false,
-                'message' => $this->_user->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ];
         }
 
         return response()->json($data)->setStatusCode($data["success"] == true ? 200 : 400);
     }
-
 
     /**
      * Обновление пароля пользователя.
@@ -418,7 +290,6 @@ class UserController extends Controller
 
         return response()->json($data)->setStatusCode($data["success"] == true ? 200 : 400);
     }
-
 
     /**
      * Удаление данных.

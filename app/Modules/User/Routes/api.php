@@ -4,68 +4,6 @@ Route::group
 (
     [
         'middleware' => ['ajax'],
-        'prefix' => 'api/ajax/user/block_ip_admin_controller/',
-        "as" => "api.ajax.user.block_admin_controller"
-    ],
-    function()
-    {
-        Route::get('read/', 'BlockIpAdminController@read')
-            ->middleware('auth.api', 'auth.admin:section,users,read')
-            ->name("read");
-
-        Route::get('get/{id}', 'BlockIpAdminController@get')
-            ->middleware('auth.api', 'auth.admin:section,users,read')
-            ->name("get");
-
-        Route::post('create/', 'BlockIpAdminController@create')
-            ->middleware('auth.api', 'auth.admin:section,users,create')
-            ->name("create");
-
-        Route::put('update/{id}', 'BlockIpAdminController@update')
-            ->middleware('auth.api', 'auth.admin:section,users,update')
-            ->name("update");
-
-        Route::delete('destroy/', 'BlockIpAdminController@destroy')
-            ->middleware('auth.api', 'auth.admin:section,users,destroy')
-            ->name("destroy");
-    }
-);
-
-Route::group
-(
-    [
-        'middleware' => ['ajax'],
-        'prefix' => 'api/ajax/user/user_group_admin_controller/',
-        "as" => "api.ajax.user.user_group_admin_controller"
-    ],
-    function()
-    {
-        Route::get('read/', 'UserGroupAdminController@read')
-            ->middleware('auth.api', 'auth.admin:section,users,read')
-            ->name("read");
-
-        Route::get('get/{id}', 'UserGroupAdminController@get')
-            ->middleware('auth.api', 'auth.admin:section,users,read')
-            ->name("get");
-
-        Route::post('create/', 'UserGroupAdminController@create')
-            ->middleware('auth.api', 'auth.admin:section,users,create')
-            ->name("create");
-
-        Route::put('update/{id}', 'UserGroupAdminController@update')
-            ->middleware('auth.api', 'auth.admin:section,users,update')
-            ->name("update");
-
-        Route::delete('destroy/', 'UserGroupAdminController@destroy')
-            ->middleware('auth.api', 'auth.admin:section,users,destroy')
-            ->name("destroy");
-    }
-);
-
-Route::group
-(
-    [
-        'middleware' => ['ajax'],
         'prefix' => 'api/ajax/user/user_role_admin_controller/',
         "as" => "api.ajax.user.user_role_admin_controller"
     ],
