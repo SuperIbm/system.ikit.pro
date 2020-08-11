@@ -57,25 +57,16 @@ class AccessController extends Controller
      */
     public function gate(): JsonResponse
     {
-        if(Auth::check())
-        {
-            $data = app(AccessGateAction::class)->setParameters([
-                "id" => Auth::user()->login
-            ])->run();
+        $data = app(AccessGateAction::class)->setParameters([
+            "id" => Auth::user()->login
+        ])->run();
 
-            if($data)
-            {
-                $data = [
-                    'success' => true,
-                    'data' => $data
-                ];
-            }
-            else
-            {
-                $data = [
-                    'success' => false
-                ];
-            }
+        if($data)
+        {
+            $data = [
+                'success' => true,
+                'data' => $data
+            ];
         }
         else
         {
