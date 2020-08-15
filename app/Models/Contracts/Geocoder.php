@@ -52,7 +52,7 @@ abstract class Geocoder
      * @since 1.0
      * @version 1.0
      */
-    protected function _getAddress(string $zipCode = null, string $country = null, string $city = null, string $region = null, string $street = null): string
+    protected function _getAddress(string $zipCode = null, string $country = null, string $city = null, string $region = null, string $street = null): ?string
     {
         $address = '';
 

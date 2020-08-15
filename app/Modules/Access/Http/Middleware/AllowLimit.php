@@ -53,11 +53,11 @@ class AllowLimit
         {
             return response()->json([
                 'success' => false,
-                'message' => trans('access::http.middleware.allowLimit.error.text')
+                'message' => trans('access::http.middleware.allowLimit.text')
             ]);
         }
         else if(Config::get('auth.redirections.login')) return redirect(Config::get('auth.redirections.login'));
         else if(Config::get('auth.redirections.register')) return redirect(Config::get('auth.redirections.login'));
-        else return response(trans('access::http.middleware.allowLimit.error.label'), 401);
+        else return response(trans('access::http.middleware.allowLimit.label'), 401);
     }
 }

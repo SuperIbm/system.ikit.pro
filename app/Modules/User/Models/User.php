@@ -119,16 +119,16 @@ class User extends Authenticatable
     protected function getNames(): array
     {
         return [
-            'image_small_id' => trans('user::model.user.image_small_id'),
-            'image_middle_id' => trans('user::model.user.image_middle_id'),
-            'login' => trans('user::model.user.login'),
-            'password' => trans('user::model.user.password'),
-            'remember_token' => trans('user::model.user.remember_token'),
-            'first_name' => trans('user::model.user.first_name'),
-            'second_name' => trans('user::model.user.second_name'),
-            'telephone' => trans('user::model.user.telephone'),
-            'two_factor' => trans('user::model.user.two_factor'),
-            'status' => trans('user::model.user.status')
+            'image_small_id' => trans('user::models.user.image_small_id'),
+            'image_middle_id' => trans('user::models.user.image_middle_id'),
+            'login' => trans('user::models.user.login'),
+            'password' => trans('user::models.user.password'),
+            'remember_token' => trans('user::models.user.remember_token'),
+            'first_name' => trans('user::models.user.first_name'),
+            'second_name' => trans('user::models.user.second_name'),
+            'telephone' => trans('user::models.user.telephone'),
+            'two_factor' => trans('user::models.user.two_factor'),
+            'status' => trans('user::models.user.status')
         ];
     }
 

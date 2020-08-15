@@ -86,9 +86,38 @@ trait RepositoryEloquent
     }
 
     /**
+     * Метод построения запроса WHERE на основе параметра фильтра.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query Построитель запроса.
+     * @param string $logic Логиечское действие для связи.
+     * @param string $operator Оператор.
+     * @param string $property Свйоство.
+     * @param mixed $value Значение.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder Вернет построитель запроса.
+     * @since 1.0
+     * @version 1.0
+     */
+    private static function _toWhere(Builder $query, string $logic, string $operator, string $property, $value): Builder
+    {
+        if(strtoupper($logic) == "AND")
+        {
+            if(strtoupper($operator) != "IN") $query->where($property, $operator, $value);
+            else $query->whereIn($property, $value);
+        }
+        else
+        {
+            if(strtoupper($operator) != "IN") $query->orWhere($property, $operator, $value);
+            else $query->orWhereIn($property, $value);
+        }
+
+        return $query;
+    }
+
+    /**
      * Метод построения запроса на основе параметра фильтра.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query Построитль запроса.
+     * @param \Illuminate\Database\Eloquent\Builder $query Построитель запроса.
      * @param array $filter Параметры поиска.
      *
      * @return \Illuminate\Database\Eloquent\Builder Вернет построитель запроса.
@@ -100,34 +129,18 @@ trait RepositoryEloquent
         $logic = isset($filter['logic']) ? $filter['logic'] : "AND";
         $operator = !isset($filter['operator']) ? "=" : $filter['operator'];
 
-        function toWhere(Builder $query, string $logic, string $operator, string $property, $value): Builder
-        {
-            if(strtoupper($logic) == "AND")
-            {
-                if(strtoupper($operator) != "IN") $query->where($property, $operator, $value);
-                else $query->whereIn($property, $value);
-            }
-            else
-            {
-                if(strtoupper($operator) != "IN") $query->orWhere($property, $operator, $value);
-                else $query->orWhereIn($property, $value);
-            }
-
-            return $query;
-        }
-
         if(isset($filter["with"]))
         {
             $query->whereHas($filter["with"], function($query) use ($filter, $logic, $operator) {
                 if(isset($filter['value']))
                 {
-                    $query = toWhere($query, $logic, $operator, $filter['property'], $filter['value']);
+                    $query = static::_toWhere($query, $logic, $operator, $filter['property'], $filter['value']);
                 }
 
                 return $query;
             });
         }
-        else $query = toWhere($query, $logic, $operator, $filter['property'], $filter['value']);
+        else $query = static::_toWhere($query, $logic, $operator, $filter['property'], $filter['value']);
 
         return $query;
     }

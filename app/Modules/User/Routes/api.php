@@ -34,7 +34,7 @@ Route::group
 Route::group
 (
     [
-        //'middleware' => ['locale', 'ajax', 'school'],
+        'middleware' => ['locale'/*, 'ajax', 'school'*/],
         'prefix' => 'private/user/user/',
         "as" => "private.user.user"
     ],
@@ -48,12 +48,12 @@ Route::group
             ->middleware('auth.api', 'auth.user')
             ->name("get");
 
-        Route::get('create/', 'UserController@create')
-            //->middleware('auth.api', 'auth.user:section,users,create')
+        Route::post('create/', 'UserController@create')
+            ->middleware('auth.api', 'auth.user:section,users,create')
             ->name("create");
 
-        Route::put('update/{id}', 'UserController@update')
-            ->middleware('auth.api', 'auth.user')
+        Route::get('update/{id}', 'UserController@update')
+            //->middleware('auth.api', 'auth.user')
             ->name("update");
 
         Route::put('password/{id}', 'UserController@password')

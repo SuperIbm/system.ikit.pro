@@ -42,11 +42,11 @@ class AllowGuest
             {
                 return response()->json([
                     'success' => false,
-                    'message' => trans('access::http.middleware.allowGuest.error.text'),
+                    'message' => trans('access::http.middleware.allowGuest.text'),
                 ]);
             }
             else if(Config::get('auth.redirections.unregister')) return redirect(Config::get('auth.redirections.unregister'));
-            else return response(trans('access::http.middleware.allowGuest.error.label'), 401);
+            else return response(trans('access::http.middleware.allowGuest.label'), 401);
         }
     }
 }
