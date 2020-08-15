@@ -68,8 +68,7 @@ class CreatePipe implements Pipe
             return $next($content);
         }
         else
-        {
-            /**
+        {            /**
              * @var $decorator \App\Models\Decorator
              */
             $decorator = $content["decorator"];

@@ -198,7 +198,7 @@ trait RepositoryTreeEloquent
         }
         else
         {
-            $this->addError("Find", "The node does not exist.");
+            $this->addError("base", trans('modules.repositoryTreeEloquent.node_not_exist'));
             return false;
         }
     }
@@ -232,7 +232,7 @@ trait RepositoryTreeEloquent
         }
         else
         {
-            $this->addError("Find", "The node does not exist.");
+            $this->addError("base", trans('modules.repositoryTreeEloquent.node_not_exist'));
             return false;
         }
     }

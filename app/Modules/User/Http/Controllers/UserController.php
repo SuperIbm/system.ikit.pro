@@ -159,7 +159,7 @@ class UserController extends Controller
         $action->setParameters([
             "school" => 1,
             "user" => [
-                'login' => "test@test.com",
+                'login' => "test5@test.com",
                 'password' => "123456",
                 'remember_token',
                 'first_name' => "Test",

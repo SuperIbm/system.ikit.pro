@@ -341,7 +341,7 @@ class User extends Authenticatable
      */
     public function referralInvited(): HasMany
     {
-        return $this->hasMany(UserReferral::class, "user_invited_id", "id");
+        return $this->hasMany(UserReferral::class, "id", "user_invited_id");
     }
 
     /**
@@ -353,7 +353,7 @@ class User extends Authenticatable
      */
     public function referralInviting(): HasMany
     {
-        return $this->hasMany(UserReferral::class, "user_inviting_id", "id");
+        return $this->hasMany(UserReferral::class, "id", "user_inviting_id");
     }
 
     /**

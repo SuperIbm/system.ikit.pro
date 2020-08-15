@@ -344,7 +344,7 @@ trait RepositoryEloquent
         }
         else
         {
-            $this->addError("base", "The record doesn't exist");
+            $this->addError("base", trans('modules.repositoryEloquent.record_exist'));
 
             return false;
         }

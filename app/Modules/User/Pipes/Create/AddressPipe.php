@@ -72,16 +72,16 @@ class AddressPipe implements Pipe
         {
             $address = [
                 'user_id' => $content["id"],
-                'postal_code' => $content["address"]["postal_code"],
-                'country' => $content["address"]["country"],
-                'region' => $content["address"]["region"],
-                'city' => $content["address"]["city"],
-                'street_address' => $content["address"]["street_address"],
-                'latitude' => $content["address"]["latitude"],
-                'longitude' => $content["address"]["longitude"],
+                'postal_code' => isset($content["address"]["postal_code"]) ? $content["address"]["postal_code"] : null,
+                'country' => isset($content["address"]["country"]) ? $content["address"]["country"] : null,
+                'region' => isset($content["address"]["region"]) ? $content["address"]["region"] : null,
+                'city' => isset($content["address"]["city"]) ? $content["address"]["city"] : null,
+                'street_address' => isset($content["address"]["street_address"]) ? $content["address"]["street_address"] : null,
+                'latitude' => isset($content["address"]["latitude"]) ? $content["address"]["latitude"] : null,
+                'longitude' => isset($content["address"]["latitude"]) ? $content["address"]["longitude"] : null,
             ];
 
-            $this->_userAddress->update($content["id"], $address);
+            $this->_userAddress->create($address);
 
             if(!$this->_userAddress->hasError()) return $next($content);
             else

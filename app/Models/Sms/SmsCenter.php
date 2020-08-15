@@ -48,31 +48,31 @@ class SmsCenter extends Sms
         switch(isset($result["error_code"]))
         {
             case 1:
-                $this->addError("noSend", "Ошибка в параметрах.", 1);
+                $this->addError("noSend", trans('modules.sms.smsCenter.params'));
                 break;
             case 2:
-                $this->addError("noSend", "Неверный логин или пароль.", 2);
+                $this->addError("noSend", trans('modules.sms.smsCenter.access'));
                 break;
             case 3:
-                $this->addError("noSend", "Недостаточно средств на счете Клиента.", 3);
+                $this->addError("noSend", trans('modules.sms.smsCenter.balance'));
                 break;
             case 4:
-                $this->addError("noSend", "IP-адрес временно заблокирован из-за частых ошибок в запросах.", 4);
+                $this->addError("noSend", trans('modules.sms.smsCenter.block'));
                 break;
             case 5:
-                $this->addError("noSend", "Неверный формат даты.", 5);
+                $this->addError("noSend", trans('modules.sms.smsCenter.format'));
                 break;
             case 6:
-                $this->addError("noSend", "Сообщение запрещено (по тексту или по имени отправителя).", 6);
+                $this->addError("noSend", trans('modules.sms.smsCenter.prohibited'));
                 break;
             case 7:
-                $this->addError("noSend", "Неверный формат номера телефона.", 7);
+                $this->addError("noSend", trans('modules.sms.smsCenter.invalid'));
                 break;
             case 8:
-                $this->addError("noSend", "Сообщение на указанный номер не может быть доставлено.", 8);
+                $this->addError("noSend", trans('modules.sms.smsCenter.unreached'));
                 break;
             case 9:
-                $this->addError("noSend", "Отправка более одного одинакового запроса на передачу SMS-сообщения либо более пяти одинаковых запросов на получение стоимости сообщения в течение минуты.", 9);
+                $this->addError("noSend", trans('modules.sms.smsCenter.limit'));
                 break;
         }
 
@@ -84,7 +84,6 @@ class SmsCenter extends Sms
         else return false;
     }
 
-
     /**
      * Проверки статуса отправки сообщения.
      *
@@ -92,10 +91,10 @@ class SmsCenter extends Sms
      * @param string $phone Номер телефона.
      *
      * @return bool Вернет true, если сообщение было отправлено.
-     * @since 1.0
+     * @throws
      * @version 1.0
      * @see \App\Models\Contracts\Sms::check
-     * @throws
+     * @since 1.0
      */
     public function check(string $index, string $phone): bool
     {
@@ -119,31 +118,31 @@ class SmsCenter extends Sms
             switch(@$result["status"])
             {
                 case -3:
-                    $this->addError("noSent", "Сообщение не найдено.", -3);
+                    $this->addError("noSent", trans('modules.sms.smsCenter.not_exist'));
                     return false;
                 case -1:
-                    $this->addError("noSent", "Ожидает отправки.", -3);
+                    $this->addError("noSent", trans('modules.sms.smsCenter.processing'));
                     return false;
                 case 0:
-                    $this->addError("noSent", "Передано оператору.", 0);
+                    $this->addError("noSent", trans('modules.sms.smsCenter.transmitted'));
                     return false;
                 case 3:
-                    $this->addError("noSent", "Просрочено.", 3);
+                    $this->addError("noSent", trans('modules.sms.smsCenter.expired'));
                     return false;
                 case 20:
-                    $this->addError("noSent", "Невозможно доставить.", 20);
+                    $this->addError("noSent", trans('modules.sms.smsCenter.undelivered'));
                     return false;
                 case 22:
-                    $this->addError("noSent", "Неверный номер.", 22);
+                    $this->addError("noSent", trans('modules.sms.smsCenter.invalid'));
                     return false;
                 case 23:
-                    $this->addError("noSent", "Запрещено.", 23);
+                    $this->addError("noSent", trans('modules.sms.smsCenter.prohibited'));
                     return false;
                 case 24:
-                    $this->addError("noSent", "Недостаточно средств.", 24);
+                    $this->addError("noSent", trans('modules.sms.smsCenter.balance'));
                     return false;
                 case 25:
-                    $this->addError("noSent", "Недоступный номер.", 25);
+                    $this->addError("noSent", trans('modules.sms.smsCenter.unavailable'));
                     return false;
                 case 1:
                     $this->cleanError();
