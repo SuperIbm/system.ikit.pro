@@ -2,8 +2,8 @@
 
 Route::group([
     'middleware' => ['locale', 'ajax'],
-    'prefix' => 'inside/access/access/',
-    "as" => "inside.access.access"
+    'prefix' => 'private/access/access/',
+    "as" => "private.access.access"
 ], function()
 {
     Route::post('gate/', 'AccessController@gate')->middleware('auth.api', 'auth.user')->name('gate');

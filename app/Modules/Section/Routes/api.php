@@ -2,8 +2,8 @@
 
 Route::group([
     'middleware' => ['ajax'],
-    'prefix' => 'api/ajax/section/section/',
-    "as" => "api.ajax.section.section"
+    'prefix' => 'private/section/section/',
+    "as" => "private.section.section"
 ], function()
 {
     Route::get('sections/', 'SectionController@sections')

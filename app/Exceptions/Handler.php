@@ -2,8 +2,12 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Psr\Log\LoggerInterface;
+use Auth;
+use Request;
 
 class Handler extends ExceptionHandler
 {
@@ -29,14 +33,57 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Throwable  $exception
-     * @return void
+     * @param  \Exception $exception
      *
-     * @throws \Exception
+     * @return mixed
+     * @throws
      */
     public function report(Throwable $exception)
     {
-        parent::report($exception);
+        if ($this->shouldntReport($exception)) {
+            return;
+        }
+
+        if (is_callable($reportCallable = [$exception, 'report'])) {
+            $this->container->call($reportCallable);
+
+            return;
+        }
+
+        try {
+            $logger = $this->container->make(LoggerInterface::class);
+        } catch (Exception $ex) {
+            throw $exception;
+        }
+
+        $logger->error(
+            $exception->getMessage(),
+            array_merge(
+                $this->exceptionContext($exception),
+                $this->context(),
+                ['exception' => $exception]
+            )
+        );
+    }
+
+    /**
+     * Get the default context variables for logging.
+     *
+     * @return array
+     */
+    protected function context()
+    {
+        $data = [];
+
+        try {
+            $data["login"] = Auth::user() ? Auth::user()->login : null;
+            $data["url"] = Request::fullUrl();
+            $data["request"] = Request::all();
+        } catch (Throwable $e) {
+
+        }
+
+        return $data;
     }
 
     /**

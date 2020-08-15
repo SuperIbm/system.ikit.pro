@@ -3,30 +3,30 @@
 Route::group
 (
     [
-        'middleware' => ['ajax'],
-        'prefix' => 'api/ajax/user/user_role_admin_controller/',
-        "as" => "api.ajax.user.user_role_admin_controller"
+        'middleware' => ['locale', 'ajax', 'school'],
+        'prefix' => 'private/user/role/',
+        "as" => "private.user.role"
     ],
     function()
     {
-        Route::get('read/', 'UserRoleAdminController@read')
-            ->middleware('auth.api', 'auth.admin:section,users,read')
+        Route::get('read/', 'UserRoleController@read')
+            ->middleware('auth.api', 'auth.user:section,users,read')
             ->name("read");
 
-        Route::get('get/{id}', 'UserRoleAdminController@get')
-            ->middleware('auth.api', 'auth.admin:section,users,read')
+        Route::get('get/{id}', 'UserRoleController@get')
+            ->middleware('auth.api', 'auth.user:section,users,read')
             ->name("get");
 
-        Route::post('create/', 'UserRoleAdminController@create')
-            ->middleware('auth.api', 'auth.admin:section,users,create')
+        Route::post('create/', 'UserRoleController@create')
+            ->middleware('auth.api', 'auth.user:section,users,create')
             ->name("create");
 
-        Route::put('update/{id}', 'UserRoleAdminController@update')
-            ->middleware('auth.api', 'auth.admin:section,users,update')
+        Route::put('update/{id}', 'UserRoleController@update')
+            ->middleware('auth.api', 'auth.user:section,users,update')
             ->name("update");
 
-        Route::delete('destroy/', 'UserRoleAdminController@destroy')
-            ->middleware('auth.api', 'auth.admin:section,users,destroy')
+        Route::delete('destroy/', 'UserRoleController@destroy')
+            ->middleware('auth.api', 'auth.user:section,users,destroy')
             ->name("destroy");
     }
 );
@@ -34,34 +34,34 @@ Route::group
 Route::group
 (
     [
-        'middleware' => ['ajax'],
-        'prefix' => 'api/ajax/user/user_admin_controller/',
-        "as" => "api.ajax.user.user_admin_controller"
+        //'middleware' => ['locale', 'ajax', 'school'],
+        'prefix' => 'private/user/user/',
+        "as" => "private.user.user"
     ],
     function()
     {
-        Route::get('read/', 'UserAdminController@read')
-            ->middleware('auth.api', 'auth.admin:section,users,read')
+        Route::get('read/', 'UserController@read')
+            //->middleware('auth.api', 'auth.user:section,users,read')
             ->name("read");
 
-        Route::get('get/{id}', 'UserAdminController@get')
-            ->middleware('auth.api', 'auth.admin')
+        Route::get('get/{id}', 'UserController@get')
+            ->middleware('auth.api', 'auth.user')
             ->name("get");
 
-        Route::post('create/', 'UserAdminController@create')
-            ->middleware('auth.api', 'auth.admin:section,users,create')
+        Route::get('create/', 'UserController@create')
+            //->middleware('auth.api', 'auth.user:section,users,create')
             ->name("create");
 
-        Route::put('update/{id}', 'UserAdminController@update')
-            ->middleware('auth.api', 'auth.admin')
+        Route::put('update/{id}', 'UserController@update')
+            ->middleware('auth.api', 'auth.user')
             ->name("update");
 
-        Route::put('password/{id}', 'UserAdminController@password')
-            ->middleware('auth.api', 'auth.admin')
+        Route::put('password/{id}', 'UserController@password')
+            ->middleware('auth.api', 'auth.user')
             ->name("password");
 
-        Route::delete('destroy/', 'UserAdminController@destroy')
-            ->middleware('auth.api', 'auth.admin:section,users,destroy')
+        Route::delete('destroy/', 'UserController@destroy')
+            ->middleware('auth.api', 'auth.user:section,users,destroy')
             ->name("destroy");
     }
 );
@@ -69,18 +69,18 @@ Route::group
 Route::group
 (
     [
-        'middleware' => ['ajax'],
-        'prefix' => 'api/ajax/user/user_config_admin_controller/',
-        "as" => "api.ajax.user.user_config_admin_controller"
+        'middleware' => ['locale', 'ajax', 'school'],
+        'prefix' => 'private/user/config/',
+        "as" => "private.user.config"
     ],
     function()
     {
-        Route::get('get/{id}', 'UserConfigAdminController@get')
-            ->middleware('auth.api', 'auth.admin')
+        Route::get('get/{id}', 'UserConfigController@get')
+            ->middleware('auth.api', 'auth.user')
             ->name("get");
 
-        Route::put('update/{id}', 'UserConfigAdminController@update')
-            ->middleware('auth.api', 'auth.admin')
+        Route::put('update/{id}', 'UserConfigController@update')
+            ->middleware('auth.api', 'auth.user')
             ->name("update");
     }
 );
@@ -88,42 +88,22 @@ Route::group
 Route::group
 (
     [
-        'middleware' => ['ajax'],
-        'prefix' => 'api/ajax/user/user_image_admin_controller/',
-        "as" => "api.ajax.user.user_image_admin_controller"
+        'middleware' => ['locale', 'ajax', 'school'],
+        'prefix' => 'private/user/image/',
+        "as" => "private.user.image"
     ],
     function()
     {
-        Route::get('get/{id}', 'UserImageAdminController@read')
-            ->middleware('auth.api', 'auth.admin:section,users,read')
+        Route::get('get/{id}', 'UserImageController@read')
+            ->middleware('auth.api', 'auth.user:section,users,read')
             ->name("read");
 
-        Route::put('update/{id}', 'UserImageAdminController@update')
-            ->middleware('auth.api', 'auth.admin')
-            ->name("update");
-
-        Route::delete('destroy/{id}', 'UserImageAdminController@destroy')
-            ->middleware('auth.api', 'auth.admin:section,users,destroy')
-            ->name("destroy");
-    }
-);
-
-Route::group
-(
-    [
-        'middleware' => ['ajax'],
-        'prefix' => 'api/ajax/user/user_image_site_controller/',
-        "as" => "api.ajax.user.user_image_site_controller"
-    ],
-    function()
-    {
-        Route::put('update', 'UserImageSiteController@update')
+        Route::put('update/{id}', 'UserImageController@update')
             ->middleware('auth.api', 'auth.user')
             ->name("update");
 
-        Route::delete('destroy', 'UserImageSiteController@destroy')
-            ->middleware('auth.api', 'auth.user')
+        Route::delete('destroy/{id}', 'UserImageController@destroy')
+            ->middleware('auth.api', 'auth.user:section,users,destroy')
             ->name("destroy");
     }
 );
-

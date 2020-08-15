@@ -2,7 +2,8 @@
 
 Route::group([
     'middleware' => ['locale', 'ajax', 'school'],
-    'prefix' => 'api/ajax/typograph/typograph/'
+    'prefix' => 'private/typograph/typograph/',
+    "as" => "private.typograph.typograph"
 ], function() {
     Route::get('get/', 'TypographAdminController@get')->middleware('auth.api', 'auth.user');
 });
