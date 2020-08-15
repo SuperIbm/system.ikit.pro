@@ -10,6 +10,6 @@
 
 @section('button')
     <a class="button" href="{{ $site }}forget/reset/{{ $id }}?code={{ $code }}">
-        {{ trans('views.recovery.button') }}
+        {{ trans('access::views.recovery.button') }}
     </a>
 @endsection

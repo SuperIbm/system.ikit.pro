@@ -1,15 +1,15 @@
 @extends('tpl.mail.index')
 
 @section('header')
-    {{ trans('views.verification.header') }}
+    {{ trans('access::views.verification.header') }}
 @endsection
 
 @section('content')
-    {{ trans('views.verification.content') }}
+    {{ trans('access::views.verification.content') }}
 @endsection
 
 @section('button')
     <a class="button" href="{{ $site }}verified/{{ $id }}?code={{ $code }}">
-        {{ trans('views.verification.button') }}
+        {{ trans('access::views.verification.button') }}
     </a>
 @endsection
