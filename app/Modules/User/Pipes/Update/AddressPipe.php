@@ -71,12 +71,12 @@ class AddressPipe implements Pipe
     {
         if($content["address"])
         {
-            /*if(!isset($content["address"]["latitude"]) || isset($content["address"]["latitude"]))
+            if(!isset($content["address"]["latitude"]) || isset($content["address"]["latitude"]))
             {
                 $coordinate = Geocoder::get(@$content["address"]["postal_code"], @$content["address"]["country"], @$content["address"]["city"], @$content["address"]["region"], @$content["address"]["street_address"]);
                 $content["address"]["latitude"] = $coordinate["latitude"];
                 $content["address"]["longitude"] = $coordinate["longitude"];
-            }*/
+            }
 
             $address = [
                 'user_id' => $content["id"],

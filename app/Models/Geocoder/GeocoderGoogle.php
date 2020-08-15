@@ -38,32 +38,36 @@ class GeocoderGoogle extends Geocoder
      */
     public function get(string $zipCode = null, string $country = null, string $city = null, string $region = null, string $street = null)
     {
-        $address = $this->_getAddress($zipCode, $country, $city, $region, $street);
-
-        if($address)
+        if(function_exists("curl_init"))
         {
-            $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&key=' . Config::get("geocoder.channels.google.key");
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_HEADER, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 3);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
-            $data = curl_exec($ch);
-            $data = json_decode($data, true);
+            $address = $this->_getAddress($zipCode, $country, $city, $region, $street);
 
-            if($data["status"] == "OK")
+            if($address)
             {
-                return [
-                    "latitude" => $data["results"][0]["geometry"]["location"]['lat'],
-                    "longitude" => $data["results"][0]["geometry"]["location"]['lng']
-                ];
+                $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&key=' . Config::get("geocoder.channels.google.key");
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_HEADER, false);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+                $data = curl_exec($ch);
+                $data = json_decode($data, true);
+
+                if($data["status"] == "OK")
+                {
+                    return [
+                        "latitude" => $data["results"][0]["geometry"]["location"]['lat'],
+                        "longitude" => $data["results"][0]["geometry"]["location"]['lng']
+                    ];
+                }
+                else
+                {
+                    $this->addError($data["status"], $data["error_message"]);
+                    return false;
+                }
             }
-            else
-            {
-                $this->addError($data["status"], $data["error_message"]);
-                return false;
-            }
+            else return null;
         }
-        else return false;
+        else return null;
     }
 }
