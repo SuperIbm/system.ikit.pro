@@ -157,11 +157,29 @@ class UserController extends Controller
         $action = app(UserCreateAction::class);
 
         $action->setParameters([
-            "school" => School::getId(),
+            "school" => 1,
+            "user" => [
+                'login' => "test2@test.com",
+                'password' => "123456",
+                'first_name' => "Test",
+                'second_name' => "User",
+                'status' => true
+            ],
+            'roles' => [
+                1
+            ],
+            'address' => [
+                'postal_code' => "127550",
+                'country' => "Россия",
+                'city' => "Москва",
+                'street_address' => "Дмитровское шоссе, 37к1",
+            ]
+
+            /*"school" => School::getId(),
             "user" => $request->input('user'),
             "image" => ($request->hasFile('image') && $request->file('image')->isValid()) ? $request->file('image') : null,
             'roles' => $request->input('roles'),
-            'address' => $request->input('address')
+            'address' => $request->input('address')*/
         ])->run();
 
         if(!$action->hasError())
@@ -212,7 +230,6 @@ class UserController extends Controller
             "user" => [
                 'login' => "test2@test.com",
                 'password' => "123456",
-                'remember_token',
                 'first_name' => "Test",
                 'second_name' => "User",
                 'status' => true

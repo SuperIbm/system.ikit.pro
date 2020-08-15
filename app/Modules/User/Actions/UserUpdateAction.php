@@ -16,7 +16,8 @@ use App\Modules\User\Pipes\Check\SchoolPipe;
 use App\Modules\User\Pipes\Update\UpdatePipe;
 use App\Modules\User\Pipes\Update\ImagePipe;
 use App\Modules\User\Pipes\Update\AddressPipe;
-use App\Modules\User\Pipes\Update\RolePipe;
+use App\Modules\User\Pipes\Update\RoleDestroyPipe;
+use App\Modules\User\Pipes\Create\RolePipe;
 
 /**
  * Создание пользователя.
@@ -44,6 +45,7 @@ class UserUpdateAction extends Action
             UpdatePipe::class,
             ImagePipe::class,
             AddressPipe::class,
+            RoleDestroyPipe::class,
             RolePipe::class
         ])->setParameters([
             "id" => $this->getParameter("id"),

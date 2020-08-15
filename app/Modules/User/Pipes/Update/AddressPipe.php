@@ -14,6 +14,7 @@ use App\Models\Contracts\Pipe;
 use App\Modules\User\Repositories\User;
 use App\Modules\User\Repositories\UserAddress;
 use Closure;
+use Geocoder;
 
 /**
  * Обновление пользователя: добавление адреса пользователя.
@@ -70,18 +71,28 @@ class AddressPipe implements Pipe
     {
         if($content["address"])
         {
+            /*if(!isset($content["address"]["latitude"]) || isset($content["address"]["latitude"]))
+            {
+                $coordinate = Geocoder::get(@$content["address"]["postal_code"], @$content["address"]["country"], @$content["address"]["city"], @$content["address"]["region"], @$content["address"]["street_address"]);
+                $content["address"]["latitude"] = $coordinate["latitude"];
+                $content["address"]["longitude"] = $coordinate["longitude"];
+            }*/
+
             $address = [
                 'user_id' => $content["id"],
-                'postal_code' => $content["address"]["postal_code"],
-                'country' => $content["address"]["country"],
-                'region' => $content["address"]["region"],
-                'city' => $content["address"]["city"],
-                'street_address' => $content["address"]["street_address"],
-                'latitude' => $content["address"]["latitude"],
-                'longitude' => $content["address"]["longitude"],
+                'postal_code' => isset($content["address"]["postal_code"]) ? $content["address"]["postal_code"] : null,
+                'country' => isset($content["address"]["country"]) ? $content["address"]["country"] : null,
+                'region' => isset($content["address"]["region"]) ? $content["address"]["region"] : null,
+                'city' => isset($content["address"]["city"]) ? $content["address"]["city"] : null,
+                'street_address' => isset($content["address"]["street_address"]) ? $content["address"]["street_address"] : null,
+                'latitude' => isset($content["address"]["latitude"]) ? $content["address"]["latitude"] : null,
+                'longitude' => isset($content["address"]["longitude"]) ? $content["address"]["longitude"] : null,
             ];
 
-            $this->_userAddress->update($content["id"], $address);
+            $user = $this->_userAddress->get($content["id"]);
+
+            if($user) $this->_userAddress->update($content["id"], $address);
+            else $this->_userAddress->create($address);
 
             if(!$this->_userAddress->hasError()) return $next($content);
             else
@@ -91,8 +102,6 @@ class AddressPipe implements Pipe
                  */
                 $decorator = $content["decorator"];
                 $decorator->setErrors($this->_userAddress->getErrors());
-
-                $this->_user->destroy($content["id"]);
 
                 return false;
             }

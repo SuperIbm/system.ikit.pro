@@ -72,8 +72,6 @@ class ImagePipe implements Pipe
                 $decorator = $content["decorator"];
                 $decorator->setErrors($this->_user->getErrors());
 
-                $this->_user->destroy($content["id"]);
-
                 return false;
             }
         }

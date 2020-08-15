@@ -16,14 +16,14 @@ use Closure;
 use App\Modules\User\Repositories\UserSchoolRole;
 
 /**
- * Обновление пользователя: добавление ролей к пользователю.
+ * Обновление пользователя: удаление старых ролей.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class RolePipe implements Pipe
+class RoleDestroyPipe implements Pipe
 {
     /**
      * Репозитарий пользователей.
@@ -72,16 +72,10 @@ class RolePipe implements Pipe
         {
             $filters = [
                 [
+                    "table" => "users",
                     "property" => "id",
                     "operator" => "=",
                     "value" => $content["id"],
-                    "logic" => "and"
-                ],
-                [
-                    "table" => "user_schools",
-                    "property" => "school_id",
-                    "operator" => "=",
-                    "value" => $content["school"],
                     "logic" => "and"
                 ]
             ];
@@ -94,40 +88,54 @@ class RolePipe implements Pipe
             {
                 if($user)
                 {
-
-                }
-
-                exit;
-
-                $this->_userSchoolRole->destroy(null, );
-
-                for($i = 0; $i < count($content["roles"]); $i++)
-                {
-                    $this->_userSchoolRole->create([
-                        "user_id" => $content["id"],
-                        "school_role_id" => $content["roles"][$i]
-                    ]);
-
-                    if($this->_userSchoolRole->hasError())
+                    if($user["schools"])
                     {
-                        /**
-                         * @var $decorator \App\Models\Decorator
-                         */
-                        $decorator = $content["decorator"];
-                        $decorator->setErrors($this->_userSchoolRole->getErrors());
+                        for($i = 0; $i < count($user["schools"]); $i++)
+                        {
+                            if($user["schools"][$i]["school_id"] == $content["school"])
+                            {
+                                for($z = 0; $z < count($user["schools"][$i]["roles"]); $z++)
+                                {
+                                    $this->_userSchoolRole->destroy($user["schools"][$i]["roles"][$z]["id"]);
 
-                        $this->_user->destroy($content["id"]);
+                                    if($this->_userSchoolRole->hasError())
+                                    {
+                                        /**
+                                         * @var $decorator \App\Models\Decorator
+                                         */
+                                        $decorator = $content["decorator"];
+                                        $decorator->setErrors($this->_userSchoolRole->getErrors());
 
-                        return false;
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
                     }
+
+                    return $next($content);
                 }
+                else
+                {
+                    /**
+                     * @var $decorator \App\Models\Decorator
+                     */
+                    $decorator = $content["decorator"];
+                    $decorator->addError("user", "The user does not exist.");
 
-                return $next($content);
+                    return false;
+                }
             }
+            else
+            {
+                /**
+                 * @var $decorator \App\Models\Decorator
+                 */
+                $decorator = $content["decorator"];
+                $decorator->setErrors($this->_user->getErrors());
 
-
-
-
+                return false;
+            }
         }
         else return $next($content);
     }
