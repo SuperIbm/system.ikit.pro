@@ -48,9 +48,9 @@ class AccessSignInRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'login' => 'Login',
-            'password' => 'Password',
-            'remember' => 'Remember'
+            'login' => trans('access::http.requests.accessSignInRequest.login'),
+            'password' => trans('access::http.requests.accessSignInRequest.password'),
+            'remember' => trans('access::http.requests.accessSignInRequest.remember'),
         ];
     }
 }

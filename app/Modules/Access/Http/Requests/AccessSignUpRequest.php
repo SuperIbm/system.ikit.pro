@@ -51,12 +51,12 @@ class AccessSignUpRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'login' => 'Login',
-            'password' => 'Password',
-            'first_name' => 'First name',
-            'second_name' => 'Last name',
-            'company' => 'Company',
-            'telephone' => 'Telephone'
+            'login' => trans('access::http.requests.accessSignUpRequest.login'),
+            'password' => trans('access::http.requests.accessSignUpRequest.password'),
+            'first_name' => trans('access::http.requests.accessSignUpRequest.first_name'),
+            'second_name' => trans('access::http.requests.accessSignUpRequest.second_name'),
+            'company' => trans('access::http.requests.accessSignUpRequest.company'),
+            'telephone' => trans('access::http.requests.accessSignUpRequest.telephone'),
         ];
     }
 }

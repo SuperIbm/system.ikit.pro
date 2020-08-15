@@ -46,7 +46,7 @@ class AccessResetCheckRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'code' => 'Code'
+            'code' => trans('access::http.requests.accessResetCheckRequest.code')
         ];
     }
 }

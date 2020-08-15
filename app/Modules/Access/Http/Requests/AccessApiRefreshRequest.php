@@ -46,7 +46,7 @@ class AccessApiRefreshRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'refreshToken' => 'Refresh token'
+            'refreshToken' => trans('access::http.requests.accessApiRefreshRequest.refreshToken')
         ];
     }
 }

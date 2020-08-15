@@ -46,7 +46,7 @@ class AccessApiTokenRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'secret' => 'Secret key'
+            'secret' => trans('access::http.requests.accessApiTokenRequest.secret')
         ];
     }
 }

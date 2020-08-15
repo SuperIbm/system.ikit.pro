@@ -46,7 +46,7 @@ class AccessForgetRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'login' => 'Login'
+            'login' => trans('access::http.requests.accessForgetRequest.login')
         ];
     }
 }

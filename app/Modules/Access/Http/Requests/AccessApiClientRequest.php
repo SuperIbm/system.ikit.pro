@@ -33,7 +33,7 @@ class AccessApiClientRequest extends FormRequest
     {
         return [
             'login' => 'required|between:1,199',
-            'password' => 'required|between:4,25'
+            'password' => 'required|between:6,25'
         ];
     }
 
@@ -47,8 +47,8 @@ class AccessApiClientRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'login' => 'Login',
-            'password' => 'Password'
+            'login' => trans('access::http.requests.accessApiClientRequest.login'),
+            'password' => trans('access::http.requests.accessApiClientRequest.password'),
         ];
     }
 }

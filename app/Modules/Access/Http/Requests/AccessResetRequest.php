@@ -47,8 +47,8 @@ class AccessResetRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'code' => 'Code',
-            'password' => 'Password'
+            'code' => trans('access::http.requests.accessResetRequest.code'),
+            'password' => trans('access::http.requests.accessResetRequest.password'),
         ];
     }
 }

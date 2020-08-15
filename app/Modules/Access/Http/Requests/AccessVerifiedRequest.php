@@ -46,7 +46,7 @@ class AccessVerifiedRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'code' => 'Code'
+            'code' => trans('access::http.requests.accessVerifiedRequest.code')
         ];
     }
 }

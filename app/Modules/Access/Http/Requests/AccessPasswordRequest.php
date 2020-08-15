@@ -47,8 +47,8 @@ class AccessPasswordRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'password_current' => 'Current password',
-            'password' => 'Password'
+            'password_current' => trans('access::http.requests.accessPasswordRequest.password_current'),
+            'password' => trans('access::http.requests.accessPasswordRequest.password'),
         ];
     }
 }

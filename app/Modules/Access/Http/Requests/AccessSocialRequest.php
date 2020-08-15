@@ -48,9 +48,9 @@ class AccessSocialRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'id' => 'ID',
-            'type' => 'Type',
-            'login' => 'Login'
+            'id' => trans('access::http.requests.accessSocialRequest.id'),
+            'type' => trans('access::http.requests.accessSocialRequest.type'),
+            'login' => trans('access::http.requests.accessSocialRequest.login'),
         ];
     }
 }
