@@ -73,7 +73,7 @@ class UserDestroyAction extends Action
         }
         else
         {
-            $this->addError("user", "The user doesn't exist");
+            $this->addError("user", trans('access::http.actions.userDestroyAction.not_exist_user'));
 
             return false;
         }

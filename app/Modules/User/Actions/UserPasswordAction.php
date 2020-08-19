@@ -75,7 +75,7 @@ class UserPasswordAction extends Action
         }
         else
         {
-            $this->addError("user", "The user doesn't exist");
+            $this->addError("user", trans('access::http.actions.userPasswordAction.not_exist_user'));
 
             return false;
         }

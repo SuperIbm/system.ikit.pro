@@ -169,7 +169,8 @@ class UserController extends Controller
         if(!$action->hasError())
         {
             $data = [
-                'success' => true
+                'success' => true,
+                'message' => trans('access::http.controllers.userController.create.message')
             ];
         }
         else
@@ -221,7 +222,8 @@ class UserController extends Controller
         if(!$action->hasError())
         {
             $data = [
-                'success' => true
+                'success' => true,
+                'message' => trans('access::http.controllers.userController.update.message')
             ];
         }
         else
@@ -271,7 +273,8 @@ class UserController extends Controller
         if(!$action->hasError())
         {
             $data = [
-                'success' => true
+                'success' => true,
+                'message' => trans('access::http.controllers.userController.password.message')
             ];
         }
         else
@@ -320,14 +323,15 @@ class UserController extends Controller
         if(!$action->hasError())
         {
             $data = [
-                'success' => true
+                'success' => true,
+                'message' => trans('access::http.controllers.userController.destroy.message')
             ];
         }
         else
         {
             Log::warning(trans('access::http.controllers.userController.destroy.log'), [
                 'module' => "User",
-                'type' => 'update',
+                'type' => 'destroy',
                 'parameters' => [
                     'ids' => $ids
                 ],

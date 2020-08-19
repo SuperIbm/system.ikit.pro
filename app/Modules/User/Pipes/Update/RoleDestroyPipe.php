@@ -121,7 +121,7 @@ class RoleDestroyPipe implements Pipe
                      * @var $decorator \App\Models\Decorator
                      */
                     $decorator = $content["decorator"];
-                    $decorator->addError("user", "The user does not exist.");
+                    $decorator->addError("user", trans('access::http.pipes.roleDestroyPipe.not_exist_user'));
 
                     return false;
                 }
