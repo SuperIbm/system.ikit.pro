@@ -7,7 +7,7 @@ return [
     'userPasswordAction' => [
         'not_exist_user' => "The user doesn't exist or not find it.",
     ],
-    'updatePipe' => [
+    'userConfigUpdateAction' => [
         'not_exist_user' => "The user doesn't exist or not find it.",
-    ]
+    ],
 ];

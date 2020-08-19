@@ -6,5 +6,8 @@ return [
     ],
     'userPasswordAction' => [
         'not_exist_user' => "Пользователь не существует либо не был найден.",
-    ]
+    ],
+    'userConfigUpdateAction' => [
+        'not_exist_user' => "Пользователь не существует либо не был найден.",
+    ],
 ];

@@ -75,11 +75,11 @@ Route::group
     ],
     function()
     {
-        Route::get('get/{id}', 'UserConfigController@get')
+        Route::get('get', 'UserConfigController@get')
             ->middleware('auth.api', 'auth.user')
             ->name("get");
 
-        Route::put('update/{id}', 'UserConfigController@update')
+        Route::put('update', 'UserConfigController@update')
             ->middleware('auth.api', 'auth.user')
             ->name("update");
     }

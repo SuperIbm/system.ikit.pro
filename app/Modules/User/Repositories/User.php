@@ -49,14 +49,15 @@ class User extends Repository
      *
      * @param int $id Первичный ключ.
      * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
+     * @param array $filters Фильтрация данных.
      *
      * @return array|bool Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function flags(int $id, bool $active = null)
+    public function flags(int $id, bool $active = null, array $filters = null)
     {
-        $result = $this->get($id, $active);
+        $result = $this->get($id, $active, $filters);
 
         if($result) return $result["flags"];
         else return false;

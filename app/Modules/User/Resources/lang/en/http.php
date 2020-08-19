@@ -25,6 +25,15 @@ return [
                 'log' => 'Destroy the user.',
                 'message' => 'The user has been deleted.'
             ]
-        ]
+        ],
+        'userConfigController' => [
+            'get' => [
+                'log' => 'Get the configs of the user.'
+            ],
+            'update' => [
+                'log' => 'Update the configs of the user.',
+                'message' => 'The config of the user has been updated.'
+            ],
+        ],
     ]
 ];
