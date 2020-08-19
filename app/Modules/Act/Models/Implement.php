@@ -66,9 +66,9 @@ class Implement
 
         if($value)
         {
-            $value["time"] = Carbon::createFromFormat("Y-m-d H:i:s", $value["time"]);
+            $value["updated_at"] = Carbon::createFromFormat("Y-m-d H:i:s", $value["updated_at"]);
             $timeCurrent = Carbon::now();
-            $timeEnd = $value["time"]->addMinutes($minutes);
+            $timeEnd = $value["updated_at"]->addMinutes($minutes);
 
             if($timeCurrent >= $timeEnd)
             {
@@ -101,8 +101,7 @@ class Implement
 
         $value = $this->_get($index, [
             "count" => 0,
-            "minutes" => $minutes,
-            "time" => Carbon::now(),
+            "minutes" => $minutes
         ]);
 
         $value["count"] += $to;
@@ -151,22 +150,19 @@ class Implement
             ],
         ];
 
-        $records = $this->_act->read($filters);
+        $record = $this->_act->get(null, $filters);
 
-        if($records)
+        if($record)
         {
-            $record = $records[0];
-
             return [
                 "count" => $record["count"],
                 "minutes" => $record["minutes"],
-                "time" => $record["updated_at"]
+                "updated_at" => $record["updated_at"]
             ];
         }
         else if($default) return $default;
         else return null;
     }
-
 
     /**
      * Запись действия.
@@ -194,17 +190,14 @@ class Implement
             ],
         ];
 
-        $records = $this->_act->read($filters);
+        $record = $this->_act->get(null, $filters);
 
-        if($records)
+        if($record)
         {
-            $record = $records[0];
-
             $this->_act->update($record["id"], [
                 "index" => $index,
                 "count" => $count,
-                "minutes" => $minutes,
-                "time" => Carbon::now()
+                "minutes" => $minutes
             ]);
         }
         else
@@ -213,7 +206,7 @@ class Implement
                 "index" => $index,
                 "count" => $count,
                 "minutes" => $minutes,
-                "time" => $time
+                "updated_at" => $time
             ]);
         }
 
@@ -239,22 +232,13 @@ class Implement
                 "operator" => "=",
                 "value" => $index,
                 "logic" => "and"
-            ],
+            ]
         ];
 
-        $records = $this->_act->read($filters);
-
-        if($records)
-        {
-            for($i = 0; $i < count($records); $i++)
-            {
-                $this->_act->destroy($records[$i]["id"]);
-            }
-        }
+        $this->_act->destroy(null, $filters);
 
         return $this;
     }
-
 
     /**
      * Получение ключа по индексу.
@@ -267,6 +251,20 @@ class Implement
      */
     protected function _getKey(string $index): string
     {
-        return md5("action." . Request::ip() . "." . $index);
+        return md5("action." . $this->_getIp() . "." . $index);
+    }
+
+    /**
+     * Получение IP адреса пользователя.
+     *
+     * @return string Вернет IP пользователя.
+     * @since 1.0
+     * @version 1.0
+     */
+    private function _getIp(): ?string
+    {
+        if(isset($_SERVER["HTTP_X_FORWARDED_FOR"])) return $_SERVER["HTTP_X_FORWARDED_FOR"];
+        else if(isset($_SERVER["REMOTE_ADDR"])) return $_SERVER["REMOTE_ADDR"];
+        else return Request::ip();
     }
 }

@@ -38,16 +38,15 @@ class Act extends Repository
      * Получить по первичному ключу.
      *
      * @param int $id Первичный ключ.
-     * @param bool $active Булево значение, если определить как true, то будет получать только активные записи.
      * @param array $filters Фильтрация данных.
      *
      * @return array Массив данных.
      * @since 1.0
      * @version 1.0
      */
-    public function get(int $id = null, bool $active = null, array $filters = null): ?array
+    public function get(int $id = null, array $filters = null): ?array
     {
-        return $this->_get(['Act', 'ActItem'], $id, $active, $filters);
+        return $this->_get(['Act', 'ActItem'], $id, null, $filters);
     }
 
     /**
