@@ -24,7 +24,7 @@ use App\Modules\User\Repositories\User;
 class UserReadAction extends Action
 {
     /**
-     * Репозитарий для выбранных групп пользователя.
+     * Репозитарий пользователей.
      *
      * @var \App\Modules\User\Repositories\User
      * @version 1.0

@@ -12,7 +12,6 @@ namespace App\Modules\User\Http\Controllers;
 
 use School;
 use Log;
-use Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -21,6 +20,8 @@ use App\Modules\User\Actions\UserGetAction;
 use App\Modules\User\Actions\UserReadAction;
 use App\Modules\User\Actions\UserCreateAction;
 use App\Modules\User\Actions\UserUpdateAction;
+use App\Modules\User\Actions\UserPasswordAction;
+use App\Modules\User\Actions\UserDestroyAction;
 
 use App\Modules\User\Http\Requests\UserAdminReadRequest;
 use App\Modules\User\Http\Requests\UserAdminDestroyRequest;
@@ -159,7 +160,8 @@ class UserController extends Controller
         $action->setParameters([
             "school" => School::getId(),
             "user" => $request->input('user'),
-            "image" => ($request->hasFile('image') && $request->file('image')->isValid()) ? $request->file('image') : null,
+            "image" => ($request->hasFile('image') && $request->file('image')
+                    ->isValid()) ? $request->file('image') : null,
             'roles' => $request->input('roles'),
             'address' => $request->input('address')
         ])->run();
@@ -207,9 +209,11 @@ class UserController extends Controller
         $action = app(UserUpdateAction::class);
 
         $action->setParameters([
+            "id" => $id,
             "school" => School::getId(),
             "user" => $request->input('user'),
-            "image" => ($request->hasFile('image') && $request->file('image')->isValid()) ? $request->file('image') : null,
+            "image" => ($request->hasFile('image') && $request->file('image')
+                    ->isValid()) ? $request->file('image') : null,
             'roles' => $request->input('roles'),
             'address' => $request->input('address')
         ])->run();
@@ -224,7 +228,7 @@ class UserController extends Controller
         {
             Log::warning(trans('access::http.controllers.userController.update.log'), [
                 'module' => "User",
-                'type' => 'create',
+                'type' => 'update',
                 'request' => $request->all(),
                 'parameters' => [
                     'id' => $id
@@ -235,9 +239,6 @@ class UserController extends Controller
                 ],
                 'error' => $action->getErrorMessage()
             ]);
-
-            echo $action->getErrorMessage();
-            exit;
 
             $data = [
                 'success' => false,
@@ -260,33 +261,37 @@ class UserController extends Controller
      */
     public function password(int $id, Request $request)
     {
-        $status = $this->_user->update($id, [
-            "password" => $data["password"] = bcrypt($request->get("password"))
-        ]);
+        $action = app(UserPasswordAction::class);
 
-        if($status)
+        $action->setParameters([
+            "id" => $id,
+            "password" => $request->get("password")
+        ])->run();
+
+        if(!$action->hasError())
         {
-            Log::info('Success: Update the user password.', [
-                'module' => "User",
-                'login' => Auth::user()->login,
-                'type' => 'update'
-            ]);
-
             $data = [
                 'success' => true
             ];
         }
         else
         {
-            Log::warning('Fail: Update the user password.', [
+            Log::warning(trans('access::http.controllers.userController.password.log'), [
                 'module' => "User",
-                'login' => Auth::user()->login,
-                'type' => 'update'
+                'type' => 'update',
+                'parameters' => [
+                    'id' => $id
+                ],
+                'school' => [
+                    'id' => School::getId(),
+                    'index' => School::getIndex()
+                ],
+                'error' => $action->getErrorMessage()
             ]);
 
             $data = [
                 'success' => false,
-                'message' => $this->_user->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ];
         }
 
@@ -305,31 +310,37 @@ class UserController extends Controller
     public function destroy(UserAdminDestroyRequest $request)
     {
         $ids = json_decode($request->input('ids'), true);
-        $status = $this->_user->destroy($ids);
 
-        if($status == true && $this->_user->hasError() == false)
+        $action = app(UserDestroyAction::class);
+
+        $action->setParameters([
+            "ids" => $ids
+        ])->run();
+
+        if(!$action->hasError())
         {
-            Log::info('Success: Destroy the user.', [
-                'module' => "User",
-                'login' => Auth::user()->login,
-                'type' => 'destroy'
-            ]);
-
             $data = [
                 'success' => true
             ];
         }
         else
         {
-            Log::warning('Fail: Destroy the user.', [
+            Log::warning(trans('access::http.controllers.userController.destroy.log'), [
                 'module' => "User",
-                'login' => Auth::user()->login,
-                'type' => 'destroy'
+                'type' => 'update',
+                'parameters' => [
+                    'ids' => $ids
+                ],
+                'school' => [
+                    'id' => School::getId(),
+                    'index' => School::getIndex()
+                ],
+                'error' => $action->getErrorMessage()
             ]);
 
             $data = [
                 'success' => false,
-                'message' => $this->_user->getErrorMessage()
+                'message' => $action->getErrorMessage()
             ];
         }
 

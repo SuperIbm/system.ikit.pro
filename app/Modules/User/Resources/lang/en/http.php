@@ -14,6 +14,12 @@ return [
             ],
             'update' => [
                 'log' => 'Update the user.'
+            ],
+            'password' => [
+                'log' => 'Update the password of the user.'
+            ],
+            'destroy' => [
+                'log' => 'Destroy the user.'
             ]
         ]
     ]
