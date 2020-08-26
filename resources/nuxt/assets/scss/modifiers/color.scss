@@ -1,0 +1,15 @@
+@import "./../vars/color";
+
+.color
+{
+    @each $color, $types in $colors
+    {
+        @each $type, $value in $types
+        {
+            &--#{$color}-#{$type}
+            {
+                background-color: $value;
+            }
+        }
+    }
+}

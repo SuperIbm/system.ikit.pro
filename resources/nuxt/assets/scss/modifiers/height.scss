@@ -1,0 +1,92 @@
+.height
+{
+    &--wide
+    {
+        height: 100%;
+
+        @media (min-width: 1904px)
+        {
+            &-xl
+            {
+                height: 100%;
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            &-lg
+            {
+                height: 100%;
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            &-md
+            {
+                height: 100%;
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            &-sm
+            {
+                height: 100%;
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            &-xs
+            {
+                height: 100%;
+            }
+        }
+    }
+
+    &--auto
+    {
+        height: auto;
+
+        @media (min-width: 1904px)
+        {
+            &-xl
+            {
+                height: auto;
+            }
+        }
+
+        @media (max-width: 1904px)
+        {
+            &-lg
+            {
+                height: auto;
+            }
+        }
+
+        @media (max-width: 1264px)
+        {
+            &-md
+            {
+                height: auto;
+            }
+        }
+
+        @media (max-width: 960px)
+        {
+            &-sm
+            {
+                height: auto;
+            }
+        }
+
+        @media all and (max-width: 600px)
+        {
+            &-xs
+            {
+                height: auto;
+            }
+        }
+    }
+}

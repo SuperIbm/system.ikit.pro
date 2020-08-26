@@ -1,0 +1,185 @@
+.padding
+{
+    @for $i from 0 through 20
+    {
+        &--aside-#{$i}
+        {
+            padding: 0.25em * $i !important;
+        }
+
+        &--top-#{$i}
+        {
+            padding-top: 0.25em * $i !important;
+        }
+
+        &--right-#{$i}
+        {
+            padding-right: 0.25em * $i !important;
+        }
+
+        &--bottom-#{$i}
+        {
+            padding-bottom: 0.25em * $i !important;
+        }
+
+        &--left-#{$i}
+        {
+            padding-left: 0.25em * $i !important;
+        }
+    }
+
+    @media (min-width: 1904px)
+    {
+        @for $i from 0 through 20
+        {
+            &--aside-#{$i}-xl
+            {
+                padding: 0.25em * $i !important;
+            }
+
+            &--top-#{$i}-xl
+            {
+                padding-top: 0.25em * $i !important;
+            }
+
+            &--right-#{$i}-xl
+            {
+                padding-right: 0.25em * $i !important;
+            }
+
+            &--bottom-#{$i}-xl
+            {
+                padding-bottom: 0.25em * $i !important;
+            }
+
+            &--left-#{$i}-xl
+            {
+                padding-left: 0.25em * $i !important;
+            }
+        }
+    }
+
+    @media (max-width: 1904px)
+    {
+        @for $i from 0 through 20
+        {
+            &--aside-#{$i}-lg
+            {
+                padding: 0.25em * $i !important;
+            }
+
+            &--top-#{$i}-lg
+            {
+                padding-top: 0.25em * $i !important;
+            }
+
+            &--right-#{$i}-lg
+            {
+                padding-right: 0.25em * $i !important;
+            }
+
+            &--lg-bottom-#{$i}
+            {
+                padding-bottom: 0.25em * $i !important;
+            }
+
+            &--left-#{$i}-lg
+            {
+                padding-left: 0.25em * $i !important;
+            }
+        }
+    }
+
+    @media (max-width: 1264px)
+    {
+        @for $i from 0 through 20
+        {
+            &--aside-#{$i}-md
+            {
+                padding: 0.25em * $i !important;
+            }
+
+            &--top-#{$i}-md
+            {
+                padding-top: 0.25em * $i !important;
+            }
+
+            &--md-right-#{$i}
+            {
+                padding-right: 0.25em * $i !important;
+            }
+
+            &--bottom-#{$i}-md
+            {
+                padding-bottom: 0.25em * $i !important;
+            }
+
+            &--left-#{$i}-md
+            {
+                padding-left: 0.25em * $i !important;
+            }
+        }
+    }
+
+    @media (max-width: 960px)
+    {
+        @for $i from 0 through 20
+        {
+            &--aside-#{$i}-sm
+            {
+                padding: 0.25em * $i !important;
+            }
+
+            &--top-#{$i}-sm
+            {
+                padding-top: 0.25em * $i !important;
+            }
+
+            &--right-#{$i}-sm
+            {
+                padding-right: 0.25em * $i !important;
+            }
+
+            &--bottom-#{$i}-sm
+            {
+                padding-bottom: 0.25em * $i !important;
+            }
+
+            &--left-#{$i}-sm
+            {
+                padding-left: 0.25em * $i !important;
+            }
+        }
+    }
+
+    @media all and (max-width: 600px)
+    {
+        @for $i from 0 through 20
+        {
+            &--aside-#{$i}-xs
+            {
+                padding: 0.25em * $i !important;
+            }
+
+            &--top-#{$i}-xs
+            {
+                padding-top: 0.25em * $i !important;
+            }
+
+            &--right-#{$i}-xs
+            {
+                padding-right: 0.25em * $i !important;
+            }
+
+            &--bottom-#{$i}-xs
+            {
+                padding-bottom: 0.25em * $i !important;
+            }
+
+            &--left-#{$i}-xs
+            {
+                padding-left: 0.25em * $i !important;
+            }
+        }
+    }
+}

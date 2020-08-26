@@ -1,0 +1,44 @@
+.hide
+{
+    display: none;
+
+    @media (min-width: 1904px)
+    {
+        &-xl
+        {
+            display: none;
+        }
+    }
+
+    @media (max-width: 1904px)
+    {
+        &-lg
+        {
+            display: none;
+        }
+    }
+
+    @media (max-width: 1264px)
+    {
+        &-md
+        {
+            display: none;
+        }
+    }
+
+    @media (max-width: 960px)
+    {
+        &-sm
+        {
+            display: none;
+        }
+    }
+
+    @media all and (max-width: 600px)
+    {
+        &-xs
+        {
+            display: none;
+        }
+    }
+}

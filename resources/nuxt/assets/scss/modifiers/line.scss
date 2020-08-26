@@ -1,0 +1,10 @@
+.line
+{
+    @for $i from 1 through 600
+    {
+        &--#{$i / 100}
+        {
+            line-height: #{$i / 100}px;
+        }
+    }
+}

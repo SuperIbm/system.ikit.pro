@@ -1,0 +1,28 @@
+.max
+{
+    width: 100%;
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+    box-sizing: border-box;
+
+    &--small
+    {
+        max-width: 760px;
+    }
+
+    &--middle
+    {
+        max-width: 1060px;
+    }
+
+    &--big
+    {
+        max-width: 1300px;
+    }
+
+    @media all and (max-width: 750px)
+    {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}

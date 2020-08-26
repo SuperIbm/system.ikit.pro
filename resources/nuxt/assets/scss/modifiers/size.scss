@@ -1,0 +1,11 @@
+.size
+{
+    @for $i from 1 through 600
+    {
+        &--#{$i}
+        {
+            font-size: #{$i / 100}px;
+            line-height: #{$i / 100}px;
+        }
+    }
+}

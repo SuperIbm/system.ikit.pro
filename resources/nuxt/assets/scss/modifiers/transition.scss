@@ -1,0 +1,11 @@
+@import "./../mixes/transition";
+
+.transition
+{
+    @include transition;
+
+    &--no
+    {
+        @include no-transition;
+    }
+}
