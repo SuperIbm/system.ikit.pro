@@ -13,14 +13,14 @@ namespace App\Modules\User\Http\Requests;
 use App\Models\FormRequest;
 
 /**
- * Класс запрос для чтения ролей.
+ * Класс запрос для удаления пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class UserRoleAdminReadRequest extends FormRequest
+class UserDestroyRequest extends FormRequest
 {
     /**
      * Возвращает правила проверки.
@@ -32,9 +32,7 @@ class UserRoleAdminReadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sort' => 'json',
-            'start' => 'integer|digits_between:0,20',
-            'limit' => 'integer|digits_between:0,20'
+            'ids' => 'required|json'
         ];
     }
 
@@ -48,9 +46,7 @@ class UserRoleAdminReadRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'sort' => 'Sorting',
-            'start' => 'Start page',
-            'limit' => 'Limit'
+            'ids' => 'ID'
         ];
     }
 }

@@ -23,8 +23,8 @@ use App\Modules\User\Actions\UserUpdateAction;
 use App\Modules\User\Actions\UserPasswordAction;
 use App\Modules\User\Actions\UserDestroyAction;
 
-use App\Modules\User\Http\Requests\UserAdminReadRequest;
-use App\Modules\User\Http\Requests\UserAdminDestroyRequest;
+use App\Modules\User\Http\Requests\UserReadRequest;
+use App\Modules\User\Http\Requests\UserDestroyRequest;
 
 /**
  * Класс контроллер для работы с пользователями в административной системе.
@@ -97,13 +97,13 @@ class UserController extends Controller
     /**
      * Чтение данных.
      *
-     * @param \App\Modules\User\Http\Requests\UserAdminReadRequest $request Запрос.
+     * @param \App\Modules\User\Http\Requests\UserReadRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function read(UserAdminReadRequest $request)
+    public function read(UserReadRequest $request)
     {
         $action = app(UserReadAction::class);
 
@@ -304,13 +304,13 @@ class UserController extends Controller
     /**
      * Удаление данных.
      *
-     * @param \App\Modules\User\Http\Requests\UserAdminDestroyRequest $request Запрос.
+     * @param \App\Modules\User\Http\Requests\UserDestroyRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function destroy(UserAdminDestroyRequest $request)
+    public function destroy(UserDestroyRequest $request)
     {
         $ids = json_decode($request->input('ids'), true);
 

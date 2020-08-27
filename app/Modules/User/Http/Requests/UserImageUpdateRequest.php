@@ -13,14 +13,14 @@ namespace App\Modules\User\Http\Requests;
 use App\Models\FormRequest;
 
 /**
- * Класс запрос для чтения групп.
+ * Класс запрос для создания изображения для пользователя
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class UserGroupAdminReadRequest extends FormRequest
+class UserImageUpdateRequest extends FormRequest
 {
     /**
      * Возвращает правила проверки.
@@ -32,9 +32,7 @@ class UserGroupAdminReadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sort' => 'json',
-            'start' => 'integer|digits_between:0,20',
-            'limit' => 'integer|digits_between:0,20'
+            'image' => 'required|image'
         ];
     }
 
@@ -48,9 +46,7 @@ class UserGroupAdminReadRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'sort' => 'Sorting',
-            'start' => 'Start page',
-            'limit' => 'Limit'
+            'image' => 'Image'
         ];
     }
 }

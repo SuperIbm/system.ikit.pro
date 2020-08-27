@@ -17,7 +17,7 @@ use Illuminate\Routing\Controller;
 use App\Modules\User\Actions\UserImageUpdateAction;
 use App\Modules\User\Actions\UserImageDestroyAction;
 
-use App\Modules\User\Http\Requests\UserImageAdminUpdateRequest;
+use App\Modules\User\Http\Requests\UserImageUpdateRequest;
 use School;
 
 /**
@@ -87,13 +87,13 @@ class UserImageController extends Controller
      * Обновление данных.
      *
      * @param int $id ID пользователя.
-     * @param \App\Modules\User\Http\Requests\UserImageAdminUpdateRequest $request Запрос.
+     * @param \App\Modules\User\Http\Requests\UserImageUpdateRequest $request Запрос.
      *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function update(int $id, UserImageAdminUpdateRequest $request)
+    public function update(int $id, UserImageUpdateRequest $request)
     {
         $action = app(UserImageUpdateAction::class);
 

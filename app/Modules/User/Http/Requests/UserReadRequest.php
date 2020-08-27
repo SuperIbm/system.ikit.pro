@@ -13,14 +13,14 @@ namespace App\Modules\User\Http\Requests;
 use App\Models\FormRequest;
 
 /**
- * Класс запрос для создания изображения для пользователя.
+ * Класс запрос для чтения пользователей.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class UserImageSiteUpdateRequest extends FormRequest
+class UserReadRequest extends FormRequest
 {
     /**
      * Возвращает правила проверки.
@@ -32,7 +32,9 @@ class UserImageSiteUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => 'required|image'
+            'sort' => 'json',
+            'start' => 'integer|digits_between:0,20',
+            'limit' => 'integer|digits_between:0,20'
         ];
     }
 
@@ -46,7 +48,9 @@ class UserImageSiteUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'image' => 'Image'
+            'sort' => 'Sorting',
+            'start' => 'Start page',
+            'limit' => 'Limit',
         ];
     }
 }
