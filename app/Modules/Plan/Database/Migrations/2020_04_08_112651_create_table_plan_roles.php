@@ -15,11 +15,11 @@ class CreateTablePlanRoles extends Migration {
 		Schema::create('plan_roles', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->bigInteger('plan_id')->unsigned()->index('plan_id');
-            $table->bigInteger('user_role_id')->unsigned()->index('user_role_id');
+            $table->bigInteger('plan_id')->unsigned()->index();
+            $table->bigInteger('user_role_id')->unsigned()->index();
 
 			$table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
 		});
 	}
 

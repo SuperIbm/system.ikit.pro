@@ -36,23 +36,19 @@ class SmsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        App::singleton('sms', function($app)
-        {
+        App::singleton('sms', function($app) {
             return new SmsManager($app);
         });
 
-        Sms::extend('center', function()
-        {
+        Sms::extend('center', function() {
             return new SmsCenter();
         });
 
-        Sms::extend('nexmo', function()
-        {
+        Sms::extend('nexmo', function() {
             return new SmsNexmo();
         });
 
-        Sms::extend('log', function()
-        {
+        Sms::extend('log', function() {
             return new SmsLog();
         });
     }

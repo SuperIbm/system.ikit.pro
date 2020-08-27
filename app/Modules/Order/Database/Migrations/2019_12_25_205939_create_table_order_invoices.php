@@ -25,15 +25,14 @@ class CreateTableOrderInvoices extends Migration
         Schema::create('order_invoices', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->bigInteger('order_id')->unsigned()->index('order_id')->nullable();
-            $table->bigInteger('order_payment_id')->unsigned()->index('order_payment_id')->nullable();
+            $table->bigInteger('order_id')->unsigned()->index()->nullable();
+            $table->bigInteger('order_payment_id')->unsigned()->index()->nullable();
 
-            $table->string('invoice', 191)->index("invoice");
-
-            $table->boolean('status')->default(0)->index('status');
+            $table->string('invoice', 191)->index();
+            $table->boolean('status')->default(true)->index();
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 

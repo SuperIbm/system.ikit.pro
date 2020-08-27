@@ -1,10 +1,12 @@
 <?php
 /**
  * Основные провайдеры.
+ *
  * @package App.Providers
  * @version 1.0
  * @since 1.0
  */
+
 namespace App\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
@@ -16,6 +18,7 @@ use Carbon\Carbon;
 
 /**
  * Класс сервис-провайдера для авторизации.
+ *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
@@ -25,13 +28,16 @@ class AuthServiceProvider extends ServiceProvider
 {
     /**
      * Список политки.
+     *
      * @var array
      */
     protected $policies = [];
 
     /**
      * Обработчик события загрузки приложения.
+     *
      * @param \Illuminate\Contracts\Auth\Access\Gate $gate Проверка права.
+     *
      * @return void
      * @version 1.0
      * @since 1.0
@@ -40,11 +46,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Auth::provider('access', function($app)
-            {
-                return new AccessUserProvider($app->make('App\Modules\User\Repositories\User'), $app->make('App\Modules\User\Repositories\BlockIp'));
-            }
-        );
+        Auth::provider('access', function($app) {
+            return new AccessUserProvider($app->make('App\Modules\User\Repositories\User'), $app->make('App\Modules\User\Repositories\BlockIp'));
+        });
 
         $gate->define('section', 'App\Modules\Access\Models\GateSection@check');
         $gate->define('role', 'App\Modules\Access\Models\GateRole@check');

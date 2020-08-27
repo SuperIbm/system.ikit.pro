@@ -25,14 +25,13 @@ class CreateTableOrderCharges extends Migration
         Schema::create('order_charges', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->bigInteger('order_invoice_id')->unsigned()->index('order_invoice_id')->nullable();
+            $table->bigInteger('order_invoice_id')->unsigned()->index()->nullable();
 
-            $table->string('charge', 191)->index("charge");
-
-            $table->boolean('status')->default(0)->index('status');
+            $table->string('charge', 191)->index();
+            $table->boolean('status')->default(true)->index();
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 

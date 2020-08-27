@@ -35,18 +35,12 @@ class GeocoderServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        App::singleton('geocoder',
-            function($app)
-            {
-                return new GeocoderManager($app);
-            }
-        );
+        App::singleton('geocoder', function($app) {
+            return new GeocoderManager($app);
+        });
 
-        Geocoder::extend('google',
-            function()
-            {
-                return new GeocoderGoogle();
-            }
-        );
+        Geocoder::extend('google', function() {
+            return new GeocoderGoogle();
+        });
     }
 }

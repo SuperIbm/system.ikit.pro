@@ -24,17 +24,17 @@ class CreateTableAlerts extends Migration
         Schema::create('alerts', function(Blueprint $table)
         {
             $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('school_id')->unsigned()->index('school_id');
+            $table->bigInteger('school_id')->unsigned()->index();
 
             $table->string('title', 191)->nullable();
             $table->string('description', 1000)->nullable();
             $table->string('url', 191)->nullable();
             $table->string('icon', 50)->nullable();
             $table->string('color', 50)->nullable();
-            $table->boolean('status')->default(1)->index('status');
+            $table->boolean('status')->default(true)->index();
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 

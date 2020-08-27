@@ -29,6 +29,7 @@ return [
     'planRoleSection' => [
         'plan_role_id' => "ID of plane role",
         'section_id' => "ID section",
+        'plan_role_section_id' => 'ID plane role of section',
         'read' => "Read",
         'update' => "Update",
         'create' => "Create",

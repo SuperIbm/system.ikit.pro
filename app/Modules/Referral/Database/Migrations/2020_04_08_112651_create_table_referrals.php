@@ -16,15 +16,14 @@ class CreateTableReferrals extends Migration {
 		{
 			$table->increments('id');
 
-            $table->string('name', 191)->index("name");
-            $table->string('type', 191)->index('type');
+            $table->string('name', 191)->index();
+            $table->string('type', 191)->index();
             $table->float('price', 10, 2)->unsigned();
             $table->boolean('percentage')->default(false);
-
-            $table->boolean('status')->default(1)->index('status');
+            $table->boolean('status')->default(true)->index();
 
 			$table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
 		});
 	}
 

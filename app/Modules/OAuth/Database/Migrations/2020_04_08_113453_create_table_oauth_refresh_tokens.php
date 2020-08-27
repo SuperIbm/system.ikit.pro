@@ -15,13 +15,13 @@ class CreateTableOauthRefreshTokens extends Migration {
 		Schema::create('oauth_refresh_tokens', function(Blueprint $table)
 		{
             $table->increments('id');
-			$table->bigInteger('oauth_token_id')->unsigned()->index('oauth_token_id');
+			$table->bigInteger('oauth_token_id')->unsigned()->index();
             $table->string('refresh_token', 500);
-			$table->dateTime('expires_at')->index('expires_at');
+			$table->dateTime('expires_at')->index();
             $table->timestamps();
 		});
 
-        DB::statement('CREATE UNIQUE INDEX refresh_token ON oauth_refresh_tokens (refresh_token(250));');
+        if(Config::get("database.default") != 'sqlite') DB::statement('CREATE UNIQUE INDEX refresh_token ON oauth_refresh_tokens (refresh_token(250));');
 	}
 
 	/**

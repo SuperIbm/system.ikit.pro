@@ -24,11 +24,11 @@ class CreateTableBlockIps extends Migration
         Schema::create('block_ips', function(Blueprint $table)
         {
             $table->bigInteger('id', true)->unsigned();
-            $table->string('ip', 15)->index('ip');
-            $table->boolean('status')->default(0)->index('status');
+            $table->string('ip', 15)->index();
+            $table->boolean('status')->default(true)->index();
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 

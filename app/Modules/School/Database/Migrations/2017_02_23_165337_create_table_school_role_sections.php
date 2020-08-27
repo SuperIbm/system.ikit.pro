@@ -25,9 +25,9 @@ class CreateTableSchoolRoleSections extends Migration
         Schema::create('school_role_sections', function(Blueprint $table) {
             $table->bigInteger('id', true)->unsigned();
 
-            $table->bigInteger('school_role_id')->unsigned()->index('school_role_id');
-            $table->bigInteger('section_id')->unsigned()->index('section_id');
-            $table->bigInteger('plan_role_section_id')->unsigned()->index('plan_role_section_id');
+            $table->bigInteger('school_role_id')->unsigned()->index();
+            $table->bigInteger('section_id')->unsigned()->index();
+            $table->bigInteger('plan_role_section_id')->unsigned()->index()->nullable();
 
             $table->boolean('read')->default(0);
             $table->boolean('update')->default(0);
@@ -35,7 +35,7 @@ class CreateTableSchoolRoleSections extends Migration
             $table->boolean('destroy')->default(0);
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 

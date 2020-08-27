@@ -32,12 +32,9 @@ class SessionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Session::extend('memcache',
-            function()
-            {
-                return new SessionMemcache();
-            }
-        );
+        Session::extend('memcache', function() {
+            return new SessionMemcache();
+        });
     }
 
     /**

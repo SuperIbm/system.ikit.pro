@@ -24,13 +24,13 @@ class CreateTableUserReferrals extends Migration
     {
         Schema::create('user_referrals', function(Blueprint $table) {
             $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('referral_id')->unsigned()->index('referral_id');
+            $table->bigInteger('referral_id')->unsigned()->index();
 
-            $table->bigInteger('user_invited_id')->unsigned()->index('user_invited_id');
-            $table->bigInteger('user_referral_id')->unsigned()->index('user_referral_id');
+            $table->bigInteger('user_invited_id')->unsigned()->index();
+            $table->bigInteger('user_referral_id')->unsigned()->index();
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 

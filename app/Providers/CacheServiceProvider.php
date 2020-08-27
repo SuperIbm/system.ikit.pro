@@ -34,19 +34,13 @@ class CacheServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Cache::extend('memcache',
-            function()
-            {
-                return Cache::repository(new CacheMemcache());
-            }
-        );
+        Cache::extend('memcache', function() {
+            return Cache::repository(new CacheMemcache());
+        });
 
-        Cache::extend('mongodb',
-            function()
-            {
-                return Cache::repository(new CacheMongoDb());
-            }
-        );
+        Cache::extend('mongodb', function() {
+            return Cache::repository(new CacheMongoDb());
+        });
     }
 
     /**

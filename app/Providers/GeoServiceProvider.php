@@ -35,18 +35,12 @@ class GeoServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        App::singleton('geo',
-            function($app)
-            {
-                return new GeoManager($app);
-            }
-        );
+        App::singleton('geo', function($app) {
+            return new GeoManager($app);
+        });
 
-        Geo::extend('base',
-            function()
-            {
-                return new GeoBase();
-            }
-        );
+        Geo::extend('base', function() {
+            return new GeoBase();
+        });
     }
 }

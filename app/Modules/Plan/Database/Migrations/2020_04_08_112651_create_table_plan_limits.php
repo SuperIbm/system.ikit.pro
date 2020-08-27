@@ -16,9 +16,9 @@ class CreateTablePlanLimits extends Migration {
 		{
 			$table->increments('id');
 
-			$table->string('name', 191)->index("name");
+			$table->string('name', 191)->index();
             $table->string('description', 191)->nullable();
-            $table->string('type', 191)->index('type');
+            $table->string('type', 191)->index();
             $table->integer('from')->unsigned();
             $table->integer('to')->unsigned()->nullable();
             $table->integer('step')->unsigned();
@@ -27,10 +27,10 @@ class CreateTablePlanLimits extends Migration {
             $table->string('currency', 3)->default("RUB");
             $table->boolean('monthly')->default(0);
             $table->boolean('endless')->default(0);
-            $table->boolean('status')->default(1)->index('status');
+            $table->boolean('status')->default(true)->index();
 
 			$table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
 		});
 	}
 

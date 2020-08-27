@@ -30,7 +30,8 @@ class CreateTableDocuments extends Migration
             $table->string('cache', 50)->nullable();
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+
+            $table->softDeletes()->index();
         });
     }
 

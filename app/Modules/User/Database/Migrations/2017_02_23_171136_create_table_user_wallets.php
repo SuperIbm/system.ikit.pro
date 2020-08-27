@@ -24,13 +24,13 @@ class CreateTableUserWallets extends Migration
         Schema::create('user_wallets', function(Blueprint $table)
         {
             $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('user_id')->unsigned()->index('user_id');
+            $table->bigInteger('user_id')->unsigned()->index();
 
-            $table->float('amount', 10, 2)->unsigned()->index('amount');
+            $table->float('amount', 10, 2)->unsigned()->index();
             $table->string('currency', 191)->default("RUB");
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 

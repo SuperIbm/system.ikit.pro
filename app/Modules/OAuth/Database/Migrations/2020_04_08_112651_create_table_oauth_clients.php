@@ -15,13 +15,13 @@ class CreateTableOauthClients extends Migration {
 		Schema::create('oauth_clients', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->bigInteger('user_id')->unsigned()->index('user_id');
+			$table->bigInteger('user_id')->unsigned()->index();
 			$table->string('secret', 500);
-            $table->dateTime('expires_at')->index('expires_at');
+            $table->dateTime('expires_at')->index();
 			$table->timestamps();
 		});
 
-        DB::statement('CREATE UNIQUE INDEX secret ON oauth_clients (secret(250));');
+        if(Config::get("database.default") != 'sqlite') DB::statement('CREATE UNIQUE INDEX secret ON oauth_clients (secret(250));');
 	}
 
 	/**

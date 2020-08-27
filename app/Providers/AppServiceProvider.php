@@ -9,9 +9,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App;
 use DB;
+use Config;
+use Illuminate\Support\ServiceProvider;
 use App\Models\Util;
 use App\Models\Bot;
 use App\Models\Device;
@@ -38,7 +39,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        DB::statement("SET sql_mode = ''");
+
+        if(Config::get("database.default") != 'sqlite') DB::statement("SET sql_mode = ''");
     }
 
     /**
@@ -50,25 +52,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        App::bind('util',
-            function()
-            {
-                return new Util();
-            }
-        );
+        App::bind('util', function() {
+            return new Util();
+        });
 
-        App::bind('device',
-            function()
-            {
-                return new Device();
-            }
-        );
+        App::bind('device', function() {
+            return new Device();
+        });
 
-        App::bind('bot',
-            function()
-            {
-                return new Bot();
-            }
-        );
+        App::bind('bot', function() {
+            return new Bot();
+        });
     }
 }

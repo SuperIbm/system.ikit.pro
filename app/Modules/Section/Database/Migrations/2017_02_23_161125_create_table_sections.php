@@ -24,14 +24,14 @@ class CreateTableSections extends Migration
     {
         Schema::create('sections', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('index', 191)->index('index');
+            $table->string('index', 191)->index();
             $table->string('label', 191);
             $table->string('icon')->nullable();
-            $table->boolean('status')->default(0)->index('status');
+            $table->boolean('status')->default(true)->index();
 
             $table->nestedSet();
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 

@@ -29,6 +29,7 @@ return [
     'planRoleSection' => [
         'plan_role_id' => "ID роли тарифа",
         'section_id' => "ID раздела",
+        'plan_role_section_id' => 'ID тарифа раздела роли',
         'read' => "Чтение",
         'update' => "Обновление",
         'create' => "Создание",

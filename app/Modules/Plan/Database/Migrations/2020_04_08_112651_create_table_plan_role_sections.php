@@ -15,8 +15,8 @@ class CreateTablePlanRoleSections extends Migration {
 		Schema::create('plan_role_sections', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->bigInteger('plan_role_id')->unsigned()->index('plan_role_id');
-            $table->bigInteger('section_id')->unsigned()->index('section_id');
+            $table->bigInteger('plan_role_id')->unsigned()->index();
+            $table->bigInteger('section_id')->unsigned()->index();
 
             $table->boolean('read')->default(0);
             $table->boolean('update')->default(0);
@@ -24,7 +24,7 @@ class CreateTablePlanRoleSections extends Migration {
             $table->boolean('destroy')->default(0);
 
 			$table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
 		});
 	}
 

@@ -15,13 +15,13 @@ class CreateTableOauthAccessTokens extends Migration {
 		Schema::create('oauth_tokens', function(Blueprint $table)
 		{
             $table->increments('id');
-			$table->bigInteger('oauth_client_id')->unsigned()->index('oauth_client_id');
+			$table->bigInteger('oauth_client_id')->unsigned()->index();
 			$table->string('token', 500);
-            $table->dateTime('expires_at')->index('expires_at');
+            $table->dateTime('expires_at')->index();
 			$table->timestamps();
 		});
 
-        DB::statement('CREATE UNIQUE INDEX token ON oauth_tokens (token(250));');
+        if(Config::get("database.default") != 'sqlite') DB::statement('CREATE UNIQUE INDEX token ON oauth_tokens (token(250));');
 	}
 
 	/**

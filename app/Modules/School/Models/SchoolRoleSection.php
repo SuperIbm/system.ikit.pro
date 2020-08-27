@@ -15,6 +15,7 @@ use App\Models\Validate;
 use App\Models\Status;
 use App\Models\Delete;
 use App\Modules\Section\Models\Section;
+use App\Modules\Plan\Models\PlanRoleSection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -41,6 +42,7 @@ class SchoolRoleSection extends Eloquent
         'id',
         'school_role_id',
         'section_id',
+        'plan_role_section_id',
         'read',
         'update',
         'create',
@@ -59,6 +61,7 @@ class SchoolRoleSection extends Eloquent
         return [
             'school_role_id' => 'required|integer|digits_between:0,20',
             'section_id' => 'required|integer|digits_between:0,20',
+            'plan_role_section_id' => 'integer|digits_between:0,20',
             'read' => 'required|boolean',
             'update' => 'nullable|max:191',
             'create' => 'required|boolean',
@@ -78,6 +81,7 @@ class SchoolRoleSection extends Eloquent
         return [
             'school_role_id' => trans('school::models.schoolRoleSection.school_role_id'),
             'section_id' => trans('school::models.schoolRoleSection.section_id'),
+            'plan_role_section_id' => trans('school::models.schoolRoleSection.plan_role_section_id'),
             'read' => trans('school::models.schoolRoleSection.read'),
             'update' => trans('school::models.schoolRoleSection.update'),
             'create' => trans('school::models.schoolRoleSection.create'),
@@ -107,5 +111,17 @@ class SchoolRoleSection extends Eloquent
     public function section(): BelongsTo
     {
         return $this->belongsTo(Section::class);
+    }
+
+    /**
+     * Получить раздел который относиться к разделу плана роли.
+     *
+     * @return \App\Modules\Plan\Models\PlanRoleSection|\Illuminate\Database\Eloquent\Relations\BelongsTo Модель для таблицы разделов ролей тарифов.
+     * @version 1.0
+     * @since 1.0
+     */
+    public function planRoleSection()
+    {
+        return $this->belongsTo(PlanRoleSection::class);
     }
 }

@@ -35,19 +35,13 @@ class CurrencyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        App::singleton('currency',
-            function($app)
-            {
-                return new CurrencyManager($app);
-            }
-        );
+        App::singleton('currency', function($app) {
+            return new CurrencyManager($app);
+        });
 
-        Currency::extend('cbr',
-            function($app)
-            {
-                return new CurrencyCbr();
-            }
-        );
+        Currency::extend('cbr', function($app) {
+            return new CurrencyCbr();
+        });
     }
 
     /**

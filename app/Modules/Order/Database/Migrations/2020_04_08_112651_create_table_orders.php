@@ -16,17 +16,17 @@ class CreateTableOrders extends Migration {
 		{
 			$table->increments('id');
 
-			$table->bigInteger('school_id')->unsigned()->index('school_id');
+			$table->bigInteger('school_id')->unsigned()->index();
 			$table->string('name', 191);
-            $table->dateTime('from')->index('from');
-            $table->dateTime('to')->index('to')->nullable();
-            $table->boolean('trial')->index('trial')->default(false);
-            $table->string('type', 191)->index('type');
-            $table->bigInteger('orderable_id')->unsigned()->nullable()->index('orderable_id');
-            $table->string('orderable_type', 191)->nullable()->index('orderable_type');
+            $table->dateTime('from')->index();
+            $table->dateTime('to')->index()->nullable();
+            $table->boolean('trial')->index()->default(false);
+            $table->string('type', 191)->index();
+            $table->bigInteger('orderable_id')->unsigned()->nullable()->index();
+            $table->string('orderable_type', 191)->nullable()->index();
 
 			$table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
 		});
 	}
 

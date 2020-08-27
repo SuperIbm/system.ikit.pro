@@ -25,12 +25,12 @@ class CreateTableOrderRefunds extends Migration
         Schema::create('order_refunds', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->bigInteger('order_charge_id')->unsigned()->index('order_charge_id')->nullable();
-            $table->string('refund', 191)->index("refund");
-            $table->boolean('status')->default(0)->index('status');
+            $table->bigInteger('order_charge_id')->unsigned()->index()->nullable();
+            $table->string('refund', 191)->index();
+            $table->boolean('status')->default(true)->index();
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 

@@ -26,16 +26,16 @@ class CreateTableOrderPayments extends Migration
         {
             $table->increments('id');
 
-            $table->string('name', 191)->index("name");
+            $table->string('name', 191)->index();
             $table->string('description', 191)->nullable();
             $table->json('parameters')->nullable();
             $table->string('system', 191);
             $table->boolean('online')->default(true);
-            $table->bigInteger('image_id')->unsigned()->nullable()->index('image_id');
-            $table->boolean('status')->default(true)->index('status');
+            $table->bigInteger('image_id')->unsigned()->nullable()->index();
+            $table->boolean('status')->default(true)->index();
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 

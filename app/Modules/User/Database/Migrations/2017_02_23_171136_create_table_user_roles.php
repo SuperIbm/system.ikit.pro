@@ -24,12 +24,12 @@ class CreateTableUserRoles extends Migration
         Schema::create('user_roles', function(Blueprint $table)
         {
             $table->bigInteger('id', true)->unsigned();
-            $table->string('name', 191)->index("name");
+            $table->string('name', 191)->index();
             $table->string('description', 191)->nullable();
-            $table->boolean('status')->default(0)->index('status');
+            $table->boolean('status')->default(true)->index();
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 

@@ -24,7 +24,7 @@ class CreateTableUserAuths extends Migration
         Schema::create('user_auths', function(Blueprint $table)
         {
             $table->bigInteger('id', true)->unsigned();
-            $table->bigInteger('user_id')->unsigned()->index('user_id');
+            $table->bigInteger('user_id')->unsigned()->index();
 
             $table->string('os', 191)->nullable();
             $table->string('device', 191)->nullable();
@@ -35,7 +35,7 @@ class CreateTableUserAuths extends Migration
             $table->float('longitude', 14, 10)->nullable();
 
             $table->timestamps();
-            $table->softDeletes()->index('deleted_at');
+            $table->softDeletes()->index();
         });
     }
 
