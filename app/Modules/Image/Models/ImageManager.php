@@ -28,6 +28,6 @@ class ImageManager extends Manager
      */
     public function getDefaultDriver(): string
     {
-        Config::get('image.record');
+        return Config::get('image.record');
     }
 }

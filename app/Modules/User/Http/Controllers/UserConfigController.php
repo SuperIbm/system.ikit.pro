@@ -41,8 +41,7 @@ class UserConfigController extends Controller
         $action = app(UserConfigGetAction::class);
 
         $data = $action->setParameters([
-            "id" => Auth::getUser()->id,
-            "school" => School::getId()
+            "id" => Auth::getUser()->id
         ])->run();
 
         if(!$action->hasError())
@@ -97,27 +96,17 @@ class UserConfigController extends Controller
         $action = app(UserConfigUpdateAction::class);
         $data = $request->all();
 
-        $data = $action->setParameters([
+        $action->setParameters([
             "id" => Auth::getUser()->id,
-            "school" => School::getId(),
             "data" => $data
         ])->run();
 
         if(!$action->hasError())
         {
-            if($data)
-            {
-                $data = [
-                    'success' => true,
-                    'message' => trans('access::http.controllers.userConfigController.update.message')
-                ];
-            }
-            else
-            {
-                $data = [
-                    'success' => false
-                ];
-            }
+            $data = [
+                'success' => true,
+                'message' => trans('access::http.controllers.userConfigController.update.message')
+            ];
         }
         else
         {

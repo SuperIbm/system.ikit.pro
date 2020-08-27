@@ -54,24 +54,9 @@ class UserConfigGetAction extends Action
      */
     public function run()
     {
-        if($this->getParameter("id") && $this->getParameter("school"))
+        if($this->getParameter("id"))
         {
-            $filters = [
-                [
-                    "table" => "users",
-                    "property" => "id",
-                    "operator" => "=",
-                    "value" => $this->getParameter("id")
-                ],
-                [
-                    "table" => "user_schools",
-                    "property" => "school_id",
-                    "operator" => "=",
-                    "value" => $this->getParameter("school")
-                ]
-            ];
-
-            $configs = $this->_user->flags(null, null, $filters);
+            $configs = $this->_user->flags($this->getParameter("id"));
 
             if(!$this->_user->hasError()) return $configs;
             else

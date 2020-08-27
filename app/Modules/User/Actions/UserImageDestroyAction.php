@@ -12,16 +12,17 @@ namespace App\Modules\User\Actions;
 
 use App\Models\Action;
 use App\Modules\User\Repositories\User;
+use ImageStore;
 
 /**
- * Обновление конфигураций пользователя.
+ * Удаление изображения пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class UserConfigUpdateAction extends Action
+class UserImageDestroyAction extends Action
 {
     /**
      * Репозитарий для выбранных групп пользователя.
@@ -54,17 +55,46 @@ class UserConfigUpdateAction extends Action
      */
     public function run()
     {
-        if($this->getParameter("id"))
+        if($this->getParameter("id") && $this->getParameter("school"))
         {
-            $user = $this->_user->get($this->getParameter("id"));
+            $filters = [
+                [
+                    "table" => "users",
+                    "property" => "id",
+                    "operator" => "=",
+                    "value" => $this->getParameter("id")
+                ],
+                [
+                    "table" => "user_schools",
+                    "property" => "school_id",
+                    "operator" => "=",
+                    "value" => $this->getParameter("school")
+                ]
+            ];
+
+            $user = $this->_user->get(null, null, $filters, [
+                "schools"
+            ]);
 
             if(!$this->_user->hasError())
             {
                 if($user)
                 {
-                    $this->_user->setFlags($this->getParameter("id"), $this->getParameter("data"));
+                    if($user['image_small_id']) ImageStore::destroy("user", $user['image_small_id']['id']);
+                    if($user['image_middle_id']) ImageStore::destroy("user", $user['image_middle_id']['id']);
 
-                    return true;
+                    $this->_user->update($this->getParameter("id"), [
+                        'image_small_id' => null,
+                        'image_middle_id' => null
+                    ]);
+
+                    if(!$this->_user->hasError()) return true;
+                    else
+                    {
+                        $this->setErrors($this->_user->getErrors());
+
+                        return false;
+                    }
                 }
                 else
                 {

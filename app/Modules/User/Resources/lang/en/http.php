@@ -35,5 +35,18 @@ return [
                 'message' => 'The config of the user has been updated.'
             ],
         ],
+        'userImageController' => [
+            'get' => [
+                'log' => 'Get the image of the user.'
+            ],
+            'update' => [
+                'log' => 'Update the image of the user.',
+                'message' => 'The image of the user has been updated.'
+            ],
+            'destroy' => [
+                'log' => 'Destroy the image of the user.',
+                'message' => 'The image of the user has been deleted.'
+            ]
+        ]
     ]
 ];

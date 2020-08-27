@@ -29,6 +29,6 @@ class DocumentManager extends Manager
      */
     public function getDefaultDriver()
     {
-        Config::get('document.record');
+        return Config::get('document.record');
     }
 }

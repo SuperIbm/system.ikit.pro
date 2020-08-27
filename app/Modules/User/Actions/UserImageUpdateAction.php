@@ -14,14 +14,14 @@ use App\Models\Action;
 use App\Modules\User\Repositories\User;
 
 /**
- * Обновление конфигураций пользователя.
+ * Обновление изображения пользователя.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class UserConfigUpdateAction extends Action
+class UserImageUpdateAction extends Action
 {
     /**
      * Репозитарий для выбранных групп пользователя.
@@ -54,17 +54,43 @@ class UserConfigUpdateAction extends Action
      */
     public function run()
     {
-        if($this->getParameter("id"))
+        if($this->getParameter("id") && $this->getParameter("school"))
         {
-            $user = $this->_user->get($this->getParameter("id"));
+            $filters = [
+                [
+                    "table" => "users",
+                    "property" => "id",
+                    "operator" => "=",
+                    "value" => $this->getParameter("id")
+                ],
+                [
+                    "table" => "user_schools",
+                    "property" => "school_id",
+                    "operator" => "=",
+                    "value" => $this->getParameter("school")
+                ]
+            ];
+
+            $user = $this->_user->get(null, null, $filters, [
+                "schools"
+            ]);
 
             if(!$this->_user->hasError())
             {
                 if($user)
                 {
-                    $this->_user->setFlags($this->getParameter("id"), $this->getParameter("data"));
+                    $this->_user->update($this->getParameter("id"), [
+                        'image_small_id' => $this->getParameter("image"),
+                        'image_middle_id' => $this->getParameter("image")
+                    ]);
 
-                    return true;
+                    if(!$this->_user->hasError()) return true;
+                    else
+                    {
+                        $this->setErrors($this->_user->getErrors());
+
+                        return false;
+                    }
                 }
                 else
                 {
