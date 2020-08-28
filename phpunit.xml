@@ -5,11 +5,11 @@
          colors="true"
 >
     <testsuites>
-        <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
+        <testsuite name="Core">
+            <directory suffix="Test.php">./app/Test</directory>
         </testsuite>
-        <testsuite name="Feature">
-            <directory suffix="Test.php">./tests/Feature</directory>
+        <testsuite name="Modules">
+            <directory suffix="Test.php">./app/Modules</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -19,13 +19,24 @@
     </filter>
     <php>
         <server name="APP_ENV" value="testing"/>
+        <server name="APP_KEY" value="base64:OzWID/BypjRtB1fwhf7VBz9GiRKEEl8bKJPzn2H32+Q="/>
+        <server name="APP_URL" value="http://loc.system.ikit.pro"/>
+        <server name="APP_NAME" value="iKit"/>
+        <server name="APP_TIMEZONE" value="Europe/Moscow"/>
+        <server name="APP_LOCALE" value="ru"/>
+        <server name="IMAGE" value="database"/>
+        <server name="IMAGE_DRIVER" value="local"/>
+        <server name="DOCUMENT" value="database"/>
+        <server name="DOCUMENT_DRIVER" value="local"/>
+        <server name="OAUTH_DRIVER" value="database"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
         <server name="CACHE_DRIVER" value="array"/>
         <server name="DB_CONNECTION" value="sqlite"/>
-        <server name="DB_DATABASE" value=":memory:"/>
+        <server name="DB_DATABASE" value="D:/sqlite/data/ikit_system.db"/>
         <server name="MAIL_MAILER" value="array"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
         <server name="TELESCOPE_ENABLED" value="false"/>
+        <server name="SMS_DRIVER" value="log"/>
     </php>
 </phpunit>
