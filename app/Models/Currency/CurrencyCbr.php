@@ -13,6 +13,7 @@ namespace App\Models\Currency;
 use Carbon\Carbon;
 use Yangqi\Htmldom\Htmldom;
 use App\Models\Contracts\Currency;
+use XmlParser;
 
 /**
  * Класс драйвер для удаленного получения котировок с центрабанка России.
@@ -37,24 +38,31 @@ class CurrencyCbr extends Currency
     public function get(Carbon $carbon, string $charCode)
     {
         $pathToFile = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=" . $carbon->format("d.m.Y");
-        $htmldom = new Htmldom("<html></html>", true, true);
+        $xml = XmlParser::load($pathToFile);
 
-        if($htmldom->Valute)
+        if($xml)
         {
-            $data = [];
+            $result = $xml->parse([
+                'values' => ['uses' => 'Valute[NumCode,CharCode,Nominal,Name,Value]']
+            ]);
 
-            foreach($htmldom->Valute as $item)
+            if($result && isset($result['values']))
             {
-                $data[$item->CharCode->asText()] = [
-                    "numCode" => $item->NumCode->asText(),
-                    "nominal" => $item->Nominal->asText(),
-                    "name" => $item->Name->asText(),
-                    'value' => (float)str_replace(",", ".", $item->Value->asText())
-                ];
-            }
+                $data = [];
 
-            if(isset($data[$charCode])) return $data[$charCode];
-            else return $data;
+                for($i = 0; $i < count($result['values']); $i++)
+                {
+                    $data[$result['values'][$i]['CharCode']] = [
+                        "numCode" => $result['values'][$i]['NumCode'],
+                        "nominal" => $result['values'][$i]['Nominal'],
+                        "name" => $result['values'][$i]['Name'],
+                        'value' => (float)str_replace(",", ".", $result['values'][$i]['Value'])
+                    ];
+                }
+
+                if(isset($data[$charCode])) return $data[$charCode];
+                else return $data;
+            }
         }
 
         return false;

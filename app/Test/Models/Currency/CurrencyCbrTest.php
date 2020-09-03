@@ -36,6 +36,6 @@ class CurrencyCbrTest extends TestCase
         $currency = new CurrencyCbr();
         $result = $currency->get(Carbon::now(), "USD");
 
-        $this->assertEquals('test', $result);
+        $this->assertArrayHasKey('value', $result);
     }
 }

@@ -4016,12 +4016,12 @@
                     /**
          * Get a schema builder instance for the connection.
          *
-         * @return \Illuminate\Database\Schema\MySqlBuilder 
+         * @return \Illuminate\Database\Schema\SQLiteBuilder 
          * @static 
          */ 
         public static function getSchemaBuilder()
         {
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getSchemaBuilder();
         }
                     /**
@@ -4032,7 +4032,7 @@
          */ 
         public static function useDefaultQueryGrammar()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->useDefaultQueryGrammar();
         }
                     /**
@@ -4043,7 +4043,7 @@
          */ 
         public static function useDefaultSchemaGrammar()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->useDefaultSchemaGrammar();
         }
                     /**
@@ -4054,7 +4054,7 @@
          */ 
         public static function useDefaultPostProcessor()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->useDefaultPostProcessor();
         }
                     /**
@@ -4067,7 +4067,7 @@
          */ 
         public static function table($table, $as = null)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->table($table, $as);
         }
                     /**
@@ -4078,7 +4078,7 @@
          */ 
         public static function query()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->query();
         }
                     /**
@@ -4092,7 +4092,7 @@
          */ 
         public static function selectOne($query, $bindings = [], $useReadPdo = true)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->selectOne($query, $bindings, $useReadPdo);
         }
                     /**
@@ -4105,7 +4105,7 @@
          */ 
         public static function selectFromWriteConnection($query, $bindings = [])
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->selectFromWriteConnection($query, $bindings);
         }
                     /**
@@ -4119,7 +4119,7 @@
          */ 
         public static function select($query, $bindings = [], $useReadPdo = true)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->select($query, $bindings, $useReadPdo);
         }
                     /**
@@ -4133,7 +4133,7 @@
          */ 
         public static function cursor($query, $bindings = [], $useReadPdo = true)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->cursor($query, $bindings, $useReadPdo);
         }
                     /**
@@ -4146,7 +4146,7 @@
          */ 
         public static function insert($query, $bindings = [])
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->insert($query, $bindings);
         }
                     /**
@@ -4159,7 +4159,7 @@
          */ 
         public static function update($query, $bindings = [])
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->update($query, $bindings);
         }
                     /**
@@ -4172,7 +4172,7 @@
          */ 
         public static function delete($query, $bindings = [])
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->delete($query, $bindings);
         }
                     /**
@@ -4185,7 +4185,7 @@
          */ 
         public static function statement($query, $bindings = [])
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->statement($query, $bindings);
         }
                     /**
@@ -4198,7 +4198,7 @@
          */ 
         public static function affectingStatement($query, $bindings = [])
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->affectingStatement($query, $bindings);
         }
                     /**
@@ -4210,7 +4210,7 @@
          */ 
         public static function unprepared($query)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->unprepared($query);
         }
                     /**
@@ -4222,7 +4222,7 @@
          */ 
         public static function pretend($callback)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->pretend($callback);
         }
                     /**
@@ -4235,7 +4235,7 @@
          */ 
         public static function bindValues($statement, $bindings)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->bindValues($statement, $bindings);
         }
                     /**
@@ -4247,7 +4247,7 @@
          */ 
         public static function prepareBindings($bindings)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->prepareBindings($bindings);
         }
                     /**
@@ -4261,7 +4261,7 @@
          */ 
         public static function logQuery($query, $bindings, $time = null)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->logQuery($query, $bindings, $time);
         }
                     /**
@@ -4273,7 +4273,7 @@
          */ 
         public static function listen($callback)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->listen($callback);
         }
                     /**
@@ -4285,7 +4285,7 @@
          */ 
         public static function raw($value)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->raw($value);
         }
                     /**
@@ -4297,7 +4297,7 @@
          */ 
         public static function recordsHaveBeenModified($value = true)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->recordsHaveBeenModified($value);
         }
                     /**
@@ -4308,7 +4308,7 @@
          */ 
         public static function isDoctrineAvailable()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->isDoctrineAvailable();
         }
                     /**
@@ -4321,7 +4321,7 @@
          */ 
         public static function getDoctrineColumn($table, $column)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getDoctrineColumn($table, $column);
         }
                     /**
@@ -4332,7 +4332,7 @@
          */ 
         public static function getDoctrineSchemaManager()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getDoctrineSchemaManager();
         }
                     /**
@@ -4343,7 +4343,7 @@
          */ 
         public static function getDoctrineConnection()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getDoctrineConnection();
         }
                     /**
@@ -4354,7 +4354,7 @@
          */ 
         public static function getPdo()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getPdo();
         }
                     /**
@@ -4365,7 +4365,7 @@
          */ 
         public static function getRawPdo()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getRawPdo();
         }
                     /**
@@ -4376,7 +4376,7 @@
          */ 
         public static function getReadPdo()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getReadPdo();
         }
                     /**
@@ -4387,31 +4387,31 @@
          */ 
         public static function getRawReadPdo()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getRawReadPdo();
         }
                     /**
          * Set the PDO connection.
          *
          * @param \PDO|\Closure|null $pdo
-         * @return \Illuminate\Database\MySqlConnection 
+         * @return \Illuminate\Database\SQLiteConnection 
          * @static 
          */ 
         public static function setPdo($pdo)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->setPdo($pdo);
         }
                     /**
          * Set the PDO connection used for reading.
          *
          * @param \PDO|\Closure|null $pdo
-         * @return \Illuminate\Database\MySqlConnection 
+         * @return \Illuminate\Database\SQLiteConnection 
          * @static 
          */ 
         public static function setReadPdo($pdo)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->setReadPdo($pdo);
         }
                     /**
@@ -4422,7 +4422,7 @@
          */ 
         public static function getName()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getName();
         }
                     /**
@@ -4434,7 +4434,7 @@
          */ 
         public static function getConfig($option = null)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getConfig($option);
         }
                     /**
@@ -4445,7 +4445,7 @@
          */ 
         public static function getDriverName()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getDriverName();
         }
                     /**
@@ -4456,19 +4456,19 @@
          */ 
         public static function getQueryGrammar()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getQueryGrammar();
         }
                     /**
          * Set the query grammar used by the connection.
          *
          * @param \Illuminate\Database\Query\Grammars\Grammar $grammar
-         * @return \Illuminate\Database\MySqlConnection 
+         * @return \Illuminate\Database\SQLiteConnection 
          * @static 
          */ 
         public static function setQueryGrammar($grammar)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->setQueryGrammar($grammar);
         }
                     /**
@@ -4479,19 +4479,19 @@
          */ 
         public static function getSchemaGrammar()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getSchemaGrammar();
         }
                     /**
          * Set the schema grammar used by the connection.
          *
          * @param \Illuminate\Database\Schema\Grammars\Grammar $grammar
-         * @return \Illuminate\Database\MySqlConnection 
+         * @return \Illuminate\Database\SQLiteConnection 
          * @static 
          */ 
         public static function setSchemaGrammar($grammar)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->setSchemaGrammar($grammar);
         }
                     /**
@@ -4502,19 +4502,19 @@
          */ 
         public static function getPostProcessor()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getPostProcessor();
         }
                     /**
          * Set the query post processor used by the connection.
          *
          * @param \Illuminate\Database\Query\Processors\Processor $processor
-         * @return \Illuminate\Database\MySqlConnection 
+         * @return \Illuminate\Database\SQLiteConnection 
          * @static 
          */ 
         public static function setPostProcessor($processor)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->setPostProcessor($processor);
         }
                     /**
@@ -4525,19 +4525,19 @@
          */ 
         public static function getEventDispatcher()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getEventDispatcher();
         }
                     /**
          * Set the event dispatcher instance on the connection.
          *
          * @param \Illuminate\Contracts\Events\Dispatcher $events
-         * @return \Illuminate\Database\MySqlConnection 
+         * @return \Illuminate\Database\SQLiteConnection 
          * @static 
          */ 
         public static function setEventDispatcher($events)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->setEventDispatcher($events);
         }
                     /**
@@ -4548,7 +4548,7 @@
          */ 
         public static function unsetEventDispatcher()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->unsetEventDispatcher();
         }
                     /**
@@ -4559,7 +4559,7 @@
          */ 
         public static function pretending()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->pretending();
         }
                     /**
@@ -4570,7 +4570,7 @@
          */ 
         public static function getQueryLog()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getQueryLog();
         }
                     /**
@@ -4581,7 +4581,7 @@
          */ 
         public static function flushQueryLog()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->flushQueryLog();
         }
                     /**
@@ -4592,7 +4592,7 @@
          */ 
         public static function enableQueryLog()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->enableQueryLog();
         }
                     /**
@@ -4603,7 +4603,7 @@
          */ 
         public static function disableQueryLog()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->disableQueryLog();
         }
                     /**
@@ -4614,7 +4614,7 @@
          */ 
         public static function logging()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->logging();
         }
                     /**
@@ -4625,19 +4625,19 @@
          */ 
         public static function getDatabaseName()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getDatabaseName();
         }
                     /**
          * Set the name of the connected database.
          *
          * @param string $database
-         * @return \Illuminate\Database\MySqlConnection 
+         * @return \Illuminate\Database\SQLiteConnection 
          * @static 
          */ 
         public static function setDatabaseName($database)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->setDatabaseName($database);
         }
                     /**
@@ -4648,19 +4648,19 @@
          */ 
         public static function getTablePrefix()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->getTablePrefix();
         }
                     /**
          * Set the table prefix in use by the connection.
          *
          * @param string $prefix
-         * @return \Illuminate\Database\MySqlConnection 
+         * @return \Illuminate\Database\SQLiteConnection 
          * @static 
          */ 
         public static function setTablePrefix($prefix)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->setTablePrefix($prefix);
         }
                     /**
@@ -4672,7 +4672,7 @@
          */ 
         public static function withTablePrefix($grammar)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->withTablePrefix($grammar);
         }
                     /**
@@ -4685,7 +4685,7 @@
          */ 
         public static function resolverFor($driver, $callback)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        \Illuminate\Database\MySqlConnection::resolverFor($driver, $callback);
+                        \Illuminate\Database\SQLiteConnection::resolverFor($driver, $callback);
         }
                     /**
          * Get the connection resolver for the given driver.
@@ -4696,7 +4696,7 @@
          */ 
         public static function getResolver($driver)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        return \Illuminate\Database\MySqlConnection::getResolver($driver);
+                        return \Illuminate\Database\SQLiteConnection::getResolver($driver);
         }
                     /**
          * Execute a Closure within a transaction.
@@ -4709,7 +4709,7 @@
          */ 
         public static function transaction($callback, $attempts = 1)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->transaction($callback, $attempts);
         }
                     /**
@@ -4721,7 +4721,7 @@
          */ 
         public static function beginTransaction()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->beginTransaction();
         }
                     /**
@@ -4733,7 +4733,7 @@
          */ 
         public static function commit()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->commit();
         }
                     /**
@@ -4746,7 +4746,7 @@
          */ 
         public static function rollBack($toLevel = null)
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         $instance->rollBack($toLevel);
         }
                     /**
@@ -4757,7 +4757,7 @@
          */ 
         public static function transactionLevel()
         {            //Method inherited from \Illuminate\Database\Connection         
-                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        /** @var \Illuminate\Database\SQLiteConnection $instance */
                         return $instance->transactionLevel();
         }
          
@@ -11280,30 +11280,6 @@
      */ 
         class Schema {
                     /**
-         * Determine if the given table exists.
-         *
-         * @param string $table
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasTable($table)
-        {
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
-                        return $instance->hasTable($table);
-        }
-                    /**
-         * Get the column listing for a given table.
-         *
-         * @param string $table
-         * @return array 
-         * @static 
-         */ 
-        public static function getColumnListing($table)
-        {
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
-                        return $instance->getColumnListing($table);
-        }
-                    /**
          * Drop all tables from the database.
          *
          * @return void 
@@ -11311,7 +11287,7 @@
          */ 
         public static function dropAllTables()
         {
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         $instance->dropAllTables();
         }
                     /**
@@ -11322,30 +11298,19 @@
          */ 
         public static function dropAllViews()
         {
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         $instance->dropAllViews();
         }
                     /**
-         * Get all of the table names for the database.
+         * Empty the database file.
          *
-         * @return array 
+         * @return void 
          * @static 
          */ 
-        public static function getAllTables()
+        public static function refreshDatabaseFile()
         {
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
-                        return $instance->getAllTables();
-        }
-                    /**
-         * Get all of the view names for the database.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getAllViews()
-        {
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
-                        return $instance->getAllViews();
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
+                        $instance->refreshDatabaseFile();
         }
                     /**
          * Set the default string length for migrations.
@@ -11356,7 +11321,19 @@
          */ 
         public static function defaultStringLength($length)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        \Illuminate\Database\Schema\MySqlBuilder::defaultStringLength($length);
+                        \Illuminate\Database\Schema\SQLiteBuilder::defaultStringLength($length);
+        }
+                    /**
+         * Determine if the given table exists.
+         *
+         * @param string $table
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasTable($table)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
+                        return $instance->hasTable($table);
         }
                     /**
          * Determine if the given table has a given column.
@@ -11368,7 +11345,7 @@
          */ 
         public static function hasColumn($table, $column)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         return $instance->hasColumn($table, $column);
         }
                     /**
@@ -11381,7 +11358,7 @@
          */ 
         public static function hasColumns($table, $columns)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         return $instance->hasColumns($table, $columns);
         }
                     /**
@@ -11394,8 +11371,20 @@
          */ 
         public static function getColumnType($table, $column)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         return $instance->getColumnType($table, $column);
+        }
+                    /**
+         * Get the column listing for a given table.
+         *
+         * @param string $table
+         * @return array 
+         * @static 
+         */ 
+        public static function getColumnListing($table)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
+                        return $instance->getColumnListing($table);
         }
                     /**
          * Modify a table on the schema.
@@ -11407,7 +11396,7 @@
          */ 
         public static function table($table, $callback)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         $instance->table($table, $callback);
         }
                     /**
@@ -11420,7 +11409,7 @@
          */ 
         public static function create($table, $callback)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         $instance->create($table, $callback);
         }
                     /**
@@ -11432,7 +11421,7 @@
          */ 
         public static function drop($table)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         $instance->drop($table);
         }
                     /**
@@ -11444,7 +11433,7 @@
          */ 
         public static function dropIfExists($table)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         $instance->dropIfExists($table);
         }
                     /**
@@ -11456,8 +11445,20 @@
          */ 
         public static function dropAllTypes()
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         $instance->dropAllTypes();
+        }
+                    /**
+         * Get all of the table names for the database.
+         *
+         * @return void 
+         * @throws \LogicException
+         * @static 
+         */ 
+        public static function getAllTables()
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
+                        $instance->getAllTables();
         }
                     /**
          * Rename a table on the schema.
@@ -11469,7 +11470,7 @@
          */ 
         public static function rename($from, $to)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         $instance->rename($from, $to);
         }
                     /**
@@ -11480,7 +11481,7 @@
          */ 
         public static function enableForeignKeyConstraints()
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         return $instance->enableForeignKeyConstraints();
         }
                     /**
@@ -11491,7 +11492,7 @@
          */ 
         public static function disableForeignKeyConstraints()
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         return $instance->disableForeignKeyConstraints();
         }
                     /**
@@ -11507,7 +11508,7 @@
          */ 
         public static function registerCustomDoctrineType($class, $name, $type)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         $instance->registerCustomDoctrineType($class, $name, $type);
         }
                     /**
@@ -11518,19 +11519,19 @@
          */ 
         public static function getConnection()
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         return $instance->getConnection();
         }
                     /**
          * Set the database connection instance.
          *
          * @param \Illuminate\Database\Connection $connection
-         * @return \Illuminate\Database\Schema\MySqlBuilder 
+         * @return \Illuminate\Database\Schema\SQLiteBuilder 
          * @static 
          */ 
         public static function setConnection($connection)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         return $instance->setConnection($connection);
         }
                     /**
@@ -11542,7 +11543,7 @@
          */ 
         public static function blueprintResolver($resolver)
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
-                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        /** @var \Illuminate\Database\Schema\SQLiteBuilder $instance */
                         $instance->blueprintResolver($resolver);
         }
          
@@ -15710,6 +15711,383 @@
      
 }
 
+    namespace Orchestra\Parser\Xml { 
+            /**
+     * 
+     *
+     * @see \Orchestra\Parser\Xml\Reader
+     */ 
+        class Facade {
+                    /**
+         * Provides SimpleXMLElement to document.
+         *
+         * @return \Laravie\Parser\Document 
+         * @static 
+         */ 
+        public static function via($xml)
+        {
+                        /** @var \Orchestra\Parser\Xml\Reader $instance */
+                        return $instance->via($xml);
+        }
+                    /**
+         * Extract content from string.
+         *
+         * @param string $content
+         * @return \Laravie\Parser\Document 
+         * @static 
+         */ 
+        public static function extract($content)
+        {            //Method inherited from \Laravie\Parser\Xml\Reader         
+                        /** @var \Orchestra\Parser\Xml\Reader $instance */
+                        return $instance->extract($content);
+        }
+                    /**
+         * Load content from file.
+         *
+         * @param string $filename
+         * @return \Laravie\Parser\Document 
+         * @static 
+         */ 
+        public static function load($filename)
+        {            //Method inherited from \Laravie\Parser\Xml\Reader         
+                        /** @var \Orchestra\Parser\Xml\Reader $instance */
+                        return $instance->load($filename);
+        }
+                    /**
+         * Load content from local file.
+         *
+         * @param string $filename
+         * @return \Laravie\Parser\Document 
+         * @static 
+         */ 
+        public static function local($filename)
+        {            //Method inherited from \Laravie\Parser\Xml\Reader         
+                        /** @var \Orchestra\Parser\Xml\Reader $instance */
+                        return $instance->local($filename);
+        }
+                    /**
+         * Load content from remote file.
+         *
+         * @param string $filename
+         * @return \Laravie\Parser\Document 
+         * @static 
+         */ 
+        public static function remote($filename)
+        {            //Method inherited from \Laravie\Parser\Xml\Reader         
+                        /** @var \Orchestra\Parser\Xml\Reader $instance */
+                        return $instance->remote($filename);
+        }
+         
+    }
+     
+}
+
+    namespace Jackiedo\LogReader\Facades { 
+            /**
+     * The LogReader class.
+     *
+     * @package Jackiedo\LogReader
+     * @author Jackie Do <anhvudo@gmail.com>
+     * @copyright 2017
+     * @access public
+     */ 
+        class LogReader {
+                    /**
+         * Sets the path to directory storing the log files.
+         *
+         * @param string $path
+         * @return void 
+         * @static 
+         */ 
+        public static function setLogPath($path)
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        $instance->setLogPath($path);
+        }
+                    /**
+         * Setting the parser for structural analysis
+         *
+         * @param object $parser
+         * @return void 
+         * @static 
+         */ 
+        public static function setLogParser($parser)
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        $instance->setLogParser($parser);
+        }
+                    /**
+         * Get instance of Levelable
+         *
+         * @return \Jackiedo\LogReader\Levelable 
+         * @static 
+         */ 
+        public static function getLevelable()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getLevelable();
+        }
+                    /**
+         * Retrieves the orderByField property.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getOrderByField()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getOrderByField();
+        }
+                    /**
+         * Retrieves the orderByDirection property.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getOrderByDirection()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getOrderByDirection();
+        }
+                    /**
+         * Retrieves the environment property.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getEnvironment()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getEnvironment();
+        }
+                    /**
+         * Retrieves the level property.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getLevel()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getLevel();
+        }
+                    /**
+         * Retrieves the currentLogPath property.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getCurrentLogPath()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getCurrentLogPath();
+        }
+                    /**
+         * Retrieves the path to directory storing the log files.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getLogPath()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getLogPath();
+        }
+                    /**
+         * Retrieves the log filename property.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getLogFilename()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getLogFilename();
+        }
+                    /**
+         * Sets the environment to sort the log entries by.
+         *
+         * @param string $environment
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function environment($environment)
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->environment($environment);
+        }
+                    /**
+         * Sets the level to sort the log entries by.
+         *
+         * @param mixed $level
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function level($level)
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->level($level);
+        }
+                    /**
+         * Sets the filename to get log entries.
+         *
+         * @param string $filename
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function filename($filename)
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->filename($filename);
+        }
+                    /**
+         * Includes read entries in the log results.
+         *
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function withRead()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->withRead();
+        }
+                    /**
+         * Alias of the withRead() method.
+         *
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function includeRead()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->includeRead();
+        }
+                    /**
+         * Sets the direction to return the log entries in.
+         *
+         * @param string $field
+         * @param string $direction
+         * @return \Jackiedo\LogReader\LogReader 
+         * @static 
+         */ 
+        public static function orderBy($field, $direction = 'asc')
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->orderBy($field, $direction);
+        }
+                    /**
+         * Returns a Laravel collection of log entries.
+         *
+         * @throws \Jackiedo\LogReader\Exceptions\UnableToRetrieveLogFilesException
+         * @return \Jackiedo\LogReader\Collection 
+         * @static 
+         */ 
+        public static function get()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->get();
+        }
+                    /**
+         * Returns total of log entries.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function count()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->count();
+        }
+                    /**
+         * Finds a logged error by it's ID.
+         *
+         * @param string $id
+         * @return mixed|null 
+         * @static 
+         */ 
+        public static function find($id = '')
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->find($id);
+        }
+                    /**
+         * Marks all retrieved log entries as read and
+         * returns the number of entries that have been marked.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function markAsRead()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->markAsRead();
+        }
+                    /**
+         * Alias of the markAsRead() method.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function markRead()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->markRead();
+        }
+                    /**
+         * Deletes all retrieved log entries and returns
+         * the number of entries that have been deleted.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function delete()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->delete();
+        }
+                    /**
+         * Deletes all retrieved log entries and returns
+         * the number of entries that have been deleted.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function removeLogFile()
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->removeLogFile();
+        }
+                    /**
+         * Paginates the returned log entries.
+         *
+         * @param int $perPage
+         * @param int $currentPage
+         * @param array $options [path => '', query => [], fragment => '', pageName => '']
+         * @return mixed 
+         * @static 
+         */ 
+        public static function paginate($perPage = 25, $currentPage = null, $options = [])
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->paginate($perPage, $currentPage, $options);
+        }
+                    /**
+         * Returns an array of log filenames.
+         *
+         * @param null|string $filename
+         * @return array 
+         * @static 
+         */ 
+        public static function getLogFilenameList($filename = null)
+        {
+                        /** @var \Jackiedo\LogReader\LogReader $instance */
+                        return $instance->getLogFilenameList($filename);
+        }
+         
+    }
+     
+}
+
     namespace App\Models\Facades { 
             /**
      * Фасад класса для работы с утилитами.
@@ -17283,312 +17661,6 @@
         {
                         /** @var \Facade\FlareClient\Flare $instance */
                         return $instance->group($groupName, $properties);
-        }
-         
-    }
-     
-}
-
-    namespace Jackiedo\LogReader\Facades { 
-            /**
-     * The LogReader class.
-     *
-     * @package Jackiedo\LogReader
-     * @author Jackie Do <anhvudo@gmail.com>
-     * @copyright 2017
-     * @access public
-     */ 
-        class LogReader {
-                    /**
-         * Sets the path to directory storing the log files.
-         *
-         * @param string $path
-         * @return void 
-         * @static 
-         */ 
-        public static function setLogPath($path)
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        $instance->setLogPath($path);
-        }
-                    /**
-         * Setting the parser for structural analysis
-         *
-         * @param object $parser
-         * @return void 
-         * @static 
-         */ 
-        public static function setLogParser($parser)
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        $instance->setLogParser($parser);
-        }
-                    /**
-         * Get instance of Levelable
-         *
-         * @return \Jackiedo\LogReader\Levelable 
-         * @static 
-         */ 
-        public static function getLevelable()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->getLevelable();
-        }
-                    /**
-         * Retrieves the orderByField property.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getOrderByField()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->getOrderByField();
-        }
-                    /**
-         * Retrieves the orderByDirection property.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getOrderByDirection()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->getOrderByDirection();
-        }
-                    /**
-         * Retrieves the environment property.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getEnvironment()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->getEnvironment();
-        }
-                    /**
-         * Retrieves the level property.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getLevel()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->getLevel();
-        }
-                    /**
-         * Retrieves the currentLogPath property.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getCurrentLogPath()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->getCurrentLogPath();
-        }
-                    /**
-         * Retrieves the path to directory storing the log files.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getLogPath()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->getLogPath();
-        }
-                    /**
-         * Retrieves the log filename property.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getLogFilename()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->getLogFilename();
-        }
-                    /**
-         * Sets the environment to sort the log entries by.
-         *
-         * @param string $environment
-         * @return \Jackiedo\LogReader\LogReader 
-         * @static 
-         */ 
-        public static function environment($environment)
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->environment($environment);
-        }
-                    /**
-         * Sets the level to sort the log entries by.
-         *
-         * @param mixed $level
-         * @return \Jackiedo\LogReader\LogReader 
-         * @static 
-         */ 
-        public static function level($level)
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->level($level);
-        }
-                    /**
-         * Sets the filename to get log entries.
-         *
-         * @param string $filename
-         * @return \Jackiedo\LogReader\LogReader 
-         * @static 
-         */ 
-        public static function filename($filename)
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->filename($filename);
-        }
-                    /**
-         * Includes read entries in the log results.
-         *
-         * @return \Jackiedo\LogReader\LogReader 
-         * @static 
-         */ 
-        public static function withRead()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->withRead();
-        }
-                    /**
-         * Alias of the withRead() method.
-         *
-         * @return \Jackiedo\LogReader\LogReader 
-         * @static 
-         */ 
-        public static function includeRead()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->includeRead();
-        }
-                    /**
-         * Sets the direction to return the log entries in.
-         *
-         * @param string $field
-         * @param string $direction
-         * @return \Jackiedo\LogReader\LogReader 
-         * @static 
-         */ 
-        public static function orderBy($field, $direction = 'asc')
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->orderBy($field, $direction);
-        }
-                    /**
-         * Returns a Laravel collection of log entries.
-         *
-         * @throws \Jackiedo\LogReader\Exceptions\UnableToRetrieveLogFilesException
-         * @return \Jackiedo\LogReader\Collection 
-         * @static 
-         */ 
-        public static function get()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->get();
-        }
-                    /**
-         * Returns total of log entries.
-         *
-         * @return int 
-         * @static 
-         */ 
-        public static function count()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->count();
-        }
-                    /**
-         * Finds a logged error by it's ID.
-         *
-         * @param string $id
-         * @return mixed|null 
-         * @static 
-         */ 
-        public static function find($id = '')
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->find($id);
-        }
-                    /**
-         * Marks all retrieved log entries as read and
-         * returns the number of entries that have been marked.
-         *
-         * @return int 
-         * @static 
-         */ 
-        public static function markAsRead()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->markAsRead();
-        }
-                    /**
-         * Alias of the markAsRead() method.
-         *
-         * @return int 
-         * @static 
-         */ 
-        public static function markRead()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->markRead();
-        }
-                    /**
-         * Deletes all retrieved log entries and returns
-         * the number of entries that have been deleted.
-         *
-         * @return int 
-         * @static 
-         */ 
-        public static function delete()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->delete();
-        }
-                    /**
-         * Deletes all retrieved log entries and returns
-         * the number of entries that have been deleted.
-         *
-         * @return int 
-         * @static 
-         */ 
-        public static function removeLogFile()
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->removeLogFile();
-        }
-                    /**
-         * Paginates the returned log entries.
-         *
-         * @param int $perPage
-         * @param int $currentPage
-         * @param array $options [path => '', query => [], fragment => '', pageName => '']
-         * @return mixed 
-         * @static 
-         */ 
-        public static function paginate($perPage = 25, $currentPage = null, $options = [])
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->paginate($perPage, $currentPage, $options);
-        }
-                    /**
-         * Returns an array of log filenames.
-         *
-         * @param null|string $filename
-         * @return array 
-         * @static 
-         */ 
-        public static function getLogFilenameList($filename = null)
-        {
-                        /** @var \Jackiedo\LogReader\LogReader $instance */
-                        return $instance->getLogFilenameList($filename);
         }
          
     }
@@ -21510,6 +21582,8 @@ namespace  {
             class Debugbar extends \Barryvdh\Debugbar\Facade {}
             class MongoDb extends \Jenssegers\Mongodb\Eloquent\Model {}
             class Module extends \Nwidart\Modules\Facades\Module {}
+            class XmlParser extends \Orchestra\Parser\Xml\Facade {}
+            class LogReader extends \Jackiedo\LogReader\Facades\LogReader {}
             class Util extends \App\Models\Facades\Util {}
             class Device extends \App\Models\Facades\Device {}
             class Bot extends \App\Models\Facades\Bot {}
@@ -21526,7 +21600,6 @@ namespace  {
             class OAuth extends \App\Modules\OAuth\Facades\OAuth {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Image extends \Intervention\Image\Facades\Image {}
-            class LogReader extends \Jackiedo\LogReader\Facades\LogReader {}
             class FirebaseAuth extends \Kreait\Laravel\Firebase\Facades\FirebaseAuth {}
             class FirebaseDatabase extends \Kreait\Laravel\Firebase\Facades\FirebaseDatabase {}
             class FirebaseDynamicLinks extends \Kreait\Laravel\Firebase\Facades\FirebaseDynamicLinks {}
