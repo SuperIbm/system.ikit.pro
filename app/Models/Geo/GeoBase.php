@@ -35,25 +35,29 @@ class GeoBase extends Geo
      */
     public function get(string $ip = null)
     {
-        $ip = isset($ip) ? $ip : Request::ip();
-
-        $ch = curl_init('http://ipgeobase.ru:7020/geo?ip=' . $ip);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
-        $string = curl_exec($ch);
-
-        $string = iconv('windows-1251', "utf-8", $string);
-
-        $params = ['inetnum', 'country', 'city', 'region', 'district', 'lat', 'lng'];
-        $data = $out = [];
-
-        foreach($params as $param)
+        if(function_exists("curl_init"))
         {
-            if(preg_match('#<' . $param . '>(.*)</' . $param . '>#is', $string, $out)) $data[$param] = trim($out[1]);
-        }
+            $ip = isset($ip) ? $ip : Request::ip();
 
-        return $data;
+            $ch = curl_init('http://ipgeobase.ru:7020/geo?ip=' . $ip);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+            $string = curl_exec($ch);
+
+            $string = iconv('windows-1251', "utf-8", $string);
+
+            $params = ['inetnum', 'country', 'city', 'region', 'district', 'lat', 'lng'];
+            $data = $out = [];
+
+            foreach($params as $param)
+            {
+                if(preg_match('#<' . $param . '>(.*)</' . $param . '>#is', $string, $out)) $data[$param] = trim($out[1]);
+            }
+
+            return $data;
+        }
+        else return null;
     }
 }

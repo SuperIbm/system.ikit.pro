@@ -45,24 +45,36 @@ class GeocoderGoogle extends Geocoder
             if($address)
             {
                 $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&key=' . Config::get("geocoder.channels.google.key");
+
                 $ch = curl_init($url);
                 curl_setopt($ch, CURLOPT_HEADER, false);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_TIMEOUT, 3);
                 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
                 $data = curl_exec($ch);
                 $data = json_decode($data, true);
 
-                if($data["status"] == "OK")
+                if($data)
                 {
-                    return [
-                        "latitude" => $data["results"][0]["geometry"]["location"]['lat'],
-                        "longitude" => $data["results"][0]["geometry"]["location"]['lng']
-                    ];
+                    if($data["status"] == "OK")
+                    {
+                        return [
+                            "latitude" => $data["results"][0]["geometry"]["location"]['lat'],
+                            "longitude" => $data["results"][0]["geometry"]["location"]['lng']
+                        ];
+                    }
+                    else
+                    {
+                        $this->addError($data["status"], $data["error_message"]);
+
+                        return false;
+                    }
                 }
                 else
                 {
-                    $this->addError($data["status"], $data["error_message"]);
+                    $this->addError(curl_errno($ch), curl_error($ch));
+
                     return false;
                 }
             }
