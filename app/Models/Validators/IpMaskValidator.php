@@ -10,8 +10,6 @@
 
 namespace App\Models\Validators;
 
-use DB;
-
 /**
  * Классы для валидации маски IP.
  *
@@ -32,7 +30,7 @@ class IpMaskValidator
      * @since 1.0
      * @version 1.0
      */
-    public function validate(string $attribute, $value): bool
+    public function validate(?string $attribute, $value): bool
     {
         return preg_match('/^(([0-9]{1,3})|(\*{1}))\.(([0-9]{1,3})|(\*{1}))\.(([0-9]{1,3})|(\*{1}))\.(([0-9]{1,3})|(\*{1}))$/', $value);
     }

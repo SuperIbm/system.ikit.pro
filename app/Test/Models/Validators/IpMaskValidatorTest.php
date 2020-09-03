@@ -8,20 +8,20 @@
  * @version 1.0
  */
 
-namespace App\Test\Models\Geo;
+namespace App\Test\Models\Validators;
 
 use Tests\TestCase;
-use App\Models\Geo\GeoBase;
+use App\Models\Validators\IpMaskValidator;
 
 /**
- * Тестирование: Класс драйвер геопозиционирования на основе сервиса ipgeobase.ru.
+ * Тестирование: Классы для валидации дробных чисел.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class GeoBaseTest extends TestCase
+class IpMaskValidatorTest extends TestCase
 {
     /**
      * Конвертирование из одной кодировки в другую.
@@ -32,10 +32,9 @@ class GeoBaseTest extends TestCase
      */
     public function testRun(): void
     {
-        $geo = new GeoBase();
-        $result = $geo->get("91.77.237.161");
+        $validator = new IpMaskValidator();
+        $result = $validator->validate(null, "128.0.0.*");
 
-        $this->assertArrayHasKey('lat', $result);
-        $this->assertArrayHasKey('lng', $result);
+        $this->assertTrue($result);
     }
 }

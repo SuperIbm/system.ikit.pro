@@ -30,7 +30,7 @@ class FloatValidator
      * @since 1.0
      * @version 1.0
      */
-    public function validate(string $attribute, $value): bool
+    public function validate(?string $attribute, $value): bool
     {
         if(is_numeric($value))
         {

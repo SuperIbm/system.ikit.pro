@@ -3,12 +3,12 @@
  * Тестирование ядра базовых классов.
  * Этот пакет содержит набор тестов для ядра баззовых классов.
  *
- * @package App.Models
+ * @package App.Test.Models
  * @since 1.0
  * @version 1.0
  */
 
-namespace App\Test\Models;
+namespace App\Test\Models\Geocoder;
 
 use Tests\TestCase;
 use App\Models\Geocoder\GeocoderGoogle;

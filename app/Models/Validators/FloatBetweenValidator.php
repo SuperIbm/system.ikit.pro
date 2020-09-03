@@ -10,7 +10,6 @@
 
 namespace App\Models\Validators;
 
-
 /**
  * Класс для вадидации рейнджа дробного числа.
  *
@@ -32,7 +31,7 @@ class FloatBetweenValidator
      * @since 1.0
      * @version 1.0
      */
-    public function validate(string $attribute, $value, array $parameters): bool
+    public function validate(?string $attribute, $value, array $parameters): bool
     {
         if(is_numeric($value))
         {
