@@ -14,7 +14,6 @@ use Carbon\Carbon;
 use Yangqi\Htmldom\Htmldom;
 use App\Models\Contracts\Currency;
 
-
 /**
  * Класс драйвер для удаленного получения котировок с центрабанка России.
  *
@@ -38,7 +37,7 @@ class CurrencyCbr extends Currency
     public function get(Carbon $carbon, string $charCode)
     {
         $pathToFile = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=" . $carbon->format("d.m.Y");
-        $htmldom = new Htmldom($pathToFile, true, true);
+        $htmldom = new Htmldom("<html></html>", true, true);
 
         if($htmldom->Valute)
         {

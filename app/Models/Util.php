@@ -1,4 +1,12 @@
 <?php
+/**
+ * Ядро базовых классов.
+ * Этот пакет содержит ядро базовых классов для работы с основными компонентами и возможностями системы.
+ *
+ * @package App.Models
+ * @since 1.0
+ * @version 1.0
+ */
 
 namespace App\Models;
 
@@ -467,7 +475,7 @@ class Util
         if($label)
         {
             if($beginning) $money = $label . $money;
-            else $money = $money." ".$label;
+            else $money = $money . " " . $label;
         }
 
         return $money;

@@ -299,7 +299,8 @@ return [
         // Advanced classes
         'MongoDb' => Jenssegers\Mongodb\Eloquent\Model::class,
         'Module' => Nwidart\Modules\Facades\Module::class,
-        //'LogReader' => Jackiedo\LogReader\Facades\LogReader::class,
+        'XmlParser' => Orchestra\Parser\Xml\Facade::class,
+        'LogReader' => Jackiedo\LogReader\Facades\LogReader::class,
 
         // Own classes
         'Util' => App\Models\Facades\Util::class,
@@ -316,7 +317,7 @@ return [
         'DocumentStore' => App\Modules\Document\Facades\Document::class,
         'Alert' => App\Modules\Alert\Facades\Alert::class,
         'Size' => Intervention\Image\Facades\Image::class,
-        'OAuth' => App\Modules\OAuth\Facades\OAuth::class
+        'OAuth' => App\Modules\OAuth\Facades\OAuth::class,
     ],
 
 ];
