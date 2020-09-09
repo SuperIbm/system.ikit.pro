@@ -10,9 +10,7 @@
 
 namespace App\Modules\Access\Tests\Feature\Http\Controllers;
 
-use Config;
 use Tests\TestCase;
-use Storage;
 
 /**
  * Тестирование: Класс контроллер для генерации ключей доступа к API.
@@ -33,14 +31,6 @@ class AccessApiControllerTest extends TestCase
      */
     public function testClient(): void
     {
-        echo env('CACHE_DRIVER');
-        echo "\n\n";
-
-        $result = $this->json('POST', 'api/client', [
-            'login' => 'test@test.com',
-            'password' => 'admin'
-        ])->getContent();
-
         $this->json('POST', 'api/client', [
             'login' => 'test@test.com',
             'password' => 'admin'
