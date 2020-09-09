@@ -32,8 +32,8 @@ class AccessPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password_current' => 'required|between:6,25',
-            'password' => 'required|between:6,25|confirmed',
+            'password_current' => 'required|between:4,25',
+            'password' => 'required|between:4,25|confirmed',
         ];
     }
 

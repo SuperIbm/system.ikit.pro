@@ -3,25 +3,25 @@
  * Тестирование ядра базовых классов.
  * Этот пакет содержит набор тестов для ядра баззовых классов.
  *
- * @package App.Test.Models
+ * @package App.Tests.Models
  * @since 1.0
  * @version 1.0
  */
 
-namespace App\Test\Models\Validators;
+namespace App\Tests\Models\Geocoder;
 
 use Tests\TestCase;
-use App\Models\Validators\FloatBetweenValidator;
+use App\Models\Geocoder\GeocoderGoogle;
 
 /**
- * Тестирование: Класс для вадидации рейнджа дробного числа.
+ * Тестирование: Класс драйвер геокодирования на основе сервиса Google.com.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class FloatBetweenValidatorTest extends TestCase
+class GeocoderGoogleTest extends TestCase
 {
     /**
      * Конвертирование из одной кодировки в другую.
@@ -32,9 +32,10 @@ class FloatBetweenValidatorTest extends TestCase
      */
     public function testRun(): void
     {
-        $validator = new FloatBetweenValidator();
-        $result = $validator->validate(null, 500.2, [2, 6]);
+        $geocoder = new GeocoderGoogle();
+        $result = $geocoder->get("680009", "Россия", "Хабаровск", null, "ул. Ким-Ю-Чена, 33");
 
-        $this->assertTrue($result);
+        $this->assertArrayHasKey('latitude', $result);
+        $this->assertArrayHasKey('longitude', $result);
     }
 }

@@ -33,7 +33,7 @@ class AccessApiClientRequest extends FormRequest
     {
         return [
             'login' => 'required|between:1,199',
-            'password' => 'required|between:6,25'
+            'password' => 'required|between:4,25'
         ];
     }
 

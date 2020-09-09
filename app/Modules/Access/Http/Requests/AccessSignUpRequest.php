@@ -33,7 +33,7 @@ class AccessSignUpRequest extends FormRequest
     {
         return [
             'login' => 'required|between:1,199',
-            'password' => 'required|between:6,25|confirmed',
+            'password' => 'required|between:4,25|confirmed',
             'first_name' => 'nullable|max:191',
             'second_name' => 'nullable|max:191',
             'company' => 'nullable|max:191',

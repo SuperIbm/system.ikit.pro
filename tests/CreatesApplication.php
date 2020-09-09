@@ -19,9 +19,10 @@ trait CreatesApplication
 
         $app->make(Kernel::class)->bootstrap();
 
-        Cache::flush();
-        Artisan::call("view:clear");
-        Artisan::call("config:cache");
+        //Cache::flush();
+        //Artisan::call("config:clear");
+        //Artisan::call("view:clear");
+        //Artisan::call("config:cache");
 
         return $app;
     }

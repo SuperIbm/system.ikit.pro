@@ -3,15 +3,15 @@
  * Тестирование ядра базовых классов.
  * Этот пакет содержит набор тестов для ядра баззовых классов.
  *
- * @package App.Test.Models
+ * @package App.Tests.Models
  * @since 1.0
  * @version 1.0
  */
 
-namespace App\Test\Models\Validators;
+namespace App\Tests\Models\Validators;
 
 use Tests\TestCase;
-use App\Models\Validators\PhoneValidator;
+use App\Models\Validators\FloatValidator;
 
 /**
  * Тестирование: Классы для валидации дробных чисел.
@@ -21,7 +21,7 @@ use App\Models\Validators\PhoneValidator;
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class PhoneValidatorTest extends TestCase
+class FloatValidatorTest extends TestCase
 {
     /**
      * Конвертирование из одной кодировки в другую.
@@ -32,8 +32,8 @@ class PhoneValidatorTest extends TestCase
      */
     public function testRun(): void
     {
-        $validator = new PhoneValidator();
-        $result = $validator->validate(null, "+1-999-099-9000", ['1']);
+        $validator = new FloatValidator();
+        $result = $validator->validate(null, 500.2);
 
         $this->assertTrue($result);
     }

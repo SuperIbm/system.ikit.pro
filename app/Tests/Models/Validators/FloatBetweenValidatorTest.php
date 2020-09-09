@@ -3,25 +3,25 @@
  * Тестирование ядра базовых классов.
  * Этот пакет содержит набор тестов для ядра баззовых классов.
  *
- * @package App.Test.Models
+ * @package App.Tests.Models
  * @since 1.0
  * @version 1.0
  */
 
-namespace App\Test\Models\Validators;
+namespace App\Tests\Models\Validators;
 
 use Tests\TestCase;
-use App\Models\Validators\IpMaskValidator;
+use App\Models\Validators\FloatBetweenValidator;
 
 /**
- * Тестирование: Классы для валидации дробных чисел.
+ * Тестирование: Класс для вадидации рейнджа дробного числа.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class IpMaskValidatorTest extends TestCase
+class FloatBetweenValidatorTest extends TestCase
 {
     /**
      * Конвертирование из одной кодировки в другую.
@@ -32,8 +32,8 @@ class IpMaskValidatorTest extends TestCase
      */
     public function testRun(): void
     {
-        $validator = new IpMaskValidator();
-        $result = $validator->validate(null, "128.0.0.*");
+        $validator = new FloatBetweenValidator();
+        $result = $validator->validate(null, 500.2, [2, 6]);
 
         $this->assertTrue($result);
     }

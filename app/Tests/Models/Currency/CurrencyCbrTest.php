@@ -3,12 +3,12 @@
  * Тестирование ядра базовых классов.
  * Этот пакет содержит набор тестов для ядра баззовых классов.
  *
- * @package App.Test.Models
+ * @package App.Tests.Models
  * @since 1.0
  * @version 1.0
  */
 
-namespace App\Test\Models\Currency;
+namespace App\Tests\Models\Currency;
 
 use Carbon\Carbon;
 use Tests\TestCase;

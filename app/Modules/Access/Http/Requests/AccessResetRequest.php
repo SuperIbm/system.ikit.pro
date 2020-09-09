@@ -33,7 +33,7 @@ class AccessResetRequest extends FormRequest
     {
         return [
             'code' => 'required',
-            'password' => 'required|between:6,25|confirmed',
+            'password' => 'required|between:4,25|confirmed',
         ];
     }
 

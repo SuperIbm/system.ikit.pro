@@ -3,25 +3,25 @@
  * Тестирование ядра базовых классов.
  * Этот пакет содержит набор тестов для ядра баззовых классов.
  *
- * @package App.Test.Models
+ * @package App.Tests.Models
  * @since 1.0
  * @version 1.0
  */
 
-namespace App\Test\Models\Geocoder;
+namespace App\Tests\Models\Geo;
 
 use Tests\TestCase;
-use App\Models\Geocoder\GeocoderGoogle;
+use App\Models\Geo\GeoBase;
 
 /**
- * Тестирование: Класс драйвер геокодирования на основе сервиса Google.com.
+ * Тестирование: Класс драйвер геопозиционирования на основе сервиса ipgeobase.ru.
  *
  * @version 1.0
  * @since 1.0
  * @copyright Weborobot.
  * @author Инчагов Тимофей Александрович.
  */
-class GeocoderGoogleTest extends TestCase
+class GeoBaseTest extends TestCase
 {
     /**
      * Конвертирование из одной кодировки в другую.
@@ -32,10 +32,10 @@ class GeocoderGoogleTest extends TestCase
      */
     public function testRun(): void
     {
-        $geocoder = new GeocoderGoogle();
-        $result = $geocoder->get("680009", "Россия", "Хабаровск", null, "ул. Ким-Ю-Чена, 33");
+        $geo = new GeoBase();
+        $result = $geo->get("91.77.237.161");
 
-        $this->assertArrayHasKey('latitude', $result);
-        $this->assertArrayHasKey('longitude', $result);
+        $this->assertArrayHasKey('lat', $result);
+        $this->assertArrayHasKey('lng', $result);
     }
 }
