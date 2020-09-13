@@ -31,5 +31,5 @@ Route::group([], function()
 {
     Route::post('client', 'AccessApiController@client')->name('client');
     Route::post('token', 'AccessApiController@token')->name('token');
-    Route::post('token/refresh', 'AccessApiController@refresh')->name('refresh');
+    Route::post('refresh', 'AccessApiController@refresh')->name('refresh');
 });

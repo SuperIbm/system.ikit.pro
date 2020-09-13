@@ -64,7 +64,7 @@ class AccessApiController extends Controller
     }
 
     /**
-     * Генерация клиента.
+     * Генерация токена.
      *
      * @param \App\Modules\Access\Http\Requests\AccessApiTokenRequest $request Запрос на генерацию токена.
      *
@@ -97,7 +97,7 @@ class AccessApiController extends Controller
     }
 
     /**
-     * Генерация клиента.
+     * Генерация токена обновления.
      *
      * @param \App\Modules\Access\Http\Requests\AccessApiRefreshRequest $request Запрос на обновление токена.
      *

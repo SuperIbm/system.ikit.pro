@@ -36,7 +36,82 @@ class AccessApiControllerTest extends TestCase
             'password' => 'admin'
         ])->assertJsonStructure([
             "success",
-            "data"
+            "data" => [
+                "user" => [
+                    "id",
+                    "image_small_id",
+                    "image_middle_id",
+                    "login",
+                    "remember_token",
+                    "first_name",
+                    "second_name",
+                    "telephone",
+                    "two_factor",
+                    "flags",
+                    "status"
+                ],
+                "secret"
+            ]
+        ]);
+    }
+
+    /**
+     * Генерация токена.
+     *
+     * @return void
+     * @since 1.0
+     * @version 1.0
+     */
+    public function testToken(): void
+    {
+        $client = $this->json('POST', 'api/client', [
+            'login' => 'test@test.com',
+            'password' => 'admin'
+        ])->getContent();
+
+        $client = json_decode($client, true);
+
+        $this->json('POST', 'api/token', [
+            'secret' => $client['data']['secret']
+        ])->assertJsonStructure([
+            "success",
+            "data" => [
+                "accessToken",
+                "refreshToken"
+            ]
+        ]);
+    }
+
+    /**
+     * Генерация токена обновления.
+     *
+     * @return void
+     * @since 1.0
+     * @version 1.0
+     */
+    public function testRefresh(): void
+    {
+        $client = $this->json('POST', 'api/client', [
+            'login' => 'test@test.com',
+            'password' => 'admin'
+        ])->getContent();
+
+        $client = json_decode($client, true);
+
+        $token = $this->json('POST', 'api/token', [
+            'secret' => $client['data']['secret']
+        ])->getContent();
+
+        $token = json_decode($token, true);
+
+        $this->json('POST', 'api/refresh', [
+            'refreshToken' => $token['data']['refreshToken']
+        ])->assertJsonStructure([
+            "success",
+            "data" => [
+                "accessToken",
+                "refreshToken"
+            ]
         ]);
     }
 }
