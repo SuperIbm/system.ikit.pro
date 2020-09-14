@@ -18,6 +18,7 @@ use App\Modules\Access\Pipes\SignUp\WalletPipe;
 use App\Modules\Access\Pipes\SignUp\VerificationPipe;
 use App\Modules\Access\Pipes\Gate\GetPipe;
 use App\Modules\Access\Pipes\SignIn\AuthPipe;
+use App\Modules\Access\Pipes\SignUp\DataPipe;
 
 /**
  * Регистрация нового пользователя.
@@ -46,7 +47,8 @@ class AccessSignUpAction extends Action
             WalletPipe::class,
             VerificationPipe::class,
             GetPipe::class,
-            AuthPipe::class
+            AuthPipe::class,
+            DataPipe::class
         ])->setParameters([
             "user" => [
                 "login" => $this->getParameter("login"),

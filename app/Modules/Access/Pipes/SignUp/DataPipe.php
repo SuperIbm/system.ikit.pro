@@ -8,14 +8,13 @@
  * @since 1.0
  */
 
-namespace App\Modules\Access\Pipes\Social;
+namespace App\Modules\Access\Pipes\SignUp;
 
 use App\Models\Contracts\Pipe;
 use Closure;
-use Str;
 
 /**
- * Регистрация нового пользователя через соцаильные сети: Получение данных для авторизованного пользователя.
+ * Регистрация нового пользователя: Получение данных для зарегестрированного пользователя.
  *
  * @version 1.0
  * @since 1.0
@@ -34,21 +33,13 @@ class DataPipe implements Pipe
      */
     public function handle(array $content, Closure $next)
     {
-        if($content["create"] && !isset($content["user"]["password"]))
-        {
-            $content["user"]["password"] = bcrypt(Str::random(8));
+        $data = [
+            "gate" => $content["gate"]
+        ];
 
-            return $next($content);
-        }
-        else
-        {
-            $data = [
-                "gate" => $content["gate"],
-                "secret" => $content["client"]["secret"],
-                "token" => $content["token"],
-            ];
+        $data["secret"] = $content["client"]["secret"];
+        $data["token"] = $content["token"];
 
-            return $data;
-        }
+        return $next($data);
     }
 }

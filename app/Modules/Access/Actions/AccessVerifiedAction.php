@@ -14,6 +14,7 @@ use App\Models\Action;
 use App\Modules\Access\Decorators\AccessVerifiedDecorator;
 use App\Modules\Access\Pipes\Verified\CheckPipe;
 use App\Modules\Access\Pipes\Gate\GetPipe;
+use App\Modules\Access\Pipes\Verified\DataPipe;
 
 /**
  * Верификация пользователя.
@@ -38,7 +39,8 @@ class AccessVerifiedAction extends Action
 
         $data = $decorator->setActions([
             CheckPipe::class,
-            GetPipe::class
+            GetPipe::class,
+            DataPipe::Class
         ])->setParameters([
             "id" => $this->getParameter("id"),
             "code" => $this->getParameter("code"),

@@ -8,14 +8,14 @@
  * @since 1.0
  */
 
-namespace App\Modules\Access\Pipes\Social;
+namespace App\Modules\Access\Pipes\Verified;
 
 use App\Models\Contracts\Pipe;
 use Closure;
 use Str;
 
 /**
- * Регистрация нового пользователя через соцаильные сети: Получение данных для авторизованного пользователя.
+ * Верификация пользователя: Получение данных для верифицированного пользователя.
  *
  * @version 1.0
  * @since 1.0
@@ -34,21 +34,12 @@ class DataPipe implements Pipe
      */
     public function handle(array $content, Closure $next)
     {
-        if($content["create"] && !isset($content["user"]["password"]))
-        {
-            $content["user"]["password"] = bcrypt(Str::random(8));
+        $data = [
+            "gate" => $content["gate"],
+            "secret" => $content["client"]["secret"],
+            "token" => $content["token"],
+        ];
 
-            return $next($content);
-        }
-        else
-        {
-            $data = [
-                "gate" => $content["gate"],
-                "secret" => $content["client"]["secret"],
-                "token" => $content["token"],
-            ];
-
-            return $data;
-        }
+        return $data;
     }
 }

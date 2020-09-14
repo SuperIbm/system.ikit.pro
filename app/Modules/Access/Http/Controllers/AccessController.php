@@ -58,7 +58,7 @@ class AccessController extends Controller
     public function gate(): JsonResponse
     {
         $data = app(AccessGateAction::class)->setParameters([
-            "id" => Auth::user()->login
+            "id" => Auth::user()->id
         ])->run();
 
         if($data)
@@ -145,6 +145,59 @@ class AccessController extends Controller
     }
 
     /**
+     * Регистрация пользователя.
+     *
+     * @param \App\Modules\Access\Http\Requests\AccessSignUpRequest $request Запрос.
+     *
+     * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
+     * @since 1.0
+     * @version 1.0
+     */
+    public function signUp(AccessSignUpRequest $request): JsonResponse
+    {
+        $action = app(AccessSignUpAction::class);
+
+        $data = $action->setParameters([
+            "login" => $request->get("login"),
+            "password" => $request->get("password"),
+            "first_name" => $request->get("first_name"),
+            "second_name" => $request->get("second_name"),
+            "telephone" => $request->get("telephone"),
+            "uid" => $request->get("uid"),
+            "verified" => false
+        ])->run();
+
+        if($data)
+        {
+            Log::info(trans('access::http.controllers.accessController.signUp.log'), [
+                'module' => "Access",
+                'type' => 'create'
+            ]);
+
+            $data = [
+                'success' => true,
+                'data' => $data
+            ];
+        }
+        else
+        {
+            Log::warning(trans('access::http.controllers.accessController.signUp.log'), [
+                'module' => "Access",
+                'type' => 'create',
+                'request' => $request->all(),
+                'error' => $action->getErrorMessage()
+            ]);
+
+            $data = [
+                'success' => false,
+                'message' => $action->getErrorMessage()
+            ];
+        }
+
+        return response()->json($data)->setStatusCode($data["success"] == true ? 200 : 400);
+    }
+
+    /**
      * Авторизация пользователя.
      *
      * @param \App\Modules\Access\Http\Requests\AccessSignInRequest $request Запрос.
@@ -180,60 +233,6 @@ class AccessController extends Controller
             Log::warning(trans('access::http.controllers.accessController.signIn.log'), [
                 'module' => "Access",
                 'type' => 'sign in',
-                'request' => $request->all(),
-                'error' => $action->getErrorMessage()
-            ]);
-
-            $data = [
-                'success' => false,
-                'message' => $action->getErrorMessage()
-            ];
-        }
-
-        return response()->json($data)->setStatusCode($data["success"] == true ? 200 : 400);
-    }
-
-    /**
-     * Регистрация пользователя.
-     *
-     * @param \App\Modules\Access\Http\Requests\AccessSignUpRequest $request Запрос.
-     *
-     * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
-     * @since 1.0
-     * @version 1.0
-     */
-    public function signUp(AccessSignUpRequest $request): JsonResponse
-    {
-        $action = app(AccessSignUpAction::class);
-
-        $data = $action->setParameters([
-            "login" => $request->get("login"),
-            "password" => $request->get("password"),
-            "first_name" => $request->get("first_name"),
-            "second_name" => $request->get("second_name"),
-            "company" => $request->get("company"),
-            "telephone" => $request->get("telephone"),
-            "uid" => $request->get("uid"),
-            "verified" => false
-        ])->run();
-
-        if($data)
-        {
-            Log::info(trans('access::http.controllers.accessController.signUp.log'), [
-                'module' => "Access",
-                'type' => 'create'
-            ]);
-
-            $data = [
-                'success' => true,
-                'data' => $data
-            ];
-        }
-        else
-        {
-            Log::warning(trans('access::http.controllers.accessController.signUp.log'), [
-                'module' => "Access",
-                'type' => 'create',
                 'request' => $request->all(),
                 'error' => $action->getErrorMessage()
             ]);
@@ -299,61 +298,46 @@ class AccessController extends Controller
     /**
      * Отправка e-mail сообщения на верификацию.
      *
-     * @param string $email Email для подтверждения.
-     *
      * @return \Illuminate\Http\JsonResponse Верент JSON ответ.
      * @since 1.0
      * @version 1.0
      */
-    public function verify($email = null): JsonResponse
+    public function verify(): JsonResponse
     {
-        if($email) $checked = true;
-        else
+        $email = Auth::user()->login;
+
+        $action = app(AccessSendEmailVerificationAction::class);
+
+        $result = $action->setParameters([
+            "email" => Auth::user()->login
+        ])->run();
+
+        if($result)
         {
-            $checked = Auth::check();
-            $email = Auth::user()->login;
-        }
+            Log::info(trans('access::http.controllers.accessController.verify.log'), [
+                'module' => "Access",
+                'type' => 'update'
+            ]);
 
-        if($checked)
-        {
-            $action = app(AccessSendEmailVerificationAction::class);
-
-            $result = $action->setParameters([
-                "email" => $email
-            ])->run();
-
-            if($result)
-            {
-                Log::info(trans('access::http.controllers.accessController.verify.log'), [
-                    'module' => "Access",
-                    'type' => 'update'
-                ]);
-
-                $data = [
-                    'success' => true
-                ];
-            }
-            else
-            {
-                Log::warning(trans('access::http.controllers.accessController.verify.log'), [
-                    'module' => "Access",
-                    'type' => 'update',
-                    'email' => $email,
-                    'error' => $action->getErrorMessage()
-                ]);
-
-                $data = [
-                    'success' => false,
-                    'message' => $action->getErrorMessage()
-                ];
-            }
-        }
-        else
-        {
             $data = [
-                'success' => false
+                'success' => true
             ];
         }
+        else
+        {
+            Log::warning(trans('access::http.controllers.accessController.verify.log'), [
+                'module' => "Access",
+                'type' => 'update',
+                'email' => $email,
+                'error' => $action->getErrorMessage()
+            ]);
+
+            $data = [
+                'success' => false,
+                'message' => $action->getErrorMessage()
+            ];
+        }
+
 
         return response()->json($data)->setStatusCode($data["success"] == true ? 200 : 400);
     }
