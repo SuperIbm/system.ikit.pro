@@ -69,13 +69,15 @@ class AccessControllerTest extends TestCase
      */
     public function testSocial(): void
     {
+        $faker = Faker::create();
+
         $this->json('POST', 'api/private/access/access/social', [
-            'id' => 'test',
-            'login' => 'test@test.com',
-            'password' => 'admin',
+            'id' => $faker->name,
+            'login' => $faker->email,
+            'password' => $faker->password,
             'type' => 'facebook',
-            'first_name' => 'Test',
-            'second_name' => 'Test'
+            'first_name' => $faker->firstName,
+            'second_name' => $faker->lastName
         ])->assertJsonStructure([
             "success",
             "data" => [
@@ -98,13 +100,17 @@ class AccessControllerTest extends TestCase
      */
     public function testSignUp(): void
     {
+        $faker = Faker::create();
+        $faker->addProvider(new PhoneFaker($faker));
+        $password = $faker->password;
+
         $this->json('POST', 'api/private/access/access/sign_up', [
-            'login' => 'test2@test.com',
-            'password' => 'admin',
-            'password_confirmation' => 'admin',
-            "first_name" => "Test",
-            "second_name" => "Test",
-            "telephone" => "+1-666-666-6666"
+            'login' => $faker->email,
+            'password' => $password,
+            'password_confirmation' => $password,
+            "first_name" => $faker->firstName,
+            "second_name" => $faker->lastName,
+            "telephone" => $faker->phone(1)
         ])->assertJsonStructure([
             "success",
             "data" => [
@@ -177,17 +183,21 @@ class AccessControllerTest extends TestCase
      */
     public function testVerified(): void
     {
+        $faker = Faker::create();
+        $faker->addProvider(new PhoneFaker($faker));
+        $password = $faker->password;
+
         $this->json('POST', 'api/private/access/access/sign_up', [
-            'login' => 'test2@test.com',
-            'password' => 'admin',
-            'password_confirmation' => 'admin',
-            "first_name" => "Test",
-            "second_name" => "Test",
-            "telephone" => "+1-666-666-6666"
+            'login' => $faker->email,
+            'password' => $password,
+            'password_confirmation' => $password,
+            "first_name" => $faker->firstName,
+            "second_name" => $faker->lastName,
+            "telephone" => $faker->phone(1)
         ]);
 
         $this->json('POST', 'api/private/access/access/verified/2', [
-            "code" => "test"
+            "code" => $faker->name
         ], [
             "Authorization" => "Bearer " . $this->getToken()
         ])->assertJsonStructure([
@@ -203,7 +213,7 @@ class AccessControllerTest extends TestCase
         ]);
 
         $this->json('POST', 'api/private/access/access/verified/3', [
-            "code" => "test"
+            "code" => $faker->name
         ], [
             "Authorization" => "Bearer " . $this->getToken()
         ])->assertJson([
@@ -242,18 +252,20 @@ class AccessControllerTest extends TestCase
      */
     public function testResetCheck(): void
     {
+        $faker = Faker::create();
+
         $this->json('POST', 'api/private/access/access/forget', [
             "login" => 'test@test.com',
         ]);
 
         $this->json('GET', 'api/private/access/access/reset_check/1', [
-            "code" => 'test',
+            "code" => $faker->name,
         ])->assertJson([
             "success" => true
         ]);
 
         $this->json('GET', 'api/private/access/access/reset_check/2', [
-            "code" => 'test',
+            "code" => $faker->name,
         ])->assertJson([
             "success" => false
         ]);
@@ -268,22 +280,25 @@ class AccessControllerTest extends TestCase
      */
     public function testReset(): void
     {
+        $faker = Faker::create();
+        $password = $faker->password;
+
         $this->json('POST', 'api/private/access/access/forget', [
             "login" => 'test@test.com',
         ]);
 
         $this->json('POST', 'api/private/access/access/reset/1', [
-            "code" => 'test',
-            'password' => '654321',
-            'password_confirmation' => '654321'
+            "code" => $faker->name,
+            'password' => $password,
+            'password_confirmation' => $password
         ])->assertJson([
             "success" => true
         ]);
 
         $this->json('GET', 'api/private/access/access/reset_check/2', [
-            "code" => 'test',
-            'password' => '654321',
-            'password_confirmation' => '654321'
+            "code" => $faker->name,
+            'password' => $password,
+            'password_confirmation' => $password
         ])->assertJson([
             "success" => false
         ]);
@@ -311,7 +326,7 @@ class AccessControllerTest extends TestCase
             "city" => $faker->randomNumber(5),
             "region" => $faker->randomNumber(5),
             "street_address" => $faker->address,
-            "company_name" => $faker->name()
+            "company_name" => $faker->name
         ], [
             "Authorization" => "Bearer " . $this->getToken()
         ])->assertJson([

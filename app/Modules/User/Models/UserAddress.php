@@ -81,14 +81,14 @@ class UserAddress extends Eloquent
     protected function getNames(): array
     {
         return [
-            "user_id" => trans('user::model.userAddress.user_id'),
-            'postal_code' => trans('user::model.userAddress.postal_code'),
-            'country' => trans('user::model.userAddress.country'),
-            'region' => trans('user::model.userAddress.region'),
-            'city' => trans('user::model.userAddress.city'),
-            'street_address' => trans('user::model.userAddress.street_address'),
-            'latitude' => trans('user::model.userAddress.latitude'),
-            'longitude' => trans('user::model.userAddress.longitude')
+            "user_id" => trans('user::models.userAddress.user_id'),
+            'postal_code' => trans('user::models.userAddress.postal_code'),
+            'country' => trans('user::models.userAddress.country'),
+            'region' => trans('user::models.userAddress.region'),
+            'city' => trans('user::models.userAddress.city'),
+            'street_address' => trans('user::models.userAddress.street_address'),
+            'latitude' => trans('user::models.userAddress.latitude'),
+            'longitude' => trans('user::models.userAddress.longitude')
         ];
     }
 

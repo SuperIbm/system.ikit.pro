@@ -71,9 +71,9 @@ class UserWallet extends Eloquent
     protected function getNames(): array
     {
         return [
-            'user_id' => trans('user::model.userWallet.user_id'),
-            'amount' => trans('user::model.userWallet.amount'),
-            'currency' => trans('user::model.userWallet.currency')
+            'user_id' => trans('user::models.userWallet.user_id'),
+            'amount' => trans('user::models.userWallet.amount'),
+            'currency' => trans('user::models.userWallet.currency')
         ];
     }
 

@@ -80,14 +80,14 @@ class UserAuth extends Eloquent
     protected function getNames(): array
     {
         return [
-            'user_id' => trans('user::model.userAuth.user_id'),
-            'os' => trans('user::model.userAuth.os'),
-            'device' => trans('user::model.userAuth.device'),
-            'browser' => trans('user::model.userAuth.browser'),
-            'agent' => trans('user::model.userAuth.agent'),
-            'ip' => trans('user::model.userAuth.ip'),
-            'latitude' => trans('user::model.userAuth.latitude'),
-            'longitude' => trans('user::model.userAuth.longitude')
+            'user_id' => trans('user::models.userAuth.user_id'),
+            'os' => trans('user::models.userAuth.os'),
+            'device' => trans('user::models.userAuth.device'),
+            'browser' => trans('user::models.userAuth.browser'),
+            'agent' => trans('user::models.userAuth.agent'),
+            'ip' => trans('user::models.userAuth.ip'),
+            'latitude' => trans('user::models.userAuth.latitude'),
+            'longitude' => trans('user::models.userAuth.longitude')
         ];
     }
 

@@ -69,8 +69,8 @@ class UserSchoolRole extends Eloquent
     protected function getNames(): array
     {
         return [
-            'user_id' => trans('user::model.userSchoolRole.user_id'),
-            'school_role_id' => trans('user::model.userSchoolRole.school_role_id')
+            'user_id' => trans('user::models.userSchoolRole.user_id'),
+            'school_role_id' => trans('user::models.userSchoolRole.school_role_id')
         ];
     }
 

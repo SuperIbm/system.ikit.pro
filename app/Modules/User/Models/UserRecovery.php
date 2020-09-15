@@ -82,8 +82,8 @@ class UserRecovery extends Eloquent
     protected function getNames(): array
     {
         return [
-            'user_id' => trans('user::model.userRecovery.user_id'),
-            'code' => trans('user::model.userRecovery.code')
+            'user_id' => trans('user::models.userRecovery.user_id'),
+            'code' => trans('user::models.userRecovery.code')
         ];
     }
 

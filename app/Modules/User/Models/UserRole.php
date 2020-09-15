@@ -73,9 +73,9 @@ class UserRole extends Eloquent
     protected function getNames(): array
     {
         return [
-            'name' => trans('user::model.userRole.name'),
-            'description' => trans('user::model.userRole.description'),
-            'status' => trans('user::model.userRole.status')
+            'name' => trans('user::models.userRole.name'),
+            'description' => trans('user::models.userRole.description'),
+            'status' => trans('user::models.userRole.status')
         ];
     }
 

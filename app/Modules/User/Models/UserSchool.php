@@ -73,9 +73,9 @@ class UserSchool extends Eloquent
     protected function getNames(): array
     {
         return [
-            'user_id' => trans('user::model.userSchool.user_id'),
-            'school_id' => trans('user::model.userSchool.school_id'),
-            'status' => trans('user::model.userSchool.status')
+            'user_id' => trans('user::models.userSchool.user_id'),
+            'school_id' => trans('user::models.userSchool.school_id'),
+            'status' => trans('user::models.userSchool.status')
         ];
     }
 

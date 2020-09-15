@@ -101,7 +101,7 @@ class Alert extends Eloquent
     protected function getNames(): array
     {
         return [
-            'school_id' => trans('user::model.alert.school_id'),
+            'school_id' => trans('user::models.alert.school_id'),
             'pattern' => trans('alert::models.alert.pattern'),
             'description' => trans('alert::models.alert.description'),
             'url' => trans('alert::models.alert.url'),

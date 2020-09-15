@@ -71,9 +71,9 @@ class UserReferral extends Eloquent
     protected function getNames(): array
     {
         return [
-            'referral_id' => trans('user::model.userReferral.referral_id'),
-            'user_invited_id' => trans('user::model.userReferral.user_invited_id'),
-            'user_inviting_id' => trans('user::model.userReferral.user_inviting_id')
+            'referral_id' => trans('user::models.userReferral.referral_id'),
+            'user_invited_id' => trans('user::models.userReferral.user_invited_id'),
+            'user_inviting_id' => trans('user::models.userReferral.user_inviting_id')
         ];
     }
 

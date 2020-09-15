@@ -68,8 +68,8 @@ class UserWalletInput extends Eloquent
     protected function getNames(): array
     {
         return [
-            'user_wallet_id' => trans('user::model.userWalletInput.user_wallet_id'),
-            'amount' => trans('user::model.userWalletInput.amount')
+            'user_wallet_id' => trans('user::models.userWalletInput.user_wallet_id'),
+            'amount' => trans('user::models.userWalletInput.amount')
         ];
     }
 

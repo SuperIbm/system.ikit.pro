@@ -83,9 +83,9 @@ class UserVerification extends Eloquent
     protected function getNames(): array
     {
         return [
-            'user_id' => trans('user::model.userVerification.user_id'),
-            'code' => trans('user::model.userVerification.code'),
-            'status' => trans('user::model.userVerification.status')
+            'user_id' => trans('user::models.userVerification.user_id'),
+            'code' => trans('user::models.userVerification.code'),
+            'status' => trans('user::models.userVerification.status')
         ];
     }
 

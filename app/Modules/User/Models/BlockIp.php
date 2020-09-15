@@ -77,8 +77,8 @@ class BlockIp extends Eloquent
     protected function getNames(): array
     {
         return [
-            'ip' => trans('user::model.blockIp.ip'),
-            'status' => trans('user::model.blockIp.status')
+            'ip' => trans('user::models.blockIp.ip'),
+            'status' => trans('user::models.blockIp.status')
         ];
     }
 }
