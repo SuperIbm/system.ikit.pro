@@ -82,13 +82,13 @@ class OrderPayment extends Eloquent
     protected function getNames(): array
     {
         return [
-            'name' => trans('order::model.orderPayment.name'),
-            'description' => trans('order::model.orderPayment.description'),
-            'parameters' => trans('order::model.orderPayment.parameters'),
-            'online' => trans('order::model.orderPayment.online'),
-            'system' => trans('order::model.orderPayment.system'),
-            'image_id' => trans('order::model.orderPayment.image_id'),
-            'status' => trans('order::model.orderPayment.status')
+            'name' => trans('order::models.orderPayment.name'),
+            'description' => trans('order::models.orderPayment.description'),
+            'parameters' => trans('order::models.orderPayment.parameters'),
+            'online' => trans('order::models.orderPayment.online'),
+            'system' => trans('order::models.orderPayment.system'),
+            'image_id' => trans('order::models.orderPayment.image_id'),
+            'status' => trans('order::models.orderPayment.status')
         ];
     }
 

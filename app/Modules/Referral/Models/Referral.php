@@ -74,10 +74,10 @@ class Referral extends Eloquent
     protected function getNames(): array
     {
         return [
-            "name" => trans('referral::model.referral.name'),
-            "type" => trans('referral::model.referral.type'),
-            "price" => trans('referral::model.referral.price'),
-            "percentage" => trans('referral::model.referral.percentage')
+            "name" => trans('referral::models.referral.name'),
+            "type" => trans('referral::models.referral.type'),
+            "price" => trans('referral::models.referral.price'),
+            "percentage" => trans('referral::models.referral.percentage')
         ];
     }
 

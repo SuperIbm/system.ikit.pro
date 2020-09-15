@@ -83,14 +83,14 @@ class Order extends Eloquent
     protected function getNames(): array
     {
         return [
-            "school_id" => trans('order::model.order.school_id'),
-            "name" => trans('order::model.order.name'),
-            "from" => trans('order::model.order.from'),
-            "to" => trans('order::model.order.to'),
-            "trial" => trans('order::model.order.trial'),
-            "type" => trans('order::model.order.type'),
-            "orderable_id" => trans('order::model.order.orderable_id'),
-            "orderable_type" => trans('order::model.order.orderable_type')
+            "school_id" => trans('order::models.order.school_id'),
+            "name" => trans('order::models.order.name'),
+            "from" => trans('order::models.order.from'),
+            "to" => trans('order::models.order.to'),
+            "trial" => trans('order::models.order.trial'),
+            "type" => trans('order::models.order.type'),
+            "orderable_id" => trans('order::models.order.orderable_id'),
+            "orderable_type" => trans('order::models.order.orderable_type')
         ];
     }
 

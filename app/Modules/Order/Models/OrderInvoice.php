@@ -74,10 +74,10 @@ class OrderInvoice extends Eloquent
     protected function getNames(): array
     {
         return [
-            "order_id" => trans('order::model.orderInvoice.order_id'),
-            "order_payment_id" => trans('order::model.orderInvoice.order_payment_id'),
-            "invoice" => trans('order::model.orderInvoice.invoice'),
-            "status" => trans('order::model.orderInvoice.status')
+            "order_id" => trans('order::models.orderInvoice.order_id'),
+            "order_payment_id" => trans('order::models.orderInvoice.order_payment_id'),
+            "invoice" => trans('order::models.orderInvoice.invoice'),
+            "status" => trans('order::models.orderInvoice.status')
         ];
     }
 

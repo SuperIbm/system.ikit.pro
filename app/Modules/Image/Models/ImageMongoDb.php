@@ -151,12 +151,12 @@ class ImageMongoDb extends MongoDb
     protected function getNames(): array
     {
         return [
-            'byte' => trans('image::model.image.byte'),
-            'folder' => trans('image::model.image.folder'),
-            'format' => trans('image::model.image.format'),
-            'cache' => trans('image::model.image.cache'),
-            'width' => trans('image::model.image.width'),
-            'height' => trans('image::model.image.height')
+            'byte' => trans('image::models.image.byte'),
+            'folder' => trans('image::models.image.folder'),
+            'format' => trans('image::models.image.format'),
+            'cache' => trans('image::models.image.cache'),
+            'width' => trans('image::models.image.width'),
+            'height' => trans('image::models.image.height')
         ];
     }
 
