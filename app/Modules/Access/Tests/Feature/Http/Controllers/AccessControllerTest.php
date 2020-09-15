@@ -290,7 +290,7 @@ class AccessControllerTest extends TestCase
     }
 
     /**
-     * Установка нового пароля.
+     * Обновление данных.
      *
      * @return void
      * @since 1.0
@@ -312,6 +312,29 @@ class AccessControllerTest extends TestCase
             "region" => $faker->randomNumber(5),
             "street_address" => $faker->address,
             "company_name" => $faker->name()
+        ], [
+            "Authorization" => "Bearer " . $this->getToken()
+        ])->assertJson([
+            "success" => true
+        ]);
+    }
+
+    /**
+     * Изменение пароля.
+     *
+     * @return void
+     * @since 1.0
+     * @version 1.0
+     */
+    public function testPassword(): void
+    {
+        $faker = Faker::create();
+        $password = $faker->password;
+
+        $this->json('PUT', 'api/private/access/access/password', [
+            "password_current" => 'admin',
+            "password" => $password,
+            'password_confirmation' => $password
         ], [
             "Authorization" => "Bearer " . $this->getToken()
         ])->assertJson([
