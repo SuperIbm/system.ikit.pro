@@ -241,7 +241,7 @@ return [
         App\Providers\CurrencyServiceProvider::class,
         App\Providers\SmsServiceProvider::class,
         App\Providers\GeoServiceProvider::class,
-        App\Providers\GeocoderServiceProvider::class,
+        App\Providers\GeocoderServiceProvider::class
     ],
 
     /*

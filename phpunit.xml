@@ -23,7 +23,7 @@
         <server name="APP_URL" value="http://loc.system.ikit.pro"/>
         <server name="APP_NAME" value="iKit"/>
         <server name="APP_TIMEZONE" value="Europe/Moscow"/>
-        <server name="APP_LOCALE" value="ru"/>
+        <server name="APP_LOCALE" value="en"/>
         <server name="IMAGE" value="database"/>
         <server name="IMAGE_DRIVER" value="local"/>
         <server name="DOCUMENT" value="database"/>

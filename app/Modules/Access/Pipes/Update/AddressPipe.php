@@ -62,6 +62,7 @@ class AddressPipe implements Pipe
         if($user)
         {
             $address = $content["data"];
+            $address["user_id"] = $user["id"];
 
             if(!isset($address["latitude"]) || !isset($address["longitude"]))
             {

@@ -10,8 +10,10 @@
 
 namespace App\Modules\Access\Tests\Feature\Http\Controllers;
 
+use App\Models\Fakers\PhoneFaker;
 use Tests\TestCase;
 use App\Models\Test\TokenTest;
+use Faker\Factory as Faker;
 
 /**
  * Тестирование: Класс контроллер для авторизации и аунтификации.
@@ -140,6 +142,14 @@ class AccessControllerTest extends TestCase
                 ]
             ]
         ]);
+
+        $this->json('POST', 'api/private/access/access/sign_in', [
+            'login' => 'test3@test.com',
+            'password' => 'admin',
+            'remember' => true
+        ])->assertJson([
+            "success" => false
+        ]);
     }
 
     /**
@@ -190,6 +200,122 @@ class AccessControllerTest extends TestCase
                     "refreshToken"
                 ]
             ]
+        ]);
+
+        $this->json('POST', 'api/private/access/access/verified/3', [
+            "code" => "test"
+        ], [
+            "Authorization" => "Bearer " . $this->getToken()
+        ])->assertJson([
+            "success" => false
+        ]);
+    }
+
+    /**
+     * Отправка e-mail для восстановления пароля.
+     *
+     * @return void
+     * @since 1.0
+     * @version 1.0
+     */
+    public function testForget(): void
+    {
+        $this->json('POST', 'api/private/access/access/forget', [
+            "login" => 'test@test.com',
+        ])->assertJson([
+            "success" => true
+        ]);
+
+        $this->json('POST', 'api/private/access/access/forget', [
+            "login" => 'test2@test.com',
+        ])->assertJson([
+            "success" => false
+        ]);
+    }
+
+    /**
+     * Проверка возможности сбить пароль.
+     *
+     * @return void
+     * @since 1.0
+     * @version 1.0
+     */
+    public function testResetCheck(): void
+    {
+        $this->json('POST', 'api/private/access/access/forget', [
+            "login" => 'test@test.com',
+        ]);
+
+        $this->json('GET', 'api/private/access/access/reset_check/1', [
+            "code" => 'test',
+        ])->assertJson([
+            "success" => true
+        ]);
+
+        $this->json('GET', 'api/private/access/access/reset_check/2', [
+            "code" => 'test',
+        ])->assertJson([
+            "success" => false
+        ]);
+    }
+
+    /**
+     * Установка нового пароля.
+     *
+     * @return void
+     * @since 1.0
+     * @version 1.0
+     */
+    public function testReset(): void
+    {
+        $this->json('POST', 'api/private/access/access/forget', [
+            "login" => 'test@test.com',
+        ]);
+
+        $this->json('POST', 'api/private/access/access/reset/1', [
+            "code" => 'test',
+            'password' => '654321',
+            'password_confirmation' => '654321'
+        ])->assertJson([
+            "success" => true
+        ]);
+
+        $this->json('GET', 'api/private/access/access/reset_check/2', [
+            "code" => 'test',
+            'password' => '654321',
+            'password_confirmation' => '654321'
+        ])->assertJson([
+            "success" => false
+        ]);
+    }
+
+    /**
+     * Установка нового пароля.
+     *
+     * @return void
+     * @since 1.0
+     * @version 1.0
+     */
+    public function testUpdate(): void
+    {
+        $faker = Faker::create();
+        $faker->addProvider(new PhoneFaker($faker));
+
+        $this->json('PUT', 'api/private/access/access/update', [
+            "first_name" => $faker->firstName,
+            "second_name" => $faker->lastName,
+            "email" => $faker->email,
+            "telephone" => $faker->phone(1),
+            "postal_code" => $faker->postcode,
+            "country" => $faker->randomNumber(5),
+            "city" => $faker->randomNumber(5),
+            "region" => $faker->randomNumber(5),
+            "street_address" => $faker->address,
+            "company_name" => $faker->name()
+        ], [
+            "Authorization" => "Bearer " . $this->getToken()
+        ])->assertJson([
+            "success" => true
         ]);
     }
 

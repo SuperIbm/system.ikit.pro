@@ -77,7 +77,7 @@ class AccessResetAction extends Action
 
         if($status)
         {
-            $user = $this->_user->get($this->getParameter("id"), true, [
+            $user = $this->_user->get($this->getParameter("id"), true, null, [
                 "recovery"
             ]);
 

@@ -367,8 +367,7 @@ class AccessController extends Controller
             ]);
 
             $data = [
-                'success' => true,
-                'data' => $data
+                'success' => true
             ];
         }
         else

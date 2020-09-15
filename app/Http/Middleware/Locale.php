@@ -11,6 +11,7 @@ namespace App\Http\Middleware;
 
 use App;
 use Closure;
+use Config;
 use Illuminate\Http\Request;
 
 /**
@@ -33,18 +34,20 @@ class Locale
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->get("locale") == "en")
+        $locale = $request->get("locale", Config::get("app.locale"));
+
+        if($locale == "en")
         {
             setlocale(LC_ALL, ['en_US.utf8']);
             setlocale(LC_NUMERIC, ['en_US.utf8']);
         }
-        else
+        else if($locale == "en")
         {
             setlocale(LC_ALL, ['ru_RU.utf8', 'rus_RUS.utf8', 'russian']);
             setlocale(LC_NUMERIC, ['ru_RU.utf8']);
         }
 
-        App::setLocale($request->get("locale", "ru"));
+        App::setLocale($locale);
 
         return $next($request);
     }
